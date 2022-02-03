@@ -55,3 +55,4 @@ Integrantes del grupo:
     Ruben Rubio Del Castillo - UO276255
     Darío Martínez Bajo - UO278290
     Efrén García Valencia - UO277189
+    Adrián Santamarina Romero - UO279062
