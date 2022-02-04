@@ -52,7 +52,8 @@ Encontrarás más información sobre el repositorio en los otros archivos README
 - Restapi: https://github.com/pglez82/asw2122_0/tree/master/restapi
 
 Integrantes del grupo:
-    Ruben Rubio Del Castillo - UO276255
-    Darío Martínez Bajo - UO278290
-    Efrén García Valencia - UO277189
-    Adrián Santamarina Romero - UO279062
+   · Ruben Rubio Del Castillo - UO276255
+   · Darío Martínez Bajo - UO278290
+   · Efrén García Valencia - UO277189
+   · Adrián Santamarina Romero - UO279062
+   · Ana Fernández Ostio - UO275780
