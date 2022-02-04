@@ -51,7 +51,7 @@ Encontrarás más información sobre el repositorio en los otros archivos README
 - Webapp: https://github.com/pglez82/asw2122_0/tree/master/webapp
 - Restapi: https://github.com/pglez82/asw2122_0/tree/master/restapi
 
-Integrantes del grupo:
+## Integrantes del grupo:
    · Ruben Rubio Del Castillo - UO276255
    · Darío Martínez Bajo - UO278290
    · Efrén García Valencia - UO277189
