@@ -9,7 +9,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 
 ****
 
-=== Requirements Overview
+=== Información general de los requisitos
 
 [role="arc42help"]
 ****
