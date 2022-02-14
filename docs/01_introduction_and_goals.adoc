@@ -1,75 +1,78 @@
 [[section-introduction-and-goals]]
-== Introduction and Goals
+== Introducción y metas
 
 [role="arc42help"]
 ****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
+Una empresa de venta de productos busca originar un sistema de venta online denominado DeDe (Decentralized Delivery).
+Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
+El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
 
-* underlying business goals, essential features and functional requirements for the system
-* quality goals for the architecture
-* relevant stakeholders and their expectations
 ****
 
 === Requirements Overview
 
 [role="arc42help"]
 ****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+.Requisitos obligatorios
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+* El sistema recreará un sistema de compra online donde los usuarios podrán elegir y solicitar productos a comprar.
+* Una vez que el usuario escoja los productos a llevar, el sistema calculará los costes de envío mirando la dirección deseada del usuario en su pod y estableciendo los costes de acuerdo a la distancia del centro de distribución a dicha dirección.
+* Se mostrarán los costes finales de los productos a comprar y, una vez que el usuario tome la decisión de comprarlos, registrará el evento que indicará que la venta ha sido completada y se pasará al envío.
+* Los usuarios podrán visualizar los pedidos realizados
+* Se construirá la aplicación usando el framework React y Typescript.
+* El producto acabado tiene que ser accesible y estar desplegado utilizando un sistema de integración continua y un servicio de hosting.
 
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
+.Requisitos opcionales
 
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
+* Los usuarios pueden tener más de una dirección de envío en sus pods (por ejemplo, en sus casas, universidad, …)
+* Poner una estimación del tiempo en que la persona estará en un sitio y limitar algunas direcciones de ser usadas en la entrega fuera de esos horarios.
+* Crear estaciones de recogida que algunos portadores emplearán. La estación de recogida se puede calcular de forma dinámica basándose en la dirección de la persona o en una posición que pille de camino al receptor.
+* Se pueden usar APIs externas de diferentes portadores, para que los usuarios puedan establecer con cuál de los portadores desean realizar el pedido.
+* Hacer que algunos usuarios con privilegios de administrador puedan ver estadísticas de productos solicitados y monitorizar el estado de los pedidos.
+* Realizar el producto tanto en una aplicación web como una aplicación de móvil.
+* Crear un emulador del sistema de envío que pueda notificar a los usuarios cuando los productos hayan llegado a su destino y poder seguir el proceso de envío.
+* Tener diferentes roles como clientes o gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
+* Incluir la posibilidad de que haya varios centros de distribución o almacenes en los que se encuentren almacenados los productos.
+* Que los usuarios puedan añadir o actualizar la información de sus direcciones en sus pods a través de la aplicación.
+* Permitir a los usuarios dar realimentación sobre su experiencia como puntuaciones y revisiones a los productos o los centros de distribución.
+* Se deja abierta la opción de emplear más de una tecnología de despliegue.
+
+
 ****
 
-=== Quality Goals
+=== Objetivos de calidad
 
 [role="arc42help"]
 ****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
 
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
+[options="header",cols="1,2,2"]
+|===
+|Objetivos de calidad|Motivación|Importancia
+| Eficiencia | Que se utilicen la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
+| Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
+| Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Media
+| Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
+| Portabilidad | La aplicación ha de poder ejecutarse en diferentes plataformas o entornos integrados | Baja
+| Comodidad | La aplicación ha de ser fácil de manejar para gente no experimentada | Alta
+|===
 
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
+
+
 ****
 
 === Stakeholders
 
 [role="arc42help"]
 ****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
 
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
+[options="header",cols="1,2"]
+|===
+|Rol/Nombre|Expectations
+| Equipo de desarrollo | Aprender a trabajar en equipo con gente que no conocen y familiarizarse con las tecnologías solicitadas en el curso
+| Empresa de venta de productos (cliente) | Una aplicación funcional que satisfaga los requisitos solicitados, especialmente aquellos relacionados con la seguridad
+| Usuario | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
+| Administrador | Tener el control de una aplicación robusta y eficiente con la que poder satisfacer las necesidades de los usuarios
+|===
 
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
 ****
 
-[options="header",cols="1,2,2"]
-|===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
-|===
