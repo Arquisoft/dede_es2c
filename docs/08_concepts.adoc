@@ -5,45 +5,45 @@
 [role="arc42help"]
 ****
 
-=== 8.1 Modelo de dominio
+=== Modelo de dominio
 
 image:UmlDiagram.png["Example UML Diagram"]
 
 En hoja aparte
 
-=== 8. 2  Internacionalización
+=== Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
 
-=== 8. 3  Seguridad
+=== Seguridad
 La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente.
 
-=== 8. 4  Consistencia
+=== Consistencia
 Otro aspecto fundamental que perseguimos es garantizar que los datos de los clientes no se corrompan al emplear su aplicación, sin importar el problema que ocurra.
 
-=== 8. 5  Usabilidad
+=== Usabilidad
 Queremos garantizar el tener una interfaz de usuario que resulte cómoda al usuario para que así en un futuro vuelva a emplear la aplicación para sus futuras compras.
 
-=== 8. 6  Internacionalización
+=== Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
 
-=== 8. 7  Manejo de excepciones
+=== Manejo de excepciones
 Se incluirá el código necesario para manejar y capturar los errores procedentes de las diferentes partes de la aplicación. De ser necesario, se le informará al cliente con el mensaje que corresponda.
 
-=== 8. 8  Accesibilidad
+=== Accesibilidad
 Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
 
-=== 8. 9  Estructura de paquetes
+=== Estructura de paquetes
 A rellenar en un futuro
 
-=== 8.10  Seguridad
+=== Seguridad
 Ningún aspecto de la aplicación será dañino para la vida del usuario.
 
-=== 8.11  Manejo de sesión
+=== Manejo de sesión
 Se manejarán las sesiones a través del uso de las APIs necesarias.
 
-=== 8.12  Estándares de código
+=== Estándares de código
 El crear código limpio que siga unas estructuras y patrones definidos es base fundamental para crear código que se pueda actualizar en un futuro. Queremos garantizar crear una aplicación al nivel que se puede esperar de un equipo de formado por Ingenieros Informáticos del Software.
 
-=== 8.13  Persistencia
+=== Persistencia
 	Decidir si se va a usar HSQLDB o MongoDB.
 ****
