@@ -1,11 +1,23 @@
 [[section-system-scope-and-context]]
 == Alcance y contexto del sistema
 
+****
+En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros clientes, por lo que para cumplir esto dos atributos de calidad, se seguirán los principios de SOLID utilizando PODS. Un POD es un lugar seguro donde el usario podrá alamacenar la informacion que desee y dar autorización a la aplicación para que se utilice la información que sea necesaria. Cada usuario tendrá un POD propio donde colocará principalmente sus datos personales y la dirección de envío. 
+****
+
 === Contexto de negocio
 
 [role="arc42help"]
 ****
 image:https://github.com/Arquisoft/dede_es2c/blob/Ana/docs/images/03_Negocio.png["Diagrama Contexto Negocio"]
+[options="header",cols="1,2,2"]
+|===
+|Comunicaciones |Entradas | Salidas
+| _Usuario_ | _Interacciones con la aplicación_ |_Respuestas a esas interacciones_
+| _POD del Usuario_ | _La inforamción relativa a cada usuario para respetar su privacidad_ | _Información que necesite la aplicación siempre cuando el usuario lo permita_
+| _DeDe_ | _Venta de productos_ | _Precio según dirección del cliente_
+| _Base de datos_ | _Peticiones por parte de la aplicación DeDe_ | _Respuesta de la información almacenada en esta base de datos_
+|===
 ****
 === Contexto técnico
 
