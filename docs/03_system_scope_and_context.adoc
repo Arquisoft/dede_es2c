@@ -48,6 +48,6 @@ The title of the table is the name of your system, the three columns contain the
 [role="arc42help"]
 ****
 
-image:03_Tecnico.png["Diagrama Contexto Técnico"]
+image:https://github.com/Arquisoft/dede_es2c/blob/Ana/docs/03_Tecnico.png["Diagrama Contexto Técnico"]
 
 ****
