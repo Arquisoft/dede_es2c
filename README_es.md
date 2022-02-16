@@ -47,9 +47,9 @@ Deberias ser capaz de acceder a la aplicación en [http://localhost:3000](http:/
 
 ## Mas información
 Encontrarás más información sobre el repositorio en los otros archivos README:
-- Documentación: https://github.com/pglez82/asw2122_0/tree/master/docs
-- Webapp: https://github.com/pglez82/asw2122_0/tree/master/webapp
-- Restapi: https://github.com/pglez82/asw2122_0/tree/master/restapi
+- Documentación: https://github.com/Arquisoft/dede_es2c/tree/master/docs
+- Webapp: https://github.com/Arquisoft/dede_es2c/tree/master/webapp
+- Restapi: https://github.com/Arquisoft/dede_es2c/tree/master/restapi
 
 ## Integrantes del grupo:
    - Ruben Rubio Del Castillo - UO276255
