@@ -7,9 +7,13 @@
 
 === Modelo de dominio
 
+****
+
 image:UmlDiagram.png["Example UML Diagram"]
 
 En hoja aparte
+
+****
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
