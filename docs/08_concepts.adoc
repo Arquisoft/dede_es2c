@@ -9,9 +9,7 @@
 
 ****
 
-image:UmlDiagram.png["Example UML Diagram"]
-
-En hoja aparte
+image:Modelo_datos.png["Modelo de datos"]
 
 ****
 
