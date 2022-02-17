@@ -63,7 +63,7 @@ ProductoController --> ProductoController: Crea el producto
 ProductoController --> ProductoRepository: Envía el producto
 ProductoRepository --> Base de datos: Almacena el producto 
 Administrador <-- ProductoController: Da el visto bueno con un mensaje 
----
+----
 
 
 === <Caso de eliminar productos>
@@ -77,5 +77,5 @@ Administrador --> ProductoController: Manda una solicitud POST
 ProductoController --> ProductoRepository: Envía la petición al repositorio
 ProductoRepository --> Base de datos: Busca el objeto y lo elimina 
 Administrador <-- ProductoController: Da el visto bueno con un mensaje 
----
+----
 
