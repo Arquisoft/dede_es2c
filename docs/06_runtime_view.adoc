@@ -55,32 +55,10 @@ Alice <-- Bob: another authentication Response
 
 El administrador rellenará un formulario con los detalles del producto que se mandará a un controlador. El controlador se encargará de enviar la petición al repositorio para que se almacene en la base de datos.
 
-----
-actor Administrador
-actor ProductoController
-actor ProductoRepository
-database Pod as "Base de datos"
-Administrador --> ProductoController: Manda una solicitud POST
-ProductoController --> ProductoRepository: Petición de crear el producto
-ProductoRepository --> Base de datos: Crea y almacena el producto 
-ProductoRepository --> ProductoController: Informa del éxito de la operación
-Administrador <-- ProductoController: Da el visto bueno con un mensaje 
-----
-
+image:diagrama_introducir.png["Añadir productos"]
 
 === Eliminar productos
 
 El administrador rellenará un formulario con los detalles del producto a borrar.El controlador le pasará la información necesaria al modelo para que éste pueda eliminar el producto de la base de datos. 
 
-----
-actor Administrador
-actor ProductoController
-actor ProductoRepository
-database Pod as "Base de datos"
-Administrador --> ProductoController: Manda una solicitud POST
-ProductoController --> ProductoRepository: Petición de eliminar el producto
-ProductoRepository --> Base de datos: Elimina el producto de la base de datos
-ProductoRepository --> ProductoController: Informa del éxito de la operación
-Administrador <-- ProductoController: Da el visto bueno con un mensaje 
-----
-
+image:diagrama_eliminar.png["Eliminar productos"]
