@@ -23,9 +23,6 @@ Otro aspecto fundamental que perseguimos es garantizar que los datos de los clie
 === Usabilidad
 Queremos garantizar el tener una interfaz de usuario que resulte cómoda al usuario para que así en un futuro vuelva a emplear la aplicación para sus futuras compras.
 
-=== Internacionalización
-La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
-
 === Manejo de excepciones
 Se incluirá el código necesario para manejar y capturar los errores procedentes de las diferentes partes de la aplicación. De ser necesario, se le informará al cliente con el mensaje que corresponda.
 
