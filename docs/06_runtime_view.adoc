@@ -50,8 +50,15 @@ Alice  --> Pod: Store route
 Alice -> Bob: Another authentication Request
 Alice <-- Bob: another authentication Response
 ----
-=== <Runtime Scenario 2>
 
-=== ...
+=== Añadir productos
 
-=== <Runtime Scenario n>
+El administrador rellenará un formulario con los detalles del producto que se mandará a un controlador. El controlador se encargará de enviar la petición al repositorio para que se almacene en la base de datos.
+
+image:diagrama_introducir.png["Añadir productos"]
+
+=== Eliminar productos
+
+El administrador rellenará un formulario con los detalles del producto a borrar.El controlador le pasará la información necesaria al modelo para que éste pueda eliminar el producto de la base de datos. 
+
+image:diagrama_eliminar.png["Eliminar productos"]
