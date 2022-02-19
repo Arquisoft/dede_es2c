@@ -11,4 +11,5 @@
 | Solid | Proyecto de descentralización web dirigido por Tim Berners-Lee, el objetivo es permitir que los usuarios tengan control de sus datos, incluido el acceso y ubicación de almacenamiento.
 | POD | Lugar donde se almacena la inforamción de cada usuario. Una vez registre la informacion, el propio usuario tendrá el control de acceso a este POD.
 | SonarCloud | Plataforma de análisis de código continuo y online con la que se puede analizar el proyecto y ver los resultados en la nube.
+| PlanrUML | Herramienta de código abierto que permite a los usuarios crear diagramas a partir de un lenguaje de texto sin formato.
 |===
