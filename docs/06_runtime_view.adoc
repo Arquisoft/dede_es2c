@@ -29,4 +29,8 @@ image:06_Compra_Productos.png["Compra productos"]
 
 === login
 El usuario debe introducir sus credenciales en la aplicación y estas serán validadas con la vase de datos, si son correctas accederá a la aplicacion con su cuentas y sino se le mostrará un mensaje  de error
-image:0_6_Login.png["Login"]
+image:06_Login.png["Login"]
+
+=== Mostrar historial de ventas
+El administrador pedirá el historial de ventas a la base de datos.
+image:06_sales_history.png["Mostrar historial de ventas"]
