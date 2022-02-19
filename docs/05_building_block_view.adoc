@@ -6,8 +6,18 @@
 [role="arc42help"]
 
 === Whitebox Overall System
+El siguiente diagrama permite mostrar las distitnas capas de la aplicación y la manera en la que el usuario interactúa con ella:
 
-=== Descripciones del sistema en caja negra
+image:05_building_block_whitebox_level_1["Building block view - Whitebox Overall System"]
+
+En el diagrama se muestra la forma de interactuar tanto del administrador, como del usuario, con el sistema. Estos dos tipos de usuarios
+tendrán dos vistas distintas, teniendo así distintas operaciones disponible a realizar, esta distinción en la aplicación se explicará en el 
+nivel 2.
+
+Se representa la aplicación DeDe en un diagrama de caja blanca con un modelo del tipo MVC, en el que cada parte de dicho modelo se representa con una
+caja negra.
+
+*Descripciones del sistema en caja negra*
 
 |===
 |Nombre|Responsabilidad
