@@ -4,7 +4,7 @@
 [role="arc42help"]
 ****
 Una empresa de venta de productos busca originar un sistema de venta online denominado DeDe (Decentralized Delivery).
-Estará centrada en la venta de productos informáticos de diferentesámbitos (como ratones, teclados...).
+Estará centrada en la venta de productos informáticos de diferentes ámbitos (como ratones, teclados...).
 Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
 El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
 
