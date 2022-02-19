@@ -26,3 +26,7 @@ image:06_FiltroProductos.png["Filtro productos"]
 El usuario tras haber añadido uno o varios productos al carrito de la compra irá a dicho carrito y comprará los productos, la aplicación gestionará la forma de pago y consultará el Pod del usuario para extraer la información necesaria.
 
 image:06_Compra_Productos.png["Compra productos"]
+
+=== login
+El usuario debe introducir sus credenciales en la aplicación y estas serán validadas con la vase de datos, si son correctas accederá a la aplicacion con su cuentas y sino se le mostrará un mensaje  de error
+image:0_6_Login.png["Login"]
