@@ -1,19 +1,28 @@
 [[section-architecture-constraints]]
-== Architecture Constraints
+== Restricciones de Arquitectura
 
+.Restricciones técnicas
+[options = "header", cols = "1,2"]
+|===
+ Restricción | Descripción
+ Arc42 |
+    Recomendado para realizar la documentación. |
+ Typescript |
+    Nuevo lenguaje de programación para todos los integrantes del grupo. |
+React |
+    Libreria JavaScript requerido para construir interfaces de usuario para la web. Aplicación nueva que nunca usamos. |
+Mongo |
+    Se trata de una base de datos no relacional, la primera vez que trabajamos con una. |
+SOLID |
+    Principios y tecnologia que nos ayudará a organizar apps, al igual que react, tenemos que investigar sobre ello ya que es la primera vez que la usamos. |
+| ===
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
+.Restricciones de orgnaización
+[options = "header", cols = "1,2"]
+|===
+ Restricción | Descripción
+ Equipo |
+    Grupo conformado por 5 personas que no habian trabajado juntos antes. |
+ Tiempo |
+    Tenemos un semestre para trabajar en el proyecto, 2 horas semanales con el profesor y reuniones del equipo semanales de 1 a 2 horas. |
+| ===
