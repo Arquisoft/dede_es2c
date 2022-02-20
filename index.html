@@ -456,7 +456,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_contexto_técnico">3.2. Contexto técnico</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Soluciones de estretegia</a>
+<ul class="sectlevel2">
+<li><a href="#_deciones_tecnologicas">4.1. Deciones tecnologicas</a></li>
+<li><a href="#_como_alcanzar_los_objetivos_de_calidad">4.2. Como alcanzar los objetivos de calidad</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_descripción_del_sistema_en_caja_blanca">5.1. Descripción del sistema en caja blanca</a></li>
@@ -864,46 +869,59 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-solution-strategy">4. Solution Strategy</h2>
+<h2 id="section-solution-strategy">4. Soluciones de estretegia</h2>
 <div class="sectionbody">
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape the system&#8217;s architecture. These include</p>
-</div>
+<div class="sect2">
+<h3 id="_deciones_tecnologicas">4.1. Deciones tecnologicas</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>technology decisions</p>
+<p>React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles.</p>
 </li>
 <li>
-<p>decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern</p>
+<p>Pod Solid: almacenamiento de la inforamción personal de cada usuario.</p>
 </li>
 <li>
-<p>decisions on how to achieve key quality goals</p>
-</li>
-<li>
-<p>relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.</p>
+<p>Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.</p>
 </div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Keep the explanation of these key decisions short.</p>
-</div>
-<div class="paragraph">
-<p>Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.</p>
-</div>
-</div>
-</div>
+<div class="sect2">
+<h3 id="_como_alcanzar_los_objetivos_de_calidad">4.2. Como alcanzar los objetivos de calidad</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Objetivos de calidad</th>
+<th class="tableblock halign-left valign-top">Escenarios</th>
+<th class="tableblock halign-left valign-top">Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eficiencia</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El usuario espera que la página web funcione de forma fluida</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El acceso al pod del usuario se hará las minimas veces posibles.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Privacidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El usuario espera que sus datos no se filtren en ningun lado</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Utilización de un POD por cada usuario, donde el usuario deberá dar permiso a la web para utilizar sus datos.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usabilidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usuario espera que la página web sea en todo momento accesible</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La página tendrá un aspecto parecido al resto de aplicaciones que existen sobre tiendas online.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1063,12 +1081,8 @@ caja negra.</p>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_modelo_de_dominio">8.1. Modelo de dominio</h3>
-<div class="sidebarblock">
-<div class="content">
 <div class="paragraph">
 <p><span class="image"><img src="./images/Modelo_datos.png" alt="Modelo de datos"></span></p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect2">
