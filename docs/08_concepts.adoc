@@ -3,11 +3,8 @@
 
 === Modelo de dominio
 
-****
-
 image:Modelo_datos.png["Modelo de datos"]
 
-****
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
