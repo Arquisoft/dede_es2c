@@ -7,9 +7,9 @@ En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros cl
 
 === Contexto de negocio
 
-[role="arc42help"]
 
-image:https://github.com/Arquisoft/dede_es2c/blob/Ana/docs/images/03_Negocio.png["Diagrama Contexto Negocio"]
+image:03_Negocio.png["Diagrama Contexto Negocio"]
+
 [options="header",cols="1,2,2"]
 |===
 |Comunicaciones |Entradas | Salidas
@@ -21,9 +21,8 @@ image:https://github.com/Arquisoft/dede_es2c/blob/Ana/docs/images/03_Negocio.png
 
 === Contexto técnico
 
-[role="arc42help"]
 
-image:https://github.com/Arquisoft/dede_es2c/blob/Ana/docs/images/03_Tecnico.png["Diagrama Contexto Técnico"]
+image:03_Tecnico.png["Diagrama Contexto Técnico"]
 
 [options="header",cols="1,2"]
 |===

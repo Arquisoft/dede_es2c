@@ -1,9 +1,6 @@
 [[section-technical-risks]]
 == Riesgos y deudas técnicas
 
-
-[role="arc42help"]
-
 .Riesgos Técnicos
 
 * Falta de experiencia con las tecnologías, ya sea React, TypeScript o SOLID. Nunca hemos trabajado con estas tecnologías, por lo tanto, empezaremos desde cero y deberíamos realizar búsquedas de información constantes para conseguir manejarlas correctamente.

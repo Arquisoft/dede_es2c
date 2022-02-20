@@ -3,7 +3,6 @@
 
 == Building Block View
 
-[role="arc42help"]
 
 === Descripción del sistema en caja blanca
 El siguiente diagrama permite mostrar las distitnas capas de la aplicación y la manera en la que el usuario interactúa con ella:
