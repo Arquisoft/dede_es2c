@@ -1,7 +1,7 @@
 [[section-introduction-and-goals]]
 == Introducción y metas
 
-[role="arc42help"]
+
 ****
 Una empresa de venta de productos busca originar un sistema de venta online denominado DeDe (Decentralized Delivery).
 Estará centrada en la venta de productos informáticos de diferentes ámbitos (como ratones, teclados...).
@@ -12,7 +12,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 
 === Información general de los requisitos
 
-[role="arc42help"]
+
 ****
 .Requisitos obligatorios
 
@@ -43,7 +43,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 
 === Objetivos de calidad
 
-[role="arc42help"]
+
 ****
 
 [options="header",cols="1,2,2"]
@@ -63,7 +63,6 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 
 === Stakeholders
 
-[role="arc42help"]
 ****
 
 [options="header",cols="1,2"]
