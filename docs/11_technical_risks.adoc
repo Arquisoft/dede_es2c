@@ -2,7 +2,7 @@
 == Riesgos y deudas técnicas
 
 
-[role="arc42help"]
+
 ****
 .Riesgos Técnicos
 
