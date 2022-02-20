@@ -63,7 +63,6 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 
 === Stakeholders
 
-[role="arc42help"]
 ****
 
 [options="header",cols="1,2"]
