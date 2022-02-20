@@ -3,7 +3,7 @@
 
 
 [role="arc42help"]
-****
+
 Las siguientes decisiones de diseño, van ordenadas de mayor a menor prioridad:
 [options="header",cols="1,2,2"]
 |===
@@ -13,4 +13,3 @@ Las siguientes decisiones de diseño, van ordenadas de mayor a menor prioridad:
 | _MongoDB_ | _Forma sencilla de almacenar la información que necesita la aplicación_ | _Base de datos con la que no se ha trbajado_
 | _Docuemntación en español_ | _Mejor conocimiento técnico_ | _Complicado de entender para personas que no sepan español_ 
 |===
-****

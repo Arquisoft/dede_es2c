@@ -8,7 +8,7 @@
 === Descripción del sistema en caja blanca
 El siguiente diagrama permite mostrar las distitnas capas de la aplicación y la manera en la que el usuario interactúa con ella:
 
-image:05_building_block_whitebox_level_1["Building block view - Whitebox Overall System"]
+image:05_building_block_whitebox_level_1.jpg["Building block view - Whitebox Overall System"]
 
 En el diagrama se muestra la forma de interactuar tanto del administrador, como del usuario, con el sistema. Estos dos tipos de usuarios
 tendrán dos vistas distintas, teniendo así distintas operaciones disponible a realizar, esta distinción en la aplicación se explicará en el 

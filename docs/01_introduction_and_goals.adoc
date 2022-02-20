@@ -2,18 +2,18 @@
 == Introducción y metas
 
 [role="arc42help"]
-****
+
 Una empresa de venta de productos busca originar un sistema de venta online denominado DeDe (Decentralized Delivery).
 Estará centrada en la venta de productos informáticos de diferentes ámbitos (como ratones, teclados...).
 Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
 El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
 
-****
+
 
 === Información general de los requisitos
 
 [role="arc42help"]
-****
+
 .Requisitos obligatorios
 
 * El sistema recreará un sistema de compra online donde los usuarios podrán elegir y solicitar productos a comprar.
@@ -39,12 +39,9 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 * Se deja abierta la opción de emplear más de una tecnología de despliegue.
 
 
-****
-
 === Objetivos de calidad
 
 [role="arc42help"]
-****
 
 [options="header",cols="1,2,2"]
 |===
@@ -58,13 +55,10 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 |===
 
 
-
-****
-
 === Stakeholders
 
 [role="arc42help"]
-****
+
 
 [options="header",cols="1,2"]
 |===
@@ -75,5 +69,5 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 | Administrador | Tener el control de una aplicación robusta y eficiente con la que poder satisfacer las necesidades de los usuarios
 |===
 
-****
+
 
