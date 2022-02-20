@@ -1,67 +1,45 @@
 [[section-concepts]]
-== Cross-cutting Concepts
+== Conceptos transversales
 
 
 [role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are
-relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+=== Modelo de dominio
 
-* domain models
-* architecture patterns or design patterns
-* rules for using specific technology
-* principal, often technical decisions of overall decisions
-* implementation rules
-
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
-of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
-
-Some of these concepts cannot be assigned to individual building blocks
-(e.g. security or safety). This is the place in the template that we provided for a
-cohesive specification of such concepts.
-
-.Form
-The form can be varied:
-
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
-
-.Structure
-A potential (but not mandatory) structure for this section could be:
-
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
-
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
-
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 ****
 
+image:Modelo_datos.png["Modelo de datos"]
 
-=== Domain model
+****
 
-image:UmlDiagram.png["Example UML Diagram"]
+=== Internacionalización
+La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
 
+=== Seguridad
+La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente.
 
+=== Consistencia
+Otro aspecto fundamental que perseguimos es garantizar que los datos de los clientes no se corrompan al emplear su aplicación, sin importar el problema que ocurra.
 
-=== _<Concept 2>_
+=== Usabilidad
+Queremos garantizar el tener una interfaz de usuario que resulte cómoda al usuario para que así en un futuro vuelva a emplear la aplicación para sus futuras compras.
 
-_<explanation>_
+=== Manejo de excepciones
+Se incluirá el código necesario para manejar y capturar los errores procedentes de las diferentes partes de la aplicación. De ser necesario, se le informará al cliente con el mensaje que corresponda.
 
-...
+=== Accesibilidad
+Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
 
-=== _<Concept n>_
+=== Estructura de paquetes
+A rellenar en un futuro
 
-_<explanation>_
+=== Seguridad
+Ningún aspecto de la aplicación será dañino para la vida del usuario.
+
+=== Manejo de sesión
+Se manejarán las sesiones a través del uso de las APIs necesarias.
+
+=== Estándares de código
+El crear código limpio que siga unas estructuras y patrones definidos es base fundamental para crear código que se pueda actualizar en un futuro. Queremos garantizar crear una aplicación al nivel que se puede esperar de un equipo de formado por Ingenieros Informáticos del Software.
+
+=== Persistencia
+Uso de una base de datos MongoDB para gestionar la parte de almacenamiento y modificación de los productos informáticos en la tienda.

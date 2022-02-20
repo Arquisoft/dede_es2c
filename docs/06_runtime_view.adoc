@@ -3,55 +3,34 @@
 
 
 [role="arc42help"]
-****
-.Contents
-The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:
+A continución se muestran diferentes escenarios que se puedene encontrar en la aplicación
 
-* important use cases or features: how do building blocks execute them?
-* interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?
-* operation and administration: launch, start-up, stop
-* error and exception scenarios
+=== Añadir productos
 
-Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their *architectural relevance*. It is *not* important to describe a large number of scenarios. You should rather document a representative selection.
+El administrador rellenará un formulario con los detalles del producto que se mandará a un controlador. El controlador se encargará de enviar la petición al repositorio para que se almacene en la base de datos.
 
-.Motivation
-You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
-You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).
+image:diagrama_introducir.png["Añadir productos"]
 
-.Form
-There are many notations for describing scenarios, e.g.
+=== Eliminar productos
 
-* numbered list of steps (in natural language)
-* activity diagrams or flow charts
-* sequence diagrams
-* BPMN or EPCs (event process chains)
-* state machines
-* ...
+El administrador rellenará un formulario con los detalles del producto a borrar.El controlador le pasará la información necesaria al modelo para que éste pueda eliminar el producto de la base de datos. 
 
-****
+image:diagrama_eliminar.png["Eliminar productos"]
 
-=== <Runtime Scenario 1>
+=== Filtro de productos
+El usuario tras realizar el login en la aplicación y ver los diferentes productos que hay, podrá utilizar los filtros situados en la parte izquierda de la página para realizar una búsqueda más precisa. Tras selccionar los filtros que el usuario vea convenientes. La aplicación pedirá a la base de datos donde se encuentren todos los productos, aquellos que el filtro muestre. Tras ello, la base de datos, retornara los productos que cumplan esos filtros a la aplicación. La aplicación mostrará los productos al usuario.
 
+image:06_FiltroProductos.png["Filtro productos"]
 
-* _<insert runtime diagram or textual description of the scenario>_
-* _<insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.>_
+=== Compra de productos
+El usuario tras haber añadido uno o varios productos al carrito de la compra irá a dicho carrito y comprará los productos, la aplicación gestionará la forma de pago y consultará el Pod del usuario para extraer la información necesaria.
 
-It is possible to use a sequence diagram:
+image:06_Compra_Productos.png["Compra productos"]
 
-[plantuml,"Sequence diagram",png]
-----
-actor Alice
-actor Bob
-database Pod as "Bob's Pod"
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-Alice  --> Pod: Store route
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
-----
-=== <Runtime Scenario 2>
+=== login
+El usuario debe introducir sus credenciales en la aplicación y estas serán validadas con la vase de datos, si son correctas accederá a la aplicacion con su cuentas y sino se le mostrará un mensaje  de error
+image:06_Login.png["Login"]
 
-=== ...
-
-=== <Runtime Scenario n>
+=== Mostrar historial de ventas
+El administrador pedirá el historial de ventas a la base de datos.
+image:06_sales_history.png["Mostrar historial de ventas"]
