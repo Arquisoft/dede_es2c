@@ -1,21 +1,19 @@
 [[section-runtime-view]]
 == Runtime View
 
-
-[role="arc42help"]
 A continución se muestran diferentes escenarios que se puedene encontrar en la aplicación
 
 === Añadir productos
 
 El administrador rellenará un formulario con los detalles del producto que se mandará a un controlador. El controlador se encargará de enviar la petición al repositorio para que se almacene en la base de datos.
 
-image:diagrama_introducir.png["Añadir productos"]
+image:diagrama_introducir.PNG["Añadir productos"]
 
 === Eliminar productos
 
 El administrador rellenará un formulario con los detalles del producto a borrar.El controlador le pasará la información necesaria al modelo para que éste pueda eliminar el producto de la base de datos. 
 
-image:diagrama_eliminar.png["Eliminar productos"]
+image:diagrama_eliminar.PNG["Eliminar productos"]
 
 === Filtro de productos
 El usuario tras realizar el login en la aplicación y ver los diferentes productos que hay, podrá utilizar los filtros situados en la parte izquierda de la página para realizar una búsqueda más precisa. Tras selccionar los filtros que el usuario vea convenientes. La aplicación pedirá a la base de datos donde se encuentren todos los productos, aquellos que el filtro muestre. Tras ello, la base de datos, retornara los productos que cumplan esos filtros a la aplicación. La aplicación mostrará los productos al usuario.
