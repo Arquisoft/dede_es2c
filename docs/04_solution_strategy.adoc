@@ -1,13 +1,13 @@
 [[section-solution-strategy]]
 == Soluciones de estretegia
 
-=== Deciones tecnologicas
+=== Decisones tecnológicas
 - React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles. 
 - Pod Solid: almacenamiento de la inforamción personal de cada usuario. 
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
  - MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
 
-=== Como alcanzar los objetivos de calidad
+=== Cómo lograr los objetivos clave de calidad
 [options="header",cols="1,2,2"]
 |===
 |Objetivos de calidad| Escenarios | Solución
