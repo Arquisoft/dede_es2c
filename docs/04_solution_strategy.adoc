@@ -5,6 +5,7 @@
 - React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles. 
 - Pod Solid: almacenamiento de la inforamción personal de cada usuario. 
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
+ - MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
 
 === Como alcanzar los objetivos de calidad
 [options="header",cols="1,2,2"]
@@ -14,5 +15,8 @@
 | Privacidad | El usuario espera que sus datos no se filtren en ningun lado | Utilización de un POD por cada usuario, donde el usuario deberá dar permiso a la web para utilizar sus datos. 
 | Usabilidad  | Usuario espera que la página web sea en todo momento accesible | La página tendrá un aspecto parecido al resto de aplicaciones que existen sobre tiendas online.
 
-|===
+|=== 
+
+=== Decisiones de organización
+Se ha acordado realizar las diferentes llamadas que se necesiten a través de la plataforma Microsoft Teams, para llegar a esta reunión antes se hablará por el WhatsApp, ya que es más fácil contactar con todos los miembros del equipo. El equipo de desarrollo utiliza GitHub para reflejar el trabajo que tiene que relaizar cada uno de los integrantes de cada equipo, además en el apartado de Wiki aparecerán las diferentes actas de las reuniones que se hacen. 
 
