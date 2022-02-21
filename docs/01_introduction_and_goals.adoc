@@ -42,7 +42,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 [options="header",cols="1,2,2"]
 |===
 |Objetivos de calidad|Motivación|Importancia
-| Eficiencia | Que se utilicen la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
+| Eficiencia | La aplicación utilizará la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
 | Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
 | Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Media
 | Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
@@ -58,7 +58,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 |Rol/Nombre|Expectations
 | Equipo de desarrollo | Aprender a trabajar en equipo con gente que no conocen y familiarizarse con las tecnologías solicitadas en el curso
 | Empresa de venta de productos (cliente) | Una aplicación funcional que satisfaga los requisitos solicitados, especialmente aquellos relacionados con la seguridad
-| Usuario | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
+| Cliente | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
 | Administrador | Tener el control de una aplicación robusta y eficiente con la que poder satisfacer las necesidades de los usuarios
 |===
 
