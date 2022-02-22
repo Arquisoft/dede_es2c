@@ -1,21 +1,18 @@
 [[section-deployment-view]]
-
-
 == Perspectiva de Despliegue
 
-[role="arc42help"]
-****Content
-.
-Tecnologías:
-    Los datos del usuario serán almacenados en un POD. El entorno de desarollo empleado para el trabajo será Node.js, mientras que emplearemos MongoDB como base
-    de datos principal.
+=== Tecnologías
+
+   - Los datos del usuario serán almacenados en un POD. El entorno de desarollo empleado para el trabajo será Node.js, mientras que emplearemos MongoDB como base de datos principal.
 
 === Infraestructura
 
-    Interfaz de usuario: Desarrollada como un conjunto de componentes de React
-    Logica de negocio: Funcionamiento de la aplicación
-    Persistencia: basada en una API REST y MongoDB
+    - Interfaz de usuario: Desarrollada como un conjunto de componentes de React
+    - Logica de negocio: Funcionamiento de la aplicación
+    - Persistencia: basada en una API REST y MongoDB
 
 === Diagrama de Despliegue
 
-image:diagrama_despliegue.png
+****
+image:diagrama_despliegue.png[]
+****

@@ -1,15 +1,12 @@
 [[section-concepts]]
 == Conceptos transversales
 
-
-[role="arc42help"]
 === Modelo de dominio
-
-****
 
 image:Modelo_datos.png["Modelo de datos"]
 
-****
+El modelo de datos tiene que ser actualizado más adelante antes de la siguiente revisión de documentación.
+
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.

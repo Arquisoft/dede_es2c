@@ -4,33 +4,27 @@
 .Restricciones técnicas
 [options = "header", cols = "1,2"]
 |===
- Restricción | Descripción
-Typescript |
-    Nuevo lenguaje de programación para todos los integrantes del grupo. |
-React |
-    Libreria JavaScript requerido para construir interfaces de usuario para la web. Aplicación nueva que nunca usamos. |
-Mongo |
-    Se trata de una base de datos no relacional, la primera vez que trabajamos con una. |
-SOLID |
-    Principios y tecnologia que nos ayudará a organizar apps, al igual que react, tenemos que investigar sobre ello ya que es la primera vez que la usamos. |
-| ===
+| Restricción | Descripción
+| Typescript | Nuevo lenguaje de programación para todos los integrantes del grupo. 
+| React | Libreria JavaScript requerido para construir interfaces de usuario para la web. Aplicación nueva que nunca usamos. 
+| Mongo | Se trata de una base de datos no relacional, la primera vez que trabajamos con una. 
+| SOLID | Principios y tecnologia que nos ayudará a organizar apps, al igual que react, tenemos que investigar sobre ello ya que es la primera vez que la usamos. 
+|===
 
 .Restricciones de organización
 [options = "header", cols = "1,2"]
 |===
- Restricción | Descripción
- Equipo |
-    Grupo conformado por 5 personas que no habian trabajado juntos antes. |
- Tiempo |
-    Fecha de entrega limite al final de semestre, 2 horas semanales con el profesor y reuniones del equipo semanales de 1 a 2 horas. |
-| ===
+| Restricción | Descripción
+| Equipo | Grupo conformado por 5 personas que no habian trabajado juntos antes. 
+| Tiempo | Fecha de entrega limite al final de semestre, 2 horas semanales con el profesor y reuniones del equipo semanales de 1 a 2 horas. 
+|===
 
 .Restricciones de documentación
 [options = "header", cols = "1,2"]
 |===
- Restricción | Descripción
- Arc42 |
-    Recomendado para realizar la documentación. |
- PlantUML |
-    Programa que permite diseñar y realizar diagramas, generándolos a través de un texto escrito |
-| ===
+| Restricción | Descripción
+| Arc42 | Recomendado para realizar la documentación. 
+| PlantUML | Programa que permite diseñar y realizar diagramas, generándolos a través de un texto escrito 
+|===
+
+
