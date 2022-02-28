@@ -1,22 +1,32 @@
 [[section-solution-strategy]]
 == Soluciones de estretegia
 
-=== Decisones tecnológicas
+=== Restricciones tecnologicas
 - React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles. 
 - Pod Solid: almacenamiento de la inforamción personal de cada usuario. 
+- TypeScript, lenguaje de programación con el que está desarrollada la aplicación. 
+
+=== Deciones tecnologicas
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
- - MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
+- MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
 
-=== Cómo lograr los objetivos clave de calidad
-[options="header",cols="1,2,2"]
+=== Como alcanzar los objetivos de calidad
+[options="header",cols="1,2"]
 |===
-|Objetivos de calidad| Escenarios | Solución
-| Eficiencia | El usuario espera que la página web funcione de forma fluida | El acceso al pod del usuario se hará las minimas veces posibles. 
-| Privacidad | El usuario espera que sus datos no se filtren en ningun lado | Utilización de un POD por cada usuario, donde el usuario deberá dar permiso a la web para utilizar sus datos. 
-| Usabilidad  | Usuario espera que la página web sea en todo momento accesible | La página tendrá un aspecto parecido al resto de aplicaciones que existen sobre tiendas online.
-
+|Objetivos de calidad| Solución
+| Eficiencia | El acceso al pod del usuario se hará las minimas veces posibles. Realización de pruebas para comprobar como de rápido responde la aplicación
+| Privacidad | Utilización de un POD por cada usuario, donde el usuario deberá dar permiso a la web para utilizar sus datos. 
+| Usabilidad | La página tendrá un aspecto parecido al resto de aplicaciones que existen sobre tiendas online.
 |=== 
 
+=== Descomposición de alto nivel del sistema
+Todavía no se ha decidido como va a estar.
+
 === Decisiones de organización
-Se ha acordado realizar las diferentes llamadas que se necesiten a través de la plataforma Microsoft Teams, para llegar a esta reunión antes se hablará por el WhatsApp, ya que es más fácil contactar con todos los miembros del equipo. El equipo de desarrollo utiliza GitHub para reflejar el trabajo que tiene que relaizar cada uno de los integrantes de cada equipo, además en el apartado de Wiki aparecerán las diferentes actas de las reuniones que se hacen. 
+ * Revisiones y reuniones acordadas con antelación se realizarán a travésd de la aplicación Microsoft Teams.
+ * Mensajería instantanea para acordar aquellas reuniones que se realicen de forma online, también para avisar de cambios pequeños.
+ * GitHub para reflejar el trabajo que se esta realizando de varias formas: 
+ ** Rama individual para cada uno, donde deberá realizar su trabajo.
+ ** Uso de wikis para recoger todo lo acordado en las reuniones.
+ ** Uso de issues para indicar las cosas que tiene que realizar cada miembro del equipo. 
 
