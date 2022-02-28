@@ -8,7 +8,7 @@
 
 === Deciones tecnologicas
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
- - MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
+- MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
 
 === Como alcanzar los objetivos de calidad
 [options="header",cols="1,2"]
