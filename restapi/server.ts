@@ -26,7 +26,7 @@ app.listen(port, ():void => {
 });
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDatabase?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
