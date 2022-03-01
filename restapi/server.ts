@@ -25,3 +25,14 @@ app.listen(port, ():void => {
     console.error('Error occured: ' + error.message);
 });
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(() =>{
+    console.log('DB CONNECTED');
+  }
+
+);
+
