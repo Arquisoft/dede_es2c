@@ -1,11 +1,11 @@
-const  user = require("/restapi/src/model/User");
+import {User} from "../model/User";
+import { RequestHandler } from "express";
 
-const getUsers = async (req:any, res:any) => {
+export const findUsers: RequestHandler = async (req, res) => {
     try {
-        const student= await user.find();
-        
-        res.status(200).json(student);
-    } catch(error) {
-        res.status(404).json({message: error.message});
+      const users = await User.find();
+      return res.json(users);
+    } catch (error) {
+      res.json(error);
     }
-}
+  };

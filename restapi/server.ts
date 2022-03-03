@@ -3,6 +3,7 @@ import cors from 'cors';
 import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
+import userRoutes from "../restapi/src/routes/UserRoutes";
 
 const app: Application = express();
 const port: number = 5000;
@@ -18,6 +19,8 @@ app.use(cors(options));
 app.use(bp.json());
 
 app.use("/api", api)
+
+app.use(userRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);

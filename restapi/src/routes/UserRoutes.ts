@@ -1,7 +1,10 @@
 const express = require("express");
-const  userAct = require("/restapi/src/controllers/UserController");
+import * as UserController from '../controllers/UserController';
+
 const router = express.Router();
 
-router.get('/users', userAct.getUsers);
+router.get('/user/list', UserController.findUsers);
 
 module.exports=router;
+
+export default router;
