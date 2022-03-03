@@ -9,3 +9,4 @@ export const findUsers: RequestHandler = async (req, res) => {
       res.json(error);
     }
   };
+

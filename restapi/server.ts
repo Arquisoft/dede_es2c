@@ -4,6 +4,7 @@ import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
+import {User} from "../restapi/src/model/User";
 
 const app: Application = express();
 const port: number = 5000;
@@ -29,13 +30,12 @@ app.listen(port, ():void => {
 });
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }).then(() =>{
     console.log('DB CONNECTED');
   }
-
 );
 
