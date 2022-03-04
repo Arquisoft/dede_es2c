@@ -3,6 +3,8 @@ import cors from 'cors';
 import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
+import userRoutes from "../restapi/src/routes/UserRoutes";
+import {User} from "../restapi/src/model/User";
 
 const app: Application = express();
 const port: number = 5000;
@@ -19,9 +21,21 @@ app.use(bp.json());
 
 app.use("/api", api)
 
+app.use(userRoutes);
+
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
 }).on("error",(error:Error)=>{
     console.error('Error occured: ' + error.message);
 });
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(() =>{
+    console.log('DB CONNECTED');
+  }
+);
 
