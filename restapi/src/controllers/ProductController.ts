@@ -40,7 +40,7 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
  * @param res Response
  * @returns lista de los productos
  */
-export const getAllProducts: RequestHandler = async (req, res) => {
+export const findProducts: RequestHandler = async (req, res) => {
     try {
         const allP = await Product.find();
         return res.json(allP); 
