@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { products } from "./Product";
+import { Product } from "../model/Product";
 
 /**
  * Método que busca los productos por codigo de este
@@ -8,7 +8,7 @@ import { products } from "./Product";
  * @returns lista de productos filtrados por codigo
  */
 export const getProductoByCode: RequestHandler = async (req, res) => {
-    const encontrado = await products.find({codigo: req.params.codigo});
+    const encontrado = await Product.find({codigo: req.params.codigo});
 
     if(encontrado){
         return res.json(encontrado);
@@ -24,10 +24,10 @@ export const getProductoByCode: RequestHandler = async (req, res) => {
  * @returns lista de productos filtrados por categoria
  */
 export const getProductsByCategoria: RequestHandler = async (req, res) => {
-    const encontrado = await products.find({codigo: req.params.codigo});
+    const encontrado = await Product.find({codigo: req.params.codigo});
 
     try {
-        const encontrado = await products.find({categoria: req.params.categoria});
+        const encontrado = await Product.find({categoria: req.params.categoria});
         return res.json(encontrado);
     }catch(error){
         res.status(404).json({message: 'No hay productos de esa categoría'})
@@ -42,7 +42,7 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
  */
 export const getAllProducts: RequestHandler = async (req, res) => {
     try {
-        const allP = await products.find();
+        const allP = await Product.find();
         return res.json(allP); 
     }catch(error){
         res.json(error);
