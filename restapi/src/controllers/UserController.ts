@@ -44,3 +44,12 @@ export const deleteUser: RequestHandler = async (req, res) => {
   }
 };
 
+export const update: RequestHandler = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.body.id,{name:req.body.name,surname:req.body.surname,email:req.body.email});
+    return res.send("User updated")
+  } catch (error) {
+    return res.status(404).json({message: 'There was a problem updating a user'});
+  }
+};
+
