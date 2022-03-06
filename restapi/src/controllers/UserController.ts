@@ -10,3 +10,13 @@ export const findUsers: RequestHandler = async (req, res) => {
     }
 };
 
+export const findUsersById: RequestHandler = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userFound = await User.findOne({_id: id});
+    return res.json(userFound)
+  } catch (error) {
+    return res.status(404).json({message: 'No hay un usuario con ese ID'});
+  }
+};
+
