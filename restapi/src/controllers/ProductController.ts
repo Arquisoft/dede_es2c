@@ -1,5 +1,7 @@
+import { Console } from "console";
 import { RequestHandler } from "express";
 import { Product } from "../model/Product";
+
 
 /**
  * Método que busca los productos por codigo de este
