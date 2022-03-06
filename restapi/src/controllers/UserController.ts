@@ -8,5 +8,5 @@ export const findUsers: RequestHandler = async (req, res) => {
     } catch (error) {
       res.json(error);
     }
-  };
+};
 
