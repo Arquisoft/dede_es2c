@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import 'bootswatch/dist/simplex/bootstrap.min.css'; // CSS que se va a utilizar
@@ -6,9 +6,18 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
 import { Card, CardContent } from '@mui/material';
+import Link from '@mui/material/Link';
+// import Check from '../checks/Arguments'
 
+
+const checkParams = (text: String) => {
+    return text === "" || text == null;
+}
 
 const LogIn: FC = () => {
+    const [idUsuario, setId] = useState('')
+    const [pass, setPass] = useState('')
+    const [pulse, setPulse] = useState(false)
     return ( 
         <div>
             <Container component= "main" maxWidth="sm">
@@ -28,6 +37,10 @@ const LogIn: FC = () => {
                                 defaultValue= "Nombre Usuario"
                                 variant="outlined"
                                 size="small"
+                                value = {idUsuario}
+                                error = {checkParams(idUsuario) && pulse}
+                                onChange = {e => setId(e.target.value)}
+                               // helperText = "Valor incorrecto"
                             />
 
                             <TextField 
@@ -38,11 +51,15 @@ const LogIn: FC = () => {
                                 type= "password"
                                 defaultValue= "Contraseña"
                                 size="small"
+                                variant="outlined"
+                                value = {pass}
+                                error = {checkParams(idUsuario) && pulse}
+                                onChange = {e => setPass(e.target.value)}
+                                // helperText = "Valor incorrecto"
                             />
 
-                            <Button variant="contained" href="#contained-buttons">
-                                Iniciar Sesión
-                            </Button>
+                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Iniciar Sesión</Button>
+                            <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
                     
