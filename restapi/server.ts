@@ -4,7 +4,7 @@ import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
-import orderRoutes from "./src/routes/OrderRoutes";
+import orderRoutes from "../restapi/src/routes/OrderRoutes";
 import productRoutes from "../restapi/src/routes/ProductsRoutes";
 import {User} from "../restapi/src/model/User";
 

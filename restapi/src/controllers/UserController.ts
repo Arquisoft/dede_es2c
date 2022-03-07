@@ -22,17 +22,23 @@ export const findUsersById: RequestHandler = async (req, res) => {
 };
 
 export const createUser: RequestHandler = async (req, res) => {
+  var bcrypt = require('bcrypt');
+  var salt = 12;
   const newUser = new User();
   newUser._id = randomUUID();
   newUser.name = req.body.name;
   newUser.surname = req.body.surname;
   newUser.email = req.body.email;
+  var password = req.body.password;
   try {
-    await User.save(newUser);
+    password = bcrypt.hash(password,salt);
+    newUser.password = password;
+    User.save(newUser);
     return res.send("User saved")
   } catch (error) {
     return res.status(404).json({message: 'There was a problem creating a user'});
   }
+  
 };
 
 export const deleteUser: RequestHandler = async (req, res) => {
@@ -52,4 +58,3 @@ export const update: RequestHandler = async (req, res) => {
     return res.status(404).json({message: 'There was a problem updating a user'});
   }
 };
-
