@@ -89,6 +89,23 @@ export const getMessage: RequestHandler = async (req, res) => {
 }
 
 
+/**
+ * Método que busca los pedidos asociados a un usuario
+ * @param req Request
+ * @param res Response
+ * @returns Pedido con el precio especificado
+ */
+ export const getOrderByIdUser: RequestHandler = async (req, res) => {
+    const user = req.params.idUser;
+    try {
+        const encontrado = await Order.findOne({id_user: user});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
+    }
+}
+
+
 // *********** AL METER DATE HAY QUE MODIFICAR ESTO  ***********
 
 /**

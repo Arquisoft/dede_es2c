@@ -41,6 +41,9 @@ router.get('/order/getProductsByCode/:code', OrderController.getOrderProductsByC
 // Buscar producto concreto en un pedido concreto
 router.get('/order/getConcreteProductByCode/:code/:code2', OrderController.getOrderConcreteProductByCode);
 
+// Buscar el pedido asociado a un usuario
+router.get('/order/getOrderByIdUser/:idUser', OrderController.getOrderByIdUser);
+
 // Para tests
 router.get('/order/message', OrderController.getMessage);
 

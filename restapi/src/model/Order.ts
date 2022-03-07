@@ -4,8 +4,15 @@ const { model, Schema } = mongoose
 export const OrderShema = new mongoose.Schema({
 
     // Habría que pasar de string a date en la fecha
+    // Deberías cambiar el usuario a un object
     
     codigo: {
+        type: String,
+        required: true,
+        immutable: true,
+        unique: true
+    },
+    id_usuario: {
         type: String,
         required: true,
         immutable: true,
