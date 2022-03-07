@@ -2,8 +2,11 @@ const mongoose = require('mongoose')
 const { model, Schema } = mongoose
 
 export const OrderShema = new mongoose.Schema({
+
+    // Habría que pasar de string a date en la fecha
+    
     codigo: {
-        type: Number,
+        type: String,
         required: true,
         immutable: true,
         unique: true
@@ -41,8 +44,6 @@ export const OrderShema = new mongoose.Schema({
         },
     }]
     },
-    { collection: 'Order' }) 
+    { collection: 'Order' })
 
-// Pare crear el modelo
 export const Order = mongoose.model('Order', OrderShema, 'Order');
-module.exports = Order;
