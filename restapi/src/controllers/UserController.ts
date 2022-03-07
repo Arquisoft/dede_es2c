@@ -31,12 +31,30 @@ export const createUser: RequestHandler = async (req, res) => {
   newUser.email = req.body.email;
   var password = req.body.password;
   try {
-    password = bcrypt.hash(password,salt);
-    newUser.password = password;
-    User.save(newUser);
+    const hashedpassword = await bcrypt.hash(password,salt);
+    newUser.password = hashedpassword;
+    await User.save(newUser);
     return res.send("User saved")
   } catch (error) {
     return res.status(404).json({message: 'There was a problem creating a user'});
+  }
+  
+};
+
+export const loginUser: RequestHandler = async (req, res) => {
+  var bcrypt = require('bcrypt');
+  var salt = 12;
+  var emailReq = req.body.email;
+  var password = req.body.password;
+  try {
+    const userFound = await User.findOne({email: emailReq});
+    if(await bcrypt.compare(password,userFound.password)){
+      return res.send("User logged");
+    }else{
+      res.send("Password Incorrect");
+    }
+  } catch (error) {
+    return res.status(404).json({message: 'There was a problem logging a user'});
   }
   
 };
