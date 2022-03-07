@@ -12,6 +12,7 @@ router.get('/product/getByCategoria/:categoria', ProductController.getProductsBy
 // Productos por su id, NO FUNCIONA
 router.get('product/getById/:id', ProductController.getProductoByID);
 
+
 module.exports = router;
 
 export default router;

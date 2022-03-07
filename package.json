@@ -1,9 +1,28 @@
 {
   "dependencies": {
     "mongodb": "^4.4.0",
-    "mongoose": "^6.2.4"
+    "mongoose": "^6.2.4",
+    "utils": "^0.3.1"
   },
   "scripts": {
     "start": "node app"
-  }
+  },
+  "name": "dede_es2c",
+  "description": "[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_0/actions)\r [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_0&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_0)\r [![codecov](https://codecov.io/gh/arquisoft/dede_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://codecov.io/gh/pglez82/asw2122_0)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arquisoft/dede_es2c.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arquisoft/dede_es2c/issues"
+  },
+  "homepage": "https://github.com/arquisoft/dede_es2c#readme"
 }
