@@ -1,6 +1,7 @@
-import {User} from "../model/User";
 import { RequestHandler } from "express";
-import { randomUUID } from "crypto";
+const { response, request } = require('express')
+
+const User = require('../model/user')
 
 export const findUsers: RequestHandler = async (req, res) => {
     try {
@@ -21,29 +22,26 @@ export const findUsersById: RequestHandler = async (req, res) => {
   }
 };
 
-export const createUser: RequestHandler = async (req, res) => {
+export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
-  var salt = 12;
-  const newUser = new User();
-  newUser._id = randomUUID();
-  newUser.name = req.body.name;
-  newUser.surname = req.body.surname;
-  newUser.email = req.body.email;
-  var password = req.body.password;
-  try {
-    const hashedpassword = await bcrypt.hash(password,salt);
-    newUser.password = hashedpassword;
-    await User.save(newUser);
-    return res.send("User saved")
-  } catch (error) {
-    return res.status(404).json({message: 'There was a problem creating a user'});
-  }
+  try{
+    const { password, ...body } = req.body
+    const user = new User(body)
+    const passwordHashed = await bcrypt.hash(password, 10);
+    user.password = passwordHashed;
+    await user.save();
+    res.status(201).json({
+        user
+    })
+} catch(err) {
+  console.log(err)
+    res.status(400).json({msg: err})
+}
   
 };
 
 export const loginUser: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');
-  var salt = 12;
   var emailReq = req.body.email;
   var password = req.body.password;
   try {
@@ -61,16 +59,20 @@ export const loginUser: RequestHandler = async (req, res) => {
 
 export const deleteUser: RequestHandler = async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.body.id);
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
     return res.send("User deleted")
   } catch (error) {
+    console.log(error)
     return res.status(404).json({message: 'There was a problem deleting a user'});
   }
 };
 
 export const update: RequestHandler = async (req, res) => {
   try {
-    await User.findByIdAndUpdate(req.body.id,{name:req.body.name,surname:req.body.surname,email:req.body.email});
+    const { id } = req.params;
+    const {_id, ...params} = req.body
+    await User.findByIdAndUpdate(id,params);
     return res.send("User updated")
   } catch (error) {
     return res.status(404).json({message: 'There was a problem updating a user'});
