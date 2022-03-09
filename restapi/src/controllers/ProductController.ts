@@ -1,5 +1,7 @@
+import { Console } from "console";
 import { RequestHandler } from "express";
 import { Product } from "../model/Product";
+
 
 /**
  * Método que busca los productos por codigo de este
@@ -63,7 +65,7 @@ export const findProducts: RequestHandler = async (req, res) => {
     }catch(error){
         res.json(error);
     }
-}
+
 
 export const getProductByPrice: RequestHandler = async (req, res) => {
     // Mirar esto, no funciona del todo
