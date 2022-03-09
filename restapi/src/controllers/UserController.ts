@@ -63,18 +63,22 @@ export const deleteUser: RequestHandler = async (req, res) => {
     await User.findByIdAndDelete(id);
     return res.send("User deleted")
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'There was a problem deleting a user'});
   }
 };
 
 export const update: RequestHandler = async (req, res) => {
+  var bcrypt = require('bcrypt');
   try {
     const { id } = req.params;
-    const {_id, ...params} = req.body
+    const {_id, password,...params} = req.body
+    if(password){
+      params.password = await bcrypt.hash(password, 10);
+    }
     await User.findByIdAndUpdate(id,params);
     return res.send("User updated")
   } catch (error) {
+    console.log(error)
     return res.status(404).json({message: 'There was a problem updating a user'});
   }
 };
