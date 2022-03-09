@@ -65,7 +65,7 @@ export const findProducts: RequestHandler = async (req, res) => {
     }catch(error){
         res.json(error);
     }
-
+}
 
 export const getProductByPrice: RequestHandler = async (req, res) => {
     // Mirar esto, no funciona del todo
