@@ -1,13 +1,18 @@
 {
   "dependencies": {
     "@mui/material": "^5.5.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
     "@types/react": "^17.0.39",
     "bootstrap": "^5.1.3",
     "bootswatch": "^5.1.3",
     "mongodb": "^4.4.0",
     "mongoose": "^6.2.4",
     "react-native-svg": "^12.3.0",
-    "utils": "^0.3.1"
+    "react-router-dom": "^6.2.2",
+    "svg": "^0.1.0",
+    "utils": "^0.3.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "node app"
@@ -28,5 +33,8 @@
   "bugs": {
     "url": "https://github.com/arquisoft/dede_es2c/issues"
   },
-  "homepage": "https://github.com/arquisoft/dede_es2c#readme"
+  "homepage": "https://github.com/arquisoft/dede_es2c#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.1"
+  }
 }
