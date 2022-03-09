@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
     "bootswatch": "^5.1.3",
     "mongodb": "^4.4.0",
@@ -16,7 +17,6 @@
   "directories": {
     "doc": "docs"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arquisoft/dede_es2c.git"

@@ -52,6 +52,7 @@ export const loginUser: RequestHandler = async (req, res) => {
       res.send("Password Incorrect");
     }
   } catch (error) {
+    console.log(error)
     return res.status(404).json({message: 'There was a problem logging a user'});
   }
   
