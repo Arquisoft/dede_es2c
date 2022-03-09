@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import 'bootswatch/dist/simplex/bootstrap.min.css'; // CSS que se va a utilizar
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import logo from '../img/logo-dede.svg';
+import logo from '../src/img/logo-dede.svg';
 import { Card, CardContent } from '@mui/material';
 import Link from '@mui/material/Link';
 // import Check from '../checks/Arguments'
