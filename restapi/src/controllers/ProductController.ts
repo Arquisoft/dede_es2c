@@ -80,4 +80,3 @@ export const getProductByPrice: RequestHandler = async (req, res) => {
         res.json(error);
     }
 }
-}
