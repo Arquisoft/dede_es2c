@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from 'react';
 import 'bootswatch/dist/litera/bootstrap.min.css';
 import LogIn from './pages/LogIn';
-import SignUp from './pages/Singup';
+import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
