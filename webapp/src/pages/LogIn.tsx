@@ -7,11 +7,20 @@ import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
 import { Card, CardContent } from '@mui/material';
 import Link from '@mui/material/Link';
+import axios from 'axios';
 // import Check from '../checks/Arguments'
 
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
+}
+
+const handleLogin = (idUser: String,pass: String) => {
+   axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
+   .then(res => {
+       console.log(res);
+       console.log(res.data);
+   })
 }
 
 const LogIn: FC = () => {
@@ -57,8 +66,8 @@ const LogIn: FC = () => {
                                 onChange = {e => setPass(e.target.value)}
                                 // helperText = "Valor incorrecto"
                             />
-
-                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Iniciar Sesión</Button>
+        
+                            <Button onClick={() => handleLogin(idUsuario,pass)} variant="contained" type="submit">Iniciar Sesión</Button>
                             <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
