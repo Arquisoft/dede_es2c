@@ -46,11 +46,16 @@ export const loginUser: RequestHandler = async (req, res) => {
   var password = req.body.password;
   try {
     const userFound = await User.findOne({email: emailReq});
-    if(await bcrypt.compare(password,userFound.password)){
-      return res.send("User logged");
+    if(userFound){
+      if(await bcrypt.compare(password,userFound.password)){
+        return res.send("User logged");
+      }else{
+        res.send("Password Incorrect");
+      }
     }else{
-      res.send("Password Incorrect");
+      res.send("User not exist");
     }
+    
   } catch (error) {
     console.log(error)
     return res.status(404).json({message: 'There was a problem logging a user'});
