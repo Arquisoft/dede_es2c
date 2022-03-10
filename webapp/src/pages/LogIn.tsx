@@ -30,7 +30,7 @@ const LogIn: FC = () => {
                     <Stack direction= "column" spacing={2}>
                         
                             <TextField 
-                                id = "idUsuario"
+                                id = "email"
                                 required
                                 name = "Correo Electronico"
                                 label = "Correo Electronico"
@@ -39,12 +39,13 @@ const LogIn: FC = () => {
                                 size="small"
                                 value = {email}
                                 error = {checkParams(email) && pulse}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setEmail(e.target.value)}
                                // helperText = "Valor incorrecto"
                             />
 
                             <TextField 
-                                id = "conUsuario"
+                                id = "pass"
                                 required
                                 name = "Contraseña"
                                 label = "Contraseña"
@@ -53,7 +54,8 @@ const LogIn: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {pass}
-                                error = {checkParams(email) && pulse}
+                                error = {checkParams(pass) && pulse}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setPass(e.target.value)}
                                 // helperText = "Valor incorrecto"
                             />
