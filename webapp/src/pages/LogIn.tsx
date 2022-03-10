@@ -1,7 +1,6 @@
 import React, { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import 'bootswatch/dist/simplex/bootstrap.min.css'; // CSS que se va a utilizar
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
