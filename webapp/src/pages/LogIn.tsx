@@ -15,7 +15,7 @@ const checkParams = (text: String) => {
 }
 
 const LogIn: FC = () => {
-    const [idUsuario, setId] = useState('')
+    const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [pulse, setPulse] = useState(false)
     return ( 
@@ -32,14 +32,14 @@ const LogIn: FC = () => {
                             <TextField 
                                 id = "idUsuario"
                                 required
-                                name = "Nombre usuario"
-                                label = "Nombre Usuario"
-                                defaultValue= "Nombre Usuario"
+                                name = "Correo Electronico"
+                                label = "Correo Electronico"
+                                defaultValue= "Correo Electronico"
                                 variant="outlined"
                                 size="small"
-                                value = {idUsuario}
-                                error = {checkParams(idUsuario) && pulse}
-                                onChange = {e => setId(e.target.value)}
+                                value = {email}
+                                error = {checkParams(email) && pulse}
+                                onChange = {e => setEmail(e.target.value)}
                                // helperText = "Valor incorrecto"
                             />
 
@@ -53,7 +53,7 @@ const LogIn: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {pass}
-                                error = {checkParams(idUsuario) && pulse}
+                                error = {checkParams(email) && pulse}
                                 onChange = {e => setPass(e.target.value)}
                                 // helperText = "Valor incorrecto"
                             />

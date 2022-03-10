@@ -2,6 +2,7 @@ import React, { useState, useEffect, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
 
 const checkParams = (text: String) => {
@@ -9,7 +10,7 @@ const checkParams = (text: String) => {
 }
 
 const checkPasswords = (repPass: String, pass: String) => {
-    return repPass != pass;
+    return repPass !== pass;
 }
 
 const SignUp: FC = () => {
@@ -24,6 +25,9 @@ const SignUp: FC = () => {
             <Container component= "main" maxWidth="sm">
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
+                    <div role= "banner">
+                        <img  width={300} height = {300}  src={logo} alt=""/>
+                    </div>
                         <Stack direction= "column" spacing={2}>
                             <TextField
                                 id = "name" required
@@ -88,7 +92,7 @@ const SignUp: FC = () => {
                             />
 
                             <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>
-                            <Link href = "/"></Link>
+                            <Link href = "/login">¿Ya tienes una cuenta? Inicia sesión aqui!</Link>
 
                         </Stack>
                     </CardContent>
