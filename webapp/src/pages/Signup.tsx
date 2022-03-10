@@ -2,14 +2,14 @@ import React, { useState, useEffect, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
 }
-
-const checkPasswords = (repPass: String, pass: String) => {
-    return repPass != pass;
+const checkPaswwords = (repPass: String, pass: String) => {
+    return repPass !== pass;
 }
 
 const SignUp: FC = () => {
@@ -24,6 +24,9 @@ const SignUp: FC = () => {
             <Container component= "main" maxWidth="sm">
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
+                    <div role= "banner">
+                        <img  width={300} height = {300}  src={logo} alt=""/>
+                    </div>
                         <Stack direction= "column" spacing={2}>
                             <TextField
                                 id = "name" required
@@ -34,6 +37,7 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {name}
                                 error = {checkParams(name) && pulse}
+                                helperText={checkParams(name) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setName(e.target.value)}
                             />
 
@@ -46,6 +50,7 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {surname}
                                 error = {checkParams(surname) && pulse}
+                                helperText={checkParams(surname) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setSurname(e.target.value)}
                             />
 
@@ -58,6 +63,7 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {email}
                                 error = {checkParams(email) && pulse}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setEmail(e.target.value)}
                             />
 
@@ -71,6 +77,7 @@ const SignUp: FC = () => {
                                 variant="outlined"
                                 value = {pass}
                                 error = {checkParams(pass) && pulse}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ' '}
                                 onChange = {e => setPass(e.target.value)}
                             />
 
@@ -83,12 +90,14 @@ const SignUp: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {repPass}
-                                error = {checkParams(repPass) && checkPasswords(repPass, pass) && pulse}
+                                error = {checkParams(repPass) && pulse || checkPaswwords(repPass, pass)}
+                                helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ' '
+                                                && checkPaswwords(repPass, pass) ? 'Las contraseñas no coinciden' : ''}
                                 onChange = {e => setRepPass(e.target.value)}
                             />
 
                             <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>
-                            <Link href = "/"></Link>
+                            <Link href = "/login">¿Ya tienes una cuenta? Inicia sesión aqui!</Link>
 
                         </Stack>
                     </CardContent>
