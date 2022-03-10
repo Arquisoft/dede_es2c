@@ -5,9 +5,6 @@ const Products: FC = () => {
 
     return (
         <div className='Products'>
-            <header className = "Products-header">
-                <NavBar />
-            </header>
         </div>
     )
 
