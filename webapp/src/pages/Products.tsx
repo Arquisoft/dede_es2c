@@ -6,9 +6,12 @@ import { Container } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import NativeSelect from '@mui/material/NativeSelect';
+import { lightBlue } from '@mui/material/colors';
 const Products: FC = () => {
 
     return (
+        
         <div className='Home'
         style={{
             display: 'flex',
@@ -17,7 +20,15 @@ const Products: FC = () => {
             height: '80vh'
         }}>
         <div>     
-        <Stack spacing={2} sx={{border:1, borderColor:'primary.main'}}>
+        <Stack spacing={2} sx={{
+            border:3, 
+            borderColor:'primary.main',
+            bgcolor: backgroundColor,
+            borderRadius:1,
+            position:"absolute",
+            top:200
+            
+            }}>
             <Stack>
                 <div>
                     <p> Mouses <Checkbox></Checkbox></p>                 
@@ -59,6 +70,27 @@ const Products: FC = () => {
         ))}
       </ImageList>
     </Container>
+    <div>
+        <Container sx={{
+                    position: "relative",
+                    top:-250,
+                    right:'10%'
+                }}>
+                <NativeSelect
+            defaultValue={30}
+            inputProps={{
+            name: 'Filter',
+            id: 'uncontrolled-native',
+             }}
+            >
+            <option value={1}>Price: low to high</option>
+            <option value={2}>Price: high to low</option>
+            <option value={3}>Relevance</option>
+            <option value={4}>Rating</option>
+            </NativeSelect>
+                
+                </Container>
+            </div>
          </div>
          
     )
@@ -92,4 +124,5 @@ const imagesList = [
         description: 'Keyboard 40€',
     }
 ];
+const backgroundColor = lightBlue[50];
 export default Products;
