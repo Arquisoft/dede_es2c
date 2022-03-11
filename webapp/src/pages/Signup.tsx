@@ -2,14 +2,14 @@ import React, { useState, useEffect, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
 }
-
-const checkPasswords = (repPass: String, pass: String) => {
-    return repPass != pass;
+const checkPaswwords = (repPass: String, pass: String) => {
+    return repPass !== pass;
 }
 
 const SignUp: FC = () => {
@@ -21,9 +21,16 @@ const SignUp: FC = () => {
     const [pulse, setPulse] = useState(false)
     return (
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm"
+                sx={{
+                position: "relative",
+                top: 150
+            }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
+                    <div role= "banner">
+                        <img  width={300} height = {300}  src={logo} alt=""/>
+                    </div>
                         <Stack direction= "column" spacing={2}>
                             <TextField
                                 id = "name" required
@@ -34,7 +41,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {name}
                                 error = {checkParams(name) && pulse}
-                                onChange = {e => setName(e.target.value)}
+                                helperText={checkParams(name) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setName(e.target.value)}
                             />
 
                             <TextField
@@ -46,7 +54,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {surname}
                                 error = {checkParams(surname) && pulse}
-                                onChange = {e => setSurname(e.target.value)}
+                                helperText={checkParams(surname) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setSurname(e.target.value)}
                             />
 
                             <TextField
@@ -58,7 +67,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {email}
                                 error = {checkParams(email) && pulse}
-                                onChange = {e => setEmail(e.target.value)}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
                             <TextField
@@ -71,7 +81,8 @@ const SignUp: FC = () => {
                                 variant="outlined"
                                 value = {pass}
                                 error = {checkParams(pass) && pulse}
-                                onChange = {e => setPass(e.target.value)}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setPass(e.target.value)}
                             />
 
                             <TextField
@@ -83,12 +94,14 @@ const SignUp: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {repPass}
-                                error = {checkParams(repPass) && checkPasswords(repPass, pass) && pulse}
-                                onChange = {e => setRepPass(e.target.value)}
+                                error = {checkParams(repPass) && pulse || checkPaswwords(repPass, pass)}
+                                helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ''
+                                                || checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : ''}
+                                onChange = {(e: any) => setRepPass(e.target.value)}
                             />
 
                             <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>
-                            <Link href = "/"></Link>
+                            <Link href = "/login">¿Ya tienes una cuenta? Inicia sesión aqui!</Link>
 
                         </Stack>
                     </CardContent>
