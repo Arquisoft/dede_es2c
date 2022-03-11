@@ -25,7 +25,7 @@ export const findUsersById: RequestHandler = async (req, res) => {
 export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
-    const { password, ...body } = req.body
+    const { password,repPassword, ...body } = req.body
     const user = new User(body)
     const passwordHashed = await bcrypt.hash(password, 10);
     user.password = passwordHashed;

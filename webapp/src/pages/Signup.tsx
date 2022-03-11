@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import axios from 'axios';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
@@ -11,6 +12,14 @@ const checkParams = (text: String) => {
 const checkPasswords = (repPass: String, pass: String) => {
     return repPass != pass;
 }
+
+const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
+    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass})
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+    })
+ }
 
 const SignUp: FC = () => {
     const [name, setName] = useState('')
@@ -87,7 +96,7 @@ const SignUp: FC = () => {
                                 onChange = {e => setRepPass(e.target.value)}
                             />
 
-                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>
+                            <Button onClick={() => handleSignup(name,surname,email,pass,repPass)} variant="contained" type="submit">Crear cuenta</Button>
                             <Link href = "/"></Link>
 
                         </Stack>
