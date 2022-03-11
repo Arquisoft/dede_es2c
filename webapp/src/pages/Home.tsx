@@ -13,7 +13,7 @@ const Home: FC = () => {
             alignItems: 'center',
             height: '80vh'
         }}>
-        <Container sx={{ width: 1000, height: 400}}>
+        <Container sx={{ width: 1100, height: 400}}>
             <ImageList variant="masonry" cols={3} gap={8}>
                 {imagesList.map((item) => (
                 <ImageListItem key={item.img}>
