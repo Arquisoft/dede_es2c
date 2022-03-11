@@ -4,6 +4,7 @@ import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import { readdir } from 'fs/promises';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
@@ -18,6 +19,10 @@ const handleSignup = (name:String,surname:String,email: String,pass: String,repP
     .then(res => {
         console.log(res);
         console.log(res.data);
+        if(res.status == 201){
+            alert("User registered");
+            window.location.assign("/login");
+        }
     })
  }
 

@@ -48,7 +48,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     const userFound = await User.findOne({email: emailReq});
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
-        return res.send("User logged");
+        res.status(201).send("User logged");
       }else{
         res.send("Password Incorrect");
       }
