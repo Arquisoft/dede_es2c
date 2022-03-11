@@ -1,11 +1,14 @@
 import React, { useState, useEffect, FC } from 'react';
+import Container from '@mui/material/Container';
+import { blue } from '@mui/material/colors';
 import { Image } from '@mui/icons-material';
-import { Container } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+
 const Home: FC = () => {
     return (
+
         <div className='Home'
         style={{
             display: 'flex',
@@ -29,7 +32,6 @@ const Home: FC = () => {
       </ImageList>
     </Container>
             
-            
         </div>
     )
 }
@@ -50,6 +52,7 @@ const imagesList = [
         title:'mouse',
         description: 'Mouse 10€',
     },
+
     {
         img:'./img/US01.jpg',
         title:'usb',

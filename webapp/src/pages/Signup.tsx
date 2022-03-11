@@ -21,7 +21,11 @@ const SignUp: FC = () => {
     const [pulse, setPulse] = useState(false)
     return (
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm"
+                sx={{
+                position: "relative",
+                top: 150
+            }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                     <div role= "banner">
@@ -37,8 +41,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {name}
                                 error = {checkParams(name) && pulse}
-                                helperText={checkParams(name) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setName(e.target.value)}
+                                helperText={checkParams(name) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setName(e.target.value)}
                             />
 
                             <TextField
@@ -50,8 +54,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {surname}
                                 error = {checkParams(surname) && pulse}
-                                helperText={checkParams(surname) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setSurname(e.target.value)}
+                                helperText={checkParams(surname) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setSurname(e.target.value)}
                             />
 
                             <TextField
@@ -63,8 +67,8 @@ const SignUp: FC = () => {
                                 size = "small"
                                 value = {email}
                                 error = {checkParams(email) && pulse}
-                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setEmail(e.target.value)}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
                             <TextField
@@ -77,8 +81,8 @@ const SignUp: FC = () => {
                                 variant="outlined"
                                 value = {pass}
                                 error = {checkParams(pass) && pulse}
-                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setPass(e.target.value)}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setPass(e.target.value)}
                             />
 
                             <TextField
@@ -91,9 +95,9 @@ const SignUp: FC = () => {
                                 variant="outlined"
                                 value = {repPass}
                                 error = {checkParams(repPass) && pulse || checkPaswwords(repPass, pass)}
-                                helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ' '
-                                                && checkPaswwords(repPass, pass) ? 'Las contraseñas no coinciden' : ''}
-                                onChange = {e => setRepPass(e.target.value)}
+                                helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ''
+                                                || checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : ''}
+                                onChange = {(e: any) => setRepPass(e.target.value)}
                             />
 
                             <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>

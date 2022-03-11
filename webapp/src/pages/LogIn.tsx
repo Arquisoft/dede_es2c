@@ -14,7 +14,7 @@ const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-const handleLogin = (idUser: String,pass: String) => {
+const handleLogin = (idUser: String, pass: String) => {
    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
    .then(res => {
        console.log(res);
@@ -22,13 +22,24 @@ const handleLogin = (idUser: String,pass: String) => {
    })
 }
 
+
 const LogIn: FC = () => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [pulse, setPulse] = useState(false)
+
+    function allFunc(idUser: String, pass: String){
+        handleLogin(idUser, pass);
+        setPulse(true);
+    }
+
     return ( 
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm" fixed={true} 
+            sx={{
+                position: "relative",
+                top: 150
+            }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                     <div role= "banner">
@@ -47,8 +58,8 @@ const LogIn: FC = () => {
                                 size="small"
                                 value = {email}
                                 error = {checkParams(email) && pulse}
-                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setEmail(e.target.value)}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setEmail(e.target.value)}
                                // helperText = "Valor incorrecto"
                             />
 
@@ -63,12 +74,12 @@ const LogIn: FC = () => {
                                 variant="outlined"
                                 value = {pass}
                                 error = {checkParams(pass) && pulse}
-                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ' '}
-                                onChange = {e => setPass(e.target.value)}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setPass(e.target.value)}
                                 // helperText = "Valor incorrecto"
                             />
         
-                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Iniciar Sesión</Button>
+                            <Button onClick={() => allFunc(email, pass)} variant="contained" type="submit">Iniciar Sesión</Button>
                             <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
