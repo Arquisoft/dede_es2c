@@ -20,7 +20,7 @@ const LogIn: FC = () => {
     const [pulse, setPulse] = useState(false)
     return ( 
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm" fixed={true}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                     <div role= "banner">
