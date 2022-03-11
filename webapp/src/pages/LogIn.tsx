@@ -68,7 +68,7 @@ const LogIn: FC = () => {
                                 // helperText = "Valor incorrecto"
                             />
         
-                            <Button onClick={() => handleLogin(idUsuario,pass)} variant="contained" type="submit">Iniciar Sesión</Button>
+                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Iniciar Sesión</Button>
                             <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
