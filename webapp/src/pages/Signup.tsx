@@ -21,7 +21,11 @@ const SignUp: FC = () => {
     const [pulse, setPulse] = useState(false)
     return (
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm"
+                sx={{
+                position: "relative",
+                top: 150
+            }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                     <div role= "banner">
