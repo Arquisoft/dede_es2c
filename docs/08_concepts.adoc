@@ -5,7 +5,7 @@
 
 image:Modelo_datos.png["Modelo de datos"]
 
-El modelo de datos tiene que ser actualizado más adelante antes de la siguiente revisión de documentación.
+Se cambiará la fecha de String a Date de cara a la próxima revisión.
 
 
 === Internacionalización
