@@ -26,7 +26,7 @@ export const getProductoByCode: RequestHandler = async (req, res) => {
  * @returns lista de productos filtrados por su id
  */
 export const getProductoByID: RequestHandler = async (req, res) => {
-    // Este método todavia no funciona
+    console.log("a");
     const id = req.params.id;
     try {
         const encontrado = await Product.findOne({_id: id});
@@ -35,6 +35,25 @@ export const getProductoByID: RequestHandler = async (req, res) => {
         return res.status(404).json({message: 'No hay producto con ese ID'});
     }
 }
+
+/**
+ * Método que busca los productos por id de este
+ * @param req Request
+ * @param res Response
+ * @returns lista de productos filtrados por su id
+ */
+ export const getProductByID: RequestHandler = async (req, res) => {
+    console.log("a");
+    const id = req.params.id;
+    try {
+        const encontrado = await Product.findOne({_id: id});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json({message: 'No hay producto con ese ID'});
+    }
+}
+
+
 
 /**
  * Método que busca los productos por categoria de este

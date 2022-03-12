@@ -45,7 +45,6 @@ export const getMessage: RequestHandler = async (req, res) => {
  * @returns Pedido con el id especificado
  */
  export const getOrderByID: RequestHandler = async (req, res) => {
-    // Este método todavia no funciona
     const id = req.params.id;
     try {
         const encontrado = await Order.findOne({_id: id});
