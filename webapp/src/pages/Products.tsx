@@ -8,6 +8,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import NativeSelect from '@mui/material/NativeSelect';
 import { lightBlue } from '@mui/material/colors';
+import Filters from '../components/Filters'
 const Products: FC = () => {
 
     return (
@@ -19,7 +20,7 @@ const Products: FC = () => {
             alignItems: 'center',
             height: '80vh'
         }}>
-        <div>     
+        {/* <div>     
         <Stack spacing={2} sx={{
             border:3, 
             borderColor:'primary.main',
@@ -55,7 +56,8 @@ const Products: FC = () => {
                 </div> 
             </Stack>        
         </Stack >
-        </div>
+        </div> */}
+        
         <Container sx={{ width: 900, height: 350}} >
             <ImageList variant="masonry" cols={3} gap={8}>
                 {imagesList.map((item) => (

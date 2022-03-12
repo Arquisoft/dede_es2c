@@ -66,3 +66,17 @@ export const findProducts: RequestHandler = async (req, res) => {
         res.json(error);
     }
 }
+
+export const getProductByPrice: RequestHandler = async (req, res) => {
+    // Mirar esto, no funciona del todo
+    const min = req.params.min;
+
+    try{
+        const todos = await Product.find({precio: min});
+        return res.json(todos);
+
+    }catch(error){
+        console.log(error);
+        res.json(error);
+    }
+}

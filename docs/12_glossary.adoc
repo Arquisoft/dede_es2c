@@ -13,4 +13,5 @@
 | PlantUML | Herramienta de código abierto que permite a los usuarios crear diagramas a partir de un lenguaje de texto sin formato.
 | Prometheus | Monitor de código abierto para almacenar las métricas.
 | Grafana | Aplicación que permite visualizar los datos almacenados en Prometheus.
+| Axios | Cliente HTTP basado en promesas. Dependecia isntalada para poder realizar de una manera mas sencilla el juntar front-end y back-end de la aplicación
 |===
