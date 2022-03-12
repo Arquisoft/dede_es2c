@@ -1,3 +1,5 @@
+import { Product } from '../shared/shareddtypes';
+import {getProducts} from '../api/api';
 import React, { useState, useEffect, FC } from 'react';
 import Container from '@mui/material/Container';
 import { blue } from '@mui/material/colors';
@@ -5,6 +7,7 @@ import { Image } from '@mui/icons-material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+
 
 const Home: FC = () => {
     return (

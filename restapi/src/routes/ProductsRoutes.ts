@@ -12,6 +12,8 @@ router.get('/product/getByCode/:codigo', ProductController.getProductoByCode);
 router.get('/product/getByCategoria/:categoria', ProductController.getProductsByCategoria);
 // Productos por su id, NO FUNCIONA
 router.get('product/getById/:id', ProductController.getProductoByID);
+router.get('product/precio_min=:min', ProductController.getProductByPrice);
+
 
 
 
