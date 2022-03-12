@@ -2,6 +2,7 @@ import { Console } from "console";
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
 
+const express = require("express");
 
 /**
  * Método cuyo único propósito es ver si se aceptan peticiontes GET
@@ -94,10 +95,10 @@ export const getMessage: RequestHandler = async (req, res) => {
  * @param res Response
  * @returns Pedido con el precio especificado
  */
- export const getOrderByIdUser: RequestHandler = async (req, res) => {
-    const user = req.params.idUser;
+ export const getOrderByEmail: RequestHandler = async (req, res) => {
+    const email = req.params.email;
     try {
-        const encontrado = await Order.findOne({id_user: user});
+        const encontrado = await Order.findOne({correo: email});
         return res.json(encontrado)
     }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
@@ -180,3 +181,38 @@ export const getMessage: RequestHandler = async (req, res) => {
 
 
 ///... etc llegado este punto añades más cuando te haga falta
+
+
+// Prueba con POST
+// La idea sería pasar esta info en un formulario
+
+export const addExampleOrder: RequestHandler = async (req, res) => {
+    try {
+
+        let order = new Order();
+        // Lo que ahora entiendo que se haría desde un formulario
+        //order.codigo = req.body.codigo;
+        order.codigo = "orderExample";
+        order.correo = "admin@uniovi.es";
+        order.direccion = "dirExample";
+        order.fecha = new Date();
+        order.precioTotal = 21.87;
+        //order.productos.codigo_producto = "AL01";
+        //order.productos.cantidad = 1;
+        //order.productos.precio = 21.87
+
+        // ¿Se haría un push?
+        order.productos = [{
+                "codigo_producto" : "AL01",
+                "cantidad": 1,
+                "precio": 21.87
+            }];
+
+        order.save();
+
+        return res.json(order);
+
+    }catch(error){
+        console.log(error);
+    }
+}

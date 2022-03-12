@@ -26,8 +26,8 @@ router.get('/order/list', OrderController.getOrders);
 // Buscar pedido por codigo
 router.get('/order/getByCode/:codigo', OrderController.getOrderByCode);
 
-// Buscar pedido por id
-router.get('/order/getById/:id', OrderController.getOrderByID);
+// Buscar pedido por correo
+router.get('/order/getOrderByEmail/:email', OrderController.getOrderByEmail);
 
 // Buscar pedido por precio
 router.get('/order/getByPrice/:price', OrderController.getOrderByPrice);
@@ -44,11 +44,13 @@ router.get('/order/getProductsByCode/:code', OrderController.getOrderProductsByC
 // Buscar producto concreto en un pedido concreto
 router.get('/order/getConcreteProductByCode/:code/:code2', OrderController.getOrderConcreteProductByCode);
 
-// Buscar el pedido asociado a un usuario
-router.get('/order/getOrderByIdUser/:idUser', OrderController.getOrderByIdUser);
+
 
 // Para tests
 router.get('/order/message', OrderController.getMessage);
+
+// Intento guardar una nueva orden
+router.get('/order/addExample', OrderController.addExampleOrder);
 
 module.exports = router;
 
