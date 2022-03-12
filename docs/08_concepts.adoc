@@ -40,3 +40,21 @@ El crear código limpio que siga unas estructuras y patrones definidos es base f
 
 === Persistencia
 Uso de una base de datos MongoDB para gestionar la parte de almacenamiento y modificación de los productos informáticos en la tienda.
+
+=== Prototipado de la aplicación
+El formato que se ha escogido para realizar los prototipos de la aplicacion es que esta sea fácil de usar y a la vez siga la forma del resto de aplicaciones del mismo tipo de esta. 
+
+Para comenzar tenemos la página inicial, esta estara compuesta por aquellos productos que tengan un descuento o sean top ventas de la aplicación. 
+
+image:08_protHome.jpg["Página inicio"]
+
+Una vez se este en la aplicacion se podran realizar varias cosas: 
+
+* Realizar LogIn en la aplicacion: Para poder acceder a la aplicación es necesario indicar el nombre de email de este como la contraseña que haya indicado anteriormente. 
+* Realizar un registro en nuestra aplicación, para ello se deberán indicar unos cuantos campos acerca de la informacion peronal de este. 
+
+image:08_protLogIn+SignUp.jpg["Página login y registro aplicación"]
+
+* Visualización de todos los productos: Se podrá ver inforamcion acerca de cada producto con su diferente precio. Además se podran realizar diferentes filtros para que el cliente pueda conseguir de una forma mas comoda los productos que desee. Los posibles filtros que se podran realizar son por precio, por categoria.
+ 
+image:08_protListaProd.jpg["Página de productos"]

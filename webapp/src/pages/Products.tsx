@@ -1,15 +1,4 @@
 import React, { useState, useEffect, FC } from 'react';
-import Container from '@mui/material/Container';
-import { blue } from '@mui/material/colors';
-import NavBar from '../components/NavBar';
-
-const Products: FC = () => {
-
-    return (
-        <div className='Products'>
-            <Container component= "main" sx={{width: 100, height: 30, color: blue}}>
-                    
-            </Container>
 import Button from '@mui/material/Button';
 import { Stack  } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
@@ -19,6 +8,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import NativeSelect from '@mui/material/NativeSelect';
 import { lightBlue } from '@mui/material/colors';
+import Filters from '../components/Filters'
 const Products: FC = () => {
 
     return (
@@ -30,7 +20,7 @@ const Products: FC = () => {
             alignItems: 'center',
             height: '80vh'
         }}>
-        <div>     
+        {/* <div>     
         <Stack spacing={2} sx={{
             border:3, 
             borderColor:'primary.main',
@@ -66,7 +56,8 @@ const Products: FC = () => {
                 </div> 
             </Stack>        
         </Stack >
-        </div>
+        </div> */}
+        
         <Container sx={{ width: 900, height: 350}} >
             <ImageList variant="masonry" cols={3} gap={8}>
                 {imagesList.map((item) => (
