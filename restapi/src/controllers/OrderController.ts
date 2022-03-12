@@ -105,9 +105,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-
-// *********** AL METER DATE HAY QUE MODIFICAR ESTO  ***********
-
 /**
  * Método que busca los pedidos por la fecha de este
  * @param req Request
@@ -123,8 +120,6 @@ export const getMessage: RequestHandler = async (req, res) => {
         return res.status(404).json({message: 'No hay pedido con esa fecha'});
     }
 }
-
-// *************************************************************
 
 /**
  * Método que te devuelve el array de productos buscando por su codigo

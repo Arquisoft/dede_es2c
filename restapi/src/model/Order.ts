@@ -24,7 +24,7 @@ export const OrderShema = new mongoose.Schema({
         lowercase: true
     },
     fecha: {
-        type: String,
+        type: Date,
         immutable: true,
         lowercase: true
     },

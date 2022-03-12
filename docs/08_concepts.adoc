@@ -5,8 +5,6 @@
 
 image:Modelo_datos.png["Modelo de datos"]
 
-Se cambiará la fecha de String a Date de cara a la próxima revisión.
-
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
@@ -25,9 +23,6 @@ Se incluirá el código necesario para manejar y capturar los errores procedente
 
 === Accesibilidad
 Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
-
-=== Estructura de paquetes
-A rellenar en un futuro
 
 === Seguridad
 Ningún aspecto de la aplicación será dañino para la vida del usuario.
