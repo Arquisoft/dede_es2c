@@ -9,4 +9,5 @@ export type Product = {
   categoria: string;
   precio: string;
   stock: string;
+  direccionImagen: string;
 }
