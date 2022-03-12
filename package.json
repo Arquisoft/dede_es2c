@@ -10,6 +10,7 @@
     "mongodb": "^4.4.0",
     "mongoose": "^6.2.4",
     "react-native-svg": "^12.3.0",
+    "react-reactive-form": "^1.0.32",
     "react-router-dom": "^6.2.2",
     "svg": "^0.1.0",
     "utils": "^0.3.1",

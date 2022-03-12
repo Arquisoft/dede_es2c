@@ -1,7 +1,6 @@
 import React, { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import 'bootswatch/dist/simplex/bootstrap.min.css'; // CSS que se va a utilizar
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
@@ -15,7 +14,7 @@ const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-const handleLogin = (idUser: String,pass: String) => {
+const handleLogin = (idUser: String, pass: String) => {
    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
    .then(res => {
        console.log(res);
@@ -27,13 +26,24 @@ const handleLogin = (idUser: String,pass: String) => {
    })
 }
 
+
 const LogIn: FC = () => {
-    const [idUsuario, setId] = useState('')
+    const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [pulse, setPulse] = useState(false)
+
+    function allFunc(idUser: String, pass: String){
+        handleLogin(idUser, pass);
+        setPulse(true);
+    }
+
     return ( 
         <div>
-            <Container component= "main" maxWidth="sm">
+            <Container component= "main" maxWidth="sm" fixed={true} 
+            sx={{
+                position: "relative",
+                top: 150
+            }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                     <div role= "banner">
@@ -43,21 +53,22 @@ const LogIn: FC = () => {
                     <Stack direction= "column" spacing={2}>
                         
                             <TextField 
-                                id = "idUsuario"
+                                id = "email"
                                 required
-                                name = "Nombre usuario"
-                                label = "Nombre Usuario"
-                                defaultValue= "Nombre Usuario"
+                                name = "Correo Electronico"
+                                label = "Correo Electronico"
+                                defaultValue= "Correo Electronico"
                                 variant="outlined"
                                 size="small"
-                                value = {idUsuario}
-                                error = {checkParams(idUsuario) && pulse}
-                                onChange = {e => setId(e.target.value)}
+                                value = {email}
+                                error = {checkParams(email) && pulse}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setEmail(e.target.value)}
                                // helperText = "Valor incorrecto"
                             />
 
                             <TextField 
-                                id = "conUsuario"
+                                id = "pass"
                                 required
                                 name = "Contraseña"
                                 label = "Contraseña"
@@ -66,12 +77,13 @@ const LogIn: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {pass}
-                                error = {checkParams(idUsuario) && pulse}
-                                onChange = {e => setPass(e.target.value)}
+                                error = {checkParams(pass) && pulse}
+                                helperText={checkParams(pass) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                onChange = {(e: any) => setPass(e.target.value)}
                                 // helperText = "Valor incorrecto"
                             />
         
-                            <Button onClick={() => handleLogin(idUsuario,pass)} variant="contained" type="submit">Iniciar Sesión</Button>
+                            <Button onClick={() => allFunc(email, pass)} variant="contained" type="submit">Iniciar Sesión</Button>
                             <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
