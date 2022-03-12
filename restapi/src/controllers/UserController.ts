@@ -22,23 +22,39 @@ export const findUsersById: RequestHandler = async (req, res) => {
   }
 };
 
+export const findUsersByEmail: RequestHandler = async (req, res) => {
+  const email = req.params.email;
+  try {
+    const userFound = await User.findOne({email: email});
+    return res.json(userFound)
+  } catch (error) {
+    return res.status(404).json({message: 'User not found'});
+  }
+};
+
 export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
-    const { password,repPassword, ...body } = req.body
-    const user = new User(body)
-    const passwordHashed = await bcrypt.hash(password, 10);
-    user.password = passwordHashed;
-    await user.save();
-    res.status(201).json({
-        user
-    })
+    if(checkBody(req.body)){
+      const { password, ...body } = req.body
+      const user = new User(body)
+      const passwordHashed = await bcrypt.hash(password, 10);
+      user.password = passwordHashed;
+      await user.save();
+      res.status(201).json({
+          user
+      })
+  }
 } catch(err) {
   console.log(err)
     res.status(400).json({msg: err})
 }
-  
 };
+
+function checkBody(body:any):boolean{
+  const { name,surname,email,password,repPassword, } =body;
+  return name != '' && surname != '' && email != '' && password != '';
+}
 
 export const loginUser: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');
