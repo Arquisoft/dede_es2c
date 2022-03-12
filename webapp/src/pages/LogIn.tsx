@@ -19,6 +19,12 @@ const handleLogin = (idUser: String, pass: String) => {
    .then(res => {
        console.log(res);
        console.log(res.data);
+       if(res.status == 201){
+           alert("Sesión iniciada");
+           window.location.assign("/");
+       }else{
+            alert("Usuario o contraseña incorrectos");
+       }
    })
 }
 
