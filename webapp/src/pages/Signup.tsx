@@ -4,13 +4,37 @@ import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
+import axios from 'axios';
+import { readdir } from 'fs/promises';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
 }
+
+
 const checkPaswwords = (repPass: String, pass: String) => {
     return repPass !== pass;
 }
+
+const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
+    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass})
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if(res.status == 201){
+            alert("User registered");
+            window.location.assign("/login");
+        }
+    })
+ }
+
+ const getEmail = async (email: String) => {
+    const data = await axios.get("http://localhost:5000/user/list/"+ email).
+    then(res => {
+        return res.data
+    })
+    return data != null; 
+} 
 
 const SignUp: FC = () => {
     const [name, setName] = useState('')
@@ -19,6 +43,16 @@ const SignUp: FC = () => {
     const [pass, setPass] = useState('')
     const [repPass, setRepPass] = useState('')
     const [pulse, setPulse] = useState(false)
+
+    async function allFunc(name:String,surname:String,email: String,pass: String,repPass:String){
+        setPulse(true);
+        if(await getEmail(email).then(resolve => {return resolve})){
+            alert("El email ya existe");
+        }else{
+            handleSignup(name,surname,email,pass,repPass);
+        }
+    }
+
     return (
         <div>
             <Container component= "main" maxWidth="sm"
@@ -100,9 +134,8 @@ const SignUp: FC = () => {
                                 onChange = {(e: any) => setRepPass(e.target.value)}
                             />
 
-                            <Button onClick={() => setPulse(true)} variant="contained" type="submit">Crear cuenta</Button>
+                            <Button onClick={() => allFunc(name,surname,email,pass,repPass)} variant="contained" type="submit">Crear cuenta</Button>
                             <Link href = "/login">¿Ya tienes una cuenta? Inicia sesión aqui!</Link>
-
                         </Stack>
                     </CardContent>
                 </Card>
