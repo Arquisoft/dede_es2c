@@ -9,24 +9,18 @@ export const OrderShema = new mongoose.Schema({
     codigo: {
         type: String,
         required: true,
-        immutable: true,
-        unique: true
     },
-    id_usuario: {
+    correo: {
         type: String,
         required: true,
-        immutable: true,
-        unique: true
     },
     direccion: {
         type: String,
         required: true,
-        lowercase: true
     },
     fecha: {
-        type: String,
-        immutable: true,
-        lowercase: true
+        type: Date,
+        required: true,
     },
     precioTotal: {
         type: Number,
@@ -37,7 +31,6 @@ export const OrderShema = new mongoose.Schema({
         codigo_producto:{
             type: String,
             required: true,
-            lowercase: true
         } ,
         cantidad: {
             type: Number,
