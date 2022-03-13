@@ -1,29 +1,25 @@
-import React, { FC } from 'react';
-import Productos from '../components/Products';
+import React, { FC, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import ProductosFiltrado from '../components/ProductosPorFiltro';
+import { Product } from '../shared/shareddtypes';
+import { getProductosByCategoria, getProducts } from '../api/api';
+import Products from '../components/Products';
 
-function cargarProductos() {
-    return (
-        <div id = "lista productos">
-            <Productos />
-        </div>
-    );
-}
-
-function filtrar(cat: string){
-
-    return (
-        <div id = "lista productos filtro" >
-            <ProductosFiltrado  categoria= "monitor"/>
-        </div>
-    )
-
-}
 
 const ListProducts: FC = () => {
+    const [prod, setProd] = useState<Product[]>([]);
+
+    async function cargarProductos() {
+        setProd(await getProducts());
+    }
+
+    async function filtrar(cat: string) {
+        setProd(await getProductosByCategoria(cat));
+    }
+
+    useEffect(() => {cargarProductos();}, []);
+
     return(
         <div style={{margin: '75px', color: '#1976d2'}}>
             <p>Categorías: </p>
@@ -37,7 +33,7 @@ const ListProducts: FC = () => {
                     <Button onClick={() => cargarProductos()} variant="contained">Todos los productos</Button>
                 </Stack>  
             </div>
-            {cargarProductos()}
+            <Products product = {prod} /> 
         </div>
     );
 }
