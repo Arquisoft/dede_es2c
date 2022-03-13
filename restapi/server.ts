@@ -6,7 +6,6 @@ import api from "./api";
 import userRoutes from "../restapi/src/routes/UserRoutes";
 import orderRoutes from "../restapi/src/routes/OrderRoutes";
 import productRoutes from "../restapi/src/routes/ProductsRoutes";
-import cloudinary from "cloudinary";
 
 
 const app: Application = express();
