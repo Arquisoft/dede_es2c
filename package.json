@@ -1,0 +1,43 @@
+{
+  "dependencies": {
+    "@mui/material": "^5.5.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@types/react": "^17.0.39",
+    "axios": "^0.26.1",
+    "bootstrap": "^5.1.3",
+    "bootswatch": "^5.1.3",
+    "cloudinary": "^1.28.1",
+    "mongodb": "^4.4.0",
+    "mongoose": "^6.2.4",
+    "react-native-svg": "^12.3.0",
+    "react-reactive-form": "^1.0.32",
+    "react-router-dom": "^6.2.2",
+    "svg": "^0.1.0",
+    "utils": "^0.3.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "node app"
+  },
+  "name": "dede_es2c",
+  "description": "[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_0/actions)\r [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_0&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_0)\r [![codecov](https://codecov.io/gh/arquisoft/dede_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://codecov.io/gh/pglez82/asw2122_0)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arquisoft/dede_es2c.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arquisoft/dede_es2c/issues"
+  },
+  "homepage": "https://github.com/arquisoft/dede_es2c#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.1"
+  }
+}
