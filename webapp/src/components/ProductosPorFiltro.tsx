@@ -1,29 +1,31 @@
-import { CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton } from '@mui/material';
+import { CardActions, CardContent, CardHeader, Grid, IconButton } from '@mui/material';
 import { useState } from 'react';
-import { getProducts } from '../api/api';
+import { getProductosByCategoria, getProducts } from '../api/api';
 import { Product } from '../shared/shareddtypes';
 import Card from '@mui/material/Card';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-function Productos() {
+type filtrado= {
+    categoria: string;
+}
+
+function Productofiltrado(categoria: filtrado) {
     const [productos, setProductos] = useState<Product[]>([]);
 
     async function cargar() {
-        const arr: Product[] = await getProducts();
+        const arr: Product[] = await getProductosByCategoria(categoria.categoria);
         setProductos(arr);
     }
 
     cargar();
 
-    const listaProductos = productos.map(
+    const listaProductos = productos.filter(
         (p) => {
             return (
-                <Grid item xs={3} md={3}>
-                    <Card  sx={{ width: 400}}>
+                <Grid item xs = {13} sm = {5} md = {2}>
+                    <Card>
                         <CardHeader title = {p.nombre}/>
-                        <CardMedia component="img" height="300" width = "270" image={p.url} alt={p.nombre} />
-                        <CardContent>Precio: {p.precio}€</CardContent>
-                        <CardContent>Descripción del producto:</CardContent>
+                        <CardContent>{p.precio}€</CardContent>
                         <CardContent>{p.descripcion}</CardContent>
                         <CardActions>
                             <IconButton aria-label='Añadir al carrito' >
@@ -49,4 +51,4 @@ function Productos() {
 }
 
 
-export default Productos;
+export default Productofiltrado;
