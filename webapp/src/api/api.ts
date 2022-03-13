@@ -25,3 +25,9 @@ export async function getProducts(): Promise<Product[]>{
   let response = await fetch(apiEndPoint + "/product/list");
   return response.json();
 }
+
+export async function getProductosByCategoria(categoria: string): Promise<Product[]>{
+  const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+  let response = await fetch(apiEndPoint + "/product/getByCategoria/" + categoria);
+  return response.json();
+}

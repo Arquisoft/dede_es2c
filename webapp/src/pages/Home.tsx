@@ -7,7 +7,17 @@ import { Image } from '@mui/icons-material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import banner from '../img/DeDeBanner.png';
+import { render } from '@testing-library/react';
 
+function cargarBanner(){
+
+    return(
+        <div>
+            <img src="https://i.postimg.cc/nhFPPJwZ/De-De-Banner.png" alt='Banner' />
+        </div>
+    )
+}
 
 const Home: FC = () => {
     return (
@@ -19,7 +29,7 @@ const Home: FC = () => {
             alignItems: 'center',
             height: '80vh'
         }}>
-        <Container sx={{ width: 1100, height: 400}}>
+        {/* <Container sx={{ width: 1100, height: 400}}>
             <ImageList variant="masonry" cols={3} gap={8}>
                 {imagesList.map((item) => (
                 <ImageListItem key={item.img}>
@@ -33,8 +43,8 @@ const Home: FC = () => {
           </ImageListItem>
         ))}
       </ImageList>
-    </Container>
-            
+    </Container> */}
+            {cargarBanner()}
         </div>
     )
 }
