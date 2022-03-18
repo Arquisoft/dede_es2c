@@ -7,7 +7,7 @@ export type Product = {
   codigo: string;
   nombre: string;
   categoria: string;
-  precio: string;
+  precio: number;
   stock: string;
   url: string;
   descripcion: string;

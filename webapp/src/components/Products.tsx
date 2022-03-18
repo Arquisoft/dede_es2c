@@ -1,14 +1,77 @@
-import { CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton } from '@mui/material';
+import { CardActions, CardContent, CardHeader, CardMedia, Grid, Typography } from '@mui/material';
 import { Product } from '../shared/shareddtypes';
 import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
+import React, { useState } from 'react';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 type ProductsProps = {
     product: Product[]
+}   
+
+const Prod = {
+    nombre: "Nombre",
+    categoria: "Categoria",
+    precio: 110,
+    url: "string",
+    descripcion: "gola"
 }
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 1000,
+    height: 900,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 
 
 const Productos = ( product: ProductsProps) => {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    function saveP(o: Product){
+        handleOpen();
+        Prod.nombre = o.nombre;
+        Prod.categoria = o.categoria;
+        Prod.precio = o.precio;
+        Prod.descripcion = o.descripcion;
+        Prod.url = o.url;
+    
+    }
+
+    if(open){
+        return (
+            
+            <Modal open = {open} onClose = {handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+            <Box sx = {style}>
+                <Typography id = "modal-modal-title" variant = "h6" component= "h2">{Prod.nombre}</Typography>
+
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>Categoria: {Prod.categoria} </Typography>
+
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>Descripcion del Producto: {Prod.descripcion}</Typography>
+
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>Precio del producto: {Prod.precio}</Typography>
+
+                <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>Añadir al carrito </Button>
+
+                <img src= {Prod.url} alt  = {Prod.nombre}/>
+
+            </Box>
+        </Modal>
+
+        );
+    }
 
     return (
         <Grid container spacing={3}>
@@ -16,16 +79,19 @@ const Productos = ( product: ProductsProps) => {
             (p) => {
                 return (
                     <Grid item xs={3} md={3}>
-                        <Card  sx={{ width: 400}}>
+                        <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                             <CardHeader title = {p.nombre}/>
-                            <CardMedia component="img" height="300" width = "270" image={p.url} alt={p.nombre} />
+                            <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
                             <CardContent>Precio: {p.precio}€</CardContent>
                             <CardContent>Descripción del producto:</CardContent>
                             <CardContent>{p.descripcion}</CardContent>
                             <CardActions>
-                                <IconButton aria-label='Añadir al carrito' >
-                                    <AddShoppingCartIcon />
-                                </IconButton>
+                                <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                    Añadir al carrito
+                                </Button>
+                                <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                    Más información
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>
