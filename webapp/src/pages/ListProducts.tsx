@@ -17,7 +17,7 @@ import EuroIcon from '@mui/icons-material/Euro';
 
 const ListProducts: FC = () => {
     const [prod, setProd] = useState<Product[]>([]);
-    const [value, setValue] = React.useState<number>(30);
+    const [value, setValue] = React.useState<number>(500);
     const [max] = React.useState<number>(500);
 
     const handleChange = ( event: Event, newValue: number | number[]) => {

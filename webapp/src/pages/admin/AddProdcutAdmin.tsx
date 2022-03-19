@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import { CardHeader, CardMedia } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { borderLeft } from '@mui/system';
 
 
 const AddProdutcAdmin: FC = () => {
