@@ -21,6 +21,7 @@ const handleLogin = (idUser: String, pass: String) => {
        console.log(res.data);
        if(res.status == 201){
            alert("Sesión iniciada");
+           localStorage.setItem('token',res.data.token);
            window.location.assign("/");
        }else{
             alert("Usuario o contraseña incorrectos");
