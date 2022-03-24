@@ -30,5 +30,5 @@ yarn-error.log*
 docs/build
 
 #Configuration files
-
+.env
 
