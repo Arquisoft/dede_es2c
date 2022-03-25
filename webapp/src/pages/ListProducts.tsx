@@ -6,8 +6,12 @@ import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
 
+type ProductsProps = {
+    onAddCart:(prod:Product) => (void);
+    cartItems:Product[]
+}
 
-const ListProducts: FC = () => {
+const ListProducts = (func:ProductsProps) => {
     const [prod, setProd] = useState<Product[]>([]);
 
     async function cargarProductos() {
@@ -33,7 +37,7 @@ const ListProducts: FC = () => {
                     <Button onClick={() => cargarProductos()} variant="contained">Todos los productos</Button>
                 </Stack>  
             </div>
-            <Products product = {prod} /> 
+            <Products product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
         </div>
     );
 }

@@ -7,13 +7,10 @@ import NavBar from './NavBar';
 
 type ProductsProps = {
     product: Product[]
+    onAddCart:(prod:Product) => (void);
+    cartItems:Product[]
 }
 const Productos = ( product: ProductsProps) => {
-    
-    const [cartItems,setCartItems] = useState<Product[]>([]);
-    const onAddCart = (prod : string) => {
-        var num = NavBar.arguments;
-    }
     return (
         <Grid container spacing={3}>
          {product.product.map(
@@ -27,7 +24,7 @@ const Productos = ( product: ProductsProps) => {
                             <CardContent>Descripción del producto:</CardContent>
                             <CardContent>{p.descripcion}</CardContent>
                             <CardActions>
-                                <IconButton onClick={() => onAddCart(p.codigo)} aria-label='Añadir al carrito' >
+                                <IconButton onClick={() => product.onAddCart(p)} aria-label='Añadir al carrito' >
                                     <AddShoppingCartIcon />
                                 </IconButton>
                             </CardActions>

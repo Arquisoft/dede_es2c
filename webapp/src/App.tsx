@@ -6,18 +6,32 @@ import Home from './pages/Home';
 import ListProducts from './pages/ListProducts';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductsSummary from './pages/ProductsSummary';
+import { Product} from './shared/shareddtypes'
 
 const App: FC = () => {
 
+  const [cartItems,setCartItems] = useState<Product[]>([]);
+  const onAddCart = (prod : Product) => {
+    const exist = cartItems.find(x=> x.codigo == prod.codigo);
+    if(exist){
+      setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
+
+    } else {
+      setCartItems([...cartItems,{...prod,cantidad:1}])
+    }
+
+  }
+
   return (
+
       <Router>
-        <NavBar></NavBar>
+        <NavBar cartItems = {cartItems}></NavBar>
         <Routes>
           <Route index element = {<Home/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
-          <Route path = 'products' element = {<ListProducts/>}/>
-          <Route path = 'summary' element = {<ProductsSummary {...1} />}/>
+          <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
+          <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems} />}/>
         </Routes>
       </Router>
   );

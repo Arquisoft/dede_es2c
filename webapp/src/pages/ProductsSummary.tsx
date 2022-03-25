@@ -1,10 +1,23 @@
 import React, {FC } from 'react';
+import { Product } from '../shared/shareddtypes';
 
-
-const ProductsSummary= (num:number) => {
-    
+type cart = {
+    cartItems:Product[];
+}
+const ProductsSummary= (cart: cart) => {
+   
     return(
-        <div>prueba</div>
+    <div className='Home'
+        style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '80vh'
+        }}>
+            <div>
+                {<h2>Cart tiene {cart.cartItems.length} elementos</h2>}
+            </div>
+        </div>
     );
 }
 

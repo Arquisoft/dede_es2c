@@ -7,9 +7,12 @@ import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
+import { Product } from '../shared/shareddtypes';
 
-
-const NavBar=() =>{
+type ProductsProps = {
+    cartItems:Product[]
+}
+const NavBar=(cart:ProductsProps) =>{
     return(
         <AppBar position="fixed" >
             <Toolbar>
@@ -23,7 +26,7 @@ const NavBar=() =>{
               </Typography>
     
               <IconButton aria-label="cart" size="medium" href = "/summary">
-                <Badge badgeContent={0} color="secondary">    
+                <Badge badgeContent={cart.cartItems.length} color="secondary">    
                     <ShoppingCartIcon color="inherit" />
                 </Badge>
                 </IconButton>
