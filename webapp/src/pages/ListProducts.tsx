@@ -7,7 +7,9 @@ import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
 import Basket from '../components/Basket';
 
-
+type product = {
+    product: Product
+}
 const ListProducts: FC = () => {
     const [prod, setProd] = useState<Product[]>([]);
 
@@ -21,7 +23,15 @@ const ListProducts: FC = () => {
 
     useEffect(() => {cargarProductos();}, []);
 
-    const [cartItems,setCartItems] = useState([]);
+    const [cartItems,setCartItems] = useState<Product[]>([]);
+
+    const onAddCart = (prod : product) => {
+        const exist = cartItems.find(x => x.codigo == prod.product.codigo);
+        if(exist){
+            
+        }
+    }
+
     return(
         <div style={{margin: '75px', color: '#1976d2'}}>
             <p>Categorías: </p>

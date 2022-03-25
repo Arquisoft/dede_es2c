@@ -1,6 +1,8 @@
 import React from 'react';
+import { Product } from '../shared/shareddtypes';
+
 type CartProps =  {
-    cartItems:never[];
+    cartItems:Product[];
 }
 
 export default function Basket(items :CartProps){
