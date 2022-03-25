@@ -1,7 +1,12 @@
 import React from 'react';
 import { ProductoCarro } from '../shared/shareddtypes';
 
+type product = {
+    product: ProductoCarro
+}
+
 type CartProps =  {
+    onAddCart:(prod: product) => void;
     cartItems:ProductoCarro[];
 }
 

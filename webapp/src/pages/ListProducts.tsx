@@ -48,7 +48,7 @@ const ListProducts: FC = () => {
                 </Stack>  
             </div>
             <Products product = {prod} /> 
-            <Basket cartItems={cartItems}></Basket>
+            <Basket onAddCart={onAddCart}cartItems={cartItems}></Basket>
         </div>
     );
 }
