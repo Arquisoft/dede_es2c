@@ -3,16 +3,17 @@ import { Button, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButt
 import { Product} from '../shared/shareddtypes';
 import Card from '@mui/material/Card';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import NavBar from './NavBar';
 
 type ProductsProps = {
     product: Product[]
 }
 const Productos = ( product: ProductsProps) => {
-        
-    const onAddCart = (prod : string) => {
-
-    }
     
+    const [cartItems,setCartItems] = useState<Product[]>([]);
+    const onAddCart = (prod : string) => {
+        var num = NavBar.arguments;
+    }
     return (
         <Grid container spacing={3}>
          {product.product.map(
