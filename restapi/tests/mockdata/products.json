@@ -1,40 +1,68 @@
 [
     {
-        "_id":{"$oid":"6225f63c24b683231c0dc36b"},
-        "codigo":"TE01",
-        "categoria":"teclado",
-        "nombre":"Logitech K120 Teclado con Cable",
-        "precio":{"$numberDouble":"9.57"},
-        "stock":{"$numberInt":"100"},
-        "descripcion":"Para Windows, Tamaño Normal, Resistante a Líquido, Barra Espaciadora Curvada, PC/Portátil, Disposición QWERTY Español, color Negro ",
-        "url":"https://i.postimg.cc/25fVD0hz/TE01.jpg"
+        "_id": "623e25ef4ec026c9f608e644",
+        "codigo": "TE01",
+        "categoria": "teclado",
+        "nombre": "Logitech K120 Teclado con Cable",
+        "precio": "9.57",
+        "stock": "100",
+        "descripcion": "Para Windows, Tamaño Normal, Resistante a Líquido, Barra Espaciadora Curvada, PC/Portátil, Disposición QWERTY Español, color Negro ",
+        "url": "https://i.postimg.cc/25fVD0hz/TE01.jpg"
     }, 
 
     {
-        "_id":{"$oid":"6225f76124b683231c0dc36d"},
-        "codigo":"RA01",
-        "categoria":"raton",
-        "nombre":"Logitech Ratón Inalámbrico M190",
-        "precio":{"$numberDouble":"15.99"},
-        "descripcion":"Diseño Curvo Ambidiestro, Batería 18 Meses con Modo Ahorro, Receptor USB, Cursor y Desplazamiento Preciso, Rueda de Desplazamiento Amplio, Negro",
-        "stock":{"$numberInt":"50"},
-        "url":"https://i.postimg.cc/RVyWPS0J/RA01.jpg"
+        "_id": "623e26044ec026c9f608e645",
+        "codigo": "RA01",
+        "categoria": "raton",
+        "nombre": "Logitech Ratón Inalámbrico M190",
+        "precio": "15.99",
+        "descripcion": "Diseño Curvo Ambidiestro, Batería 18 Meses con Modo Ahorro, Receptor USB, Cursor y Desplazamiento Preciso, Rueda de Desplazamiento Amplio, Negro",
+        "stock": "50",
+        "url": "https://i.postimg.cc/RVyWPS0J/RA01.jpg"
     }, 
 
     {
-        "_id": {
-            "$oid": "623e03414ec026c9f608e641"
-        },
+        "_id": "623e03414ec026c9f608e641",
         "codigo": "MO01",
         "categoria": "monitor",
         "nombre": "Samsung LF27T352FHRXEN",
-        "precio": {
-            "$numberDouble": "139.99"
-        },
+        "precio": "139.99",
         "descripcion": "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
-        "stock": {
-            "$numberInt": "20"
-        },
+        "stock": "20",
         "url": "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
+    }, 
+
+    {
+        "_id": "623e26254ec026c9f608e646",
+        "codigo": "AL01",
+        "categoria": "almacenamiento",
+        "nombre": "SanDisk Ultra 128 GB Dual Type-C - USB 3.1, Memoria Flash USB ",
+        "precio": "21.87",
+        "descripcion": "",
+        "stock": "500",
+        "url": "https://i.postimg.cc/zfS3XTFT/US01.jpg"
+    }, 
+
+    {
+        "_id": "623e263b4ec026c9f608e647",
+        "codigo": "SO01",
+        "categoria": "sonido",
+        "nombre": "Hama Sonic LS-206 6W",
+        "precio": "9.87",
+        "descripcion": "Negro, Plata Altavoz - Altavoces (2.0 Canales, 6 W, 50-20000 Hz, 4 Ω, Negro, Plata) ",
+        "stock": "100",
+        "url": "https://i.postimg.cc/SNJX72mp/AL01.jpg"
+    },
+
+    {
+        "_id":  "623e264d4ec026c9f608e648",
+        "codigo": "TE01",
+        "categoria": "teclado",
+        "nombre": "hola",
+        "precio": "8.88",
+        "stock": "0",
+        "descripcion": "Para Windows, Tamaño Normal, Resistante a Líquido, Barra Espaciadora Curvada, PC/Portátil, Disposición QWERTY Español, color Negro ",
+        "url": "https://i.postimg.cc/25fVD0hz/TE01.jpg"
     }
+
 ]
