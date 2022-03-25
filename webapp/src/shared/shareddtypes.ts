@@ -12,3 +12,18 @@ export type Product = {
   url: string;
   descripcion: string;
 }
+
+
+export type Order = {
+  codigo: string;
+  fecha: Date,
+  precioTotal: number,
+  product: Object[],
+  correo: string
+}
+
+export type Object = {
+    codigo_producto: string;
+    cantidad: number;
+    precio: number;
+}

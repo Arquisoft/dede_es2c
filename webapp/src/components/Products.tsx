@@ -7,6 +7,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import ClearIcon from '@mui/icons-material/Clear';
 
 type ProductsProps = {
     product: Product[]
@@ -17,7 +18,8 @@ const Prod = {
     categoria: "Categoria",
     precio: 110,
     url: "string",
-    descripcion: "gola"
+    descripcion: "gola",
+    stock: '10'
 }
 
 const style = {
@@ -47,12 +49,35 @@ const Productos = ( product: ProductsProps) => {
         Prod.precio = o.precio;
         Prod.descripcion = o.descripcion;
         Prod.url = o.url;
-    
+        Prod.stock = o.stock;
     }
 
     if(open){
-        return (
-            
+
+        if(Prod.stock != '0'){
+
+            return (
+                
+                <Modal open = {open} onClose = {handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <Box sx = {style}>
+                    <Typography id = "modal-modal-title" variant = "h6" component= "h2">{Prod.nombre}</Typography>
+
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>Categoria: {Prod.categoria} </Typography>
+
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>Descripcion del Producto: {Prod.descripcion}</Typography>
+
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>Precio del producto: {Prod.precio}</Typography>
+
+                    <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>Añadir al carrito </Button>
+
+                    <img src= {Prod.url} alt  = {Prod.nombre}/>
+
+                </Box>
+            </Modal>
+
+            );
+        } else {
+            return (
             <Modal open = {open} onClose = {handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
             <Box sx = {style}>
                 <Typography id = "modal-modal-title" variant = "h6" component= "h2">{Prod.nombre}</Typography>
@@ -63,39 +88,64 @@ const Productos = ( product: ProductsProps) => {
 
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>Precio del producto: {Prod.precio}</Typography>
 
-                <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>Añadir al carrito </Button>
+                <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
+                    NO STOCK
+                </Button>
 
                 <img src= {Prod.url} alt  = {Prod.nombre}/>
 
             </Box>
         </Modal>
-
-        );
+            ); 
+        }
     }
 
     return (
         <Grid container spacing={3}>
          {product.product.map(
             (p) => {
-                return (
-                    <Grid item xs={3} md={3}>
-                        <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
-                            <CardHeader title = {p.nombre}/>
-                            <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
-                            <CardContent>Precio: {p.precio}€</CardContent>
-                            <CardContent>Descripción del producto:</CardContent>
-                            <CardContent>{p.descripcion}</CardContent>
-                            <CardActions>
-                                <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>
-                                    Añadir al carrito
-                                </Button>
-                                <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
-                                    Más información
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                );
+
+                if(p.stock != '0') {
+                    return (
+                        <Grid item xs={3} md={3}>
+                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                <CardHeader title = {p.nombre}/>
+                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                <CardContent>Precio: {p.precio}€</CardContent>
+                                <CardContent>Descripción del producto:</CardContent>
+                                <CardContent>{p.descripcion}</CardContent>
+                                <CardActions>
+                                    <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                        Añadir al carrito
+                                    </Button>
+                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                        Más información
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    );
+                } else {
+                    return (
+                        <Grid item xs={3} md={3}>
+                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                <CardHeader title = {p.nombre}/>
+                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                <CardContent>Precio: {p.precio}€</CardContent>
+                                <CardContent>Descripción del producto:</CardContent>
+                                <CardContent>{p.descripcion}</CardContent>
+                                <CardActions>
+                                    <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
+                                        NO STOCK
+                                    </Button>
+                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                        Más información
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    );
+                }
             }
         )}
         </Grid>
