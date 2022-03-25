@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
+import Basket from '../components/Basket';
 
 
 const ListProducts: FC = () => {
@@ -19,6 +20,7 @@ const ListProducts: FC = () => {
     }
 
     useEffect(() => {cargarProductos();}, []);
+
     const [cartItems,setCartItems] = useState([]);
     return(
         <div style={{margin: '75px', color: '#1976d2'}}>
