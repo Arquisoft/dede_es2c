@@ -6,7 +6,8 @@ import Home from './pages/Home';
 import ListProducts from './pages/ListProducts';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductsSummary from './pages/ProductsSummary';
-import { Product} from './shared/shareddtypes'
+import { Product} from './shared/shareddtypes';
+import Pago from './pages/Pago';
 
 const App: FC = () => {
 
@@ -31,7 +32,8 @@ const App: FC = () => {
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
-          <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems} />}/>
+          <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
+          <Route path = 'pago' element = {<Pago/>}/>
         </Routes>
       </Router>
   );

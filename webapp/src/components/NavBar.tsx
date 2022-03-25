@@ -27,7 +27,7 @@ const NavBar=(cart:ProductsProps) =>{
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 
-              <IconButton aria-label="cart" size="medium" href = "/summary">
+              <IconButton onClick={() => window.location.href = '/summary'} aria-label="cart" size="medium">
                 <Badge badgeContent={numOfProducts} color="secondary">    
                     <ShoppingCartIcon color="inherit" />
                 </Badge>

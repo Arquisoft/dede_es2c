@@ -1,5 +1,7 @@
+import { Container } from '@mui/material';
 import React, {FC } from 'react';
 import { Product } from '../shared/shareddtypes';
+import Button from '@mui/material/Button';
 
 type cart = {
     cartItems:Product[];
@@ -7,17 +9,16 @@ type cart = {
 const ProductsSummary= (cart: cart) => {
    
     return(
-    <div className='Home'
-        style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '80vh'
+        <Container
+        sx={{
+            position: 'relative',
+            top: 750,
+            left: 1000
         }}>
-            <div>
-                {<h2>Cart tiene {cart.cartItems.length} elementos</h2>}
-            </div>
-        </div>
+            <div className ='Pago' style ={{height:'100'}} >
+                <Button variant = "contained" href= '/pago'>Completar el pago </Button>
+            </div>           
+        </Container>
     );
 }
 
