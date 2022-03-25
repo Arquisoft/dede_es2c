@@ -1,6 +1,7 @@
 import { Console } from "console";
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
+import { Product } from "../model/Product";
 
 const express = require("express");
 
@@ -19,8 +20,74 @@ export const getMessage: RequestHandler = async (req, res) => {
 }
 
 
+// INSERTAR UN NUEVO PEDIDO EN LA BD
 
-// GET PARAA BUSCAR LOS DATOS DE LOS PEDIDOS
+
+export const generarPedidoEjemplo: RequestHandler = async(req, res, next) => {
+
+    // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
+    // Si quieres intorducir un nuevo pedido: cambia el código 
+    
+    try {
+
+        let order = new Order();
+        // Lo que ahora entiendo que se haría desde un formulario
+        //order.codigo = req.body.codigo;
+        order.codigo = "orderOneExample";
+        order.correo = "admin@uniovi.es";
+        order.direccion = "dirExample";
+        order.fecha = new Date();
+        order.precioTotal = 161,86;
+        order.productos = [{
+                "id" : "6225f87724b683231c0dc36f",
+                "cantidad": 1
+            }, {
+                "id" : "6225f7fa24b683231c0dc36e",
+                "cantidad": 1
+            }
+        ];
+        order.save();
+
+        return res.json(order);
+
+    } catch (error){
+
+        // Si hay algún error
+        console.log(error);
+    }
+
+}
+
+// PARA LOS POST EN UN FUTURO
+
+export const i: RequestHandler = async(req, res, next) => {
+
+    //Asumo que el id del producto a añadir viene en el cuerpo (body) de la solicitud
+
+    try {
+
+        // Toda la info de la URL
+        const codigo = req.body.codigo;
+        const correo = req.body.correo;
+        const fecha = req.body.fecha;
+        const direccion = req.body.direccion;
+        const precioTotal = req.body.precioTotal;
+        const productos = req.body.productos;
+        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                    precioTotal: precioTotal, productos: productos});
+
+        // Guardo el pedido
+        order.save();
+    } catch (error){
+
+        // Si hay algún error
+        console.log(error);
+    }
+
+}
+
+
+// GET PARA BUSCAR LOS DATOS DE LOS PEDIDOS
 
 
 /**
@@ -141,25 +208,28 @@ export const getMessage: RequestHandler = async (req, res) => {
 
 
 /**
- * Método que te devuelve un producto específico del array de productos de un pedido a buscar
+ * Método que te devuelve el primer producto del array de pedidos
  * @param req Request
  * @param res Response
  * @returns La lista de productos buscando por código 
  */
- export const getOrderConcreteProductByCode: RequestHandler = async (req, res) => {
+ export const getFirstProductByCode: RequestHandler = async (req, res) => {
     const code = req.params.code;
-    const code2 = req.params.code2;
+
     try {
+
         const encontrado = await Order.findOne({codigo: code});
-        // Bucle for
-        for (let i = 0; i<encontrado.productos.length; i++){
-            if (encontrado.productos[i].codigo_producto === code2){
-                return res.json(encontrado.productos[i]);
-            }
-        }
-        return res.json("ERROR");
+
+        // Busco el primer producto
+        const id_producto = encontrado.productos[0].id;
+
+        const producto = await Product.findOne({_id: id_producto});
+
+        return res.json(producto);
+
+
     }catch(error){
-        return res.status(404).json({message: 'No se ha encontrado la lista de productos'});
+        return res.status(404).json({message: "Ha surgido un error"});
     }
 }
 
@@ -174,45 +244,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     try {
         const allP = await Order.find();
         return res.json(allP); 
-    }catch(error){
-        console.log(error);
-    }
-}
-
-
-///... etc llegado este punto añades más cuando te haga falta
-
-
-// Prueba con POST
-// La idea sería pasar esta info en un formulario
-
-export const addExampleOrder: RequestHandler = async (req, res) => {
-    try {
-
-        let order = new Order();
-        // Lo que ahora entiendo que se haría desde un formulario
-        //order.codigo = req.body.codigo;
-        order.codigo = "orderExample";
-        order.correo = "admin@uniovi.es";
-        order.direccion = "dirExample";
-        order.fecha = new Date();
-        order.precioTotal = 21.87;
-        //order.productos.codigo_producto = "AL01";
-        //order.productos.cantidad = 1;
-        //order.productos.precio = 21.87
-
-        // ¿Se haría un push?
-        order.productos = [{
-                "codigo_producto" : "AL01",
-                "cantidad": 1,
-                "precio": 21.87
-            }];
-
-        order.save();
-
-        return res.json(order);
-
-
     }catch(error){
         console.log(error);
     }
