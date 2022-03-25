@@ -1,15 +1,18 @@
-import { CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton } from '@mui/material';
-import { Product } from '../shared/shareddtypes';
+import React, { useState } from 'react';
+import { Button, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton } from '@mui/material';
+import { Product} from '../shared/shareddtypes';
 import Card from '@mui/material/Card';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 type ProductsProps = {
     product: Product[]
 }
-
-
 const Productos = ( product: ProductsProps) => {
+        
+    const onAddCart = (prod : string) => {
 
+    }
+    
     return (
         <Grid container spacing={3}>
          {product.product.map(
@@ -23,7 +26,7 @@ const Productos = ( product: ProductsProps) => {
                             <CardContent>Descripción del producto:</CardContent>
                             <CardContent>{p.descripcion}</CardContent>
                             <CardActions>
-                                <IconButton aria-label='Añadir al carrito' >
+                                <IconButton onClick={() => onAddCart(p.codigo)} aria-label='Añadir al carrito' >
                                     <AddShoppingCartIcon />
                                 </IconButton>
                             </CardActions>

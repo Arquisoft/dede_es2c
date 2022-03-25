@@ -11,14 +11,5 @@ export type Product = {
   stock: string;
   url: string;
   descripcion: string;
-}
-
-export type ProductoCarro = {
-  codigo: string;
-  nombre: string;
-  categoria: string;
-  precio: string;
   cantidad: number;
-  url: string;
-  descripcion: string;
 }

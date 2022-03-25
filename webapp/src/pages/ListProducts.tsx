@@ -2,14 +2,11 @@ import React, { FC, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import { Product,ProductoCarro } from '../shared/shareddtypes';
+import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
-import Basket from '../components/Basket';
 
-type product = {
-    product: ProductoCarro
-}
+
 const ListProducts: FC = () => {
     const [prod, setProd] = useState<Product[]>([]);
 
@@ -22,17 +19,6 @@ const ListProducts: FC = () => {
     }
 
     useEffect(() => {cargarProductos();}, []);
-
-    const [cartItems,setCartItems] = useState<ProductoCarro[]>([]);
-
-    const onAddCart = (prod : product) => {
-        const exist = cartItems.find(x => x.codigo == prod.product.codigo);
-        if(exist){
-            setCartItems(cartItems.map(x => x.codigo == prod.product.codigo ? {...exist,cantidad : exist.cantidad + 1} : x));
-        } else {
-             setCartItems([...cartItems, {...prod.product, cantidad: 1}]);
-        }
-    }
 
     return(
         <div style={{margin: '75px', color: '#1976d2'}}>
@@ -48,7 +34,6 @@ const ListProducts: FC = () => {
                 </Stack>  
             </div>
             <Products product = {prod} /> 
-            <Basket onAddCart={onAddCart}cartItems={cartItems}></Basket>
         </div>
     );
 }
