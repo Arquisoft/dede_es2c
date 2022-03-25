@@ -19,7 +19,7 @@ const ListProducts: FC = () => {
     }
 
     useEffect(() => {cargarProductos();}, []);
-
+    const [cartItems,setCartItems] = useState([]);
     return(
         <div style={{margin: '75px', color: '#1976d2'}}>
             <p>Categorías: </p>
@@ -34,6 +34,7 @@ const ListProducts: FC = () => {
                 </Stack>  
             </div>
             <Products product = {prod} /> 
+            <Basket cartItems={cartItems}></Basket>
         </div>
     );
 }
