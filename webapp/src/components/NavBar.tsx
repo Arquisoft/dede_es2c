@@ -13,6 +13,8 @@ type ProductsProps = {
     cartItems:Product[]
 }
 const NavBar=(cart:ProductsProps) =>{
+    var numOfProducts = 0
+    cart.cartItems.map(x => numOfProducts+= x.cantidad);
     return(
         <AppBar position="fixed" >
             <Toolbar>
@@ -24,9 +26,9 @@ const NavBar=(cart:ProductsProps) =>{
     
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
-    
+
               <IconButton aria-label="cart" size="medium" href = "/summary">
-                <Badge badgeContent={cart.cartItems.length} color="secondary">    
+                <Badge badgeContent={numOfProducts} color="secondary">    
                     <ShoppingCartIcon color="inherit" />
                 </Badge>
                 </IconButton>
