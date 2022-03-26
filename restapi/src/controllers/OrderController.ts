@@ -39,10 +39,10 @@ export const generarPedidoEjemplo: RequestHandler = async(req, res, next) => {
         order.fecha = new Date();
         order.precioTotal = 161,86;
         order.productos = [{
-                "id" : "6225f87724b683231c0dc36f",
+                "id" : "623e26254ec026c9f608e646",
                 "cantidad": 1
             }, {
-                "id" : "6225f7fa24b683231c0dc36e",
+                "id" : "623e03414ec026c9f608e641",
                 "cantidad": 1
             }
         ];
