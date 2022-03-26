@@ -83,6 +83,8 @@ export const getProductByPrice: RequestHandler = async (req, res) => {
 }
 
 
+// Métodos extra
+
 export const createProduct = async (req = request, res = response) => {
     try {
         if(checkParams(req.body)){
