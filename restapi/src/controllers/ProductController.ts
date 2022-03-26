@@ -1,5 +1,6 @@
 import { Console } from "console";
-import { RequestHandler } from "express";
+import { RequestHandler, response, request } from "express";
+import { body, param } from "express-validator";
 import { Product } from "../model/Product";
 
 
@@ -82,9 +83,58 @@ export const getProductByPrice: RequestHandler = async (req, res) => {
 }
 
 
-
-
-
 // Métodos extra
 
+export const createProduct = async (req = request, res = response) => {
+    try {
+        if(checkParams(req.body)){
+            if(checkDoesNotExistProductCode(req.body.codigo)){
+                const product = new Product(req.body);
+                await product.save();
+                res.status(201).json({product})
+            }
+        }
+        
+    }catch (err){
+        console.log(err);
+        res.status(400).json({msg: err})
+    }
+}
 
+function checkParams(body: any): boolean{
+    const {codigo, categoria, nombre, precio, stock, url} = body;
+    return codigo != null && codigo != '' && categoria != null && categoria != '' && 
+    nombre != null && nombre != '' && precio >= 0 && stock > 0 && url != null && url != ''
+}
+
+function checkDoesNotExistProductCode(codigo: string): boolean{
+    const p =  Product.getProductoByCode({codigo: String});
+    return p;
+}
+
+export const deleteProduct: RequestHandler = async (req, res) => {
+    try{
+        const {id} = req.params;
+        await Product.findByIdAndDelete(id);
+        return res.send("Product deleted");
+    }catch (err){
+        return res.status(404).json({message: "There was a problem deleting a prodcut"});
+    }
+}
+
+export const update: RequestHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const {_id,codigo, ...params} = req.body;
+        if(codigo){
+            if(checkDoesNotExistProductCode(codigo)){
+                params.codigo = codigo;
+            }
+        }
+        await Product.findByIdAndUpdate(id, params);
+        return res.send("Product updated");
+    }catch (err){
+        console.log(err);
+        return res.status(404).json({message: "There was a problem updating a product"})
+    }
+}
