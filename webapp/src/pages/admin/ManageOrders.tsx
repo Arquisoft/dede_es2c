@@ -6,7 +6,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import { Product, Order } from '../../shared/shareddtypes';
+import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import {  getOrders } from '../../api/api';
 import OrderAdmin from '../admin/OrderAdmin';
@@ -19,7 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
-  }));
+}));
 
 const ManageOrders: FC = () => {
 
