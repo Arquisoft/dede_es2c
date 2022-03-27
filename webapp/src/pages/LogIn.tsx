@@ -22,7 +22,7 @@ const handleLogin = (idUser: String, pass: String) => {
        if(res.status == 201){
            alert("Sesión iniciada");
            localStorage.setItem('token',res.data.token);
-           window.location.assign("/");
+           window.location.assign("/products");
        }else{
             alert("Usuario o contraseña incorrectos");
        }

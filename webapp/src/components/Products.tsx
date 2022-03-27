@@ -52,6 +52,11 @@ const Productos = ( product: ProductsProps) => {
         Prod.stock = o.stock;
     }
 
+    function handleAddCart(){
+        if(!localStorage.token)
+            window.location.assign("/login");
+    }
+
     if(open){
 
         if(Prod.stock != '0'){
@@ -115,7 +120,7 @@ const Productos = ( product: ProductsProps) => {
                                 <CardContent>Descripción del producto:</CardContent>
                                 <CardContent>{p.descripcion}</CardContent>
                                 <CardActions>
-                                    <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                    <Button  onClick={handleAddCart} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
                                         Añadir al carrito
                                     </Button>
                                     <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
