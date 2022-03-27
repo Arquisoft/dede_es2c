@@ -7,7 +7,10 @@ export const ProductOrderSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, 
         required: true
     },
-    cantidad: {type: Number, index: true, required: true}, 
+    cantidad: {
+        type: Number, 
+        index: true, required: true
+    }, 
     id_order: {
         $ref: "Order",
         type: mongoose.Schema.ObjectId, 

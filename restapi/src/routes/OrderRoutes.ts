@@ -5,8 +5,23 @@ const router = express.Router();
 
 //********* PEDIDOS **********//
 
-// Guardar un pedido
+//**** GENERAR ****
 router.get('/order/generateExample', OrderController.generateExample);
+
+//**** POST ****
+
+
+// Añadir un producto por URL
+router.get('/order/add/:codigo/:correo/:direccion/:fecha/:precioTotal/:id_user', OrderController.addOrderURL);
+// Eliminar por URL
+router.get('/order/delete/:id', OrderController.deleteOrderURL);
+// Actualizar por URL
+router.get('/order/update/:id/:stock/:nombre/:descripcion/:url', OrderController.updateOrderURL);
+
+
+
+//**** GET ****
+
 // Busca todos
 router.get('/order/list', OrderController.getOrders);
 // Buscar pedido por codigo

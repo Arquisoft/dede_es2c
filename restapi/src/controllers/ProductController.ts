@@ -1,91 +1,35 @@
-import { Console } from "console";
 import { RequestHandler, response, request } from "express";
-import { body, param } from "express-validator";
 import { Product } from "../model/Product";
+import { ProductOrder } from "../model/ProductOrder";
 
 
-/**
- * Método que busca los productos por codigo de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por codigo
- */
-export const getProductoByCode: RequestHandler = async (req, res) => {
-    const cod = req.params.codigo;
+/************* GENERAR DATOS *************/
+
+export const generateExample: RequestHandler = async(req, res, next) => {
+    // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
+    // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-        const encontrado = await Product.findOne({codigo: cod});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json();
-    }
-}
 
-/**
- * Método que busca los productos por id de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por su id
- */
-export const getProductoByID: RequestHandler = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const encontrado = await Product.findOne({_id: id});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json({message: 'No hay producto con ese ID'});
-    }
-}
-
-
-/**
- * Método que busca los productos por categoria de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por categoria
- */
-export const getProductsByCategoria: RequestHandler = async (req, res) => {
-
-    try {
-        const encontrado = await Product.find({categoria: req.params.categoria});
-        return res.json(encontrado);
-    }catch(error){
-        res.status(404).json({message: 'No hay productos de esa categoría'})
-    }
-}
-
-/**
- * Método que retorna todos los productos
- * @param req Request
- * @param res Response
- * @returns lista de los productos
- */
-export const findProducts: RequestHandler = async (req, res) => {
-    try {
-        const allP = await Product.find();
-        return res.json(allP); 
-    }catch(error){
-        res.json(error);
-    }
-}
-
-export const getProductByPrice: RequestHandler = async (req, res) => {
-    // Mirar esto, no funciona del todo
-    const min = req.params.min;
-
-    try{
-        const todos = await Product.find({precio: min});
-        return res.json(todos);
-
-    }catch(error){
+        let product = new Product();
+        product.codigo = "codeExample";
+        product.categoria = "categoryExample";
+        product.nombre = "nameExample";
+        product.precio = 10;
+        product.descripcion = "descriptionExample";
+        product.stock = 3;
+        product.url = "urlExample";
+        product.save();
+        return res.json(product);
+    } catch (error){
         console.log(error);
-        res.json(error);
     }
+
 }
 
 
-// ******** Métodos extra POST ********
+/************* POST *************/
 
-export const createProductURL : RequestHandler= async (req = request, res = response) => {
+export const addProductURL : RequestHandler= async (req = request, res = response) => {
     // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
     try {
         if(checkParams(req.params)){
@@ -104,7 +48,7 @@ export const createProductURL : RequestHandler= async (req = request, res = resp
 }
 
 
-export const createProductForm = async (req = request, res = response) => {
+export const addProductForm = async (req = request, res = response) => {
     try {
         if(checkParams(req.body)){
             const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
@@ -123,13 +67,6 @@ export const createProductForm = async (req = request, res = response) => {
     }
 }
 
-function checkParams(body: any): boolean{
-    const {codigo, categoria, nombre, precio, descripcion, stock, url} = body;
-    return codigo != null && codigo != '' && categoria != null && categoria != '' && 
-    nombre != null && nombre != '' && descripcion != null && descripcion != '' && 
-    precio >= 0 && stock > 0 && url != null && url != ''
-}
-
 
 export const deleteProductURL: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/delete/62404a4b4d0ed7d3c5c3e39c
@@ -142,7 +79,7 @@ export const deleteProductURL: RequestHandler = async (req, res) => {
     }
 }
 
-export const deleteProductPOST: RequestHandler = async (req, res) => {
+export const deleteProductForm: RequestHandler = async (req, res) => {
     try{
         const {id} = req.body;
         await Product.findByIdAndDelete(id);
@@ -162,5 +99,80 @@ export const updateProductURL: RequestHandler = async (req, res) => {
     }catch (err){
         console.log(err);
         return res.status(404).json({message: "There was a problem updating a product"})
+    }
+}
+
+export const updateProductForm: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
+    try {
+        const id  = req.body.id;
+        const {_id,stock, ...body} = req.body;
+        await Product.findByIdAndUpdate(id, body); 
+        return res.send("Product updated OK");
+    }catch (err){
+        console.log(err);
+        return res.status(404).json({message: "There was a problem updating a product"})
+    }
+}
+
+function checkParams(body: any): boolean{
+    const {codigo, categoria, nombre, precio, descripcion, stock, url} = body;
+    return codigo != null && codigo != '' && categoria != null && categoria != '' && 
+    nombre != null && nombre != '' && descripcion != null && descripcion != '' && 
+    precio >= 0 && stock > 0 && url != null && url != ''
+}
+
+
+
+/************* GET *************/
+
+ export const getProductoByCode: RequestHandler = async (req, res) => {
+    const cod = req.params.codigo;
+    try {
+        const encontrado = await Product.findOne({codigo: cod});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json();
+    }
+}
+
+
+export const getProductoByID: RequestHandler = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const encontrado = await Product.findOne({_id: id});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json({message: 'No hay producto con ese ID'});
+    }
+}
+
+export const getProductsByCategoria: RequestHandler = async (req, res) => {
+
+    try {
+        const encontrado = await Product.find({categoria: req.params.categoria});
+        return res.json(encontrado);
+    }catch(error){
+        res.status(404).json({message: 'No hay productos de esa categoría'})
+    }
+}
+
+export const getProducts: RequestHandler = async (req, res) => {
+    try {
+        const allP = await Product.find();
+        return res.json(allP); 
+    }catch(error){
+        res.json(error);
+    }
+}
+
+export const getProductByPrice: RequestHandler = async (req, res) => {
+    const min = req.params.min;
+    try{
+        const todos = await Product.find({precio: min});
+        return res.json(todos);
+    }catch(error){
+        console.log(error);
+        res.json(error);
     }
 }
