@@ -26,17 +26,8 @@ export const OrderShema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 0
+    }
     },
-    productos: [{
-        id: {
-            type: mongoose.Schema.ObjectId,
-            required: true
-        },
-        cantidad: {
-            type: Number,
-            default: 1
-        }
-    }]},
     { collection: 'Order' })
 
 export const Order = mongoose.model('Order', OrderShema, 'Order');

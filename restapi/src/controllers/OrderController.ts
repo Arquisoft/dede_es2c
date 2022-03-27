@@ -5,25 +5,10 @@ import { Product } from "../model/Product";
 
 const express = require("express");
 
-/**
- * Método cuyo único propósito es ver si se aceptan peticiontes GET
- */
-export const getMessage: RequestHandler = async (req, res) => {
-    try {
-        console.log("hola");
-        return res.json({
-            text: 'ejemplo'
-        })
-    }catch(error){
-        console.log(error);
-    }
-}
-
 
 // INSERTAR UN NUEVO PEDIDO EN LA BD
 
-
-export const generarPedidoEjemplo: RequestHandler = async(req, res, next) => {
+export const generateExample: RequestHandler = async(req, res, next) => {
 
     // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
     // Si quieres intorducir un nuevo pedido: cambia el código 
@@ -37,15 +22,7 @@ export const generarPedidoEjemplo: RequestHandler = async(req, res, next) => {
         order.correo = "admin@uniovi.es";
         order.direccion = "dirExample";
         order.fecha = new Date();
-        order.precioTotal = 161,86;
-        order.productos = [{
-                "id" : "623e26254ec026c9f608e646",
-                "cantidad": 1
-            }, {
-                "id" : "623e03414ec026c9f608e641",
-                "cantidad": 1
-            }
-        ];
+        order.precioTotal = 139.99;
         order.save();
 
         return res.json(order);
@@ -60,7 +37,7 @@ export const generarPedidoEjemplo: RequestHandler = async(req, res, next) => {
 
 // PARA LOS POST EN UN FUTURO
 
-export const i: RequestHandler = async(req, res, next) => {
+export const addNewOrder: RequestHandler = async(req, res, next) => {
 
     //Asumo que el id del producto a añadir viene en el cuerpo (body) de la solicitud
 
@@ -187,52 +164,6 @@ export const i: RequestHandler = async(req, res, next) => {
         return res.status(404).json({message: 'No hay pedido con esa fecha'});
     }
 }
-
-/**
- * Método que te devuelve el array de productos buscando por su codigo
- * @param req Request
- * @param res Response
- * @returns La lista de productos buscando por código 
- */
- export const getOrderProductsByCode: RequestHandler = async (req, res) => {
-    const code = req.params.code;
-    try {
-        const encontrado = await Order.findOne({codigo: code});
-        // Encuentro el pedido pero busco devolver los productos
-        const productos = encontrado.productos
-        return res.json(productos)
-    }catch(error){
-        return res.status(404).json({message: 'No se ha encontrado la lista de productos'});
-    }
-}
-
-
-/**
- * Método que te devuelve el primer producto del array de pedidos
- * @param req Request
- * @param res Response
- * @returns La lista de productos buscando por código 
- */
- export const getFirstProductByCode: RequestHandler = async (req, res) => {
-    const code = req.params.code;
-
-    try {
-
-        const encontrado = await Order.findOne({codigo: code});
-
-        // Busco el primer producto
-        const id_producto = encontrado.productos[0].id;
-
-        const producto = await Product.findOne({_id: id_producto});
-
-        return res.json(producto);
-
-
-    }catch(error){
-        return res.status(404).json({message: "Ha surgido un error"});
-    }
-}
-
 
 /**
  * Método que retorna todos los pedidos
