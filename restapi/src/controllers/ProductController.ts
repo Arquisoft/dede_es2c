@@ -1,16 +1,132 @@
-import { Console } from "console";
 import { RequestHandler, response, request } from "express";
-import { body, param } from "express-validator";
 import { Product } from "../model/Product";
+import { ProductOrder } from "../model/ProductOrder";
 
 
-/**
- * Método que busca los productos por codigo de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por codigo
- */
-export const getProductoByCode: RequestHandler = async (req, res) => {
+/************* GENERAR DATOS *************/
+
+export const generateExample: RequestHandler = async(req, res, next) => {
+    // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
+    // Si quieres intorducir un nuevo pedido: cambia el código 
+    try {
+
+        let product = new Product();
+        product.codigo = "codeExample";
+        product.categoria = "categoryExample";
+        product.nombre = "nameExample";
+        product.precio = 10;
+        product.descripcion = "descriptionExample";
+        product.stock = 3;
+        product.url = "urlExample";
+        product.save();
+        return res.json(product);
+    } catch (error){
+        console.log(error);
+    }
+
+}
+
+
+/************* POST *************/
+
+export const addProductURL : RequestHandler= async (req = request, res = response) => {
+    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
+    try {
+        if(checkParams(req.params)){
+            const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
+            if(productoEncontrado == null){
+                const product = new Product(req.params);
+                await product.save();
+                return res.send("New product OK")
+            } else {
+                return res.send("There was a problem adding a product")
+            }
+        }   
+    }catch (err){
+        return res.status(400).json({msg: err})
+    }
+}
+
+
+export const addProductForm = async (req = request, res = response) => {
+    try {
+        if(checkParams(req.body)){
+            const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
+            if(productoEncontrado == null){
+                const product = new Product(req.body);
+                await product.save();
+                return res.send("New product OK")
+            } else {
+                return res.send("There was a problem adding a product")
+            }
+        }
+        
+    }catch (err){
+        console.log(err);
+        res.status(400).json({msg: err})
+    }
+}
+
+
+export const deleteProductURL: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/delete/62404a4b4d0ed7d3c5c3e39c
+    try{
+        const {id} = req.params;
+        await Product.findByIdAndDelete(id);
+        return res.send("Product deleted");
+    }catch (err){
+        return res.status(404).json({message: "There was a problem deleting a prodcut"});
+    }
+}
+
+export const deleteProductForm: RequestHandler = async (req, res) => {
+    try{
+        const {id} = req.body;
+        await Product.findByIdAndDelete(id);
+        return res.send("Product deleted");
+    }catch (err){
+        return res.status(404).json({message: "There was a problem deleting a prodcut"});
+    }
+}
+
+export const updateProductURL: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
+    try {
+        const id  = req.params.id;
+        const {_id, ...params} = req.params;
+        await Product.findByIdAndUpdate(id, params); 
+        return res.send("Product updated OK");
+    }catch (err){
+        console.log(err);
+        return res.status(404).json({message: "There was a problem updating a product"})
+    }
+}
+
+export const updateProductForm: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
+    try {
+        const id  = req.body.id;
+        const {_id, ...body} = req.body;
+        await Product.findByIdAndUpdate(id, body); 
+        return res.send("Product updated OK");
+    }catch (err){
+        console.log(err);
+        return res.status(404).json({message: "There was a problem updating a product"})
+    }
+}
+
+function checkParams(body: any): boolean{
+    const {codigo, categoria, nombre, precio, descripcion, stock, url} = body;
+    return codigo != null && codigo != '' && categoria != null && categoria != '' && 
+    nombre != null && nombre != '' && descripcion != null && descripcion != '' && 
+    precio >= 0 && stock > 0 && url != null && url != ''
+}
+
+
+
+/************* GET *************/
+
+ export const getProductoByCode: RequestHandler = async (req, res) => {
     const cod = req.params.codigo;
     try {
         const encontrado = await Product.findOne({codigo: cod});
@@ -20,12 +136,7 @@ export const getProductoByCode: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que busca los productos por id de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por su id
- */
+
 export const getProductoByID: RequestHandler = async (req, res) => {
     const id = req.params.id;
     try {
@@ -36,13 +147,6 @@ export const getProductoByID: RequestHandler = async (req, res) => {
     }
 }
 
-
-/**
- * Método que busca los productos por categoria de este
- * @param req Request
- * @param res Response
- * @returns lista de productos filtrados por categoria
- */
 export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
@@ -53,13 +157,7 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que retorna todos los productos
- * @param req Request
- * @param res Response
- * @returns lista de los productos
- */
-export const findProducts: RequestHandler = async (req, res) => {
+export const getProducts: RequestHandler = async (req, res) => {
     try {
         const allP = await Product.find();
         return res.json(allP); 
@@ -69,72 +167,12 @@ export const findProducts: RequestHandler = async (req, res) => {
 }
 
 export const getProductByPrice: RequestHandler = async (req, res) => {
-    // Mirar esto, no funciona del todo
-    const min = req.params.min;
-
+    const price = req.params.price;
     try{
-        const todos = await Product.find({precio: min});
+        const todos = await Product.find({precio: price});
         return res.json(todos);
-
     }catch(error){
         console.log(error);
         res.json(error);
-    }
-}
-
-
-// Métodos extra
-
-export const createProduct = async (req = request, res = response) => {
-    try {
-        if(checkParams(req.body)){
-            if(checkDoesNotExistProductCode(req.body.codigo)){
-                const product = new Product(req.body);
-                await product.save();
-                res.status(201).json({product})
-            }
-        }
-        
-    }catch (err){
-        console.log(err);
-        res.status(400).json({msg: err})
-    }
-}
-
-function checkParams(body: any): boolean{
-    const {codigo, categoria, nombre, precio, stock, url} = body;
-    return codigo != null && codigo != '' && categoria != null && categoria != '' && 
-    nombre != null && nombre != '' && precio >= 0 && stock > 0 && url != null && url != ''
-}
-
-function checkDoesNotExistProductCode(codigo: string): boolean{
-    const p =  Product.getProductoByCode({codigo: String});
-    return p;
-}
-
-export const deleteProduct: RequestHandler = async (req, res) => {
-    try{
-        const {id} = req.params;
-        await Product.findByIdAndDelete(id);
-        return res.send("Product deleted");
-    }catch (err){
-        return res.status(404).json({message: "There was a problem deleting a prodcut"});
-    }
-}
-
-export const update: RequestHandler = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const {_id,codigo, ...params} = req.body;
-        if(codigo){
-            if(checkDoesNotExistProductCode(codigo)){
-                params.codigo = codigo;
-            }
-        }
-        await Product.findByIdAndUpdate(id, params);
-        return res.send("Product updated");
-    }catch (err){
-        console.log(err);
-        return res.status(404).json({message: "There was a problem updating a product"})
     }
 }
