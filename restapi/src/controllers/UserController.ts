@@ -54,7 +54,7 @@ export const createUser = async (req = request, res = response) => {
 
 function checkBody(body:any):boolean{
   const { name,surname,email,password,repPassword, } =body;
-  return name != '' && surname != '' && email != '' && password != '';
+  return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
 }
 
 export const loginUser: RequestHandler = async (req, res) => {
