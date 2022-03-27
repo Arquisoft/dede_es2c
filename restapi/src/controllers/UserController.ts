@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
+import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
 const User = require('../model/user')
@@ -20,6 +21,23 @@ export const findUsersById: RequestHandler = async (req, res) => {
     return res.json(userFound)
   } catch (error) {
     return res.status(404).json({message: 'User not found'});
+  }
+};
+
+export const isAdmin: RequestHandler = async (req, res) => {
+  const token = req.params.token;
+  if(token){
+    try{
+    const verify = verifyToken(token);
+    console.log(verify)
+    if(verify){
+      const userFound = await User.findOne({_id: verify.id});
+      console.log(userFound.role)
+      return res.json(userFound.role)
+    }
+    }catch(err){
+      return res.json("Se ha producido un error verificando el token")
+    }
   }
 };
 
