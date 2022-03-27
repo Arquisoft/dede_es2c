@@ -3,7 +3,7 @@
 
 === Modelo de dominio
 
-image:Modelo_datos.png["Modelo de datos"]
+image:08_Modelo_datos.png["Modelo de datos"]
 
 
 === Internacionalización

@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
 const { model, Schema } = mongoose
 
-export const OrderShema = new mongoose.Schema({
-
-    // Habría que pasar de string a date en la fecha
-    // Deberías cambiar el usuario a un object
-    
+export const OrderShema = new mongoose.Schema({  
     codigo: {
         type: String,
         required: true,
@@ -26,6 +22,11 @@ export const OrderShema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 0
+    },
+    id_user: {
+        $ref: "User",
+        type: mongoose.Schema.ObjectId, 
+        required: true
     }
     },
     { collection: 'Order' })
