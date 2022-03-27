@@ -4,9 +4,9 @@ import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
-import orderRoutes from "../restapi/src/routes/OrderRoutes";
-import productRoutes from "../restapi/src/routes/ProductsRoutes";
 require('dotenv').config();
+import productRoutes from "./src/routes/ProductsOrderRoutes";
+
 
 const app: Application = express();
 const port: number = 5000;
@@ -26,7 +26,6 @@ app.use("/api", api)
 
 app.use(userRoutes);
 app.use(productRoutes);
-api.use(orderRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);

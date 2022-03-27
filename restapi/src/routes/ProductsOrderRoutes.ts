@@ -20,6 +20,9 @@ router.get('/product/precio_min=:min', ProductController.getProductByPrice);
 
 // Consultas del Order
 
+// Guardar un pedido
+router.get('/order/generarPedidoEjemplo', OrderController.generarPedidoEjemplo);
+
 // Busca todos
 router.get('/order/list', OrderController.getOrders);
 
@@ -41,16 +44,15 @@ router.get('/order/getByDate/:date', OrderController.getOrderByDate);
 // Buscar productos por codigo de la fecha
 router.get('/order/getProductsByCode/:code', OrderController.getOrderProductsByCode);
 
-// Buscar producto concreto en un pedido concreto
-router.get('/order/getConcreteProductByCode/:code/:code2', OrderController.getOrderConcreteProductByCode);
-
+// Buscar el primer producto del carrito
+router.get('/order/getFirstProductByCode/:code', OrderController.getFirstProductByCode);
 
 
 // Para tests
 router.get('/order/message', OrderController.getMessage);
 
-// Intento guardar una nueva orden
-router.get('/order/addExample', OrderController.addExampleOrder);
+
+
 
 module.exports = router;
 
