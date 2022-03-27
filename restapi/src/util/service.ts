@@ -1,12 +1,18 @@
 import { ObjectId } from "mongodb";
 require('dotenv').config();
 const jwt = require ('jsonwebtoken')
+import axios from "axios";
 
 export const generateToken = (id : ObjectId) => {
     return jwt.sign( { id }, process.env.JWT_TOKEN, {
         expiresIn: "30d"
     })
 };
+
+export const verifyToken = (token:string) =>{
+    const verify = jwt.verify(token,process.env.JWT_TOKEN);
+    return verify;
+}
 
 export const auth = (req:any,res:any,next:any) => {
     try{

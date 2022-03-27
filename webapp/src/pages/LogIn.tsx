@@ -19,8 +19,6 @@ const checkParams = (text: String) => {
 const handleLogin = (idUser: String, pass: String) => {
    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
    .then(res => {
-       console.log(res);
-       console.log(res.data);
        if(res.status == 201){
         Swal.fire({
             title: "Sesión iniciada",
@@ -29,6 +27,7 @@ const handleLogin = (idUser: String, pass: String) => {
             localStorage.setItem('token',res.data.token);
             window.location.assign("/products");
         });
+        localStorage.setItem("admin",res.data.role);
        }else{
             Swal.fire({
                 title: "Creedenciales incorrectos",

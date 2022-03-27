@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
+import PrivateRoute from './components/routes/PrivateRoute';
 
 
 const App: FC = () => {
@@ -19,9 +20,18 @@ const App: FC = () => {
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'products' element = {<ListProducts/>}/>
-          <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
-          <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
-          <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
+          <Route path = 'admin/addProduct' element = {
+          <PrivateRoute redirectTo="/login">
+            <AddProdutcAdmin />
+          </PrivateRoute>} />
+          <Route path = 'admin/manageProducts' element = {
+          <PrivateRoute redirectTo="/login">
+            <ManageProducts />
+          </PrivateRoute>} />
+          <Route path = 'admin/manageOrders' element = {
+          <PrivateRoute redirectTo="/login">
+            <ManageOrders />
+          </PrivateRoute>} />
           {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
         </Routes>
       </Router>
