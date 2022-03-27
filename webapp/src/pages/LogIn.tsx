@@ -28,6 +28,9 @@ const handleLogin = (idUser: String, pass: String) => {
    })
 }
 
+const changeIcon = () => {
+
+}
 
 const LogIn: FC = () => {
     const [email, setEmail] = useState('')

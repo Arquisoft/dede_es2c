@@ -64,8 +64,8 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose} href = "user/Profile">Perfil</MenuItem>
+                <MenuItem onClick={handleClose} href = "user/Profile">Historial de Ventas</MenuItem>
             </Menu>
             
         </Toolbar>     
