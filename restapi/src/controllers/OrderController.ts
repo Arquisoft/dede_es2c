@@ -83,7 +83,7 @@ export const updateOrderURL: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
       const { id } = req.params;
-      const {_id, correo, ...params} = req.params
+      const {_id, ...params} = req.params
       await Order.findByIdAndUpdate(id, params);
       return res.send("Order updated")
     } catch (error) {
@@ -96,7 +96,7 @@ export const updateOrderURL: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
       const { id } = req.body;
-      const {_id, correo, ...body} = req.body
+      const {_id, ...body} = req.body
       await Order.findByIdAndUpdate(id, body);
       return res.send("Order updated")
     } catch (error) {

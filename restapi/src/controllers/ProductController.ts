@@ -93,7 +93,7 @@ export const updateProductURL: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
         const id  = req.params.id;
-        const {_id,stock, ...params} = req.params;
+        const {_id, ...params} = req.params;
         await Product.findByIdAndUpdate(id, params); 
         return res.send("Product updated OK");
     }catch (err){
@@ -106,7 +106,7 @@ export const updateProductForm: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
         const id  = req.body.id;
-        const {_id,stock, ...body} = req.body;
+        const {_id, ...body} = req.body;
         await Product.findByIdAndUpdate(id, body); 
         return res.send("Product updated OK");
     }catch (err){
@@ -167,9 +167,9 @@ export const getProducts: RequestHandler = async (req, res) => {
 }
 
 export const getProductByPrice: RequestHandler = async (req, res) => {
-    const min = req.params.min;
+    const price = req.params.price;
     try{
-        const todos = await Product.find({precio: min});
+        const todos = await Product.find({precio: price});
         return res.json(todos);
     }catch(error){
         console.log(error);

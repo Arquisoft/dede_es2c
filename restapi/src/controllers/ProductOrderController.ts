@@ -26,6 +26,7 @@ export const addProductOrderURL: RequestHandler = async(req, res, next) => {
         const id_order = req.params.id_order;
         const productOrder = new ProductOrder({id_product: id_product, cantidad : cantidad, id_order: id_order});
         productOrder.save();
+        return res.send("Product in an order inserted");
     } catch (error){
         console.log(error);
     }
@@ -38,6 +39,7 @@ export const addProductOrderForm: RequestHandler = async(req, res, next) => {
         const id_order = req.body.id_order;
         const productOrder = new ProductOrder({id_product: id_product, cantidad : cantidad, id_order: id_order});
         productOrder.save();
+        return res.send("Product in an order inserted");
     } catch (error){
         console.log(error);
     }
@@ -66,7 +68,7 @@ export const deleteProductOrderForm: RequestHandler = async (req, res) => {
 export const updateProductOrderURL: RequestHandler = async (req, res) => {
     try {
         const id  = req.params.id;
-        const {_id,cantidad, ...params} = req.params;
+        const {_id, ...params} = req.params;
         await ProductOrder.findByIdAndUpdate(id, params); 
         return res.send("Product in an order updated OK");
     }catch (err){
@@ -78,7 +80,7 @@ export const updateProductOrderURL: RequestHandler = async (req, res) => {
 export const updateProductOrderForm: RequestHandler = async (req, res) => {
     try {
         const id  = req.body.id;
-        const {_id,cantidad, ...body} = req.body;
+        const {_id, ...body} = req.body;
         await ProductOrder.findByIdAndUpdate(id, body); 
         return res.send("Product in an order updated OK");
     }catch (err){

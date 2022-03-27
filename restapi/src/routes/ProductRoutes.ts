@@ -30,7 +30,7 @@ router.get('/product/getByCategoria/:categoria', ProductController.getProductsBy
 // Productos por el ID
 router.get('/product/getById/:id', ProductController.getProductoByID);
 // Productos por el precio minimo
-router.get('/product/precio_min=:min', ProductController.getProductByPrice);
+router.get('/product/getByPrice/:price', ProductController.getProductByPrice);
 
 
 module.exports = router;
