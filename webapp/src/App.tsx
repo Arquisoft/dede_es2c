@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
-
+import UserAdmin from './pages/admin/UsersAdmin';
 
 const App: FC = () => {
   return (
@@ -22,7 +22,7 @@ const App: FC = () => {
           <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
-          {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
+          <Route path='admin/manageUsers' element = {<UserAdmin />} />
         </Routes>
       </Router>
   );
