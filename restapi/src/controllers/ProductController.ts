@@ -83,15 +83,37 @@ export const getProductByPrice: RequestHandler = async (req, res) => {
 }
 
 
-// Métodos extra
+// ******** Métodos extra POST ********
 
-export const createProduct = async (req = request, res = response) => {
+export const createProductURL : RequestHandler= async (req = request, res = response) => {
+    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
+    try {
+        if(checkParams(req.params)){
+            const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
+            if(productoEncontrado == null){
+                const product = new Product(req.params);
+                await product.save();
+                return res.send("New product OK")
+            } else {
+                return res.send("There was a problem adding a product")
+            }
+        }   
+    }catch (err){
+        return res.status(400).json({msg: err})
+    }
+}
+
+
+export const createProductForm = async (req = request, res = response) => {
     try {
         if(checkParams(req.body)){
-            if(checkDoesNotExistProductCode(req.body.codigo)){
+            const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
+            if(productoEncontrado == null){
                 const product = new Product(req.body);
                 await product.save();
-                res.status(201).json({product})
+                return res.send("New product OK")
+            } else {
+                return res.send("There was a problem adding a product")
             }
         }
         
@@ -102,17 +124,15 @@ export const createProduct = async (req = request, res = response) => {
 }
 
 function checkParams(body: any): boolean{
-    const {codigo, categoria, nombre, precio, stock, url} = body;
+    const {codigo, categoria, nombre, precio, descripcion, stock, url} = body;
     return codigo != null && codigo != '' && categoria != null && categoria != '' && 
-    nombre != null && nombre != '' && precio >= 0 && stock > 0 && url != null && url != ''
+    nombre != null && nombre != '' && descripcion != null && descripcion != '' && 
+    precio >= 0 && stock > 0 && url != null && url != ''
 }
 
-function checkDoesNotExistProductCode(codigo: string): boolean{
-    const p =  Product.getProductoByCode({codigo: String});
-    return p;
-}
 
-export const deleteProduct: RequestHandler = async (req, res) => {
+export const deleteProductURL: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/delete/62404a4b4d0ed7d3c5c3e39c
     try{
         const {id} = req.params;
         await Product.findByIdAndDelete(id);
@@ -122,17 +142,23 @@ export const deleteProduct: RequestHandler = async (req, res) => {
     }
 }
 
-export const update: RequestHandler = async (req, res) => {
+export const deleteProductPOST: RequestHandler = async (req, res) => {
+    try{
+        const {id} = req.body;
+        await Product.findByIdAndDelete(id);
+        return res.send("Product deleted");
+    }catch (err){
+        return res.status(404).json({message: "There was a problem deleting a prodcut"});
+    }
+}
+
+export const updateProductURL: RequestHandler = async (req, res) => {
+    // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
-        const { id } = req.params;
-        const {_id,codigo, ...params} = req.body;
-        if(codigo){
-            if(checkDoesNotExistProductCode(codigo)){
-                params.codigo = codigo;
-            }
-        }
-        await Product.findByIdAndUpdate(id, params);
-        return res.send("Product updated");
+        const id  = req.params.id;
+        const {_id,stock, ...params} = req.params;
+        await Product.findByIdAndUpdate(id, params); 
+        return res.send("Product updated OK");
     }catch (err){
         console.log(err);
         return res.status(404).json({message: "There was a problem updating a product"})
