@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Order, Product, Object } from '../../shared/shareddtypes';
+import { Order, Product, ProductPedido } from '../../shared/shareddtypes';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 type OrderProps = {
     order: Order[]
@@ -23,36 +24,19 @@ const style = {
 
 
 const OrderAdmin = (order: OrderProps) => {
-    let [ordersT, setOrders]  = React.useState<string>("");
-
-    function cargarProductosCesta(pro: Product[]) {
-        setOrders("");
-        let aux = pro.length;
-        for(let i = 0; i < aux; i++){
-            ordersT += pro[i].nombre + "\n";
-        }
-    }
-
-    const cargar = (p: Object[]) => {
-        setOrders("");
-        let aux = p.length;
-        console.log(p.length);
-        for(let i = 0; i < aux; i++){
-            ordersT += p[i].codigo_producto+ "\n";
-        }
-    };
 
     return (
         <>
             {order.order.map((o) => {
-                 cargar(o.product); 
                 return (
                     <TableRow key={o.codigo} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">{o.codigo}</TableCell>
                         <TableCell component="th" scope="row">{o.fecha.toLocaleString()}</TableCell>
                         <TableCell align='center'>{o.correo}</TableCell>
                         <TableCell component="th" scope="row">{o.precioTotal}</TableCell>
-                        <TableCell component="th" scope="row">{ordersT}</TableCell> 
+                         <TableCell component="th" scope="row">
+                            {o.product.map((pr) => {return pr.producto.nombre + "\n"})}    
+                        </TableCell>  
                     </TableRow>
                 );
             })}

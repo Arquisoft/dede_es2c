@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { Typography, TextField, Stack} from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import axios from 'axios';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
@@ -42,7 +43,6 @@ const style = {
     p: 4,
 };
 
-
 const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
 
     const [open, setOpen] = useState(false);
@@ -52,11 +52,11 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
     const [pulse, setPulse] = useState(false);
 
     // constantes para la actualizacio de los productos
-    const [nombre, setNombre] = useState('');
-    const [descrop, setDescrip] = useState('');
-    const [urlCod, setUrl] = useState('') ;
-    const [stock, setStock] = useState(0);
-    const [precio, setPrecio] = useState(0);
+    let [nombre, setNombre] = useState('');
+    let [descrop, setDescrip] = useState('');
+    let [urlCod, setUrl] = useState('') ;
+    let [stock, setStock] = useState(0);
+    let [precio, setPrecio] = useState(0);
 
     function saveP(o: Product){
         
@@ -66,13 +66,20 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
         Prod.precio = o.precio;
         Prod.descripcion = o.descripcion;
         Prod.url = o.url; 
+
+        nombre = o.nombre; 
+        descrop = o.descripcion;
+        urlCod =  o.url;
+        stock = Number.parseFloat(o.stock)
+        precio = o.precio;
         handleOpen();
         
     }
 
-   async function allFunc(nombre: string, descrip: string, stock: number, precio: number, url: string) {
+    async function allFunc(nombre: string, descrip: string, stock: number, precio: number, url: string) {
        setPulse(true);
-   }
+       
+    }
 
     if(open){
         if(pulse){
@@ -125,6 +132,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         label = "Stock"
                         size = "small"
                         value = {stock}
+                        defaultValue = {stock}
                         helperText={checkParamsNumber(stock) && pulse ? 'La casilla no puede estar vacia' : ''}
                         onChange = {(e: any) => setStock(e.target.value)}
                     />
