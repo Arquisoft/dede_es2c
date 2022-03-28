@@ -11,6 +11,7 @@ import Pago from './pages/Pago';
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
+import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
 
 
@@ -38,12 +39,25 @@ const App: FC = () => {
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
-          <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
-          <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
-          <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
-          <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
-          <Route path= 'admin/manageUsers' element = {<UserAdmin />} />
+          <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
+          <Route path = 'admin/addProduct' element = {
+          <PrivateRoute redirectTo="/login" >
+            <AddProdutcAdmin />
+          </PrivateRoute>} />
+          <Route path = 'admin/manageProducts' element = {
+          <PrivateRoute redirectTo="/login" >
+            <ManageProducts />
+          </PrivateRoute>} />
+          <Route path = 'admin/manageOrders' element = {
+          <PrivateRoute redirectTo="/login">
+            <ManageOrders />
+          </PrivateRoute>} />
+          <Route path = 'admin/manageUsers' element = {
+          <PrivateRoute redirectTo="/login">
+            <UserAdmin />
+          </PrivateRoute>} />
+          {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
         </Routes>
       </Router>
   );

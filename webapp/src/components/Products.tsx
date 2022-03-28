@@ -54,6 +54,11 @@ const Productos = ( product: ProductsProps) => {
         Prod.stock = o.stock;
     }
 
+    function handleAddCart(){
+        if(!localStorage.token)
+            window.location.assign("/login");
+    }
+
     if(open){
 
         if(Prod.stock != '0'){
