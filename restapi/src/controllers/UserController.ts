@@ -83,7 +83,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     const userFound = await User.findOne({email: emailReq});
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
-        const token = generateToken(userFound.id)
+        const token = generateToken(userFound.id,userFound.role)
         res.status(201).json({
           token,
           userFound

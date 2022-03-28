@@ -24,10 +24,11 @@ const handleLogin = (idUser: String, pass: String) => {
             title: "Sesión iniciada",
             icon: "success"
         }).then(() => {
+            console.log(res.data)
             localStorage.setItem('token',res.data.token);
+            localStorage.setItem('user',res.data.userFound.role);
             window.location.assign("/products");
         });
-        localStorage.setItem("admin",res.data.role);
        }else{
             Swal.fire({
                 title: "Creedenciales incorrectos",

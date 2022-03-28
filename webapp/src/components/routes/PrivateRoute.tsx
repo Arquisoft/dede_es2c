@@ -9,9 +9,10 @@ async function isAdmin(){
 }
 
 
-export default function PrivateRoute({children,redirectTo}: any) {
-  isAdmin();
-  let isAuthenticated = localStorage.getItem("admin") == "ROLE_ADMIN";
+export default function PrivateRoute({children,user,redirectTo}: any) {
+  //isAdmin();
+  console.log(user)
+  let isAuthenticated = (user == "ROLE_ADMIN");
   console.log(isAuthenticated)
   return isAuthenticated ? children : <Navigate to={redirectTo} replace={true} />;
 };
