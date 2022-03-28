@@ -13,6 +13,7 @@ type ProductsProps = {
     product: Product[]
     onAddCart:(prod:Product) => (void);
     cartItems:Product[]
+    homePage: boolean
 }
         
 const Prod = {
@@ -53,6 +54,8 @@ const Productos = ( product: ProductsProps) => {
         Prod.url = o.url;
         Prod.stock = o.stock;
     }
+
+    
 
     if(open){
 
@@ -108,65 +111,73 @@ const Productos = ( product: ProductsProps) => {
         <Grid container spacing={3}>
          {product.product.map(
             (p) => {
-                /* return (
-                    <Grid item xs={3} md={3}>
-                        <Card  sx={{ width: 400}}>
-                            <CardHeader title = {p.nombre}/>
-                            <CardMedia component="img" height="300" width = "270" image={p.url} alt={p.nombre} />
-                            <CardContent>Precio: {p.precio}€</CardContent>
-                            <CardContent>Descripción del producto:</CardContent>
-                            <CardContent>{p.descripcion}</CardContent>
-                            <CardActions>
-                                <IconButton onClick={() => product.onAddCart(p)} aria-label='Añadir al carrito' >
-                                    <AddShoppingCartIcon />
-                                </IconButton>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                ); */
-
-                 if(p.stock != '0') {
-                    return (
-                        <Grid item xs={3} md={3}>
-                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
-                                <CardHeader title = {p.nombre}/>
-                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
-                                <CardContent>Precio: {p.precio}€</CardContent>
-                                <CardContent>Descripción del producto:</CardContent>
-                                <CardContent>{p.descripcion}</CardContent>
-                                <CardActions>
-                                    <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
-                                        Añadir al carrito
-                                    </Button>
-                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
-                                        Más información
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    );
+                
+                if(product.homePage){
+                    if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0 ){
+                        return(
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                            Añadir al carrito
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        );
+                    }
                 } else {
-                    return (
-                        <Grid item xs={3} md={3}>
-                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
-                                <CardHeader title = {p.nombre}/>
-                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
-                                <CardContent>Precio: {p.precio}€</CardContent>
-                                <CardContent>Descripción del producto:</CardContent>
-                                <CardContent>{p.descripcion}</CardContent>
-                                <CardActions>
-                                    <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
-                                        NO STOCK
-                                    </Button>
-                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
-                                        Más información
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+
+                    if(p.stock != '0') {
+                        return (
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                            Añadir al carrito
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                    );
+                    } else {
+                        return (
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
+                                            NO STOCK
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
                     );
                 } 
-
+            }
             }
         )}
         </Grid>
