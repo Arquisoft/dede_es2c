@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import LogIn from './pages/LogIn';
 import NavBar from './components/NavBar';
 import SignUp from './pages/Signup';
@@ -32,7 +32,7 @@ const App: FC = () => {
 
       <Router>
         <NavBar cartItems = {cartItems}></NavBar>
-        <NavBar/> 
+        {/* <NavBar/>  */}
         <Routes>
           <Route index element = {<Home/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
@@ -40,11 +40,10 @@ const App: FC = () => {
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
-          <Route path = 'products' element = {<ListProducts/>}/>
           <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
-          <Route path='admin/manageUsers' element = {<UserAdmin />} />
+          <Route path= 'admin/manageUsers' element = {<UserAdmin />} />
         </Routes>
       </Router>
   );
