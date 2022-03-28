@@ -7,6 +7,7 @@ import { Typography } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import {User} from '../../shared/shareddtypes';
 
 type Email = {
     email:String
@@ -14,14 +15,6 @@ type Email = {
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
-}
-
-const getEmail = async (email: String) => {
-    const data = await axios.get("http://localhost:5000/user/list/"+ email).
-    then(res => {
-        return res.data
-    })
-    return data != null; 
 }
 
 const handleChangeProfile = (name:String,surname:String,email: String,pass: String) => {
@@ -33,21 +26,29 @@ const handleChangeProfile = (name:String,surname:String,email: String,pass: Stri
 }
 
 const Profile = (correo:Email) => {
+    let [user, setUser] = React.useState<User>({name: "",email: "",surname: "", password: ""});
     const [pulse, setPulse] = useState(false)
-    const [name, setName] = useState('')
+    let [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
 
     async function allFunc(name:String,surname:String,email: String,pass: String){
         setPulse(true);
-        if(await getEmail(email).then(resolve => {return resolve})){
-            alert("El email ya existe");
-        }else{
-            handleChangeProfile(name,surname,email,pass);
-        }
     }
 
+    const getUserByEmail = async (email:String) => {
+        const data = await axios.get("http://localhost:5000/user/list/" + email).
+        then(res => {
+            setUser(res.data);
+            user = res.data;
+            return res.data;
+        })
+        return data != null;
+    }
+    
+    getUserByEmail(correo.email);
+    
     return ( 
         <div>
             <Container component= "main" maxWidth="sm"
@@ -65,7 +66,7 @@ const Profile = (correo:Email) => {
                                 id = "email" required
                                 name = "Correo electronico"
                                 label = "Correo electronico"
-                                defaultValue = "Correo electronico"
+                                value = {user.email}
                                 variant = "outlined"
                                 size = "small"
                             />
@@ -74,7 +75,7 @@ const Profile = (correo:Email) => {
                                 id = "name" required
                                 name = "Nombre"
                                 label = "Nombre"
-                                defaultValue = "Nombre"
+                                value = {user.name}
                                 variant = "outlined"
                                 size = "small"
                             />
@@ -83,7 +84,7 @@ const Profile = (correo:Email) => {
                                 id = "surname" required
                                 name = "Apellido"
                                 label = "Apellido"
-                                defaultValue = "Apellido"
+                                value = {user?.surname}
                                 variant = "outlined"
                                 size = "small"
                             />
@@ -94,7 +95,7 @@ const Profile = (correo:Email) => {
                                 name = "Contraseña"
                                 label = "Contraseña"
                                 type= "password"
-                                defaultValue= "Contraseña"
+                                value= {user?.password}
                                 size="small"
                                 variant="outlined"
                             />

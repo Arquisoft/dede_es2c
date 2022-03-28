@@ -1,6 +1,6 @@
 import { Console } from "console";
 import { RequestHandler, response, request } from "express";
-import { body, param } from "express-validator";
+//import { body, param } from "express-validator";
 import { Product } from "../model/Product";
 
 

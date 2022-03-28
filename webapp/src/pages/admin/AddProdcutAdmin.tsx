@@ -24,7 +24,6 @@ const AddProdutcAdmin: FC = () => {
         setCategoria(event.target.value as string)
     }
 
-
     return (
         <div style={{marginLeft: '450px', marginRight: 'auto', marginTop: '100px'}}>
             <Stack direction= "row">

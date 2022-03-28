@@ -23,7 +23,7 @@ const App: FC = () => {
           <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
-          <Route path = 'user/Profile' element = {<Profile email={"pepe"}/>} />
+          <Route path = 'user/Profile' element = {<Profile email={"admin@uniovi.es"}/>} />
           {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
         </Routes>
       </Router>
