@@ -11,9 +11,9 @@ export type Product = {
   stock: string;
   url: string;
   descripcion: string;
+  cantidad: number;
+
 }
-
-
 export type Order = {
   id: string |undefined;
   codigo: string;
@@ -25,7 +25,7 @@ export type Order = {
 }
 
 export type ProductPedido = {
-    id_producto: string;
-    cantidad: number;
-    id_carrito: string;
+  id_producto: string;
+  cantidad: number;
+  id_carrito: string;
 }
