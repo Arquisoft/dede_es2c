@@ -26,7 +26,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.save();
         return res.json(order);
     } catch (error){
-        console.log(error);
+        return res.send("Ha surgido un error")
     }
 
 }
@@ -67,19 +67,19 @@ export const addOrderForm: RequestHandler = async(req, res, next) => {
 
 export const deleteOrderURL: RequestHandler = async (req, res) => {
     try {
-      const { id } = req.params;
-      await Order.findByIdAndDelete(id);
-      return res.send("Order deleted")
+        const {codigo} = req.params;
+        await Order.deleteOne({codigo: codigo});
+        return res.send("Order deleted")
     } catch (error) {
-      return res.status(404).json({message: 'There was a problem deleting a order'});
+        return res.status(404).json({message: 'There was a problem deleting a order'});
     }
 };
 
 export const deleteOrderForm: RequestHandler = async (req, res) => {
     try {
-      const { id } = req.body;
-      await Order.findByIdAndDelete(id);
-      return res.send("Order deleted")
+        const {codigo} = req.body;
+        await Order.deleteOne({codigo: codigo});
+        return res.send("Order deleted")
     } catch (error) {
       return res.status(404).json({message: 'There was a problem deleting a order'});
     }
@@ -89,26 +89,26 @@ export const deleteOrderForm: RequestHandler = async (req, res) => {
 export const updateOrderURL: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
-      const { id } = req.params;
-      const {_id, ...params} = req.params
-      await Order.findByIdAndUpdate(id, params);
-      return res.send("Order updated")
+        const codigo  = req.params.codigo;
+        const {...params} = req.params;
+        await Order.findOneAndUpdate({codigo: codigo}, params); 
+        return res.send("Order updated")
     } catch (error) {
-      console.log(error)
-      return res.status(404).json({message: 'There was a problem updating a order'});
+        console.log(error)
+        return res.status(404).json({message: 'There was a problem updating a order'});
     }
   };
 
   export const updateOrderPOST: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
-      const { id } = req.body;
-      const {_id, ...body} = req.body
-      await Order.findByIdAndUpdate(id, body);
-      return res.send("Order updated")
+        const codigo  = req.body.codigo;
+        const {...body} = req.body;
+        await Order.findOneAndUpdate({codigo: codigo}, body); 
+        return res.send("Order updated")
     } catch (error) {
-      console.log(error)
-      return res.status(404).json({message: 'There was a problem updating a order'});
+        console.log(error)
+        return res.status(404).json({message: 'There was a problem updating a order'});
     }
   };
 

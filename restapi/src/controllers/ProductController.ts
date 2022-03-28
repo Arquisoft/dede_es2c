@@ -22,6 +22,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     } catch (error){
         console.log(error);
     }
+    
 
 }
 
@@ -81,8 +82,8 @@ export const deleteProductURL: RequestHandler = async (req, res) => {
 
 export const deleteProductForm: RequestHandler = async (req, res) => {
     try{
-        const {id} = req.body;
-        await Product.findByIdAndDelete(id);
+        const {codigo} = req.body;
+        await Product.deleteOne({codigo: codigo});
         return res.send("Product deleted");
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});
@@ -92,9 +93,9 @@ export const deleteProductForm: RequestHandler = async (req, res) => {
 export const updateProductURL: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
-        const id  = req.params.id;
-        const {_id, ...params} = req.params;
-        await Product.findByIdAndUpdate(id, params); 
+        const codigo  = req.params.codigo;
+        const {...params} = req.params;
+        await Product.findOneAndUpdate({codigo: codigo}, params); 
         return res.send("Product updated OK");
     }catch (err){
         console.log(err);
@@ -105,9 +106,9 @@ export const updateProductURL: RequestHandler = async (req, res) => {
 export const updateProductForm: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
-        const id  = req.body.id;
-        const {_id, ...body} = req.body;
-        await Product.findByIdAndUpdate(id, body); 
+        const codigo  = req.body.codigo;
+        const {...body} = req.body;
+        await Product.findOneAndUpdate({codigo: codigo}, body); 
         return res.send("Product updated OK");
     }catch (err){
         console.log(err);

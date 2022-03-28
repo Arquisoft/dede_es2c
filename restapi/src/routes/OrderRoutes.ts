@@ -13,9 +13,9 @@ router.get('/order/generateExample', OrderController.generateExample);
 // Añadir un producto por URL
 router.get('/order/add/:codigo/:correo/:direccion/:fecha/:precioTotal/:productos', OrderController.addOrderURL);
 // Eliminar por URL
-router.get('/order/delete/:id', OrderController.deleteOrderURL);
+router.get('/order/delete/:codigo', OrderController.deleteOrderURL);
 // Actualizar por URL
-router.get('/order/update/:id/:direccion', OrderController.updateOrderURL);
+router.get('/order/update/:codigo/:direccion', OrderController.updateOrderURL);
 
 
 

@@ -16,7 +16,7 @@ router.get('/product/add/:codigo/:categoria/:nombre/:precio/:descripcion/:stock/
 // Eliminar por URL
 router.get('/product/delete/:codigo', ProductController.deleteProductURL);
 // Actualizar por URL
-router.get('/product/update/:id/:stock/:nombre/:descripcion/:url', ProductController.updateProductURL);
+router.get('/product/update/:codigo/:stock/:nombre/:descripcion/:url', ProductController.updateProductURL);
 
 
 //**** GET ****
