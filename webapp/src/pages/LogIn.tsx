@@ -26,7 +26,6 @@ const handleLogin = (idUser: String, pass: String) => {
         }).then(() => {
             console.log(res.data)
             localStorage.setItem('token',res.data.token);
-            localStorage.setItem('user',res.data.userFound.role);
             window.location.assign("/products");
         });
        }else{

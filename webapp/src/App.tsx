@@ -12,7 +12,6 @@ import PrivateRoute from './components/routes/PrivateRoute';
 
 
 const App: FC = () => {
-  const user = localStorage.getItem("user");
   return (
       <Router>
         <NavBar/> 
@@ -22,15 +21,15 @@ const App: FC = () => {
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'products' element = {<ListProducts/>}/>
           <Route path = 'admin/addProduct' element = {
-          <PrivateRoute redirectTo="/login" user={user}>
+          <PrivateRoute redirectTo="/login" >
             <AddProdutcAdmin />
           </PrivateRoute>} />
           <Route path = 'admin/manageProducts' element = {
-          <PrivateRoute redirectTo="/login" user={user}>
+          <PrivateRoute redirectTo="/login" >
             <ManageProducts />
           </PrivateRoute>} />
           <Route path = 'admin/manageOrders' element = {
-          <PrivateRoute redirectTo="/login" user={user}>
+          <PrivateRoute redirectTo="/login">
             <ManageOrders />
           </PrivateRoute>} />
           {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
