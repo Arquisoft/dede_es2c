@@ -9,7 +9,7 @@ export default function PrivateRoute({children,redirectTo}: any) {
   if(localStorage.getItem('token') != null)
     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
   if(user){
-    isAuthenticated = (user.user.role === "ROLE_ADMIN");
+    isAuthenticated = (user.role === "ROLE_ADMIN");
   }else{
     isAuthenticated = false;
   }

@@ -24,23 +24,6 @@ export const findUsersById: RequestHandler = async (req, res) => {
   }
 };
 
-export const isAdmin: RequestHandler = async (req, res) => {
-  const token = req.params.token;
-  if(token){
-    try{
-    const verify = verifyToken(token);
-    console.log(verify)
-    if(verify){
-      const userFound = await User.findOne({_id: verify.id});
-      console.log(userFound.role)
-      return res.json(userFound.role)
-    }
-    }catch(err){
-      return res.json("Se ha producido un error verificando el token")
-    }
-  }
-};
-
 export const findUsersByEmail: RequestHandler = async (req, res) => {
   const email = req.params.email;
   try {
