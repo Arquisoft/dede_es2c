@@ -1,34 +1,115 @@
-import { Console } from "console";
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
 
-const express = require("express");
 
-/**
- * Método cuyo único propósito es ver si se aceptan peticiontes GET
- */
-export const getMessage: RequestHandler = async (req, res) => {
+/************* GENERAR DATOS *************/
+
+export const generateExample: RequestHandler = async(req, res, next) => {
+    // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
+    // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-        console.log("hola");
-        return res.json({
-            text: 'ejemplo'
-        })
-    }catch(error){
+
+        let order = new Order();
+        order.codigo = "orderOneExample";
+        order.correo = "admin@uniovi.es";
+        order.direccion = "dirExample";
+        order.fecha = new Date();
+        order.precioTotal = 139.99;
+        order.id_user = "6227991f3dc4737c6f68cc32";
+        order.save();
+        return res.json(order);
+    } catch (error){
+        console.log(error);
+    }
+
+}
+
+/************* POST *************/
+
+export const addOrderURL: RequestHandler = async(req, res, next) => {
+    try {
+        const codigo = req.params.codigo;
+        const correo = req.params.correo;
+        const fecha = req.params.fecha;
+        const direccion = req.params.direccion;
+        const precioTotal = req.params.precioTotal;
+        const id_user = req.params.id_user;
+        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                    precioTotal: precioTotal, id_user: id_user});
+        order.save();
+    } catch (error){
         console.log(error);
     }
 }
 
+export const addOrderForm: RequestHandler = async(req, res, next) => {
+    try {
+        const codigo = req.body.codigo;
+        const correo = req.body.correo;
+        const fecha = req.body.fecha;
+        const direccion = req.body.direccion;
+        const precioTotal = req.body.precioTotal;
+        const id_user = req.body.id_user;
+        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                    precioTotal: precioTotal, id_user: id_user});
+        order.save();
+    } catch (error){
+        console.log(error);
+    }
+}
+
+export const deleteOrderURL: RequestHandler = async (req, res) => {
+    try {
+      const { id } = req.params;
+      await Order.findByIdAndDelete(id);
+      return res.send("Order deleted")
+    } catch (error) {
+      return res.status(404).json({message: 'There was a problem deleting a order'});
+    }
+};
+
+export const deleteOrderForm: RequestHandler = async (req, res) => {
+    try {
+      const { id } = req.body;
+      await Order.findByIdAndDelete(id);
+      return res.send("Order deleted")
+    } catch (error) {
+      return res.status(404).json({message: 'There was a problem deleting a order'});
+    }
+};
 
 
-// GET PARAA BUSCAR LOS DATOS DE LOS PEDIDOS
+export const updateOrderURL: RequestHandler = async (req, res) => {
+    // Se pueden actualizar tanto el correo como la direccion
+    try {
+      const { id } = req.params;
+      const {_id, ...params} = req.params
+      await Order.findByIdAndUpdate(id, params);
+      return res.send("Order updated")
+    } catch (error) {
+      console.log(error)
+      return res.status(404).json({message: 'There was a problem updating a order'});
+    }
+  };
+
+  export const updateOrderPOST: RequestHandler = async (req, res) => {
+    // Se pueden actualizar tanto el correo como la direccion
+    try {
+      const { id } = req.body;
+      const {_id, ...body} = req.body
+      await Order.findByIdAndUpdate(id, body);
+      return res.send("Order updated")
+    } catch (error) {
+      console.log(error)
+      return res.status(404).json({message: 'There was a problem updating a order'});
+    }
+  };
 
 
-/**
- * Método que busca los pedidos por el codigo de este
- * @param req Request
- * @param res Response
- * @returns Pedido con el codigo especificado
- */
+
+/************* GET *************/
+
+
  export const getOrderByCode: RequestHandler = async (req, res) => {
     const cod = req.params.codigo;
     try {
@@ -39,12 +120,7 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que busca los pedidos por el id de este
- * @param req Request
- * @param res Response
- * @returns Pedido con el id especificado
- */
+
  export const getOrderByID: RequestHandler = async (req, res) => {
     const id = req.params.id;
     try {
@@ -55,13 +131,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-
-/**
- * Método que busca los pedidos por el precio de este
- * @param req Request
- * @param res Response
- * @returns Pedido con el precio especificado
- */
  export const getOrderByPrice: RequestHandler = async (req, res) => {
     const price = req.params.price;
     try {
@@ -72,12 +141,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que busca los pedidos por la dirección de este
- * @param req Request
- * @param res Response
- * @returns Pedido con el precio especificado
- */
  export const getOrderByDirection: RequestHandler = async (req, res) => {
     const dir = req.params.dir;
     try {
@@ -88,13 +151,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-
-/**
- * Método que busca los pedidos asociados a un usuario
- * @param req Request
- * @param res Response
- * @returns Pedido con el precio especificado
- */
  export const getOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
@@ -105,12 +161,6 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que busca los pedidos por la fecha de este
- * @param req Request
- * @param res Response
- * @returns Pedido con la fecha especificada
- */
  export const getOrderByDate: RequestHandler = async (req, res) => {
     const date = req.params.date;
     try {
@@ -121,97 +171,10 @@ export const getMessage: RequestHandler = async (req, res) => {
     }
 }
 
-/**
- * Método que te devuelve el array de productos buscando por su codigo
- * @param req Request
- * @param res Response
- * @returns La lista de productos buscando por código 
- */
- export const getOrderProductsByCode: RequestHandler = async (req, res) => {
-    const code = req.params.code;
-    try {
-        const encontrado = await Order.findOne({codigo: code});
-        // Encuentro el pedido pero busco devolver los productos
-        const productos = encontrado.productos
-        return res.json(productos)
-    }catch(error){
-        return res.status(404).json({message: 'No se ha encontrado la lista de productos'});
-    }
-}
-
-
-/**
- * Método que te devuelve un producto específico del array de productos de un pedido a buscar
- * @param req Request
- * @param res Response
- * @returns La lista de productos buscando por código 
- */
- export const getOrderConcreteProductByCode: RequestHandler = async (req, res) => {
-    const code = req.params.code;
-    const code2 = req.params.code2;
-    try {
-        const encontrado = await Order.findOne({codigo: code});
-        // Bucle for
-        for (let i = 0; i<encontrado.productos.length; i++){
-            if (encontrado.productos[i].codigo_producto === code2){
-                return res.json(encontrado.productos[i]);
-            }
-        }
-        return res.json("ERROR");
-    }catch(error){
-        return res.status(404).json({message: 'No se ha encontrado la lista de productos'});
-    }
-}
-
-
-/**
- * Método que retorna todos los pedidos
- * @param req Request
- * @param res Response
- * @returns lista de los pedidos
- */
  export const getOrders: RequestHandler = async (req, res) => {
     try {
         const allP = await Order.find();
         return res.json(allP); 
-    }catch(error){
-        console.log(error);
-    }
-}
-
-
-///... etc llegado este punto añades más cuando te haga falta
-
-
-// Prueba con POST
-// La idea sería pasar esta info en un formulario
-
-export const addExampleOrder: RequestHandler = async (req, res) => {
-    try {
-
-        let order = new Order();
-        // Lo que ahora entiendo que se haría desde un formulario
-        //order.codigo = req.body.codigo;
-        order.codigo = "orderExample";
-        order.correo = "admin@uniovi.es";
-        order.direccion = "dirExample";
-        order.fecha = new Date();
-        order.precioTotal = 21.87;
-        //order.productos.codigo_producto = "AL01";
-        //order.productos.cantidad = 1;
-        //order.productos.precio = 21.87
-
-        // ¿Se haría un push?
-        order.productos = [{
-                "codigo_producto" : "AL01",
-                "cantidad": 1,
-                "precio": 21.87
-            }];
-
-        order.save();
-
-        return res.json(order);
-
     }catch(error){
         console.log(error);
     }

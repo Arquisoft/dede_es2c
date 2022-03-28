@@ -4,8 +4,9 @@ import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
-import orderRoutes from "../restapi/src/routes/OrderRoutes";
-import productRoutes from "../restapi/src/routes/ProductsRoutes";
+import productRoutes from "./src/routes/ProductRoutes";
+import productOrderRoutes from "./src/routes/ProductOrderRoutes";
+import orderRoutes from "./src/routes/OrderRoutes";
 
 
 const app: Application = express();
@@ -25,7 +26,8 @@ app.use("/api", api)
 
 app.use(userRoutes);
 app.use(productRoutes);
-api.use(orderRoutes);
+app.use(productOrderRoutes);
+app.use(orderRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
