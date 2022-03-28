@@ -1,6 +1,5 @@
 import { RequestHandler, response, request } from "express";
 import { Product } from "../model/Product";
-import { ProductOrder } from "../model/ProductOrder";
 
 
 /************* GENERAR DATOS *************/
@@ -48,6 +47,7 @@ export const addProductURL : RequestHandler= async (req = request, res = respons
 }
 
 
+
 export const addProductForm = async (req = request, res = response) => {
     try {
         if(checkParams(req.body)){
@@ -71,8 +71,8 @@ export const addProductForm = async (req = request, res = response) => {
 export const deleteProductURL: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/delete/62404a4b4d0ed7d3c5c3e39c
     try{
-        const {id} = req.params;
-        await Product.findByIdAndDelete(id);
+        const {codigo} = req.params;
+        await Product.deleteOne({codigo: codigo});
         return res.send("Product deleted");
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});

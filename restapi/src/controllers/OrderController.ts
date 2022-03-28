@@ -15,7 +15,14 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.direccion = "dirExample";
         order.fecha = new Date();
         order.precioTotal = 139.99;
-        order.id_user = "6227991f3dc4737c6f68cc32";
+        order.productos = [{
+            "codigo_producto" : "codigo1",
+            "cantidad": 1
+        }, {
+            "codigo_producto" : "codigo2",
+            "cantidad": 1
+        }
+    ];
         order.save();
         return res.json(order);
     } catch (error){
@@ -33,9 +40,9 @@ export const addOrderURL: RequestHandler = async(req, res, next) => {
         const fecha = req.params.fecha;
         const direccion = req.params.direccion;
         const precioTotal = req.params.precioTotal;
-        const id_user = req.params.id_user;
+        const productos = req.params.productos;
         const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, id_user: id_user});
+                                    precioTotal: precioTotal, productos: productos});
         order.save();
     } catch (error){
         console.log(error);
@@ -49,9 +56,9 @@ export const addOrderForm: RequestHandler = async(req, res, next) => {
         const fecha = req.body.fecha;
         const direccion = req.body.direccion;
         const precioTotal = req.body.precioTotal;
-        const id_user = req.body.id_user;
+        const productos = req.body.productos;
         const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, id_user: id_user});
+                                    precioTotal: precioTotal, productos: productos});
         order.save();
     } catch (error){
         console.log(error);
