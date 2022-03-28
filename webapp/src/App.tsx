@@ -11,12 +11,9 @@ import Pago from './pages/Pago';
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
-<<<<<<< HEAD
 import Profile from './pages/user/Profile';
-=======
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
->>>>>>> Developer
 
 
 const App: FC = () => {
@@ -42,13 +39,10 @@ const App: FC = () => {
           <Route index element = {<Home/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
-<<<<<<< HEAD
-          <Route path = 'products' element = {<ListProducts/>}/>
           <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
           <Route path = 'user/Profile' element = {<Profile email={"admin@uniovi.es"}/>} />
-=======
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
@@ -68,7 +62,6 @@ const App: FC = () => {
           <PrivateRoute redirectTo="/login">
             <UserAdmin />
           </PrivateRoute>} />
->>>>>>> Developer
           {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
         </Routes>
       </Router>

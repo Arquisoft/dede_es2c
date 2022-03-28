@@ -1,8 +1,5 @@
 import { RequestHandler, response, request } from "express";
-<<<<<<< HEAD
 //import { body, param } from "express-validator";
-=======
->>>>>>> Developer
 import { Product } from "../model/Product";
 import { ProductOrder } from "../model/ProductOrder";
 

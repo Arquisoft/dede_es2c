@@ -43,10 +43,6 @@ export default function NavBar(cart:ProductsProps) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>
 
-            <IconButton aria-label="cart" size="medium">
-                <ShoppingCartIcon color="inherit" />
-            </IconButton>
-
             <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
