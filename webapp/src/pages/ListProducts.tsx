@@ -14,8 +14,12 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import EuroIcon from '@mui/icons-material/Euro';
 
+type ProductsProps = {
+    onAddCart:(prod:Product) => (void);
+    cartItems:Product[]
+}
 
-const ListProducts: FC = () => {
+const ListProducts = (func:ProductsProps) => {
     const [prod, setProd] = useState<Product[]>([]);
     const [value, setValue] = React.useState<number>(500);
     const [max] = React.useState<number>(500);
@@ -99,7 +103,7 @@ const ListProducts: FC = () => {
                     
                 </Stack>  
             </div>
-            <Products product = {prod} /> 
+            <Products product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
         </div>
     );
 }

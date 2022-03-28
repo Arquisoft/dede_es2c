@@ -4,11 +4,15 @@ import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
-import productRoutes from "./src/routes/ProductsOrderRoutes";
+require('dotenv').config();
+import productRoutes from "./src/routes/ProductRoutes";
+import productOrderRoutes from "./src/routes/ProductOrderRoutes";
+import orderRoutes from "./src/routes/OrderRoutes";
 
 
 const app: Application = express();
 const port: number = 5000;
+
 
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
@@ -24,6 +28,8 @@ app.use("/api", api)
 
 app.use(userRoutes);
 app.use(productRoutes);
+app.use(productOrderRoutes);
+app.use(orderRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
@@ -32,7 +38,8 @@ app.listen(port, ():void => {
 });
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://' + process.env.DATABASE_USER + ':' + process.env.DATABASE_PASSWORD + 
+                '@cluster0.tx3d4.mongodb.net/' + process.env.DATABASE_NAME + '?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

@@ -8,8 +8,18 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Menu } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import { Product } from '../shared/shareddtypes';
 
-export default function NavBar() {
+type ProductsProps = {
+  cartItems:Product[]
+}
+
+export default function NavBar(cart:ProductsProps) {
+    var numOfProducts = 0
+    cart.cartItems.map(x => numOfProducts+= x.cantidad);
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -47,7 +57,12 @@ export default function NavBar() {
                 <AccountCircle />
               </IconButton>
 
-            <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button>
+            <IconButton onClick={() => window.location.href = '/summary'} aria-label="cart" size="medium">
+                <Badge badgeContent={numOfProducts} color="secondary">    
+                    <ShoppingCartIcon color="inherit" />
+                </Badge>
+                </IconButton>
+                <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
 
             <Menu
                 id="menu-appbar"

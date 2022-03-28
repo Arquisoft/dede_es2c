@@ -1,4 +1,6 @@
 import { RequestHandler } from "express";
+import{generateToken} from "../util/service";
+import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
 const User = require('../model/user')
@@ -53,7 +55,7 @@ export const createUser = async (req = request, res = response) => {
 
 function checkBody(body:any):boolean{
   const { name,surname,email,password,repPassword, } =body;
-  return name != '' && surname != '' && email != '' && password != '';
+  return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
 }
 
 export const loginUser: RequestHandler = async (req, res) => {
@@ -64,7 +66,11 @@ export const loginUser: RequestHandler = async (req, res) => {
     const userFound = await User.findOne({email: emailReq});
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
-        res.status(201).send("User logged");
+        const token = generateToken(userFound.id,userFound.role)
+        res.status(201).json({
+          token,
+          userFound
+        });
       }else{
         res.send("Password Incorrect");
       }
