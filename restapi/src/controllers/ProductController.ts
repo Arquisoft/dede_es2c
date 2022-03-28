@@ -21,7 +21,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     } catch (error){
         console.log(error);
     }
-
+    
 
 }
 
