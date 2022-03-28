@@ -8,7 +8,6 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
     // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-
         let product = new Product();
         product.codigo = "codeExample";
         product.categoria = "categoryExample";
@@ -22,7 +21,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     } catch (error){
         console.log(error);
     }
-    
+
 
 }
 

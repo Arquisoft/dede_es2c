@@ -8,7 +8,6 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
     // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-
         let order = new Order();
         order.codigo = "orderOneExample";
         order.correo = "admin@uniovi.es";
@@ -35,15 +34,23 @@ export const generateExample: RequestHandler = async(req, res, next) => {
 
 export const addOrderURL: RequestHandler = async(req, res, next) => {
     try {
-        const codigo = req.params.codigo;
-        const correo = req.params.correo;
-        const fecha = req.params.fecha;
-        const direccion = req.params.direccion;
-        const precioTotal = req.params.precioTotal;
-        const productos = req.params.productos;
-        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, productos: productos});
-        order.save();
+        if (checkParams(req.params)){
+            const orderEncontrada = await Order.findOne({codigo: req.params.codigo});
+            if (orderEncontrada == null){
+                const codigo = req.params.codigo;
+                const correo = req.params.correo;
+                const fecha = req.params.fecha;
+                const direccion = req.params.direccion;
+                const precioTotal = req.params.precioTotal;
+                const productos = req.params.productos;
+                const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                        precioTotal: precioTotal, productos: productos});
+                await order.save();
+                return res.send("New order OK")
+            } else {
+                return res.send("There was a problem adding an order")
+            }
+        }
     } catch (error){
         console.log(error);
     }
@@ -51,15 +58,23 @@ export const addOrderURL: RequestHandler = async(req, res, next) => {
 
 export const addOrderForm: RequestHandler = async(req, res, next) => {
     try {
-        const codigo = req.body.codigo;
-        const correo = req.body.correo;
-        const fecha = req.body.fecha;
-        const direccion = req.body.direccion;
-        const precioTotal = req.body.precioTotal;
-        const productos = req.body.productos;
-        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, productos: productos});
-        order.save();
+        if (checkParams(req.body)){
+            const orderEncontrada = await Order.findOne({codigo: req.body.codigo});
+            if (orderEncontrada == null){
+                const codigo = req.body.codigo;
+                const correo = req.body.correo;
+                const fecha = req.body.fecha;
+                const direccion = req.body.direccion;
+                const precioTotal = req.body.precioTotal;
+                const productos = req.body.productos;
+                const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                        precioTotal: precioTotal, productos: productos});
+                await order.save();
+                return res.send("New order OK")
+            } else {
+                return res.send("There was a problem adding an order")
+            }
+        }
     } catch (error){
         console.log(error);
     }
@@ -111,6 +126,16 @@ export const updateOrderURL: RequestHandler = async (req, res) => {
         return res.status(404).json({message: 'There was a problem updating a order'});
     }
   };
+
+
+
+  
+function checkParams(body: any): boolean{
+    const {codigo, correo, direccion, fecha, precioTotal} = body;
+    return codigo != null && codigo != '' && correo != null && correo != '' && 
+    direccion != null && direccion != '' && fecha != null && precioTotal > 0
+}
+
 
 
 
