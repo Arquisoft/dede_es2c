@@ -15,14 +15,17 @@ export type Product = {
 
 
 export type Order = {
+  id: string |undefined;
   codigo: string;
   fecha: Date,
   precioTotal: number,
-  product: ProductPedido[],
+  product: ProductPedido,
   correo: string
+  id_usuario: string;
 }
 
 export type ProductPedido = {
-    producto: Product;
+    id_producto: string;
     cantidad: number;
+    id_carrito: string;
 }
