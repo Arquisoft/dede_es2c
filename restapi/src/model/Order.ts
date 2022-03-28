@@ -23,11 +23,17 @@ export const OrderShema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    id_user: {
-        $ref: "User",
-        type: mongoose.Schema.ObjectId, 
-        required: true
-    }
+    productos: [{
+        codigo_producto: {
+            type: String,
+            required: true
+        },
+        cantidad: {
+            type: Number,
+            default: 1,
+            required: true
+        }
+    }],
     },
     { collection: 'Order' })
 

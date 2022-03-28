@@ -5,7 +5,6 @@ import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import userRoutes from "../restapi/src/routes/UserRoutes";
 import productRoutes from "./src/routes/ProductRoutes";
-import productOrderRoutes from "./src/routes/ProductOrderRoutes";
 import orderRoutes from "./src/routes/OrderRoutes";
 
 
@@ -26,7 +25,6 @@ app.use("/api", api)
 
 app.use(userRoutes);
 app.use(productRoutes);
-app.use(productOrderRoutes);
 app.use(orderRoutes);
 
 app.listen(port, ():void => {
