@@ -18,7 +18,7 @@ const checkPaswwords = (repPass: String, pass: String) => {
 }
 
 const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass})
+    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass,"repPassword":repPass})
     .then(res => {
         console.log(res);
         console.log(res.data);
@@ -27,8 +27,10 @@ const handleSignup = (name:String,surname:String,email: String,pass: String,repP
                 title: "Usuario registrado",
                 text: "Te has registrado correctamente en la aplicación",
                 icon: "success"
+            }).then(() => {
+                window.location.assign("/login");
             });
-            window.location.assign("/login");
+            
         }
     })
  }
