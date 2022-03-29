@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const {Product} = require("../model/Product").schema;
+
+
+import { Product } from "../model/Product";
+
 
 
 const OrderShema = new mongoose.Schema({  
@@ -27,12 +30,7 @@ const OrderShema = new mongoose.Schema({
     products: {
         type: [Product],
         required: true
-    },
-    
-    },
-    {
-        versionKey: false,
-        timestamps: true,
+    }, 
     },
     { collection: 'Order' })
 

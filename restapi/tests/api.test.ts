@@ -13,8 +13,6 @@ const app: Application = express();
 
 const mongoose = require("mongoose");
 
-const server = app.listen(5000);
-
 
 beforeAll(async () => {
 
@@ -26,6 +24,7 @@ beforeAll(async () => {
   app.use(apiUser);
   app.use(apiProduct);
   app.use(apiOrders);
+  app.listen(5000);
 
   app.use("/uploads", express.static(path.resolve("uploads")));
   app.set("view engine", "ejs");
@@ -43,7 +42,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
     await mongoose.connection.close();
-    await server.close();  
+ 
 });
 
 

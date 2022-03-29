@@ -38,11 +38,6 @@ const ProductSchema = new mongoose.Schema({
         required: true
     },
     },
-    {
-        versionKey: false,
-        timestamps: true,
-    }, 
     { collection: 'Product' });
 
-const Product = model("Product", ProductSchema);
-module.exports = Product;
+export const Product = model("Product", ProductSchema);
