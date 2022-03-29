@@ -29,9 +29,9 @@ const Profile = (correo:Email) => {
     let [user, setUser] = React.useState<User>({name: "",email: "",surname: "", password: ""});
     const [pulse, setPulse] = useState(false)
     let [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
+    let [surname, setSurname] = useState('')
+    let [email, setEmail] = useState('')
+    let [pass, setPass] = useState('')
 
     async function allFunc(name:String,surname:String,email: String,pass: String){
         setPulse(true);

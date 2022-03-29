@@ -11,6 +11,7 @@ import { AccountCircle } from '@mui/icons-material';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { Product } from '../shared/shareddtypes';
+import Link from '@mui/material/Link';
 
 type ProductsProps = {
   cartItems:Product[]
@@ -43,7 +44,7 @@ export default function NavBar(cart:ProductsProps) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>
 
-            <IconButton
+          <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -73,9 +74,8 @@ export default function NavBar(cart:ProductsProps) {
                   horizontal: 'right',
                 }}
                 open={open}
-                onClose={handleClose}
               >
-                <MenuItem onClick={handleClose} href = "user/Profile">Perfil</MenuItem>
+                <MenuItem onClick={handleClose} > Perfil</MenuItem>
                 <MenuItem onClick={handleClose} href = "user/Profile">Historial de Ventas</MenuItem>
             </Menu>
             
