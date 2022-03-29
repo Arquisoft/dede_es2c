@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 
 import { Product } from "../model/Product";
 
-
-
 const OrderShema = new mongoose.Schema({  
     codigo: {
         type: String,

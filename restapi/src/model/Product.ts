@@ -3,7 +3,7 @@ const { model, Schema } = mongoose
 
 const IVA = 1.21; // Constante para almacenar el IVA de los productos
 
-const ProductSchema = new mongoose.Schema({
+export const Product = new mongoose.Schema({
     codigo: { 
         type: String, 
         required: true
@@ -40,4 +40,4 @@ const ProductSchema = new mongoose.Schema({
     },
     { collection: 'Product' });
 
-export const Product = model("Product", ProductSchema);
+export const productModel = model("Product", Product);
