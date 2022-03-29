@@ -75,8 +75,12 @@ export default function NavBar(cart:ProductsProps) {
                 }}
                 open={open}
               >
-                <MenuItem onClick={handleClose} > Perfil</MenuItem>
-                <MenuItem onClick={handleClose} href = "user/Profile">Historial de Ventas</MenuItem>
+                <Link href="/user/Profile" underline="none"style={{color:"#000000"}}>
+                  <MenuItem href = "/user/profile" onClick={handleClose}>Perfil</MenuItem>
+                </Link>
+                <Link href="/user/Profile" underline="none"style={{color:"#000000"}}>
+                  <MenuItem onClick={handleClose} href = "user/Profile">Historial de Ventas</MenuItem>
+                </Link>
             </Menu>
             
         </Toolbar>     

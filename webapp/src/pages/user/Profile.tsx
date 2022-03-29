@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
-import Link from '@mui/material/Link';
 import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
 
@@ -17,38 +16,39 @@ const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-const handleChangeProfile = (name:String,surname:String,email: String,pass: String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass})
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-    })
-}
-
 const Profile = (correo:Email) => {
-    let [user, setUser] = React.useState<User>({name: "",email: "",surname: "", password: ""});
+    let [user, setUser] = React.useState<User>({id: "", name: "",email: "",surname: "", password: ""});
     const [pulse, setPulse] = useState(false)
+    let [email, setEmail] = useState('')
     let [name, setName] = useState('')
     let [surname, setSurname] = useState('')
-    let [email, setEmail] = useState('')
     let [pass, setPass] = useState('')
-
-    async function allFunc(name:String,surname:String,email: String,pass: String){
-        setPulse(true);
-    }
 
     const getUserByEmail = async (email:String) => {
         const data = await axios.get("http://localhost:5000/user/list/" + email).
         then(res => {
             setUser(res.data);
-            user = res.data;
             return res.data;
         })
         return data != null;
     }
-    
+
+    const updateUser = (id:String,name:String,surname:String,email: String,pass: String) => {
+        axios.post("http://localhost:5000/user/update/",{"id":id,"name":name,"surname":surname,"email":email,"password":pass})
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
+    }
+
+    async function allFunc(name:String,surname:String,email: String,pass: String){
+        setPulse(true);
+        updateUser(user.id, user.name, user.surname, user.email, user.password);
+    }
+
     getUserByEmail(correo.email);
-    
+    console.log(user.email)
+
     return ( 
         <div>
             <Container component= "main" maxWidth="sm"
@@ -63,41 +63,33 @@ const Profile = (correo:Email) => {
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                         <Stack direction= "column" spacing={2}>
                             <TextField
-                                id = "email" required
-                                name = "Correo electronico"
+                                id = "email" 
                                 label = "Correo electronico"
-                                value = {user.email}
-                                variant = "outlined"
-                                size = "small"
+                                multiline
+                                defaultValue={user.email}
                             />
 
                             <TextField
-                                id = "name" required
-                                name = "Nombre"
+                                id = "name"
                                 label = "Nombre"
+                                multiline
                                 value = {user.name}
-                                variant = "outlined"
-                                size = "small"
                             />
 
                             <TextField
-                                id = "surname" required
+                                id = "surname"
                                 name = "Apellido"
-                                label = "Apellido"
-                                value = {user?.surname}
-                                variant = "outlined"
-                                size = "small"
+                                multiline
+                                value = {user.surname}
                             />
 
 
                             <TextField
-                                id = "pass" required
+                                id = "pass" 
                                 name = "Contraseña"
-                                label = "Contraseña"
+                                multiline
                                 type= "password"
-                                value= {user?.password}
-                                size="small"
-                                variant="outlined"
+                                value= {user.password}
                             />
 
                             <Button onClick={() => allFunc(name,surname,email,pass)} variant="contained" type="submit">Aplicar cambios</Button>
