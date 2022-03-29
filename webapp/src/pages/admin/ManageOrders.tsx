@@ -6,10 +6,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import { Order } from '../../shared/shareddtypes';
+import { Order, User } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import {  getOrders } from '../../api/api';
 import OrderAdmin from '../admin/OrderAdmin';
+import axios from 'axios';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -24,12 +25,20 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ManageOrders: FC = () => {
 
     const [orders, setOrders]  = React.useState<Order[]>([]);
+    const [user, setUser] = React.useState<User>();
 
-    async function cargarPedidos() {
+    /* async function cargarPedidos() {
         setOrders(await getOrders());
+    } */
+
+    const getOrders2 = async () => {
+        const data = await axios.get('http://localhost:5000/order/list').then(res => {
+            setOrders(res.data)
+        })
+        return data != null
     }
 
-    useEffect(() => {cargarPedidos();}, []);
+    useEffect(() => {getOrders2();}, []);
 
     return (
         <div>
