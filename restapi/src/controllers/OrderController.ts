@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
-const {Product} = require("../model/Product")
+import { productModel } from "../model/Product";
+
 
 
 
@@ -21,7 +22,7 @@ export const createOrder: RequestHandler = async (req, res) => {
 
     const updateStock = async (products: any) => {
       for (var i = 0; i < products.length; i++) {
-        let product = await Product.findOne({ codigo: products[i].codigo });
+        let product = await productModel.findOne({ codigo: products[i].codigo });
         product.stock = product.stock - products[i].stock;
         product.save();
       }

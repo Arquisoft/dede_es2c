@@ -1,5 +1,6 @@
 import { RequestHandler, response, request } from "express";
-const {Product} = require("../model/Product")
+
+import { productModel } from "../model/Product";
 
 
 // FALTA LA VERIFICACIÓN DE LOS TOKENS
@@ -10,9 +11,9 @@ export const addProduct : RequestHandler= async (req = request, res = response) 
     // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
     try {
         if(checkParams(req.params)){
-            const productoEncontrado = await Product.findOne({codigo: req.params.codigo});
+            const productoEncontrado = await productModel.findOne({codigo: req.params.codigo});
             if(productoEncontrado == null){
-                const product = new Product(req.params);
+                const product = new productModel(req.params);
                 await product.save();
                 return res.send("New product OK")
             } else {
@@ -29,7 +30,7 @@ export const deleteProduct: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/delete/62404a4b4d0ed7d3c5c3e39c
     try{
         const {codigo} = req.params;
-        const productDeleted = await Product.deleteOne({codigo: codigo});
+        const productDeleted = await productModel.deleteOne({codigo: codigo});
         if (productDeleted){
             return res.send("Product deleted");
         }
@@ -44,7 +45,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
     try {
         const codigo  = req.params.codigo;
         const {...params} = req.params;
-        const productUpdated = await Product.findOneAndUpdate({codigo: codigo}, params); 
+        const productUpdated = await productModel.findOneAndUpdate({codigo: codigo}, params); 
         if (productUpdated){
             return res.send("Product updated");
         }
@@ -70,7 +71,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
     // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-        let product = new Product();
+        let product = new productModel();
         product.codigo = "codeExample";
         product.categoria = "categoryExample";
         product.nombre = "nameExample";
@@ -93,7 +94,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
  export const getProductoByCode: RequestHandler = async (req, res) => {
     const cod = req.params.codigo;
     try {
-        const encontrado = await Product.findOne({codigo: cod});
+        const encontrado = await productModel.findOne({codigo: cod});
         return res.json(encontrado)
     }catch(error){
         return res.status(404).json();
@@ -102,7 +103,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
 
 export const getProducts: RequestHandler = async (req, res) => {
     try {
-        const allP = await Product.find();
+        const allP = await productModel.find();
         return res.json(allP); 
     }catch(error){
         res.json(error);
