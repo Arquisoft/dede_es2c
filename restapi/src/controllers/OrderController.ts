@@ -1,12 +1,54 @@
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
+import { Product } from "../model/Product";
 
 
-/************* GENERAR DATOS *************/
+
+
+/************* CREAR UN PEDIDO *************/
+
+export const createOrder: RequestHandler = async (req, res) => {
+    
+    // PASO 1: verificar el usuario conectado
+
+    /** 
+    const isVerified = verifyToken(
+      req.headers.token + "",
+      req.headers.email + ""
+    );
+    **/
+   
+    // PASO 2: actualizar el stock
+
+    const updateStock = async (products: any) => {
+      for (var i = 0; i < products.length; i++) {
+        let product = await Product.findOne({ codigo: products[i].codigo });
+        product.stock = product.stock - products[i].stock;
+        product.save();
+      }
+    };
+  
+    // PASO 3: crear el pedido
+
+
+    //if (isVerified) {
+      try {
+        const order = new Order(req.body);
+        updateStock(order.products);
+        const orderToSave = await order.save();
+        res.json(orderToSave);
+      } catch (error) {
+        console.log(error);
+        res.status(412).json();
+      }
+    //} else {
+    //  res.status(203).json();
+    //}
+};
+
+/************* GENERAR UN EJEMPLO *************/
 
 export const generateExample: RequestHandler = async(req, res, next) => {
-    // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
-    // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
         let order = new Order();
         order.codigo = "orderOneExample";
@@ -14,24 +56,51 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.direccion = "dirExample";
         order.fecha = new Date();
         order.precioTotal = 139.99;
-        order.productos = [{
-            "codigo_producto" : "codigo1",
-            "cantidad": 1
-        }, {
-            "codigo_producto" : "codigo2",
-            "cantidad": 1
-        }
-    ];
         order.save();
         return res.json(order);
     } catch (error){
         return res.send("Ha surgido un error")
     }
 
-}
+};
 
-/************* POST *************/
+/************* BÚSQUEDA DE PEDIDOS *************/
 
+export const getOrderByCode: RequestHandler = async (req, res) => {
+    const cod = req.params.codigo;
+    try {
+        const encontrado = await Order.findOne({codigo: cod});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json({message: 'No se ha encontrado un pedido con ese código'});
+    }
+};
+
+
+export const getOrderByEmail: RequestHandler = async (req, res) => {
+    const email = req.params.email;
+    try {
+        const encontrado = await Order.findOne({correo: email});
+        return res.json(encontrado)
+    }catch(error){
+        return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
+    }
+};
+
+export const getOrders: RequestHandler = async (req, res) => {
+    try {
+        const allP = await Order.find();
+        return res.json(allP); 
+    }catch(error){
+        console.log(error);
+    }
+};
+
+
+// MÉTODOS QUE COMO DE MOMENTO NO USO Y ME PIDEN COBERTURA DE CÓDIGO DEJO COMENTADOS
+
+
+/** 
 export const addOrderURL: RequestHandler = async(req, res, next) => {
     try {
         if (checkParams(req.params)){
@@ -136,22 +205,10 @@ function checkParams(body: any): boolean{
     direccion != null && direccion != '' && fecha != null && precioTotal > 0
 }
 
+**/
 
 
-
-/************* GET *************/
-
-
- export const getOrderByCode: RequestHandler = async (req, res) => {
-    const cod = req.params.codigo;
-    try {
-        const encontrado = await Order.findOne({codigo: cod});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json();
-    }
-}
-
+/**
 
  export const getOrderByID: RequestHandler = async (req, res) => {
     const id = req.params.id;
@@ -162,6 +219,7 @@ function checkParams(body: any): boolean{
         return res.status(404).json({message: 'No hay pedido con ese ID'});
     }
 }
+
 
  export const getOrderByPrice: RequestHandler = async (req, res) => {
     const price = req.params.price;
@@ -183,15 +241,6 @@ function checkParams(body: any): boolean{
     }
 }
 
- export const getOrderByEmail: RequestHandler = async (req, res) => {
-    const email = req.params.email;
-    try {
-        const encontrado = await Order.findOne({correo: email});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
-    }
-}
 
  export const getOrderByDate: RequestHandler = async (req, res) => {
     const date = req.params.date;
@@ -203,11 +252,5 @@ function checkParams(body: any): boolean{
     }
 }
 
- export const getOrders: RequestHandler = async (req, res) => {
-    try {
-        const allP = await Order.find();
-        return res.json(allP); 
-    }catch(error){
-        console.log(error);
-    }
-}
+
+ **/

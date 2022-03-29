@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const { model, Schema } = mongoose
 
+import { Product } from "../model/Product";
+
+
 export const OrderShema = new mongoose.Schema({  
     codigo: {
         type: String,
@@ -23,17 +26,10 @@ export const OrderShema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    productos: [{
-        codigo_producto: {
-            type: String,
-            required: true
-        },
-        cantidad: {
-            type: Number,
-            default: 1,
-            required: true
-        }
-    }],
+    products: {
+        type: [Product],
+        required: true
+    },
     },
     { collection: 'Order' })
 
