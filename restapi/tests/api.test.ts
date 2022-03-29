@@ -36,35 +36,80 @@ beforeAll(async () => {
     });
 });
 
-
-
 // CONEXIÓN A LA BD
 
 afterAll(async () => {
     await mongoose.connection.close();
+    // Cuidado con lo que se ponga aquí, que puede afectar a la BD
  
 });
 
 
+/******* USUARIOS *******/ 
+
 describe("user ", () => {
   /**
-   * Test that we can get a user without error
+   * Consigo un usuario
    */
-  it("Can get a user", async () => {
+  it("Puedo conseguir un usuario", async () => {
     const response: Response = await request(app).get(
-      "/user/list/user@example.com"
+      "/user/list/user@uniovi.es"
     );
     expect(response.statusCode).toBe(200);
   });
 
   /**
-   * Test that we can't get a non existing user
+   * No puedo conseguir un usuario no existente
    */
-  it("Can't get non existing user", async () => {
+  it("No puedo conseguir un usuario no existente", async () => {
     const response: Response = await request(app).get(
       "/user/list/something"
     );
     expect(response.statusCode).toBe(204);
   });
 
+  /**
+   * Puedo listar a todos los usuarios
+   */
+   it("Puedo listar a todos los usuarios", async () => {
+    const response: Response = await request(app).get(
+      "/user/list"
+    );
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+
+/******* PRODUCTOS *******/ 
+
+describe("products ", () => {
+  /**
+   * Consigo un producto
+   */
+  it("Puedo conseguir un usuario", async () => {
+    const response: Response = await request(app).get(
+      "/product/getByCode/codeExample"
+    );
+    expect(response.statusCode).toBe(200);
+  });
+
+  /**
+   * No puedo conseguir un producto no existente
+   */
+  it("No puedo conseguir un producto no existente", async () => {
+    const response: Response = await request(app).get(
+      "/product/getByCode/productDoesNotExists"
+    );
+    expect(response.statusCode).toBe(204);
+  });
+
+  /**
+   * Puedo listar a todos los productos
+   */
+   it("Puedo listar a todos los productos", async () => {
+    const response: Response = await request(app).get(
+      "/product/list"
+    );
+    expect(response.statusCode).toBe(200);
+  });
 });
