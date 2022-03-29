@@ -7,6 +7,8 @@ import { Typography } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
+import Link from '@mui/material/Link';
+import { margin } from '@mui/system';
 
 type Email = {
     email:String
@@ -17,8 +19,9 @@ const checkParams = (text: String) => {
 }
 
 const Profile = (correo:Email) => {
-    let [user, setUser] = React.useState<User>({id: "", name: "",email: "",surname: "", password: ""});
+    let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
     const [pulse, setPulse] = useState(false)
+    let [id, setId] = useState('')
     let [email, setEmail] = useState('')
     let [name, setName] = useState('')
     let [surname, setSurname] = useState('')
@@ -33,21 +36,20 @@ const Profile = (correo:Email) => {
         return data != null;
     }
 
-    const updateUser = (id:String,name:String,surname:String,email: String,pass: String) => {
-        axios.post("http://localhost:5000/user/update/",{"id":id,"name":name,"surname":surname,"email":email,"password":pass})
+    const updateUser = (id:String,name:String,surname:String,email: String) => {
+        axios.post("http://localhost:5000/user/update/",{"_id":id,"name":name,"surname":surname,"email":email})
         .then(res => {
             console.log(res);
             console.log(res.data);
         })
     }
 
-    async function allFunc(name:String,surname:String,email: String,pass: String){
+    async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
-        updateUser(user.id, user.name, user.surname, user.email, user.password);
+        updateUser(id, name, surname, email);
     }
-
+    
     getUserByEmail(correo.email);
-    console.log(user.email)
 
     return ( 
         <div>
@@ -57,42 +59,50 @@ const Profile = (correo:Email) => {
                 top: 150
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
-                    <Typography>
-                        <span className="miPerfil" style={{position:'relative', right:-240, top:10}}>Mi Perfil</span>
-                    </Typography>
+
+                    <Typography className="miPerfil" style={{position:'relative', right:-240, top:10}}> Mi Perfil </Typography>
+                    
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                         <Stack direction= "column" spacing={2}>
+
                             <TextField
                                 id = "email" 
-                                label = "Correo electronico"
                                 multiline
                                 defaultValue={user.email}
+                                variant = "outlined"
+                                size = "small"
                             />
 
                             <TextField
                                 id = "name"
-                                label = "Nombre"
                                 multiline
-                                value = {user.name}
+                                defaultValue = {user.name}
+                                variant = "outlined"
+                                size = "small"
                             />
 
                             <TextField
                                 id = "surname"
                                 name = "Apellido"
                                 multiline
-                                value = {user.surname}
+                                defaultValue = {user.surname}
+                                variant = "outlined"
+                                size = "small"
                             />
 
 
                             <TextField
                                 id = "pass" 
                                 name = "Contraseña"
-                                multiline
                                 type= "password"
                                 value= {user.password}
+                                size="small"
+                                variant="outlined"
+                                
                             />
 
-                            <Button onClick={() => allFunc(name,surname,email,pass)} variant="contained" type="submit">Aplicar cambios</Button>
+                            <Button onClick={() => allFunc(user._id,user.name,user.surname,user.email)} variant="contained" type="submit">Aplicar cambios</Button>
+                            <Link href = "">Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>
                 </Card>

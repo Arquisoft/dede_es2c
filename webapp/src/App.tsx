@@ -42,7 +42,7 @@ const App: FC = () => {
           <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
-          <Route path = 'user/Profile' element = {<Profile email={"email@uniovi.es"}/>} />
+          <Route path = 'user/profile' element = {<Profile email={"admin@uniovi.es"}/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
