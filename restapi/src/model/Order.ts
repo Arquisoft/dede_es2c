@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
-const { model, Schema } = mongoose
-
-import { Product } from "../model/Product";
+const {Product} = require("../model/Product").schema;
 
 
-export const OrderShema = new mongoose.Schema({  
+const OrderShema = new mongoose.Schema({  
     codigo: {
         type: String,
         required: true,
@@ -30,7 +28,12 @@ export const OrderShema = new mongoose.Schema({
         type: [Product],
         required: true
     },
+    
+    },
+    {
+        versionKey: false,
+        timestamps: true,
     },
     { collection: 'Order' })
 
-export const Order = mongoose.model('Order', OrderShema, 'Order');
+export const Order = mongoose.model('Order', OrderShema);

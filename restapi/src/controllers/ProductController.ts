@@ -1,5 +1,5 @@
 import { RequestHandler, response, request } from "express";
-import { Product } from "../model/Product";
+const {Product} = require("../model/Product")
 
 
 // FALTA LA VERIFICACIÓN DE LOS TOKENS

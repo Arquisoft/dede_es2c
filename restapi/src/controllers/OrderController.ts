@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import { Order } from "../model/Order";
-import { Product } from "../model/Product";
-
+const {Product} = require("../model/Product")
 
 
 
