@@ -26,11 +26,11 @@ export const findUsersById: RequestHandler = async (req, res) => {
 
 export const findUsersByEmail: RequestHandler = async (req, res) => {
   const email = req.params.email;
-  try {
-    const userFound = await User.findOne({email: email});
+  const userFound = await User.findOne({email: email});
+  if (userFound){
     return res.json(userFound)
-  } catch (error) {
-    return res.status(404).json({message: 'User not found'});
+  } else {
+    return res.status(204).json();
   }
 };
 

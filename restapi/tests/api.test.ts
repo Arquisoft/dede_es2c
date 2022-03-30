@@ -1,50 +1,136 @@
-import request, {Response} from 'supertest';
-import express, { Application } from 'express';
-import * as http from 'http';
-import bp from 'body-parser';
-import cors from 'cors';
-import api from '../api';
+import request, { Response } from "supertest";
+import express, { Application, RequestHandler } from "express";
+import cors from "cors";
+import bp from "body-parser";
+import promBundle from "express-prom-bundle";
+import apiUser from "../src/routes/UserRoutes";
+import apiProduct from "../src/routes/ProductRoutes";
+import apiOrders from "../src/routes/OrderRoutes";
 
-let app:Application;
-let server:http.Server;
+const path = require("path");
+
+const app: Application = express();
+
+const mongoose = require("mongoose");
+
 
 beforeAll(async () => {
-    app = express();
-    const port: number = 5000;
-    const options: cors.CorsOptions = {
-        origin: ['http://localhost:3000']
-    };
-    app.use(cors(options));
-    app.use(bp.json());
-    app.use("/api", api)
 
-    server = app.listen(port, ():void => {
-        console.log('Restapi server for testing listening on '+ port);
-    }).on("error",(error:Error)=>{
-        console.error('Error occured: ' + error.message);
+  const metricsMiddleware: RequestHandler = promBundle({ includeMethod: true });
+  app.use(metricsMiddleware);
+
+  app.use(cors());
+  app.use(bp.json());
+
+  app.use(bp.urlencoded({ extended: false }));
+  
+  app.use(apiUser);
+  app.use(apiProduct);
+  app.use(apiOrders);
+  app.listen(5000);
+
+  app.use("/uploads", express.static(path.resolve("uploads")));
+  app.set("view engine", "ejs");
+
+  await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     });
 });
 
+// CONEXIÓN A LA BD
+
 afterAll(async () => {
-    server.close() //close the server
-})
+    await mongoose.connection.close();
+    // Cuidado con lo que se ponga aquí, que puede afectar a la BD
+ 
+});
 
-describe('user ', () => {
-    /**
-     * Test that we can list users without any error.
-     */
-    it('can be listed',async () => {
-        const response:Response = await request(app).get("/api/users/list");
-        expect(response.statusCode).toBe(200);
-    });
 
-    /**
-     * Tests that a user can be created through the productService without throwing any errors.
-     */
-    it('can be created correctly', async () => {
-        let username:string = 'Pablo'
-        let email:string = 'gonzalezgpablo@uniovi.es'
-        const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
-        expect(response.statusCode).toBe(200);
-    });
+/******* USUARIOS *******/ 
+
+describe("user ", () => {
+  /**
+   * Consigo un usuario
+   */
+  it("Puedo conseguir un usuario", async () => {
+    const response: Response = await request(app).get(
+      "/user/list/user@uniovi.es"
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        name: "USer",
+        surname: "USer",
+        email: "user@uniovi.es",
+      })
+    );
+  });
+
+  /**
+   * No puedo conseguir un usuario no existente
+   */
+  it("No puedo conseguir un usuario no existente", async () => {
+    const response: Response = await request(app).get(
+      "/user/list/something"
+    );
+    expect(response.statusCode).toBe(204);
+  });
+
+  /**
+   * Puedo listar a todos los usuarios
+   */
+   it("Puedo listar a todos los usuarios", async () => {
+    const response: Response = await request(app).get(
+      "/user/list"
+    );
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+
+/******* PRODUCTOS *******/ 
+
+describe("products ", () => {
+  /**
+   * Consigo un producto
+   */
+  it("Puedo conseguir un producto", async () => {
+    const response: Response = await request(app).get(
+      "/product/getByCode/codeExample"
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        codigo: "codeExample",
+        categoria: "categoryExample",
+        precio: 10,
+        stock: 3,
+        descripcion: "descriptionExample",
+        url: "urlExample",
+      })
+    );
+  });
+
+  /**
+   * No puedo conseguir un producto no existente
+   */
+  it("No puedo conseguir un producto no existente", async () => {
+    const response: Response = await request(app).get(
+      "/product/getByCode/productDoesNotExists"
+    );
+    expect(response.statusCode).toBe(204);
+  });
+
+  /**
+   * Puedo listar a todos los productos
+   */
+   it("Puedo listar a todos los productos", async () => {
+    const response: Response = await request(app).get(
+      "/product/list"
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual("application/json");
+  });
 });
