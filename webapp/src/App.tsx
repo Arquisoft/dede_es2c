@@ -12,6 +12,7 @@ import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
 import Profile from './pages/user/Profile';
+import OrderHistory from './pages/user/OrderHistory';
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
 
@@ -43,6 +44,7 @@ const App: FC = () => {
           <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
           <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
           <Route path = 'user/profile' element = {<Profile email={"admin@uniovi.es"}/>} />
+          <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>

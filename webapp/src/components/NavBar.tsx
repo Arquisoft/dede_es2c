@@ -78,7 +78,7 @@ export default function NavBar(cart:ProductsProps) {
                 <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
                 </Link>
-                <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
+                <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
                   <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
                 </Link>
             </Menu>

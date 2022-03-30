@@ -14,18 +14,9 @@ type Email = {
     email:String
 }
 
-const checkParams = (text: String) => {
-    return text === "" || text == null;
-}
-
 const Profile = (correo:Email) => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
     const [pulse, setPulse] = useState(false)
-    let [id, setId] = useState('')
-    let [email, setEmail] = useState('')
-    let [name, setName] = useState('')
-    let [surname, setSurname] = useState('')
-    let [pass, setPass] = useState('')
 
     const getUserByEmail = async (email:String) => {
         const data = await axios.get("http://localhost:5000/user/list/" + email).
