@@ -7,6 +7,7 @@ import { Typography, TextField, Stack} from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from 'axios';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
@@ -52,7 +53,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
     const [pulse, setPulse] = useState(false);
 
     // constantes para la actualizacio de los productos
-    let [nombre, setNombre] = useState('');
+    var [nombre, setNombre] = useState('');
     let [descrop, setDescrip] = useState('');
     let [urlCod, setUrl] = useState('') ;
     let [stock, setStock] = useState(0);
@@ -67,18 +68,22 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
         Prod.descripcion = o.descripcion;
         Prod.url = o.url; 
 
-        nombre = o.nombre; 
-        descrop = o.descripcion;
-        urlCod =  o.url;
-        stock = Number.parseFloat(o.stock)
-        precio = o.precio;
+        setNombre(o.nombre);
+        setDescrip(o.descripcion)
+        setStock(Number.parseFloat(o.stock));
+        setPrecio(o.precio);
+        setUrl(o.url)
         handleOpen();
         
-    }
+    } 
 
     async function allFunc(nombre: string, descrip: string, stock: number, precio: number, url: string) {
        setPulse(true);
        
+    }
+
+    async function eliminar(pro: Product){
+
     }
 
     if(open){
@@ -97,6 +102,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         variant = "outlined"
                         label = "Nombre del producto"
                         size = "small"
+                        defaultValue={nombre}
                         value = {nombre}
                         error = {checkParams(nombre) && pulse}
                         helperText={checkParams(nombre) && pulse ? 'La casilla no puede estar vacia' : ''}
@@ -109,6 +115,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         variant = "outlined"
                         label = "Descripcion del producto"
                         size = "small"
+                        defaultValue={descrop}
                         value = {descrop}
                         helperText={checkParams(descrop) && pulse ? 'La casilla no puede estar vacia' : ''}
                         onChange = {(e: any) => setDescrip(e.target.value)}
@@ -120,6 +127,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         variant = "outlined"
                         label = "Imagen del Producto (URL)"
                         size = "small"
+                        defaultValue={urlCod}
                         value = {urlCod}
                         helperText={checkParams(urlCod) && pulse ? 'La casilla no puede estar vacia' : ''}
                         onChange = {(e: any) => setUrl(e.target.value)}
@@ -143,6 +151,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         variant = "outlined"
                         label = "Precio base del producto"
                         size = "small"
+                        defaultValue={precio}
                         value = {precio}
                         helperText={checkParamsNumber(precio) && pulse ? 'La casilla no puede estar vacia' : ''}
                         onChange = {(e: any) => setPrecio(e.target.value)}
@@ -169,6 +178,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                     <TableCell align='center'>18</TableCell>
                     <TableCell align='center'>{p.stock}</TableCell>
                     <TableCell align='center'><Button onClick={ () => saveP(p)}>Administrar</Button></TableCell>
+                    <TableCell align='center'><Button variant="outlined" color='error' startIcon = {<ClearIcon />}>Eliminar Producto</Button></TableCell>
                 </TableRow>
             );
         })}

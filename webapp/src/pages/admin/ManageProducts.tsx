@@ -50,6 +50,7 @@ const ManageProducts: FC = ()  => {
                                 <StyledTableCell align='right'>I.V.A (%)</StyledTableCell>
                                 <StyledTableCell align='right'>Stock</StyledTableCell>
                                 <StyledTableCell align='center'>Adminsitrar</StyledTableCell>
+                                <StyledTableCell align='center'>Eliminar</StyledTableCell>
                             </TableRow>
                         </TableHead>
 

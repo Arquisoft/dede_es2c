@@ -21,7 +21,7 @@ const OrderAdmin = (order: OrderProps) => {
                         <TableCell component="th" scope="row">{o.precioTotal}</TableCell>
                          <TableCell component="th" scope="row">
                             {o.productsPedido.map((p) => {return p.codigoProd + "\n"})}
-                        </TableCell> 
+                        </TableCell>  
                     </TableRow>
                 );  
             })}
