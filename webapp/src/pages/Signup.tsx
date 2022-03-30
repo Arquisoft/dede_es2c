@@ -18,7 +18,7 @@ const checkPaswwords = (repPass: String, pass: String) => {
 }
 
 const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass,"repPassword":repPass})
+    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
     .then(res => {
         console.log(res);
         console.log(res.data);

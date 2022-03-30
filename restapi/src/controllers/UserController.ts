@@ -110,3 +110,24 @@ export const update: RequestHandler = async (req, res) => {
     return res.status(404).json({message: 'There was a problem updating a user'});
   }
 };
+
+export const giveAdminRole: RequestHandler = async (req, res) => {
+  try {
+    const {_id, token,...params} = req.body
+    const tokenVerified = verifyToken(token)
+    if(tokenVerified.role != "ROLE_ADMIN"){
+      return res.status(404).json("El usuario loggeado no es admin")
+    }
+    const user = await User.findOne({ _id: _id });
+    if(user){
+      const update = {role: "ROLE_ADMIN"}
+      await user.updateOne(update);
+      return res.status(201).send("User updated")
+    }else{
+      return res.status(404).json("El usuario a cambiar el rol no existe")
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(404).json({message: 'Hubo un problema cambiando el rol al usuario'});
+  }
+};
