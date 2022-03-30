@@ -18,9 +18,12 @@ beforeAll(async () => {
 
   const metricsMiddleware: RequestHandler = promBundle({ includeMethod: true });
   app.use(metricsMiddleware);
+
   app.use(cors());
   app.use(bp.json());
+
   app.use(bp.urlencoded({ extended: false }));
+  
   app.use(apiUser);
   app.use(apiProduct);
   app.use(apiOrders);
@@ -56,6 +59,13 @@ describe("user ", () => {
       "/user/list/user@uniovi.es"
     );
     expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        name: "USer",
+        surname: "USer",
+        email: "user@uniovi.es",
+      })
+    );
   });
 
   /**
@@ -86,11 +96,21 @@ describe("products ", () => {
   /**
    * Consigo un producto
    */
-  it("Puedo conseguir un usuario", async () => {
+  it("Puedo conseguir un producto", async () => {
     const response: Response = await request(app).get(
       "/product/getByCode/codeExample"
     );
     expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        codigo: "codeExample",
+        categoria: "categoryExample",
+        precio: 10,
+        stock: 3,
+        descripcion: "descriptionExample",
+        url: "urlExample",
+      })
+    );
   });
 
   /**
@@ -111,5 +131,6 @@ describe("products ", () => {
       "/product/list"
     );
     expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual("application/json");
   });
 });
