@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { orderModel } from "../model/Order";
-import { productModel } from "../model/Product";
+import { Product, productModel } from "../model/Product";
 
 
 
@@ -51,14 +51,43 @@ export const createOrder: RequestHandler = async (req, res) => {
 export const generateExample: RequestHandler = async(req, res, next) => {
     try {
         let order = new orderModel();
-        order.codigo = "orderOneExample";
+        order.codigo = "orderTwoExample";
         order.correo = "admin@uniovi.es";
         order.direccion = "dirExample";
         order.fecha = new Date();
         order.precioTotal = 139.99;
+
+        var productA = new productModel (
+            {
+                codigo: "TE01", 
+                categoria: "teclado", 
+                nombre: "Logitech K120 Teclado con Cable",
+                precio: 9.57, 
+                descripcion: "Para Windows, Tamaño Normal, Resistante a Líquido, Barra Espaciadora Curvada, PC/Portátil, Disposición QWERTY Español, color Negro ",
+                stock: 100,
+                url: "https://i.postimg.cc/25fVD0hz/TE01.jpg"
+            }
+        );
+
+        var productB = new productModel (
+            {
+                codigo: "RA01", 
+                categoria: "raton", 
+                nombre: "Logitech Ratón Inalámbrico M190",
+                precio: 15.99, 
+                descripcion: "Diseño Curvo Ambidiestro, Batería 18 Meses con Modo Ahorro, Receptor USB, Cursor y Desplazamiento Preciso, Rueda de Desplazamiento Amplio, Negro",
+                stock: 50,
+                url: "https://i.postimg.cc/RVyWPS0J/RA01.jpg"
+            }
+        )
+
+        var productos = [productA, productB];
+
+        order.products = productos;
         order.save();
         return res.json(order);
     } catch (error){
+        console.log(error)
         return res.send("Ha surgido un error")
     }
 
