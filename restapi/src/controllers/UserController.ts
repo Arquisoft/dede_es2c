@@ -4,6 +4,12 @@ import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
 const User = require('../model/user')
+import {
+  getSolidDataset,
+  getThing,
+  getStringNoLocale,
+} from "@inrupt/solid-client";
+import { VCARD } from "@inrupt/vocab-common-rdf";
 
 export const findUsers: RequestHandler = async (req, res) => {
     try {
@@ -129,5 +135,26 @@ export const giveAdminRole: RequestHandler = async (req, res) => {
   } catch (error) {
     console.log(error)
     return res.status(404).json({message: 'Hubo un problema cambiando el rol al usuario'});
+  }
+};
+
+export const getUserPOD: RequestHandler = async (req, res) => {
+  try {
+    const name = req.params.name;
+    const url = "https://" + name  + ".inrupt.net/profile/card";
+    const profile = await getSolidDataset(
+      url, {
+      fetch: fetch
+    });
+    const profileCard = getThing(profile, url + "#me")
+    const addressWebID = profileCard!.predicates["http://www.w3.org/2006/vcard/ns#hasAddress"]["namedNodes"]
+    const idAddress = addressWebID![0].split('#')[1]
+    if (idAddress == null){
+      return res.status(404).json({message: "No existe la dirección"});
+    }
+    return res.status(200).json(addressWebID) 
+  } catch (error) {
+    console.log(error)
+    return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };
