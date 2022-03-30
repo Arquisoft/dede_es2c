@@ -134,3 +134,39 @@ describe("products ", () => {
     expect(response.type).toEqual("application/json");
   });
 });
+
+
+/******* PEDIDOS *******/ 
+
+describe("orders ", () => {
+  /**
+   * Consigo un pedido
+   */
+  it("Puedo conseguir un pedido", async () => {
+    const response: Response = await request(app).get(
+      "/order/getByCode/orderTwoExample"
+    );
+    expect(response.statusCode).toBe(200);
+  });
+
+  /**
+   * No puedo conseguir un pedido no existente
+   */
+  it("No puedo conseguir un pedido no existente", async () => {
+    const response: Response = await request(app).get(
+      "/order/getByCode/orderDoesNotExists"
+    );
+    expect(response.statusCode).toBe(204);
+  });
+
+  /**
+   * Puedo listar a todos los pedidos
+   */
+   it("Puedo listar a todos los pedidos", async () => {
+    const response: Response = await request(app).get(
+      "/order/list"
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual("application/json");
+  });
+});

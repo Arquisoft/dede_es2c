@@ -99,7 +99,11 @@ export const getOrderByCode: RequestHandler = async (req, res) => {
     const cod = req.params.codigo;
     try {
         const encontrado = await orderModel.findOne({codigo: cod});
-        return res.json(encontrado)
+        if (encontrado){
+            return res.json(encontrado)
+          } else {
+            return res.status(204).json();
+          }
     }catch(error){
         return res.status(404).json({message: 'No se ha encontrado un pedido con ese código'});
     }
@@ -110,7 +114,11 @@ export const getOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
         const encontrado = await orderModel.findOne({correo: email});
-        return res.json(encontrado)
+        if (encontrado){
+            return res.json(encontrado)
+          } else {
+            return res.status(204).json();
+          }
     }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
     }
