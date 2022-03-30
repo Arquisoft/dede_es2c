@@ -44,8 +44,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
     // EJEMPLO: localhost:5000/product/update/62404dd8d75496dc3793f573/55/nombreCambiado/descripcionCambiada/urlCambiada
     try {
         const codigo  = req.params.codigo;
-        const {...params} = req.params;
-        const productUpdated = await productModel.findOneAndUpdate({codigo: codigo}, params); 
+        const productUpdated = await productModel.findOneAndUpdate({codigo: codigo}, req.query, { new: true }); 
         if (productUpdated){
             return res.send("Product updated");
         }

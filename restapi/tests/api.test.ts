@@ -61,8 +61,8 @@ describe("user ", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(
       expect.objectContaining({
-        name: "USer",
-        surname: "USer",
+        name: "User",
+        surname: "User",
         email: "user@uniovi.es",
       })
     );
@@ -98,17 +98,17 @@ describe("products ", () => {
    */
   it("Puedo conseguir un producto", async () => {
     const response: Response = await request(app).get(
-      "/product/getByCode/codeExample"
+      "/product/getByCode/MO01"
     );
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(
       expect.objectContaining({
-        codigo: "codeExample",
-        categoria: "categoryExample",
-        precio: 10,
-        stock: 3,
-        descripcion: "descriptionExample",
-        url: "urlExample",
+        codigo: "MO01",
+        categoria: "monitor",
+        precio: 139.99,
+        stock: 20,
+        descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
+        url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg",
       })
     );
   });
