@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Order } from "../model/Order";
+import { orderModel } from "../model/Order";
 import { productModel } from "../model/Product";
 
 
@@ -33,7 +33,7 @@ export const createOrder: RequestHandler = async (req, res) => {
 
     //if (isVerified) {
       try {
-        const order = new Order(req.body);
+        const order = new orderModel(req.body);
         updateStock(order.products);
         const orderToSave = await order.save();
         res.json(orderToSave);
@@ -50,7 +50,7 @@ export const createOrder: RequestHandler = async (req, res) => {
 
 export const generateExample: RequestHandler = async(req, res, next) => {
     try {
-        let order = new Order();
+        let order = new orderModel();
         order.codigo = "orderOneExample";
         order.correo = "admin@uniovi.es";
         order.direccion = "dirExample";
@@ -69,7 +69,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
 export const getOrderByCode: RequestHandler = async (req, res) => {
     const cod = req.params.codigo;
     try {
-        const encontrado = await Order.findOne({codigo: cod});
+        const encontrado = await orderModel.findOne({codigo: cod});
         return res.json(encontrado)
     }catch(error){
         return res.status(404).json({message: 'No se ha encontrado un pedido con ese código'});
@@ -80,7 +80,7 @@ export const getOrderByCode: RequestHandler = async (req, res) => {
 export const getOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
-        const encontrado = await Order.findOne({correo: email});
+        const encontrado = await orderModel.findOne({correo: email});
         return res.json(encontrado)
     }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
@@ -89,7 +89,7 @@ export const getOrderByEmail: RequestHandler = async (req, res) => {
 
 export const getOrders: RequestHandler = async (req, res) => {
     try {
-        const allP = await Order.find();
+        const allP = await orderModel.find();
         return res.json(allP); 
     }catch(error){
         console.log(error);
