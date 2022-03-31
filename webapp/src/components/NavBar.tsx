@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { Product } from '../shared/shareddtypes';
@@ -24,9 +25,25 @@ const NavBar=(cart:ProductsProps) =>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-
+    var totalPrice = 0;
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
+
+    const removeItem = (prod:Product) =>{
+        const index = cart.cartItems.indexOf(prod,0);
+        if(index > -1){
+            if(cart.cartItems[index].cantidad > 1){
+                cart.cartItems[index].cantidad = cart.cartItems[index].cantidad -1 ;
+            } else{
+                cart.cartItems.splice(index);
+            }
+        } 
+    }
+
+    const allFunc = (prod:Product) =>{
+        removeItem(prod);
+        handleClose();
+    }
     return(
         <AppBar position="fixed" >
             <Toolbar>
@@ -61,19 +78,29 @@ const NavBar=(cart:ProductsProps) =>{
                     {cart.cartItems.length > 0 ? (
                         <>
                         {cart.cartItems.map( prod => (
-                            <div className= "Item details">
+                            <div className= "cartItem">
                                 <Container>
-                                    <img src = {prod.url}></img>
                                     <Typography variant="body2" component="div" sx={{ flexGrow: 1 }}>
-                                        {prod.nombre} x{prod.cantidad} precio:{prod.cantidad * prod.precio}
-                                    </Typography>                                
+                                    <img style={{
+                                        marginRight:20,
+                                        width:50,
+                                        height: 40,
+                                        bottom:20
+                                    }} src = {prod.url}>                                
+                                    </img>
+                                        {prod.nombre} x{prod.cantidad} precio:{prod.cantidad * prod.precio}            
+                                        <IconButton style={{
+                                        left:10,
+                                    }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
+                                    </Typography>
+                          
                                 </Container>                         
-                            </div>                     
-                        ))}
+                            </div>                                            
+                         ))}
                         <div></div>
                         <Button variant = "contained" style={{
                             left:20,
-                            bottom:-3
+                            bottom:-5
                         }}> Completar el pago </Button>
                         </>
                     ) :(<div>
@@ -94,4 +121,8 @@ const  showProducts = () =>{
         <div>hola</div>
     );
 }
+
+
+
+
 export default NavBar;
