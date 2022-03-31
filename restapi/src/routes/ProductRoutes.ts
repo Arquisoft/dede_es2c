@@ -10,7 +10,7 @@ router.get('/product/add/:codigo/:categoria/:nombre/:precio/:descripcion/:stock/
 // Eliminar por URL
 router.get('/product/delete/:codigo', ProductController.deleteProduct);
 // Actualizar por URL
-router.get('/product/update/:codigo/:stock/:nombre/:descripcion/:url', ProductController.updateProduct);
+router.get('/product/update/:codigo/', ProductController.updateProduct);
 // Listar productos
 router.get('/product/list', ProductController.getProducts);
 // Producto por codigo propio de cada uno
