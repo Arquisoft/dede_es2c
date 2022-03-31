@@ -7,6 +7,7 @@ import { Typography, TextField, Stack} from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const checkParams = (text: String) => {
@@ -58,6 +59,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
     let [urlCod, setUrl] = useState('') ;
     let [stock, setStock] = useState(0);
     let [precio, setPrecio] = useState(0);
+    let [codigo, setCodigo] = useState('');
 
     function saveP(o: Product){
         
@@ -73,17 +75,60 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
         setStock(Number.parseFloat(o.stock));
         setPrecio(o.precio);
         setUrl(o.url)
+        setCodigo(o.codigo);
         handleOpen();
         
     } 
 
-    async function allFunc(nombre: string, descrip: string, stock: number, precio: number, url: string) {
-       setPulse(true);
-       
+    async function allFunc(codigo: string, nombre: string, descrip: string, stock: number, precio: number, url: string) {
+        axios.get("http://localhost:5000/product/update/" + codigo + "/" + stock + "/" + nombre + "/" + descrip + "/" + url).then(
+            res => {
+                setPulse(true);
+                if(res.status === 201){
+                    Swal.fire(
+                        'Actualizado!',
+                        'Este prodcuto ha sido actualizado.',
+                        'success'
+                    )
+                }else {
+                    Swal.fire(
+                        'Ha ocurrido un problema',
+                        'error'
+                    )
+                }
+            }
+        )
+        
     }
 
     async function eliminar(pro: Product){
-
+        Swal.fire({
+            title: '¿Estás seguro de eliminar el producto ' + pro.nombre + '?',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.get("http://localhost:5000/product/delete/" + pro.codigo).then(res => {
+                    if(res.status !== 404){
+                        Swal.fire(
+                            'Eliminado!',
+                            'Este prodcuto ha sido eliminado.',
+                            'success'
+                        )
+                    }else {
+                        Swal.fire(
+                            'Ha ocurrido un problema',
+                            'error'
+                        )
+                    }
+                })
+                
+            }
+          })
     }
 
     if(open){
@@ -157,7 +202,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         onChange = {(e: any) => setPrecio(e.target.value)}
                     />
 
-                    <Button onClick={ () => allFunc(nombre, descrop, stock, precio, urlCod)} variant = "contained" type = "submit">Actualizar producto</Button>
+                    <Button onClick={ () => allFunc(codigo, nombre, descrop, stock, precio, urlCod)} variant = "contained" type = "submit">Actualizar producto</Button>
 
                     </Stack>
                 </Box>
@@ -178,7 +223,9 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                     <TableCell align='center'>18</TableCell>
                     <TableCell align='center'>{p.stock}</TableCell>
                     <TableCell align='center'><Button onClick={ () => saveP(p)}>Administrar</Button></TableCell>
-                    <TableCell align='center'><Button variant="outlined" color='error' startIcon = {<ClearIcon />}>Eliminar Producto</Button></TableCell>
+                    <TableCell align='center'>
+                        <Button variant="outlined" color='error' onClick = {() => eliminar(p)} startIcon = {<ClearIcon />}>Eliminar Producto</Button>
+                    </TableCell>
                 </TableRow>
             );
         })}

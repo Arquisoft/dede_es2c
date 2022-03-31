@@ -58,7 +58,7 @@ const Home = (func: ProductsProps) => {
 
     return (
 
-        <div className='Home' style={{ marginTop: '300px', marginLeft: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
+        <div className='Home' style={{ marginTop: '300px', marginLeft: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
           <Stack direction= 'column'>
                 {cargarBanner()}
                 <p>Últimas unidades</p>

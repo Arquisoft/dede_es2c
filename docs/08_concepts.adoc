@@ -10,7 +10,7 @@ image:08_Modelo_datos.png["Modelo de datos"]
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
 
 === Seguridad
-La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente.
+La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente. Para poder garantizar la seguridad al usuario con sus contraseñas estas serán cifradas.
 
 === Consistencia
 Otro aspecto fundamental que perseguimos es garantizar que los datos de los clientes no se corrompan al emplear su aplicación, sin importar el problema que ocurra.
@@ -23,9 +23,6 @@ Se incluirá el código necesario para manejar y capturar los errores procedente
 
 === Accesibilidad
 Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
-
-=== Seguridad
-Ningún aspecto de la aplicación será dañino para la vida del usuario.
 
 === Manejo de sesión
 Se manejarán las sesiones a través del uso de las APIs necesarias.

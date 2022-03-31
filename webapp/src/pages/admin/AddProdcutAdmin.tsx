@@ -9,15 +9,39 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const AddProdutcAdmin: FC = () => {
 
+    async function addProduct(url: string, nombre: string, descripcion: string, precio: number, categoria: string, stock: string){
+        let codigo = uuidv4();
+        axios.get("http://localhost:5000/product/add/" + codigo + "/" + categoria + "/" + nombre + "/" + precio.toString() + "/" + descripcion + "/" + stock + "/" + url).then(
+            res => {
+                if(res.status === 201){
+                    Swal.fire({
+                        title: "UProducto añadido",
+                        text: "Se ha añadido el prodcuto sin problemas",
+                        icon: "success"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "ERROR",
+                        text: "Se ha producido un error con los productos",
+                        icon: "error"
+                    });
+                }
+            }
+        )
+    }
+
     const [urlBase, setUrl] = useState('https://i.postimg.cc/25fVD0hz/TE01.jpg')
     const [nombreP , setNombre] = useState('')
     const [descrip, setDescripcion] = useState('')
-    const [stock, setStock] = useState()
-    const [precio, setPrecio] = useState()
+    const [stock, setStock] = useState('')
+    const [precio, setPrecio] = useState(0)
     const [categoria, setCategoria] = useState('')
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -107,7 +131,7 @@ const AddProdutcAdmin: FC = () => {
                                     </Select>
                                 </FormControl>
 
-                                <Button variant = "contained" type = "submit">Añadir Producto Nuevo</Button>
+                                <Button variant = "contained" type = "submit" onClick={() => addProduct(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
                             </Stack>
                         </Box> 
                         </div>

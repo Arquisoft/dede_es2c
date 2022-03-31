@@ -20,7 +20,7 @@ const OrderAdmin = (order: OrderProps) => {
                         <TableCell align='center'>{o.correo}</TableCell>
                         <TableCell component="th" scope="row">{o.precioTotal}</TableCell>
                          <TableCell component="th" scope="row">
-                            {o.productsPedido.map((p) => {return p.codigoProd + "\n"})}
+                            {o.productsPedido.map((p) => {return p.codigo + "\n"})}
                         </TableCell>  
                     </TableRow>
                 );  
