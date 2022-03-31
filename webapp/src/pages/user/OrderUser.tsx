@@ -13,8 +13,8 @@ type OrderProps = {
 const  OrderUser = (orderProp: OrderProps) => {
 
     console.log(orderProp.email)
-    const findOrdertByEmail = async () =>{
-        const data = axios.get('http://localhost:5000/order/getByEmail/' + orderProp.email).then(
+    const findProductInOrdertById = async (id: string) =>{
+        const data = axios.get('http://localhost:5000/productOrder/getById/' + id).then(
             res => {
                 console.log(res.data);
                 return res.data
@@ -29,7 +29,7 @@ const  OrderUser = (orderProp: OrderProps) => {
                 console.log(o.codigo);
                 console.log(o.fecha.toLocaleString());
                 console.log(o.precioTotal);
-                findOrdertByEmail();
+                findProductInOrdertById(o.codigo);
                 return (
                     
                     <TableRow key={o.codigo} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

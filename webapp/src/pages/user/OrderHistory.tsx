@@ -32,8 +32,6 @@ const OrderHistory = (id: Id) => {
         setOrders(await getOrdersByEmail(id.email));
     }
 
-    console.log(orders[0].id)
-
     useEffect(() => {cargarPedidos();}, []);
     
     return (
