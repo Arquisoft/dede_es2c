@@ -8,11 +8,23 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { Product } from '../shared/shareddtypes';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Container } from '@mui/material';
 
 type ProductsProps = {
     cartItems:Product[]
 }
 const NavBar=(cart:ProductsProps) =>{
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     return(
@@ -27,15 +39,59 @@ const NavBar=(cart:ProductsProps) =>{
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 
-              <IconButton onClick={() => window.location.href = '/summary'} aria-label="cart" size="medium">
+              <IconButton 
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}       
+              >
                 <Badge badgeContent={numOfProducts} color="secondary">    
                     <ShoppingCartIcon color="inherit" />
                 </Badge>
                 </IconButton>
+                <Menu     
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                 'aria-labelledby': 'basic-button',
+                }}>
+                    {cart.cartItems.length > 0 ? (
+                        <>
+                        {cart.cartItems.map( prod => (
+                            <div className= "Item details">
+                                <Container>
+                                    <img src = {prod.url}></img>
+                                    <Typography variant="body2" component="div" sx={{ flexGrow: 1 }}>
+                                        {prod.nombre} x{prod.cantidad} precio:{prod.cantidad * prod.precio}
+                                    </Typography>                                
+                                </Container>                         
+                            </div>                     
+                        ))}
+                        <div></div>
+                        <Button variant = "contained" style={{
+                            left:20,
+                            bottom:-3
+                        }}> Completar el pago </Button>
+                        </>
+                    ) :(<div>
+                        <Container>
+                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                            El carro se encuentra vacío
+                        </Typography>
+                        </Container>
+                        </div>)}
+                </Menu>
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
-                
             </Toolbar>     
         </AppBar>
             );
     }
+const  showProducts = () =>{
+    return(
+        <div>hola</div>
+    );
+}
 export default NavBar;
