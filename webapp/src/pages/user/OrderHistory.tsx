@@ -29,7 +29,7 @@ const OrderHistory = (id: Id) => {
     const [orders, setOrders]  = React.useState<Order[]>([]);
 
     async function cargarPedidos() {
-        setOrders(await getOrdersByEmail(id.email));
+        setOrders(await getOrders());
     }
 
     useEffect(() => {cargarPedidos();}, []);
