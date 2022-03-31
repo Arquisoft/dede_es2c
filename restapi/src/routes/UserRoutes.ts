@@ -10,6 +10,8 @@ router.post('/user/signup',UserController.createUser);
 router.post('/user/login',UserController.loginUser);
 router.post('/user/delete/:id',UserController.deleteUser);
 router.post('/user/update/:id',UserController.update);
+router.post('/user/giveAdmin',UserController.giveAdminRole);
+router.get('/user/pod/:name',UserController.getUserPOD);
 module.exports=router;
 
 export default router;
