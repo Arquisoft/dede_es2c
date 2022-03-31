@@ -3,7 +3,7 @@ import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
-const User = require('../model/user')
+import User from "../model/User";
 import {
   getSolidDataset,
   getThing,
