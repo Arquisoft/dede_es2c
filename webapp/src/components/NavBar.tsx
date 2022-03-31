@@ -28,6 +28,7 @@ const NavBar=(cart:ProductsProps) =>{
     var totalPrice = 0;
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
+    cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
 
     const removeItem = (prod:Product) =>{
         const index = cart.cartItems.indexOf(prod,0);
@@ -80,7 +81,7 @@ const NavBar=(cart:ProductsProps) =>{
                         {cart.cartItems.map( prod => (
                             <div className= "cartItem">
                                 <Container>
-                                    <Typography variant="body2" component="div" sx={{ flexGrow: 1 }}>
+                                    
                                     <img style={{
                                         marginRight:20,
                                         width:50,
@@ -88,20 +89,28 @@ const NavBar=(cart:ProductsProps) =>{
                                         bottom:20
                                     }} src = {prod.url}>                                
                                     </img>
-                                        {prod.nombre} x{prod.cantidad} precio:{prod.cantidad * prod.precio}            
+                                        {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
                                         <IconButton style={{
                                         left:10,
                                     }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
-                                    </Typography>
+                                    
                           
                                 </Container>                         
                             </div>                                            
                          ))}
                         <div></div>
-                        <Button variant = "contained" style={{
-                            left:20,
-                            bottom:-5
-                        }}> Completar el pago </Button>
+                        <Container style = {{
+                            right:200
+                        }}>
+                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                            Precio total: {totalPrice}€
+                        </Typography>
+                        </Container>
+                        <Button variant = "contained" size = "small" style={{
+                            left:24,
+                            bottom:-2
+                        }} href = "/pago"> Completar el pago </Button>
+                        
                         </>
                     ) :(<div>
                         <Container>
