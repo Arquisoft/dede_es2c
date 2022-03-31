@@ -81,10 +81,13 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
     } 
 
     async function allFunc(codigo: string, nombre: string, descrip: string, stock: number, precio: number, url: string) {
-        axios.get("http://localhost:5000/product/update/" + codigo + "/" + stock + "/" + nombre + "/" + descrip + "/" + url).then(
+        // http://localhost:5000/product/update/codeExample/?nombre=namePrueba&descripcion=descripcionPrueba
+        axios.get("http://localhost:5000/product/update/" + 
+            codigo + "/?nombre=" + nombre + "&descripcion" + descrip + 
+            "&precio=" + precio + "&url=" + url + '&stock=' + stock).then(
             res => {
                 setPulse(true);
-                if(res.status === 201){
+                if(res.status !== 404){
                     Swal.fire(
                         'Actualizado!',
                         'Este prodcuto ha sido actualizado.',

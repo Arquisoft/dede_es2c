@@ -1,6 +1,6 @@
 import { RequestHandler, response, request } from "express";
 
-import { productModel } from "../model/Product";
+import { Product, productModel } from "../model/Product";
 
 
 // FALTA LA VERIFICACIÓN DE LOS TOKENS
@@ -109,6 +109,27 @@ export const getProducts: RequestHandler = async (req, res) => {
         const allP = await productModel.find();
         return res.json(allP); 
     }catch(error){
+        res.json(error);
+    }
+}
+
+export const getProductsByCategoria: RequestHandler = async (req, res) => {
+
+    try {
+        const encontrado = await Product.find({categoria: req.params.categoria});
+        return res.json(encontrado);
+    }catch(error){
+        res.status(404).json({message: 'No hay productos de esa categoría'})
+    }
+}
+
+export const getProductByPrice: RequestHandler = async (req, res) => {
+    const price = req.params.price;
+    try{
+        const todos = await Product.find({precio: price});
+        return res.json(todos);
+    }catch(error){
+        console.log(error);
         res.json(error);
     }
 }

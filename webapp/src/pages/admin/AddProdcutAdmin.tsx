@@ -16,9 +16,21 @@ import Swal from 'sweetalert2';
 
 const AddProdutcAdmin: FC = () => {
 
-    async function addProduct(url: string, nombre: string, descripcion: string, precio: number, categoria: string, stock: string){
+    function checkCampos(url: string, nombre: string, descipcion: string, precio: string, stock: string){
+        if(url === '' || url === null || nombre === '' || nombre === null ||
+        descipcion === '' || descipcion === null || Number.parseFloat(precio) < 0 || Number.parseInt(stock) < 0 ){
+            Swal.fire({
+                title: "ERROR",
+                text: "Alguno de los campos introducidos no es correcto",
+                icon: "error"
+            });
+        }
+    }
+
+    async function addProduct(url: string, nombre: string, descripcion: string, precio: string, categoria: string, stock: string){
+        checkCampos(nombre, url, descripcion, precio, stock);
         let codigo = uuidv4();
-        axios.get("http://localhost:5000/product/add/" + codigo + "/" + categoria + "/" + nombre + "/" + precio.toString() + "/" + descripcion + "/" + stock + "/" + url).then(
+        axios.get("http://localhost:5000/product/add/" + codigo + "/" + categoria + "/" + nombre + "/" + precio + "/" + descripcion + "/" + stock + "/" + url).then(
             res => {
                 if(res.status === 201){
                     Swal.fire({
@@ -41,7 +53,7 @@ const AddProdutcAdmin: FC = () => {
     const [nombreP , setNombre] = useState('')
     const [descrip, setDescripcion] = useState('')
     const [stock, setStock] = useState('')
-    const [precio, setPrecio] = useState(0)
+    const [precio, setPrecio] = useState('')
     const [categoria, setCategoria] = useState('')
 
     const handleChange = (event: SelectChangeEvent) => {

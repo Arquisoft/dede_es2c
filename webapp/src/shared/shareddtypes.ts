@@ -18,12 +18,17 @@ export type Order = {
   codigo: string;
   fecha: Date,
   precioTotal: number,
-  productsPedido: Product[],
+  productsPedido: Object[],
   correo: string
 }
 
 export type Object = {
-  codigoProd: string;
+  codigo: string;
+  nombre: string;
+  categoria: string;
+  precio: number;
+  stock: string;
+  url: string;
+  descripcion: string;
   cantidad: number;
-  id_carrito: string;
 }
