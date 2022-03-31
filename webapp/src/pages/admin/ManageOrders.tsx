@@ -9,6 +9,7 @@ import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import OrderAdmin from '../admin/OrderAdmin';
 import axios from 'axios';
+import { getOrders } from '../../api/api';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -23,19 +24,20 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ManageOrders: FC = () => {
 
     const [orders, setOrders]  = React.useState<Order[]>([]);
-
-    /* async function cargarPedidos() {
+    
+    async function cargarPedidos() {
         setOrders(await getOrders());
-    } */
+    }
 
-    const getOrders2 = async () => {
+    /* const getOrders2 = async () => {
         const data = await axios.get('http://localhost:5000/order/list').then(res => {
             setOrders(res.data)
         })
         return data != null
-    }
+    } */
 
-    useEffect(() => {getOrders2();}, []);
+    useEffect(() => {cargarPedidos();}, []);
+    console.log(orders)
 
     return (
         <div>
@@ -53,7 +55,7 @@ const ManageOrders: FC = () => {
                         </TableHead>
 
                         <TableBody>
-                            <OrderAdmin order = {orders} />
+                            <OrderAdmin orders = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>
