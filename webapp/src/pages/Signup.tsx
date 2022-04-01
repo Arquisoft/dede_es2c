@@ -30,7 +30,6 @@ const handleSignup = (name:String,surname:String,email: String,pass: String,repP
             }).then(() => {
                 window.location.assign("/login");
             });
-            
         }
     })
  }

@@ -8,14 +8,36 @@ import { Card, CardContent } from '@mui/material';
 import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
-import { margin } from '@mui/system';
+import Swal from 'sweetalert2';
 
 type Email = {
     email:String
 }
 
+
+
+const updateUser = (id:String,name:String,surname:String,email: String) => {
+    axios.post("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if(res.status == 404){
+            Swal.fire({
+                title: "Perfil modificado",
+                text: "El perfil ha sido modificado con exito",
+                icon: "success"
+            }).then(() => {
+                window.location.assign("/login");
+            });
+        }
+    })
+}
+
 const Profile = (correo:Email) => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
     const [pulse, setPulse] = useState(false)
 
     const getUserByEmail = async (email:String) => {
@@ -27,20 +49,15 @@ const Profile = (correo:Email) => {
         return data != null;
     }
 
-    const updateUser = (id:String,name:String,surname:String,email: String) => {
-        axios.post("http://localhost:5000/user/update/",{"_id":id,"name":name,"surname":surname,"email":email})
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-    }
-
     async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
         updateUser(id, name, surname, email);
     }
     
     getUserByEmail(correo.email);
+    console.log(user.email)
+    console.log(user.name)
+    console.log(user.surname)
 
     return ( 
         <div>
@@ -62,6 +79,7 @@ const Profile = (correo:Email) => {
                                 defaultValue={user.email}
                                 variant = "outlined"
                                 size = "small"
+                                onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
                             <TextField
@@ -70,6 +88,7 @@ const Profile = (correo:Email) => {
                                 defaultValue = {user.name}
                                 variant = "outlined"
                                 size = "small"
+                                onChange = {(e: any) => setName(e.target.value)}
                             />
 
                             <TextField
@@ -79,6 +98,7 @@ const Profile = (correo:Email) => {
                                 defaultValue = {user.surname}
                                 variant = "outlined"
                                 size = "small"
+                                onChange = {(e: any) => setSurname(e.target.value)}
                             />
 
 
@@ -89,10 +109,9 @@ const Profile = (correo:Email) => {
                                 value= {user.password}
                                 size="small"
                                 variant="outlined"
-                                
                             />
 
-                            <Button onClick={() => allFunc(user._id,user.name,user.surname,user.email)} variant="contained" type="submit">Aplicar cambios</Button>
+                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit">Aplicar cambios</Button>
                             <Link href = "">Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>

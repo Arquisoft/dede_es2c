@@ -19,7 +19,7 @@ const OrderAdmin = (order: OrderProps) => {
                 return res.data
             }
         )
-        return data != null; 
+        return data != null;
     }
 
     return (
