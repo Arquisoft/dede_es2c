@@ -2,6 +2,7 @@ import { RequestHandler, response, request } from "express";
 
 import { Product, productModel } from "../model/Product";
 
+const ProductPost = require('../model/Product')
 
 // FALTA LA VERIFICACIÓN DE LOS TOKENS
 
@@ -21,6 +22,20 @@ export const addProduct : RequestHandler= async (req = request, res = response) 
             }
         }   
     }catch (err){
+        return res.status(400).json({msg: err})
+    }
+}
+
+
+export const addProductPost : RequestHandler= async (req = request, res = response) => {
+    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
+    try {
+        const prod = new productModel(req.body);
+        await prod.save();
+        res.status(201).json({prod})
+            
+    }catch (err){
+        console.log(err)
         return res.status(400).json({msg: err})
     }
 }

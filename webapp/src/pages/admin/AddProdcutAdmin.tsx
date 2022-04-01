@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import { CardHeader, CardMedia } from '@mui/material';
+import { CardHeader, CardMedia, Container } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
@@ -30,8 +30,11 @@ const AddProdutcAdmin: FC = () => {
     async function addProduct(url: string, nombre: string, descripcion: string, precio: string, categoria: string, stock: string){
         checkCampos(nombre, url, descripcion, precio, stock);
         let codigo = uuidv4();
-        axios.get("http://localhost:5000/product/add/" + codigo + "/" + categoria + "/" + nombre + "/" + precio + "/" + descripcion + "/" + stock + "/" + url).then(
+        axios.post("http://localhost:5000/product/addPost", {"codigo": codigo, 
+                "nombre": nombre, "categoria": categoria, "stock": Number.parseInt(stock), 
+                "precio": Number.parseFloat(precio), "url": url, "descripcion": descripcion}).then(
             res => {
+                console.log("Llego hasta aqui")
                 if(res.status === 201){
                     Swal.fire({
                         title: "UProducto añadido",
@@ -62,14 +65,14 @@ const AddProdutcAdmin: FC = () => {
 
 
     return (
-        <div style={{marginLeft: '450px', marginRight: 'auto', marginTop: '100px'}}>
-            <Stack direction= "row">
+        <div>
+            <Container component= "main" maxWidth="sm" fixed={true} 
+            sx={{ position: "relative",top: 150}}>
                 <Card sx = {{minWidth: 700, height: 1100}}>
                     <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
                     <CardHeader title = 'Añadir un nuevo producto' />
 
                       <CardMedia component= "img" height= "400" width= "300" image={urlBase} />
-                        <p></p>
                         <div style={{borderLeft: '125px'}}> 
                         <Box sx = {{width: 600, height: 300, alignContent: 'center' }}>
                             <Stack direction = "column" spacing = {2}>
@@ -121,6 +124,7 @@ const AddProdutcAdmin: FC = () => {
                                     rows= {5}
                                     maxRows = {10}
                                     multiline
+                                    required
                                     value = {descrip}
                                     onChange = {(e: any) => setDescripcion(e.target.value)}
                                 />
@@ -135,11 +139,11 @@ const AddProdutcAdmin: FC = () => {
                                         onChange={handleChange}
                                         required
                                     >
-                                        <MenuItem value = 'teclado'>Teclado</MenuItem>
-                                        <MenuItem value = 'monitor'>Monitor</MenuItem>
-                                        <MenuItem value = 'raton'>Ratón</MenuItem>
-                                        <MenuItem value = 'almacenamiento'>Almacenamiento</MenuItem>
-                                        <MenuItem value = 'sonido'>Sonido</MenuItem>
+                                        <MenuItem value = 'teclado'>teclado</MenuItem>
+                                        <MenuItem value = 'monitor'>monitor</MenuItem>
+                                        <MenuItem value = 'raton'>raton</MenuItem>
+                                        <MenuItem value = 'almacenamiento'>almacenamiento</MenuItem>
+                                        <MenuItem value = 'sonido'>sonido</MenuItem>
                                     </Select>
                                 </FormControl>
 
@@ -149,9 +153,8 @@ const AddProdutcAdmin: FC = () => {
                         </div>
                     </Stack>
                 </Card>
-            </Stack>
 
-            <p></p>
+            </Container>
         </div>
     );
 } 

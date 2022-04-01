@@ -19,5 +19,7 @@ router.get('/product/getByCode/:codigo', ProductController.getProductoByCode);
 router.get('/product/getByCategoria/:categoria', ProductController.getProductsByCategoria);
 // Productos por precio ordenado
 router.get('/product/getByPrecio/:precio', ProductController.getProductByPrice);
+// Productos añadir con Post
+router.post('/product/addPost', ProductController.addProductPost);
 module.exports = router;
 export default router;

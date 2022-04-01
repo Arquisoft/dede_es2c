@@ -121,6 +121,9 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                             'Eliminado!',
                             'Este prodcuto ha sido eliminado.',
                             'success'
+                        ).then(() => {
+                            window.location.assign("/admin/manageProducts");
+                        }
                         )
                     }else {
                         Swal.fire(
@@ -129,7 +132,6 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         )
                     }
                 })
-                
             }
           })
     }
