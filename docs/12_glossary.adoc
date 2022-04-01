@@ -16,4 +16,6 @@
 | Axios | Cliente HTTP basado en promesas. Dependecia isntalada para poder realizar de una manera mas sencilla el juntar front-end y back-end de la aplicación
 | PostImage | Página web para poder almacenar las imagenes de los productos 
 | MUI | Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación
+| GitHub | Plataforma para alojar proyectos utilizando un sistema de veriones Git
+| Pencil | Aplicación de escritorio en la que se puede realizar prototipos de pantallas
 |===

@@ -1,18 +1,21 @@
-import { CardActions, CardContent, CardHeader, CardMedia, Grid, Typography } from '@mui/material';
-import { Product } from '../shared/shareddtypes';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import InfoIcon from '@mui/icons-material/Info';
+
 import React, { useState } from 'react';
+import { Button, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+import { Product} from '../shared/shareddtypes';
+import InfoIcon from '@mui/icons-material/Info';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ClearIcon from '@mui/icons-material/Clear';
+import Card from '@mui/material/Card';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 type ProductsProps = {
     product: Product[]
-}   
-
+    onAddCart:(prod:Product) => (void);
+    cartItems:Product[]
+    homePage: boolean
+}
+        
 const Prod = {
     nombre: "Nombre",
     categoria: "Categoria",
@@ -52,6 +55,12 @@ const Productos = ( product: ProductsProps) => {
         Prod.stock = o.stock;
     }
 
+    function handleAddCart(){
+        if(!localStorage.token)
+            window.location.assign("/login");
+    }
+
+
     if(open){
 
         if(Prod.stock != '0'){
@@ -68,7 +77,9 @@ const Productos = ( product: ProductsProps) => {
 
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>Precio del producto: {Prod.precio}</Typography>
 
-                    <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>Añadir al carrito </Button>
+                    {/* <IconButton onClick={() => product.onAddCart(Prod)} aria-label='Añadir al carrito' >
+                              <AddShoppingCartIcon />
+                      </IconButton> */}
 
                     <img src= {Prod.url} alt  = {Prod.nombre}/>
 
@@ -104,48 +115,73 @@ const Productos = ( product: ProductsProps) => {
         <Grid container spacing={3}>
          {product.product.map(
             (p) => {
-
-                if(p.stock != '0') {
-                    return (
-                        <Grid item xs={3} md={3}>
-                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
-                                <CardHeader title = {p.nombre}/>
-                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
-                                <CardContent>Precio: {p.precio}€</CardContent>
-                                <CardContent>Descripción del producto:</CardContent>
-                                <CardContent>{p.descripcion}</CardContent>
-                                <CardActions>
-                                    <Button variant="outlined" startIcon = {<AddShoppingCartIcon />}>
-                                        Añadir al carrito
-                                    </Button>
-                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
-                                        Más información
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    );
+                
+                if(product.homePage){
+                    if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0 ){
+                        return(
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="00" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                            Añadir al carrito
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        );
+                    }
                 } else {
-                    return (
-                        <Grid item xs={3} md={3}>
-                            <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
-                                <CardHeader title = {p.nombre}/>
-                                <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
-                                <CardContent>Precio: {p.precio}€</CardContent>
-                                <CardContent>Descripción del producto:</CardContent>
-                                <CardContent>{p.descripcion}</CardContent>
-                                <CardActions>
-                                    <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
-                                        NO STOCK
-                                    </Button>
-                                    <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
-                                        Más información
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+
+                    if(p.stock != '0') {
+                        return (
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                            Añadir al carrito
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
                     );
-                }
+                    } else {
+                        return (
+                            <Grid item xs={3} md={3}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
+                                    <CardHeader title = {p.nombre}/>
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardContent>Precio: {p.precio}€</CardContent>
+                                    <CardContent>Descripción del producto:</CardContent>
+                                    <CardContent>{p.descripcion}</CardContent>
+                                    <CardActions>
+                                        <Button variant="outlined" color='error' startIcon = {<ClearIcon />}>
+                                            NO STOCK
+                                        </Button>
+                                        <Button onClick={ () => saveP(p) } variant="outlined" startIcon = {<InfoIcon />}>
+                                            Más información
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                    );
+                } 
+            }
             }
         )}
         </Grid>
