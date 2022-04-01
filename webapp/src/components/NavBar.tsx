@@ -5,16 +5,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Badge, { BadgeProps } from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
 import { Product } from '../shared/shareddtypes';
 
 type ProductsProps = {
     cartItems:Product[]
 }
-const NavBar=(cart:ProductsProps) =>{
+const NavBar = (cart:ProductsProps) =>{
     var numOfProducts = 0
-    cart.cartItems.map(x => numOfProducts+= x.cantidad);
+    cart.cartItems.map(x => numOfProducts += x.cantidad);
+
     return(
         <AppBar position="fixed" >
             <Toolbar>

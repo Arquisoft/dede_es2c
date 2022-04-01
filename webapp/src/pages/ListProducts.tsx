@@ -49,7 +49,7 @@ const ListProducts = (func:ProductsProps) => {
     }
 
     async function filtrar(cat: string) {
-        let aux: Product[] = []
+       /*  let aux: Product[] = []
         let auxNum = 0;
         for (let index = 0; index < prod.length; index++) {
             
@@ -58,8 +58,8 @@ const ListProducts = (func:ProductsProps) => {
                 auxNum++;
             }
             
-        }
-        setProd(aux);
+        } */
+        setProd(await getProductosByCategoria(cat));
     }
 
     async function filtroPrecio(orden: string) {

@@ -116,7 +116,7 @@ export const getProducts: RequestHandler = async (req, res) => {
 export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
-        const encontrado = await Product.find({categoria: req.params.categoria});
+        const encontrado = await productModel.find({categoria: req.params.categoria});
         return res.json(encontrado);
     }catch(error){
         res.status(404).json({message: 'No hay productos de esa categoría'})

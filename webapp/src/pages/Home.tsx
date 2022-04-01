@@ -3,6 +3,7 @@ import { Product } from '../shared/shareddtypes';
 import axios from 'axios';
 import { Stack, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
 import Products from '../components/Products';
+import Typography from '@mui/material/Typography';
 
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
@@ -61,7 +62,9 @@ const Home = (func: ProductsProps) => {
         <div className='Home' style={{ marginTop: '300px', marginLeft: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
           <Stack direction= 'column'>
                 {cargarBanner()}
-                <p>Últimas unidades</p>
+                <Typography variant="h4" gutterBottom component="div">
+                    Últimas Unidades
+                </Typography>
                 <Products homePage = {true} product = {prods} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
 
             </Stack>
