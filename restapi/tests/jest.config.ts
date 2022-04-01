@@ -4,6 +4,6 @@ export default {
         "^.+\\.tsx?$": "ts-jest"
     },
     collectCoverage: true,
-    //collectCoverageFrom:["api.ts"],
-    //testTimeout: 15000
+    collectCoverageFrom: ["**/*Controller.ts"],
+    testTimeout: 15000,
 }

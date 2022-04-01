@@ -2,10 +2,13 @@ import request, { Response } from "supertest";
 import express, { Application, RequestHandler } from "express";
 import cors from "cors";
 import bp from "body-parser";
+import { Server } from "http";
 import promBundle from "express-prom-bundle";
 import apiUser from "../src/routes/UserRoutes";
 import apiProduct from "../src/routes/ProductRoutes";
 import apiOrders from "../src/routes/OrderRoutes";
+
+var server: Server;
 
 const path = require("path");
 
@@ -42,6 +45,7 @@ beforeAll(async () => {
 // CONEXIÓN A LA BD
 
 afterAll(async () => {
+    server.close();
     await mongoose.connection.close();
     // Cuidado con lo que se ponga aquí, que puede afectar a la BD
  
@@ -87,6 +91,23 @@ describe("user ", () => {
     );
     expect(response.statusCode).toBe(200);
   });
+
+
+    /**
+     * Intento crear un usuario con un email existente
+     */
+    it("No puedo crear un usuario con un email ya existente ", async () => {
+      const response: Response = await request(app).post("/user/signup").send({
+        name: "prueba",
+        surname: "prueba",
+        email: "usuarioPrueba@gmail.com",
+        password: "prueba",
+        role: "user",
+      });
+      expect(response.statusCode).toBe(400);
+    });
+
+
 });
 
 

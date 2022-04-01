@@ -7,7 +7,7 @@ import { Product, productModel } from "../model/Product";
 
 /************* CREAR UN PEDIDO *************/
 
-export const createOrder: RequestHandler = async (req, res) => {
+export const addOrder: RequestHandler = async (req, res) => {
     
     // PASO 1: verificar el usuario conectado
 
@@ -110,6 +110,7 @@ export const getOrderByCode: RequestHandler = async (req, res) => {
 };
 
 
+
 export const getOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
@@ -120,9 +121,24 @@ export const getOrderByEmail: RequestHandler = async (req, res) => {
             return res.status(204).json();
           }
     }catch(error){
+        return res.status(404).json({message: 'Ese usuario no tiene pedidos'});
+    }
+};
+
+export const getTotalUserOrderByEmail: RequestHandler = async (req, res) => {
+    const email = req.params.email;
+    try {
+        const encontrado = await orderModel.find({correo: email});
+        if (encontrado){
+            return res.json(encontrado)
+          } else {
+            return res.status(204).json();
+          }
+    }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
     }
 };
+
 
 export const getOrders: RequestHandler = async (req, res) => {
     try {
