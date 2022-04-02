@@ -8,6 +8,7 @@
     "bootstrap": "^5.1.3",
     "bootswatch": "^5.1.3",
     "cloudinary": "^1.28.1",
+    "concurrently": "^7.1.0",
     "react-native-svg": "^12.3.0",
     "react-reactive-form": "^1.0.32",
     "react-router-dom": "^6.2.2",
@@ -16,7 +17,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "restapi/./server.ts webapp/./server.ts"
+    "restapi": "cd restapi && npm start",
+    "webapp": "cd webapp && npm start",
+    "start": "concurrently \"npm run restapi\" \"npm run webapp\""
   },
   "name": "dede_es2c",
   "description": "[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_0/actions)\r [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_0&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_0)\r [![codecov](https://codecov.io/gh/arquisoft/dede_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://codecov.io/gh/pglez82/asw2122_0)",
