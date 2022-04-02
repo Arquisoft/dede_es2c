@@ -13,18 +13,41 @@ import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
+import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
 
 
 const App: FC = () => {
 
   const [cartItems,setCartItems] = useState<Product[]>([]);
   const onAddCart = (prod : Product) => {
-    const exist = cartItems.find(x=> x.codigo == prod.codigo);
-    if(exist){
-      setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
+    try{
+    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+    }catch(err){
+      Swal.fire({
+        title: "Debes iniciar sesión",
+        text: "Para añadir un producto al carrito primero debes iniciar sesión",
+        icon: "warning"
+    }).then(() => {
+        window.location.assign("/login");
+    });
+    }
+    if(user){
+      const exist = cartItems.find(x=> x.codigo == prod.codigo);
+      if(exist){
+        setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
 
-    } else {
-      setCartItems([...cartItems,{...prod,cantidad:1}])
+      } else {
+        setCartItems([...cartItems,{...prod,cantidad:1}])
+      }
+    }else{
+      Swal.fire({
+        title: "Debes iniciar sesión",
+        text: "Para añadir un producto al carrito primero debes iniciar sesión",
+        icon: "warning"
+    }).then(() => {
+        window.location.assign("/login");
+    });
     }
 
   }
