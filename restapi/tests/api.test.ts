@@ -19,19 +19,15 @@ beforeAll(async () => {
 
   server = app.listen(5000);
 
+  app.use(cors());
   const metricsMiddleware: RequestHandler = promBundle({ includeMethod: true });
   app.use(metricsMiddleware);
-
-  app.use(cors());
   app.use(bp.json());
-
   app.use(bp.urlencoded({ extended: false }));
-  
+
   app.use(apiUser);
   app.use(apiProduct);
   app.use(apiOrders);
-
-
 
   await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
     {
