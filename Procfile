@@ -1,0 +1,2 @@
+web: /webapp
+api: /restapi
