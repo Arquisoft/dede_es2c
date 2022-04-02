@@ -17,8 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "restapi": "cd restapi && npm start",
-    "webapp": "cd webapp && npm start",
+    "restapi": "cd restapi && npm install && npm start",
+    "webapp": "cd webapp && && npm install && npm start",
     "start": "concurrently \"npm run restapi\" \"npm run webapp\""
   },
   "name": "dede_es2c",
