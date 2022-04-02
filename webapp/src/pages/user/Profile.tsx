@@ -35,9 +35,9 @@ const updateUser = (id:String,name:String,surname:String,email: String) => {
 
 const Profile = (correo:Email) => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
+    let [name, setName] = useState('')
+    let [surname, setSurname] = useState('')
+    let [email, setEmail] = useState('')
     const [pulse, setPulse] = useState(false)
 
     const getUserByEmail = async (email:String) => {
@@ -55,9 +55,9 @@ const Profile = (correo:Email) => {
     }
     
     getUserByEmail(correo.email);
-    console.log(user.email)
-    console.log(user.name)
-    console.log(user.surname)
+    email = user.email
+    name = user.name
+    surname = user.surname
 
     return ( 
         <div>
