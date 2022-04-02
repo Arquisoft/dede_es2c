@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import {  getOrders, getOrdersByEmail } from '../../api/api';
-import OrderUser from '../user/OrderUser';
+import OrderAdmin from '../admin/OrderAdmin';
 
 type Id = {
     email:String
@@ -45,9 +45,8 @@ const OrderHistory = (id: Id) => {
                                 <StyledTableCell>Productos</StyledTableCell>  
                             </TableRow>
                         </TableHead>
-
                         <TableBody>
-                            <OrderUser order = {orders} />
+                            <OrderAdmin order = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>
