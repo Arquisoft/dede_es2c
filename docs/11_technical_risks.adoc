@@ -7,9 +7,12 @@
 * Posibles problemas al trabajar con GitHub. Pueden surgir problemas a la hora de subir nuestros cambios a GitHub e incluso modificar cambios ya realizados por otros compañeros, para reducir esto lo máximo posible, cada compañero trabajará en su rama y cuando se quiera realizar cambios al proyecto principal se hará un pull request para que otro miembro del equipo lo verifique.
 * Primer proyecto web con un tamaño tan grande. Si bien hemos tenido algo de experiencia con proyectos web, nunca con estas dimensiones ni tecnologías. Para paliar este riesgo, deberíamos buscar bastante información sobre cómo llevarlo a cabo e intentar familiarizarnos con esta forma de trabajo lo antes posible.
 * El tiempo. Tenemos poco tiempo para llevar a cabo los prototipos, entonces habrá que tenerlo en cuenta a la hora de desarrollar y llevar el proyecto lo más al día posible.
-* Seguridad en nuestro proyecto. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar.
+* Posibles vulnerabilidades en el proyecto web. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar.
 
 .Deudas Técnicas
 
-Por el momento no existen deudas técnicas ya que el proyecto todavía no está en desarrollo y no se han tomado decisiones que 
-las generen.
+* Código poco claro y sin refactorizar en la parte del backend sobre la gestión de usuarios.
+* Acoplamiento en el frontend a la hora de decodificar el token de sesión, se usa un módulo específico para ello.
+* Almacenamiento de token de sesión en el localStorage, se podría guardar en un nuevo campo de la base de datos, ya que el localStorage es modificable desde el navegador
+* Faltaría refactorizar parte del código del frontend para hacerlo más claro y modificable.
+* Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.

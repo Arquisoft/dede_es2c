@@ -109,7 +109,7 @@ export const update: RequestHandler = async (req, res) => {
     if(password){
       params.password = await bcrypt.hash(password, 10);
     }
-    await User.findByIdAndUpdate(id,params);
+    await User.updateOne({_id: id},params);
     return res.send("User updated")
   } catch (error) {
     console.log(error)
