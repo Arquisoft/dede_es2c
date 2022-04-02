@@ -18,4 +18,6 @@
 | MUI | Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación
 | GitHub | Plataforma para alojar proyectos utilizando un sistema de veriones Git
 | Pencil | Aplicación de escritorio en la que se puede realizar prototipos de pantallas
+| UUID | Librería que genera cógidos aleatorios donde la probabilidad de que uno sea repetido es mínimo
+| SweetAlert2 | Librería de libre acceso para construir los diferentes componentes modales que se utilizan en la aplicación
 |===

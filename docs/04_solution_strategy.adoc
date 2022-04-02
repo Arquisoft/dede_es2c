@@ -4,11 +4,12 @@
 === Restricciones tecnologicas
 - React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles. 
 - Pod Solid: almacenamiento de la inforamción personal de cada usuario. 
-- TypeScript, lenguaje de programación con el que está desarrollada la aplicación. 
+- TypeScript: lenguaje de programación con el que está desarrollada la aplicación. 
 
 === Deciones tecnologicas
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
-- MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto
+- MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de código abierto por lo que se permite una mayor libertad de creación de documentos
+- MUI: Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación. La mayoria de componentes que se utilizan en nuestra aplicación son de esta librería y son personalizados según se necesita el formato de este.
 
 === Como alcanzar los objetivos de calidad
 [options="header",cols="1,2"]

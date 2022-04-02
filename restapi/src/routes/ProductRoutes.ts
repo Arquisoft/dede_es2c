@@ -15,7 +15,11 @@ router.get('/product/update/:codigo/', ProductController.updateProduct);
 router.get('/product/list', ProductController.getProducts);
 // Producto por codigo propio de cada uno
 router.get('/product/getByCode/:codigo', ProductController.getProductoByCode);
-
-
+// Productos por categoría 
+router.get('/product/getByCategoria/:categoria', ProductController.getProductsByCategoria);
+// Productos por precio ordenado
+router.get('/product/getByPrecio/:precio', ProductController.getProductByPrice);
+// Productos añadir con Post
+router.post('/product/addPost', ProductController.addProductPost);
 module.exports = router;
 export default router;

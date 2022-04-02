@@ -1,7 +1,8 @@
 import { RequestHandler, response, request } from "express";
 
-import { productModel } from "../model/Product";
+import { Product, productModel } from "../model/Product";
 
+const ProductPost = require('../model/Product')
 
 // FALTA LA VERIFICACIÓN DE LOS TOKENS
 
@@ -21,6 +22,20 @@ export const addProduct : RequestHandler= async (req = request, res = response) 
             }
         }   
     }catch (err){
+        return res.status(400).json({msg: err})
+    }
+}
+
+
+export const addProductPost : RequestHandler= async (req = request, res = response) => {
+    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
+    try {
+        const prod = new productModel(req.body);
+        await prod.save();
+        res.status(201).json({prod})
+            
+    }catch (err){
+        console.log(err)
         return res.status(400).json({msg: err})
     }
 }
@@ -109,6 +124,27 @@ export const getProducts: RequestHandler = async (req, res) => {
         const allP = await productModel.find();
         return res.json(allP); 
     }catch(error){
+        res.json(error);
+    }
+}
+
+export const getProductsByCategoria: RequestHandler = async (req, res) => {
+
+    try {
+        const encontrado = await productModel.find({categoria: req.params.categoria});
+        return res.json(encontrado);
+    }catch(error){
+        res.status(404).json({message: 'No hay productos de esa categoría'})
+    }
+}
+
+export const getProductByPrice: RequestHandler = async (req, res) => {
+    const price = req.params.price;
+    try{
+        const todos = await Product.find({precio: price});
+        return res.json(todos);
+    }catch(error){
+        console.log(error);
         res.json(error);
     }
 }
