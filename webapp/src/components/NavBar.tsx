@@ -18,6 +18,7 @@ import { Container } from '@mui/material';
 type ProductsProps = {
   cartItems:Product[]
 }
+
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -61,39 +62,6 @@ const NavBar=(cart:ProductsProps) =>{
     
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
-
-                <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleClose}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-
-                <IconButton onClick={() => window.location.href = '/summary'} aria-label="cart" size="medium"></IconButton>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    open={open}
-                >
-                    <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                            </Link>
-                            <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
-                    </Link>
-                </Menu>
 
               <IconButton 
                 id="basic-button"
@@ -158,19 +126,47 @@ const NavBar=(cart:ProductsProps) =>{
                         </Container>
                         </div>)}
                 </Menu>
+                <IconButton
+                    id="basic-button"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                    color = "inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    open={open}
+                >
+                    <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
+                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                    </Link>
+                    <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
+                        <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
+                    </Link>
+                </Menu>
 
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
-
             </Toolbar>     
         </AppBar>
             );
     }
-
 const  showProducts = () =>{
     return(
         <div>hola</div>
     );
 }
-
 
 export default NavBar;

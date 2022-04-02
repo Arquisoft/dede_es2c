@@ -8,18 +8,17 @@ type OrderProps = {
     order: Order[]
 }
 
+const findProductInOrdertById = async (id: string) =>{
+    const data = axios.get('http://localhost:5000/productOrder/getById/' + id).then(
+        res => {
+            console.log(res.data);
+            return res.data
+        }
+    )
+    return data != null; 
+}
 
 const  OrderUser = (orderProp: OrderProps) => {
-
-    const findProductInOrdertById = async (id: string) =>{
-        const data = axios.get('http://localhost:5000/productOrder/getById/' + id).then(
-            res => {
-                console.log(res.data);
-                return res.data
-            }
-        )
-        return data != null; 
-    }
 
     return (
         <>

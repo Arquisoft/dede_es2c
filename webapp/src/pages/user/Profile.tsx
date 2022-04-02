@@ -14,30 +14,11 @@ type Email = {
     email:String
 }
 
-
-
-const updateUser = (id:String,name:String,surname:String,email: String) => {
-    axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(res.status == 404){
-            Swal.fire({
-                title: "Perfil modificado",
-                text: "El perfil ha sido modificado con exito",
-                icon: "success"
-            }).then(() => {
-                window.location.assign("/login");
-            });
-        }
-    })
-}
-
 const Profile = (correo:Email) => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
-    let [name, setName] = useState('')
-    let [surname, setSurname] = useState('')
-    let [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
     const [pulse, setPulse] = useState(false)
 
     const getUserByEmail = async (email:String) => {
@@ -49,15 +30,43 @@ const Profile = (correo:Email) => {
         return data != null;
     }
 
+    getUserByEmail(correo.email);
+    const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
+        console.log(name)
+        console.log(user.name)
+        console.log(surname)
+        console.log(user.surname)
+        console.log(email)
+        console.log(user.email)
+        if(name == ''){
+            name = user.name
+        }
+        if(surname == ''){
+            surname = user.surname
+        }
+        if(email == ''){
+            email = user.email
+        }
+        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if(res.status == 404){
+                Swal.fire({
+                    title: "Perfil modificado",
+                    text: "El perfil ha sido modificado con exito",
+                    icon: "success"
+                }).then(() => {
+                    window.location.assign("/login");
+                });
+            }
+        })
+    }
+
     async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
         updateUser(id, name, surname, email);
     }
-    
-    getUserByEmail(correo.email);
-    email = user.email
-    name = user.name
-    surname = user.surname
 
     return ( 
         <div>
