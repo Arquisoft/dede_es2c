@@ -122,7 +122,7 @@ const Productos = ( product: ProductsProps) => {
                             <Grid item xs={3} md={3}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
-                                    <CardMedia component="img" height="00" width = "300" image={p.url} alt={p.nombre} />
+                                    <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
                                     <CardContent>Precio: {p.precio}€</CardContent>
                                     <CardContent>Descripción del producto:</CardContent>
                                     <CardContent>{p.descripcion}</CardContent>

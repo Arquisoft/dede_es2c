@@ -36,7 +36,7 @@ const ManageProducts: FC = ()  => {
     return (
        
         <div>
-            <StackAdmin />
+            {/* <StackAdmin /> */}
             <div style={{ margin: '170px' }}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="customized table">
@@ -50,6 +50,7 @@ const ManageProducts: FC = ()  => {
                                 <StyledTableCell align='right'>I.V.A (%)</StyledTableCell>
                                 <StyledTableCell align='right'>Stock</StyledTableCell>
                                 <StyledTableCell align='center'>Adminsitrar</StyledTableCell>
+                                <StyledTableCell align='center'>Eliminar</StyledTableCell>
                             </TableRow>
                         </TableHead>
 

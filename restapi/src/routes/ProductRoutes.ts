@@ -2,36 +2,22 @@ const express = require("express");
 import * as ProductController from '../controllers/ProductController';
 const router = express.Router();
 
-//********* PRODUCTOS **********//
 
-//**** GENERAR ****
-
+// Generar un ejemplo
 router.get('/product/generateExample', ProductController.generateExample);
-
-
-//**** POST **** 
-
-// Añadir un producto por URL
-router.get('/product/add/:codigo/:categoria/:nombre/:precio/:descripcion/:stock/:url', ProductController.addProductURL);
 // Eliminar por URL
-router.get('/product/delete/:codigo', ProductController.deleteProductURL);
+router.get('/product/delete/:codigo', ProductController.deleteProduct);
 // Actualizar por URL
-router.get('/product/update/:codigo/:stock/:nombre/:descripcion/:url', ProductController.updateProductURL);
-
-
-//**** GET ****
-
+router.get('/product/update/:codigo/', ProductController.updateProduct);
 // Listar productos
 router.get('/product/list', ProductController.getProducts);
 // Producto por codigo propio de cada uno
 router.get('/product/getByCode/:codigo', ProductController.getProductoByCode);
-// Productos por la categoria a la que pertenencen
+// Productos por categoría 
 router.get('/product/getByCategoria/:categoria', ProductController.getProductsByCategoria);
-// Productos por el ID
-router.get('/product/getById/:id', ProductController.getProductoByID);
-// Productos por el precio minimo
-router.get('/product/getByPrice/:price', ProductController.getProductByPrice);
-
-
+// Productos por precio ordenado
+router.get('/product/getByPrecio/:precio', ProductController.getProductByPrice);
+// Productos añadir con Post
+router.post('/product/addPost', ProductController.addProductPost);
 module.exports = router;
 export default router;

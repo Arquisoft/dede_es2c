@@ -79,7 +79,6 @@ const App: FC = () => {
           <PrivateRoute redirectTo="/login">
             <UserAdmin />
           </PrivateRoute>} />
-          {/* <Route path = 'admin/updateProduct' element = {<UpdateProduct />} /> */}
         </Routes>
       </Router>
   );
