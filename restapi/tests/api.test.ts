@@ -155,7 +155,18 @@ describe("user ", () => {
     );
     expect(response.statusCode).toBe(404);
   }); 
+
+  /**
+   * Intento actualizar un usuario no existente
+   */
+  it("Intento actualizar un usuario no existente", async () => {
+  const response: Response = await request(app).post("/user/delete").send({
+    id: "IDFALSO"
+  });
+  expect(response.statusCode).toBe(404);
+  });
 });
+
 
 
 /******* PRODUCTOS *******/ 
@@ -206,14 +217,35 @@ describe("products ", () => {
 
 
   /**
-   * Consigo un producto buscando por la categoría
+   * Busco un producto por una categoría inexistente
    */
-    it("Puedo conseguir un producto buscando por categoria", async () => {
+   it("No conseguir un producto buscando por categoria inexistente", async () => {
     const response: Response = await request(app).get(
-      "/product/getByCategoria/monitor"
-      );
-    expect(response.statusCode).toBe(200);
+    "/product/getByCategoria/noExiste"
+    );
+    expect(response.statusCode).toBe(204);
   });
+
+  /**
+   * Busco un producto por una categoría inexistente
+   */
+  it("No conseguir un producto buscando por categoria inexistente", async () => {
+    const response: Response = await request(app).get(
+    "/product/getByCategoria/noExiste"
+    );
+    expect(response.statusCode).toBe(204);
+  });
+
+  /**
+   * Busco un producto por un precio inexistente
+   */
+  it("Busco un producto por un precio inexistente", async () => {
+    const response: Response = await request(app).get(
+    "/product/getByPrecio/0.00"
+    );
+    expect(response.statusCode).toBe(404);
+  });  
+
 
   /**
    * Creo un producto
@@ -230,6 +262,7 @@ describe("products ", () => {
     });
     expect(response.statusCode).toBe(201);
   });
+
 
   /**
     * Intento crear el mismo producto
@@ -279,6 +312,28 @@ describe("products ", () => {
     );
     expect(response.statusCode).toBe(200);
   });
+
+  /**
+   * Creo el producto de ejemplo
+   */
+ it("Creo el producto de ejemplo", async () => {
+  const response: Response = await request(app).get(
+    "/product/generateExample"
+    );
+  expect(response.statusCode).toBe(201);
+  });  
+
+  /**
+    * Borro el producto de ejemplo
+    */
+ it("Borro el producto de ejemplo", async () => {
+  const response: Response = await request(app).get(
+  "/product/delete/codeExample"
+    );
+  expect(response.statusCode).toBe(200);
+  });  
+
+
 });
 
 

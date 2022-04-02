@@ -181,7 +181,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

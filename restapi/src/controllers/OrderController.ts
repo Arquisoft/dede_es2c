@@ -26,7 +26,6 @@ export const addOrder: RequestHandler = async (req, res) => {
         const orderToSave = await order.save();
         res.json(orderToSave);
     } catch (error) {
-        console.log(error);
         res.status(412).json();
     }
 };
@@ -72,7 +71,6 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.save();
         return res.json(order);
     } catch (error){
-        console.log(error)
         return res.send("Ha surgido un error")
     }
 

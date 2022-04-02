@@ -26,7 +26,6 @@ export const addProductPost : RequestHandler= async (req = request, res = respon
         }
             
     }catch (err){
-        console.log(err)
         return res.status(400).json({msg: err})
     }
 }
@@ -87,9 +86,9 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         product.stock = 3;
         product.url = "urlExample";
         product.save();
-        return res.json(product);
+        res.status(201).json({product})
     } catch (error){
-        console.log(error);
+        return res.status(404).json({message: "There was a problem adding a product"})
     }
     
 
@@ -138,7 +137,7 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
 export const getProductByPrice: RequestHandler = async (req, res) => {
     const precio = req.params.precio;
     try{
-        const todos = await Product.find({precio: precio});
+        const todos = await Product.findOne({precio: precio});
         if (todos){
             return res.json(todos)
           } else {
