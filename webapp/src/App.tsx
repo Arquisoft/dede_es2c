@@ -23,15 +23,6 @@ const App: FC = () => {
   const onAddCart = (prod : Product) => {
     try{
     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
-    }catch(err){
-      Swal.fire({
-        title: "Debes iniciar sesión",
-        text: "Para añadir un producto al carrito primero debes iniciar sesión",
-        icon: "warning"
-    }).then(() => {
-        window.location.assign("/login");
-    });
-    }
     if(user){
       const exist = cartItems.find(x=> x.codigo == prod.codigo);
       if(exist){
@@ -49,7 +40,15 @@ const App: FC = () => {
         window.location.assign("/login");
     });
     }
-
+    }catch(err){
+      Swal.fire({
+        title: "Debes iniciar sesión",
+        text: "Para añadir un producto al carrito primero debes iniciar sesión",
+        icon: "warning"
+    }).then(() => {
+        window.location.assign("/login");
+    });
+    }
   }
 
   return (
