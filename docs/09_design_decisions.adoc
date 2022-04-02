@@ -3,17 +3,33 @@
 Restricciones técncias, es decir, se obliga a que el equipo de desarrollo trabaje con las diferentes decisiones:
 [options="header",cols="1,2,2"]
 |===
-|Decisiones |Ventajas |Desventajas
+| Restricciones | Ventajas |Desventajas
 | _React_ | _Facilidad para realizar las interfaces de usuario_ | _Framework nuevo para todo el equipo_
 | _TypeScript_ | _Lenguaje más familiriarizado, no permite fallos en los tipos_ | _Lenguaje con el que no se ha trabajado_
 | _Almacenamiento de las direcciones en PODs_ | _Seguridad para el usaurio_ | _Poco conocimiento del funcionamiento_
+| _Jest_ | _Compatible con TypeScript_ | _Nunca se ha trabajado con ello, puede llegar a tardar mucho en devolver el resultado de los tests_ 
 |===
 
 
 Las siguientes decisiones de diseño tomadas por el equipo de desarrollo, van ordenadas de mayor a menor prioridad:
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2,2,2"]
 |===
-|Decisiones |Ventajas |Desventajas
-| _MongoDB_ | _Forma sencilla de almacenar la información que necesita la aplicación_ | _Base de datos con la que no se ha trbajado_
-| _Documentación en español_ | _Mejor conocimiento técnico_ | _Complicado de entender para personas que no sepan español_ 
+|Decisiones | Ventajas | Desventajas | Link 
+| _MongoDB_ | _Forma sencilla de almacenar la información que necesita la aplicación_ | _Transacciones no soportadas_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #01]
+| _Axios_ | _Forma sencilla de conseguir datos de la Base de Datos_ | _Al procesar mucha información este puede llegar a subir el tiempo de respuesta para el cliente_| https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #02]
+| _MUI_ | _Se puede personalizar según el cliente quiera conveniente_ | _Pruebas de aceptación son dificiles de realizar_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #03]
+| _PostIamges_ | _Fácil colocación de las imagenes en la aplicación_ | _Para el administrador de la aplicación puede llegar a costarle asociar una imagen a la página web_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #05]
+| _SweetAlert2_ | _Modales con mejor diseño que los que nos pueden ofrecer MUI_ | _Se necesita instalar una nueva dependecia al sistema_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #06]
+| _UUID_ | _El código que llega a generar es improbable que se vuelva a repetir_| _El código para el adminsitrador en el caso de los productos, podria llegar a ser muy largo_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #07]
+| _Mongoose_ | _Facilita la conexion con la base de datos_ | _Nunca ha sido utilizado_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #08]
+| _Express_ | _Facilita el diseño la aplicación de forma sencilla y rápida_ | _Primera vez que se ha trabajado_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #09]
+| _NodeJS_| _Failita el trbajo a la hora de pedir datos a la base de datos_ | _Es necesario aprender como funciona este sistema_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #10]
+|===
+
+
+Decisiones que todavia no se han llegado a decidir 
+[options="header",cols="1,2,2,2"]
+|===
+| Decisiones | Ventajas | Desventajas | Link 
+| _Heroku_ | _Gratuito y además existen varias formas de desplegar_ | _Difil despliegue ya que contiene un número máximo de estos y además la documentación de errores no es concisa_| https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #04]
 |===
