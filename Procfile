@@ -1,2 +1,2 @@
-web: npx run webapp
+web: npm run webapp
 api: npm run restapi
