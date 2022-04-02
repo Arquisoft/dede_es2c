@@ -35,7 +35,7 @@ const App: FC = () => {
         <NavBar cartItems = {cartItems}></NavBar>
         {/* <NavBar/>  */}
         <Routes>
-          <Route index element = {<Home/>}/>
+          <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>

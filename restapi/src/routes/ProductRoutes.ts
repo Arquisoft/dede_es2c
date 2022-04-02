@@ -14,9 +14,9 @@ router.get('/product/generateExample', ProductController.generateExample);
 // Añadir un producto por URL
 router.get('/product/add/:codigo/:categoria/:nombre/:precio/:descripcion/:stock/:url', ProductController.addProductURL);
 // Eliminar por URL
-router.get('/product/delete/:id', ProductController.deleteProductURL);
+router.get('/product/delete/:codigo', ProductController.deleteProductURL);
 // Actualizar por URL
-router.get('/product/update/:id/:stock/:nombre/:descripcion/:url', ProductController.updateProductURL);
+router.get('/product/update/:codigo/:stock/:nombre/:descripcion/:url', ProductController.updateProductURL);
 
 
 //**** GET ****

@@ -103,7 +103,7 @@ const ListProducts = (func:ProductsProps) => {
                     
                 </Stack>  
             </div>
-            <Products product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
+            <Products homePage = {false} product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
         </div>
     );
 }

@@ -8,18 +8,24 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     // Haz aquí los cambios en vez de tener que meter manualmente los datos en mongoDB
     // Si quieres intorducir un nuevo pedido: cambia el código 
     try {
-
         let order = new Order();
         order.codigo = "orderOneExample";
         order.correo = "admin@uniovi.es";
         order.direccion = "dirExample";
         order.fecha = new Date();
         order.precioTotal = 139.99;
-        order.id_user = "6227991f3dc4737c6f68cc32";
+        order.productos = [{
+            "codigo_producto" : "codigo1",
+            "cantidad": 1
+        }, {
+            "codigo_producto" : "codigo2",
+            "cantidad": 1
+        }
+    ];
         order.save();
         return res.json(order);
     } catch (error){
-        console.log(error);
+        return res.send("Ha surgido un error")
     }
 
 }
@@ -28,15 +34,23 @@ export const generateExample: RequestHandler = async(req, res, next) => {
 
 export const addOrderURL: RequestHandler = async(req, res, next) => {
     try {
-        const codigo = req.params.codigo;
-        const correo = req.params.correo;
-        const fecha = req.params.fecha;
-        const direccion = req.params.direccion;
-        const precioTotal = req.params.precioTotal;
-        const id_user = req.params.id_user;
-        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, id_user: id_user});
-        order.save();
+        if (checkParams(req.params)){
+            const orderEncontrada = await Order.findOne({codigo: req.params.codigo});
+            if (orderEncontrada == null){
+                const codigo = req.params.codigo;
+                const correo = req.params.correo;
+                const fecha = req.params.fecha;
+                const direccion = req.params.direccion;
+                const precioTotal = req.params.precioTotal;
+                const productos = req.params.productos;
+                const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                        precioTotal: precioTotal, productos: productos});
+                await order.save();
+                return res.send("New order OK")
+            } else {
+                return res.send("There was a problem adding an order")
+            }
+        }
     } catch (error){
         console.log(error);
     }
@@ -44,15 +58,23 @@ export const addOrderURL: RequestHandler = async(req, res, next) => {
 
 export const addOrderForm: RequestHandler = async(req, res, next) => {
     try {
-        const codigo = req.body.codigo;
-        const correo = req.body.correo;
-        const fecha = req.body.fecha;
-        const direccion = req.body.direccion;
-        const precioTotal = req.body.precioTotal;
-        const id_user = req.body.id_user;
-        const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
-                                    precioTotal: precioTotal, id_user: id_user});
-        order.save();
+        if (checkParams(req.body)){
+            const orderEncontrada = await Order.findOne({codigo: req.body.codigo});
+            if (orderEncontrada == null){
+                const codigo = req.body.codigo;
+                const correo = req.body.correo;
+                const fecha = req.body.fecha;
+                const direccion = req.body.direccion;
+                const precioTotal = req.body.precioTotal;
+                const productos = req.body.productos;
+                const order = new Order({codigo: codigo, correo: correo, direccion: direccion, fecha: fecha,
+                                        precioTotal: precioTotal, productos: productos});
+                await order.save();
+                return res.send("New order OK")
+            } else {
+                return res.send("There was a problem adding an order")
+            }
+        }
     } catch (error){
         console.log(error);
     }
@@ -60,19 +82,19 @@ export const addOrderForm: RequestHandler = async(req, res, next) => {
 
 export const deleteOrderURL: RequestHandler = async (req, res) => {
     try {
-      const { id } = req.params;
-      await Order.findByIdAndDelete(id);
-      return res.send("Order deleted")
+        const {codigo} = req.params;
+        await Order.deleteOne({codigo: codigo});
+        return res.send("Order deleted")
     } catch (error) {
-      return res.status(404).json({message: 'There was a problem deleting a order'});
+        return res.status(404).json({message: 'There was a problem deleting a order'});
     }
 };
 
 export const deleteOrderForm: RequestHandler = async (req, res) => {
     try {
-      const { id } = req.body;
-      await Order.findByIdAndDelete(id);
-      return res.send("Order deleted")
+        const {codigo} = req.body;
+        await Order.deleteOne({codigo: codigo});
+        return res.send("Order deleted")
     } catch (error) {
       return res.status(404).json({message: 'There was a problem deleting a order'});
     }
@@ -82,28 +104,38 @@ export const deleteOrderForm: RequestHandler = async (req, res) => {
 export const updateOrderURL: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
-      const { id } = req.params;
-      const {_id, ...params} = req.params
-      await Order.findByIdAndUpdate(id, params);
-      return res.send("Order updated")
+        const codigo  = req.params.codigo;
+        const {...params} = req.params;
+        await Order.findOneAndUpdate({codigo: codigo}, params); 
+        return res.send("Order updated")
     } catch (error) {
-      console.log(error)
-      return res.status(404).json({message: 'There was a problem updating a order'});
+        console.log(error)
+        return res.status(404).json({message: 'There was a problem updating a order'});
     }
   };
 
   export const updateOrderPOST: RequestHandler = async (req, res) => {
     // Se pueden actualizar tanto el correo como la direccion
     try {
-      const { id } = req.body;
-      const {_id, ...body} = req.body
-      await Order.findByIdAndUpdate(id, body);
-      return res.send("Order updated")
+        const codigo  = req.body.codigo;
+        const {...body} = req.body;
+        await Order.findOneAndUpdate({codigo: codigo}, body); 
+        return res.send("Order updated")
     } catch (error) {
-      console.log(error)
-      return res.status(404).json({message: 'There was a problem updating a order'});
+        console.log(error)
+        return res.status(404).json({message: 'There was a problem updating a order'});
     }
   };
+
+
+
+  
+function checkParams(body: any): boolean{
+    const {codigo, correo, direccion, fecha, precioTotal} = body;
+    return codigo != null && codigo != '' && correo != null && correo != '' && 
+    direccion != null && direccion != '' && fecha != null && precioTotal > 0
+}
+
 
 
 
