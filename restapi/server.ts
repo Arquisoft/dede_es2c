@@ -3,7 +3,7 @@ import cors from 'cors';
 import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
-import userRoutes from "../restapi/src/routes/UserRoutes";
+import userRoutes from "./src/routes/UserRoutes";
 require('dotenv').config();
 import productRoutes from "./src/routes/ProductRoutes";
 import orderRoutes from "./src/routes/OrderRoutes";
