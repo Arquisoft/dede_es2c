@@ -17,7 +17,7 @@ type Email = {
 
 
 const updateUser = (id:String,name:String,surname:String,email: String) => {
-    axios.post("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+    axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
     .then(res => {
         console.log(res);
         console.log(res.data);

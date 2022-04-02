@@ -6,13 +6,11 @@ import axios from 'axios';
 
 type OrderProps = {
     order: Order[]
-    email: String
 }
 
 
 const  OrderUser = (orderProp: OrderProps) => {
 
-    console.log(orderProp.email)
     const findProductInOrdertById = async (id: string) =>{
         const data = axios.get('http://localhost:5000/productOrder/getById/' + id).then(
             res => {

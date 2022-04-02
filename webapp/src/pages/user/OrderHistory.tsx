@@ -33,7 +33,7 @@ const OrderHistory = (id: Id) => {
     }
 
     useEffect(() => {cargarPedidos();}, []);
-    
+
     return (
         <div>
             <div style={{ margin: '170px' }}>
@@ -49,7 +49,7 @@ const OrderHistory = (id: Id) => {
                         </TableHead>
 
                         <TableBody>
-                            <OrderUser order = {orders} email = {id.email} />
+                            <OrderUser order = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>
