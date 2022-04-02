@@ -8,31 +8,22 @@ const ProductPost = require('../model/Product')
 
 /************* POST CON LOS PRODUCTOS *************/
 
-export const addProduct : RequestHandler= async (req = request, res = response) => {
-    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
-    try {
-        if(checkParams(req.params)){
-            const productoEncontrado = await productModel.findOne({codigo: req.params.codigo});
-            if(productoEncontrado == null){
-                const product = new productModel(req.params);
-                await product.save();
-                return res.send("New product OK")
-            } else {
-                return res.send("There was a problem adding a product")
-            }
-        }   
-    }catch (err){
-        return res.status(400).json({msg: err})
-    }
-}
-
-
 export const addProductPost : RequestHandler= async (req = request, res = response) => {
     // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
     try {
-        const prod = new productModel(req.body);
-        await prod.save();
-        res.status(201).json({prod})
+        // Hay que buscar que no exista
+        const productoPrevio = await productModel.findOne({codigo: req.body.codigo})
+        if (productoPrevio == null){
+            if (checkParams(req.body)){
+                const prod = new productModel(req.body);
+                await prod.save();
+                res.status(201).json({prod})
+            } else {
+                return res.status(412).json({message: "Incomplete product"});
+            }
+        } else {
+            return res.status(409).json({message: "A product with that code already exists"});
+        }
             
     }catch (err){
         console.log(err)
@@ -48,6 +39,8 @@ export const deleteProduct: RequestHandler = async (req, res) => {
         const productDeleted = await productModel.deleteOne({codigo: codigo});
         if (productDeleted){
             return res.send("Product deleted");
+        } else {
+            return res.status(301).json({ message: "The operation didn't succed "});
         }
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});
@@ -131,21 +124,29 @@ export const getProducts: RequestHandler = async (req, res) => {
 export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
-        const encontrado = await productModel.find({categoria: req.params.categoria});
-        return res.json(encontrado);
+        const encontrado = await productModel.findOne({categoria: req.params.categoria});
+        if (encontrado){
+            return res.json(encontrado)
+          } else {
+            return res.status(204).json();
+          }
     }catch(error){
         res.status(404).json({message: 'No hay productos de esa categoría'})
     }
 }
 
 export const getProductByPrice: RequestHandler = async (req, res) => {
-    const price = req.params.price;
+    const precio = req.params.precio;
     try{
-        const todos = await Product.find({precio: price});
-        return res.json(todos);
+        const todos = await Product.find({precio: precio});
+        if (todos){
+            return res.json(todos)
+          } else {
+            return res.status(204).json();
+          }
     }catch(error){
-        console.log(error);
-        res.json(error);
+        res.status(404).json({message: 'No hay productos con ese precio'})
+
     }
 }
 

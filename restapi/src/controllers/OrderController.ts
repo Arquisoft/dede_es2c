@@ -8,17 +8,9 @@ import { Product, productModel } from "../model/Product";
 /************* CREAR UN PEDIDO *************/
 
 export const addOrder: RequestHandler = async (req, res) => {
-    
-    // PASO 1: verificar el usuario conectado
 
-    /** 
-    const isVerified = verifyToken(
-      req.headers.token + "",
-      req.headers.email + ""
-    );
-    **/
    
-    // PASO 2: actualizar el stock
+    // Hay que actualizar el stock
 
     const updateStock = async (products: any) => {
       for (var i = 0; i < products.length; i++) {
@@ -27,23 +19,16 @@ export const addOrder: RequestHandler = async (req, res) => {
         product.save();
       }
     };
-  
-    // PASO 3: crear el pedido
-
-
-    //if (isVerified) {
-      try {
+    
+    try {
         const order = new orderModel(req.body);
         updateStock(order.products);
         const orderToSave = await order.save();
         res.json(orderToSave);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(412).json();
-      }
-    //} else {
-    //  res.status(203).json();
-    //}
+    }
 };
 
 /************* GENERAR UN EJEMPLO *************/
@@ -129,11 +114,7 @@ export const getTotalUserOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
         const encontrado = await orderModel.find({correo: email});
-        if (encontrado){
-            return res.json(encontrado)
-          } else {
-            return res.status(204).json();
-          }
+        return res.json(encontrado)
     }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
     }

@@ -6,7 +6,7 @@ const router = express.Router();
 // Generar ejemplo
 router.get('/order/generateExample', OrderController.generateExample);
 // Crear un pedido
-router.post("/order/add", OrderController.addOrder);
+router.post("/order/addOrder", OrderController.addOrder);
 // Busca todos
 router.get('/order/list', OrderController.getOrders);
 // Buscar pedido por codigo

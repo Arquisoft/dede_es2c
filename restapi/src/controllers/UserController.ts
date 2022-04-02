@@ -101,6 +101,17 @@ export const deleteUser: RequestHandler = async (req, res) => {
   }
 };
 
+export const deleteUserByEmail: RequestHandler = async (req, res) => {
+  try {
+    const { email } = req.params;
+    await User.deleteOne({email: email});
+    return res.send("User deleted")
+  } catch (error) {
+    return res.status(404).json({message: 'There was a problem deleting a user'});
+  }
+};
+
+
 export const update: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');
   try {
