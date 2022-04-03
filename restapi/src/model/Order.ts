@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
-const { model, Schema } = mongoose
 
-export const OrderShema = new mongoose.Schema({
 
-    // Habría que pasar de string a date en la fecha
-    // Deberías cambiar el usuario a un object
-    
+import { Product } from "../model/Product";
+
+const OrderShema = new mongoose.Schema({  
     codigo: {
         type: String,
         required: true,
@@ -27,23 +25,11 @@ export const OrderShema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    productos: [{
-        codigo_producto:{
-            type: String,
-            required: true,
-        } ,
-        cantidad: {
-            type: Number,
-            required: true,
-            min: 0
-        },
-        precio:  {
-            type: Number,
-            required: true,
-            min: 0
-        },
-    }]
+    products: {
+        type: [Product],
+        required: true
+    }, 
     },
     { collection: 'Order' })
 
-export const Order = mongoose.model('Order', OrderShema, 'Order');
+export const orderModel = mongoose.model('Order', OrderShema);

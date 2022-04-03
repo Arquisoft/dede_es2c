@@ -7,6 +7,8 @@ import logo from '../img/logo-dede.svg';
 import { Card, CardContent } from '@mui/material';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import SelectInput from '@mui/material/Select/SelectInput';
 // import Check from '../checks/Arguments'
 
 
@@ -17,17 +19,29 @@ const checkParams = (text: String) => {
 const handleLogin = (idUser: String, pass: String) => {
    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
    .then(res => {
-       console.log(res);
-       console.log(res.data);
        if(res.status == 201){
-           alert("Sesión iniciada");
-           window.location.assign("/");
+        Swal.fire({
+            title: "Sesión iniciada",
+            icon: "success"
+        }).then(() => {
+            console.log(res.data)
+            localStorage.setItem('token',res.data.token);
+            window.location.assign("/products");
+        });
        }else{
-            alert("Usuario o contraseña incorrectos");
+            Swal.fire({
+                title: "Creedenciales incorrectos",
+                text: "El usuario o contraseña son incorrectos, vuelva a introducirlos",
+                icon: "error",
+                footer: '<a href ="/signup">¿No tienes cuenta? Registrate ahora!</a>'
+            });
        }
    })
 }
 
+const changeIcon = () => {
+
+}
 
 const LogIn: FC = () => {
     const [email, setEmail] = useState('')

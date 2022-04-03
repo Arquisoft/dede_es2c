@@ -5,7 +5,7 @@ Una empresa de venta de productos busca originar un sistema de venta online deno
 Estará centrada en la venta de productos informáticos de diferentes ámbitos (como ratones, teclados...).
 Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
 El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
-
+Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además de acceder a la tienda, crear, modificar y eliminar los productos de la base de datos.
 
 
 === Información general de los requisitos
@@ -44,9 +44,8 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 |Objetivos de calidad|Motivación|Importancia
 | Eficiencia | La aplicación utilizará la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
 | Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
-| Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Media
+| Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Alta
 | Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
-| Portabilidad | La aplicación ha de poder ejecutarse en diferentes plataformas o entornos integrados | Baja
 | Comodidad | La aplicación ha de ser fácil de manejar para gente no experimentada | Alta
 |===
 
@@ -59,7 +58,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 | Equipo de desarrollo | Aprender a trabajar en equipo con gente que no conocen y familiarizarse con las tecnologías solicitadas en el curso
 | Empresa de venta de productos (cliente) | Una aplicación funcional que satisfaga los requisitos solicitados, especialmente aquellos relacionados con la seguridad
 | Cliente | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
-| Administrador | Tener el control de una aplicación robusta y eficiente con la que poder satisfacer las necesidades de los usuarios
+| Administrador | Tener el control de una aplicación robusta y eficiente que incluya la posiblidad de crear, modificar, eliminar productos, ver los usuarios y pedidos
 |===
 
 

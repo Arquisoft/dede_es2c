@@ -5,25 +5,30 @@ import Button from '@mui/material/Button';
 import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { readdir } from 'fs/promises';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-
 const checkPaswwords = (repPass: String, pass: String) => {
     return repPass !== pass;
 }
 
 const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"password":pass})
+    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
     .then(res => {
         console.log(res);
         console.log(res.data);
         if(res.status == 201){
-            alert("User registered");
-            window.location.assign("/login");
+            Swal.fire({
+                title: "Usuario registrado",
+                text: "Te has registrado correctamente en la aplicación",
+                icon: "success"
+            }).then(() => {
+                window.location.assign("/login");
+            });
         }
     })
  }
@@ -47,7 +52,11 @@ const SignUp: FC = () => {
     async function allFunc(name:String,surname:String,email: String,pass: String,repPass:String){
         setPulse(true);
         if(await getEmail(email).then(resolve => {return resolve})){
-            alert("El email ya existe");
+            Swal.fire({
+                title: "El e-mail ya existe",
+                text: "El e-mail ya existe en el sistema, pruebe con otro",
+                icon: "error"
+            });
         }else{
             handleSignup(name,surname,email,pass,repPass);
         }

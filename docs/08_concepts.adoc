@@ -3,14 +3,14 @@
 
 === Modelo de dominio
 
-image:Modelo_datos.png["Modelo de datos"]
+image:08_Modelo_datos.png["Modelo de datos"]
 
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
 
 === Seguridad
-La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente.
+La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente. Para poder garantizar la seguridad al usuario con sus contraseñas estas serán cifradas.
 
 === Consistencia
 Otro aspecto fundamental que perseguimos es garantizar que los datos de los clientes no se corrompan al emplear su aplicación, sin importar el problema que ocurra.
@@ -23,9 +23,6 @@ Se incluirá el código necesario para manejar y capturar los errores procedente
 
 === Accesibilidad
 Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
-
-=== Seguridad
-Ningún aspecto de la aplicación será dañino para la vida del usuario.
 
 === Manejo de sesión
 Se manejarán las sesiones a través del uso de las APIs necesarias.
@@ -41,15 +38,46 @@ El formato que se ha escogido para realizar los prototipos de la aplicacion es q
 
 Para comenzar tenemos la página inicial, esta estara compuesta por aquellos productos que tengan un descuento o sean top ventas de la aplicación. 
 
-image:08_protHome.jpg["Página inicio"]
+image:08_HomePage.png["Página inicio"]
+
+También se podrá tener acceso a la vista de los productos, la cual ofrece una serie de categorías por si se está buscando algo en especifico. 
+
+image:08_CatalogoProductos.png["Catalogo de Productos"]
 
 Una vez se este en la aplicacion se podran realizar varias cosas: 
 
+Desde el punto de vista de un cliente:
+
 * Realizar LogIn en la aplicacion: Para poder acceder a la aplicación es necesario indicar el nombre de email de este como la contraseña que haya indicado anteriormente. 
+
+image:08_IniciarSesion.png["Página login"]
+
 * Realizar un registro en nuestra aplicación, para ello se deberán indicar unos cuantos campos acerca de la informacion peronal de este. 
 
-image:08_protLogIn+SignUp.jpg["Página login y registro aplicación"]
+image:08_Registro.png["Registro aplicación"]
 
-* Visualización de todos los productos: Se podrá ver inforamcion acerca de cada producto con su diferente precio. Además se podran realizar diferentes filtros para que el cliente pueda conseguir de una forma mas comoda los productos que desee. Los posibles filtros que se podran realizar son por precio, por categoria.
- 
-image:08_protListaProd.jpg["Página de productos"]
+* Realizar el pago del carrito del usuario
+
+image:08_VentanaPago.png["Ventana Pego"]
+
+Desde el punto de vista de Administrador:
+
+* Ver todos los pedidos que se han realizado desde la aplicación
+
+image:08_ProdAdmin.png["Pedidos como Admin"]
+
+* Ver todos los usuarios registrados en la aplicación, asi como tener un botón para asignar a otro administrador
+
+image:08_AdminUsuarios.png["Productos como Admin"]
+
+* Crear un nuevo producto 
+
+image:08_AdminAnadirProducto.png["Añadir productos"]
+
+* Ver todos los productos que exiten en la app: 
+
+image:08_ProdAdmin.png["Productos como Admin"]
+
+* Actualizar los valores de productos ya existentes
+
+image:08_ModalActualizacionProd.png["Actualizar Productos como Admin"]

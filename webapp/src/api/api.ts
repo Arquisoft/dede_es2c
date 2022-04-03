@@ -1,4 +1,4 @@
-import {User, Product} from '../shared/shareddtypes';
+import {User, Product, Order} from '../shared/shareddtypes';
 
 export async function addUser(user:User):Promise<boolean>{
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
@@ -29,5 +29,21 @@ export async function getProducts(): Promise<Product[]>{
 export async function getProductosByCategoria(categoria: string): Promise<Product[]>{
   const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
   let response = await fetch(apiEndPoint + "/product/getByCategoria/" + categoria);
+  return response.json();
+}
+
+export async function getOrders(): Promise<Order[]>{
+  const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+  let response = await fetch(apiEndPoint + "/order/list");
+  return response.json();
+}
+
+export async function getDireccionPod(webId: string) {
+  const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+  let response = await fetch(apiEndPoint + "/user/pod/" + webId);
+
+  if(response.status === 404){
+      return "";
+  }
   return response.json();
 }

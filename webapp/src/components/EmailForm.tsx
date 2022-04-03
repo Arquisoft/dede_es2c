@@ -17,8 +17,11 @@ type NotificationType = {
 
 function EmailForm(props: EmailFormProps): JSX.Element {
 
+  const [_id, setId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [surname, setSurame] = useState('');
+  const [password, setPassword] = useState('');
 
   const [notificationStatus, setNotificationStatus] = useState(false);
   const [notification, setNotification] = useState<NotificationType>({severity:'success',message:''});
@@ -27,7 +30,7 @@ function EmailForm(props: EmailFormProps): JSX.Element {
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let result:boolean = await addUser({name,email});
+    let result:boolean = await addUser({_id,email,name,surname,password});
     if (result){
       setNotificationStatus(true);
       setNotification({ 

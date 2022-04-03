@@ -1,19 +1,21 @@
 const express = require("express");
 import * as OrderController from '../controllers/OrderController';
-
 const router = express.Router();
 
 
-// DE MOMENTO ESTO SE MUEVE AL PRODUCTS HASTA QUE SEPA QUÉ LE PASA
-//      Lo tengo que hacer así porque si no no puedo hacer nada
-
+// Generar ejemplo
+router.get('/order/generateExample', OrderController.generateExample);
+// Crear un pedido
+router.post("/order/addOrder", OrderController.addOrder);
 // Busca todos
-//router.get('/order/list', OrderController.getOrders);
+router.get('/order/list', OrderController.getOrders);
+// Buscar pedido por codigo
+router.get('/order/getByCode/:codigo', OrderController.getOrderByCode);
+// Buscar pedido por correo
+router.get('/order/getByEmail/:email', OrderController.getOrderByEmail);
+// Buscar todos los pedidos por correo
+router.get('/order/getAllByEmail/:email', OrderController.getTotalUserOrderByEmail);
 
-// Para tests
-//router.get('/order/message', OrderController.getMessage);
 
 module.exports = router;
-
 export default router;
-

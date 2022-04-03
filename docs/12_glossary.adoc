@@ -16,4 +16,13 @@
 | Axios | Cliente HTTP basado en promesas. Dependecia isntalada para poder realizar de una manera mas sencilla el juntar front-end y back-end de la aplicación
 | PostImage | Página web para poder almacenar las imagenes de los productos 
 | MUI | Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación
+| GitHub | Plataforma para alojar proyectos utilizando un sistema de veriones Git
+| Pencil | Aplicación de escritorio en la que se puede realizar prototipos de pantallas
+| UUID | Librería que genera cógidos aleatorios donde la probabilidad de que uno sea repetido es mínimo
+| SweetAlert2 | Librería de libre acceso para construir los diferentes componentes modales que se utilizan en la aplicación
+| NodeJs | Entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos
+| Express | Framework de aplicaciones web gratuito y de código abierto para Node. js. Se utiliza para diseñar y construir aplicaciones web de forma rápida y sencilla
+| MongoDB | Sistema de base de datos NoSQL, orientado a documentos y de código abierto
+| MongoDB Atlas | Sistema gestionador de base de datos que se encarga de toda la complejidad de la implementación, la gestión y la recuperación de sus implementaciones en el proveedor de servicios en la nube de su elección
+| Mongoose | Biblioteca de JavaScript que le permite definir esquemas con datos fuertemente tipados
 |===
