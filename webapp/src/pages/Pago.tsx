@@ -50,11 +50,11 @@ const Pago: FC = () => {
 
             Swal.fire({
                 title: "Creedenciales correctas",
-                text:   "Direccion: " + calle + "\n" +
-                        "Código Postal: " + codigo + "\n" + 
-                        "Localidad: " + localidad + "\n" +     
-                        "Region: "  + region + "\n" + 
-                        "País: " + pais + "\n"
+                text:   "Direccion: " + direccion['street_address'] + "\n" +
+                        "Código Postal: " + direccion['postalCode'] + "\n" + 
+                        "Localidad: " + direccion['locality'] + "\n" +     
+                        "Region: "  + direccion['region'] + "\n" + 
+                        "País: " + direccion['country'] + "\n"
                       ,
                 icon: "success",
             });

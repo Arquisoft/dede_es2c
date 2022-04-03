@@ -76,4 +76,4 @@ test('Admin -> Administrar Pedidos Inside', async () => {
                             {codigo: "B", correo: "b@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}]
   render(<OrderAdmin orders={pedido}  />)
   expect(screen.getByText(/a@uniovi/i)).toBeInTheDocument();
-});
+}); 

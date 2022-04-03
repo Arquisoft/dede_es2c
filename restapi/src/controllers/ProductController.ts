@@ -123,7 +123,7 @@ export const getProducts: RequestHandler = async (req, res) => {
 export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
-        const encontrado = await productModel.findOne({categoria: req.params.categoria});
+        const encontrado = await productModel.find({categoria: req.params.categoria});
         if (encontrado){
             return res.json(encontrado)
           } else {
