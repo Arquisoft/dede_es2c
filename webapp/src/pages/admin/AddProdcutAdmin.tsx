@@ -125,6 +125,7 @@ const AddProdutcAdmin: FC = () => {
                                     maxRows = {10}
                                     multiline
                                     required
+                                    defaultValue={descrip}
                                     value = {descrip}
                                     onChange = {(e: any) => setDescripcion(e.target.value)}
                                 />
