@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import {  getOrders, getOrdersByEmail } from '../../api/api';
-import OrderAdmin from '../admin/OrderAdmin';
+import OrderUser from '../user/OrderUser';
 
 type Id = {
     email:String
@@ -31,6 +31,7 @@ const OrderHistory = (id: Id) => {
         setOrders(await getOrdersByEmail(id.email));
     }
     useEffect(() => {cargarPedidos();}, []);
+    console.log(orders)
 
     return (
         <div>
@@ -46,7 +47,7 @@ const OrderHistory = (id: Id) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <OrderAdmin order = {orders} />
+                            <OrderUser orders = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>
