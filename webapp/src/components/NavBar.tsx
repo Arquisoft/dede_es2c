@@ -13,6 +13,7 @@ import { Container } from '@mui/material';
 
 type ProductsProps = {
     cartItems:Product[]
+    setUser:(user: string) => void
 }
 
 
@@ -45,6 +46,89 @@ const NavBar=(cart:ProductsProps) =>{
         removeItem(prod);
         handleClose();
     }
+
+    console.log(localStorage.getItem('TOKEN'))
+    if(localStorage.getItem('TOKEN') !== null && (localStorage.getItem('TOKEN')?.includes("ROLE_ADMIN"))){
+        return(
+            <AppBar position="fixed" >
+                <Toolbar>
+                <Typography variant="h6" component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+                   DeDe
+                  </Typography>
+                  <Button color="inherit" href = "/">Inicio</Button>
+                  <Button color="inherit" href = "/products">Productos</Button>
+                  <Button color = "inherit" href='/admin/manageProducts'>Productos</Button>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                  </Typography>
+    
+                  <IconButton 
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}       
+                  >
+                    <Badge badgeContent={numOfProducts} color="secondary">    
+                        <ShoppingCartIcon color="inherit" />
+                    </Badge>
+                    </IconButton>
+                    <Menu     
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                     'aria-labelledby': 'basic-button',
+                    }}>
+                        {cart.cartItems.length > 0 ? (
+                            <>
+                            {cart.cartItems.map( prod => (
+                                <div className= "cartItem">
+                                    <Container>
+                                        
+                                        <img style={{
+                                            marginRight:20,
+                                            width:50,
+                                            height: 40,
+                                            bottom:20
+                                        }} src = {prod.url}>                                
+                                        </img>
+                                            {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
+                                            <IconButton style={{
+                                            left:10,
+                                        }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
+                                        
+                              
+                                    </Container>                         
+                                </div>                                            
+                             ))}
+                            <div></div>
+                            <Container style = {{
+                                right:200
+                            }}>
+                            <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                                Precio total: {totalPrice}€
+                            </Typography>
+                            </Container>
+                            <Button variant = "contained" size = "small" style={{
+                                left:24,
+                                bottom:-2
+                            }} href = "/pago"> Completar el pago </Button>
+                            
+                            </>
+                        ) :(<div>
+                            <Container>
+                            <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                                El carro se encuentra vacío
+                            </Typography>
+                            </Container>
+                            </div>)}
+                    </Menu>
+                    <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
+                </Toolbar>     
+            </AppBar>
+                );
+    }else {
 
     return(
         <AppBar position="fixed" >
@@ -125,6 +209,7 @@ const NavBar=(cart:ProductsProps) =>{
             </Toolbar>     
         </AppBar>
             );
+                    }
 
 }
 const  showProducts = () =>{

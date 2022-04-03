@@ -13,15 +13,19 @@ import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
+import { useContext } from 'react';
+import { UserContext } from './contexts/UserContext';
 
 
 const App: FC = () => {
 
+  const { dispatch: {setUser}} = useContext(UserContext);
+
   const [cartItems,setCartItems] = useState<Product[]>([]);
   const onAddCart = (prod : Product) => {
-    const exist = cartItems.find(x=> x.codigo == prod.codigo);
+    const exist = cartItems.find(x=> x.codigo === prod.codigo);
     if(exist){
-      setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
+      setCartItems(cartItems.map(x=> x.codigo === prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
 
     } else {
       setCartItems([...cartItems,{...prod,cantidad:1}])
@@ -32,7 +36,7 @@ const App: FC = () => {
   return (
 
       <Router>
-        <NavBar cartItems = {cartItems}></NavBar>
+        <NavBar cartItems = {cartItems} setUser = {setUser}></NavBar>
         {/* <NavBar/>  */}
         <Routes>
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
