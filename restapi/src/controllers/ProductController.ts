@@ -1,5 +1,4 @@
 import { RequestHandler, response, request } from "express";
-
 import { Product, productModel } from "../model/Product";
 
 const ProductPost = require('../model/Product')

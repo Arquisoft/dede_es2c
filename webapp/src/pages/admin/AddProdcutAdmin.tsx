@@ -63,7 +63,6 @@ const AddProdutcAdmin: FC = () => {
         setCategoria(event.target.value as string)
     }
 
-
     return (
         <div>
             <Container component= "main" maxWidth="sm" fixed={true} 

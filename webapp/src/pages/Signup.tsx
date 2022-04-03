@@ -12,7 +12,6 @@ const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-
 const checkPaswwords = (repPass: String, pass: String) => {
     return repPass !== pass;
 }
@@ -30,7 +29,6 @@ const handleSignup = (name:String,surname:String,email: String,pass: String,repP
             }).then(() => {
                 window.location.assign("/login");
             });
-            
         }
     })
  }

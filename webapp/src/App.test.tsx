@@ -10,8 +10,9 @@ import UserAdmin from './pages/admin/UsersAdmin';
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageOrders from './pages/admin/ManageOrders';
 import OrderAdmin from './pages/admin/OrderAdmin';
+import Profile from './pages/user/Profile';
+import OrderHistory from './pages/user/OrderHistory'
 import Pago from './pages/Pago';
-
 /* test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/Source code/i);
@@ -49,12 +50,12 @@ test('Admin -> Administrar Productos Base Datos', async () => {
   expect(screen.getByText(/PruebaTecado/i)).toBeInTheDocument();
   expect(screen.getByText(/Administrar/i)).toBeInTheDocument();
 });
-
+/*
  test('Admin -> Administrar Usuarios dentro', async () => {
   const userList:User[] = [{name:"Ana", email: "a@uniovi.es"}]
   render(<IUserAdmin user={userList} />)
   expect(screen.getByText(/Ver pedidos/i)).toBeInTheDocument();
-});
+});*/
 
 test('Admin -> Administrar Usuarios', async () => {
   render(<UserAdmin />)
@@ -83,4 +84,20 @@ test('Admin -> Administrar Pedidos Inside', async () => {
                             {codigo: "B", correo: "b@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}]
   render(<OrderAdmin orders={pedido}  />)
   expect(screen.getByText(/a@uniovi/i)).toBeInTheDocument();
+}); 
+
+test('User -> Sobre La Página', async () => {
+  render(<Profile email={"user2@uniovi.com"}/>)
+  expect(screen.getByText(/Correo electrónico:/i)).toBeInTheDocument();
+  expect(screen.getByText(/Nombre:/i)).toBeInTheDocument();
+  expect(screen.getByText(/Apellidos:/i)).toBeInTheDocument();
+  expect(screen.getByText(/Contraseña:/i)).toBeInTheDocument();
+}); 
+
+test('User -> Página historial de datos', async () => {
+  render(<OrderHistory email={"admin@uniovi.es"}/>)
+  expect(screen.getByText(/Código del pedido/i)).toBeInTheDocument();
+  expect(screen.getByText(/Fecha de orden/i)).toBeInTheDocument();
+  expect(screen.getByText(/Precio del pedido/i)).toBeInTheDocument();
+  expect(screen.getByText(/Productos/i)).toBeInTheDocument();
 }); 

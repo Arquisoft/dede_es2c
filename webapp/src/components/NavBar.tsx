@@ -5,14 +5,18 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Badge from '@mui/material/Badge';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Menu } from '@mui/material';
+import { MenuItem } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
 import { Product } from '../shared/shareddtypes';
-import Menu from '@mui/material/Menu';
+import Link from '@mui/material/Link';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
 
 type ProductsProps = {
-    cartItems:Product[]
+  cartItems:Product[]
 }
 
 
@@ -24,6 +28,9 @@ const NavBar=(cart:ProductsProps) =>{
     };
     const handleClose = () => {
       setAnchorEl(null);
+    };
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
     };
     var totalPrice = 0;
     var numOfProducts = 0
@@ -121,6 +128,38 @@ const NavBar=(cart:ProductsProps) =>{
                         </Container>
                         </div>)}
                 </Menu>
+                <IconButton
+                    id="basic-button"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                    color = "inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    open={open}
+                >
+                    <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
+                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                    </Link>
+                    <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
+                        <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
+                    </Link>
+                </Menu>
+
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
             </Toolbar>     
         </AppBar>
@@ -132,8 +171,5 @@ const  showProducts = () =>{
         <div>hola</div>
     );
 }
-
-
-
 
 export default NavBar;
