@@ -40,6 +40,6 @@ export async function getOrders(): Promise<Order[]>{
 
 export async function getOrdersByEmail(email: String): Promise<Order[]>{
   const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-  let response = await fetch(apiEndPoint + "/order/getByEmail/" + email);
+  let response = await fetch(apiEndPoint + "/order/getAllByEmail/" + email);
   return response.json();
 }

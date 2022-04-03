@@ -24,7 +24,6 @@ export type Order = {
   fecha: Date,
   precioTotal: number,
   products: Object[],
-  product: ProductPedido,
   correo: string
   id_usuario: string;
 }

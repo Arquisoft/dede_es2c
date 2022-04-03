@@ -25,11 +25,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const OrderHistory = (id: Id) => {
-
     const [orders, setOrders]  = React.useState<Order[]>([]);
     async function cargarPedidos() {
-        setOrders(await getOrdersByEmail(id.email));
+        setOrders(await getOrders());
     }
+
     useEffect(() => {cargarPedidos();}, []);
     console.log(orders)
 
@@ -43,7 +43,7 @@ const OrderHistory = (id: Id) => {
                             <StyledTableCell>Código del pedido</StyledTableCell>
                                 <StyledTableCell>Fecha de orden</StyledTableCell>
                                 <StyledTableCell>Precio del pedido</StyledTableCell>
-                                <StyledTableCell>Productos</StyledTableCell>  
+                                <StyledTableCell>Productos</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

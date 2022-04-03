@@ -32,12 +32,6 @@ const Profile = (correo:Email) => {
 
     getUserByEmail(correo.email);
     const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
-        console.log(name)
-        console.log(user.name)
-        console.log(surname)
-        console.log(user.surname)
-        console.log(email)
-        console.log(user.email)
         if(name == ''){
             name = user.name
         }
