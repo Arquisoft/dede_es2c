@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>DeDe_0</title>
+<title>DeDe_Es2C</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1><span class="image"><img src="./images/LogoASW.png" alt="arc42"></span> DeDe_0</h1>
+<h1><span class="image"><img src="./images/LogoASW.png" alt="arc42"></span> DeDe_Es2C</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -467,7 +467,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
-<li><a href="#_descripción_del_sistema_en_caja_blanca">5.1. Descripción del sistema en caja blanca</a></li>
+<li><a href="#_5_1_whitebox_overall_system">5.1. 5.1. Whitebox Overall System</a></li>
+<li><a href="#_5_2_nivel_1">5.2. 5.2. Nivel 1</a></li>
+<li><a href="#_5_3_nivel_2">5.3. 5.3. Nivel 2</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
@@ -496,11 +498,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_usabilidad">8.5. Usabilidad</a></li>
 <li><a href="#_manejo_de_excepciones">8.6. Manejo de excepciones</a></li>
 <li><a href="#_accesibilidad">8.7. Accesibilidad</a></li>
-<li><a href="#_seguridad_2">8.8. Seguridad</a></li>
-<li><a href="#_manejo_de_sesión">8.9. Manejo de sesión</a></li>
-<li><a href="#_estándares_de_código">8.10. Estándares de código</a></li>
-<li><a href="#_persistencia">8.11. Persistencia</a></li>
-<li><a href="#_prototipado_de_la_aplicación">8.12. Prototipado de la aplicación</a></li>
+<li><a href="#_manejo_de_sesión">8.8. Manejo de sesión</a></li>
+<li><a href="#_estándares_de_código">8.9. Estándares de código</a></li>
+<li><a href="#_persistencia">8.10. Persistencia</a></li>
+<li><a href="#_prototipado_de_la_aplicación">8.11. Prototipado de la aplicación</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Decisiones de diseño</a></li>
@@ -558,7 +559,8 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <p>Una empresa de venta de productos busca originar un sistema de venta online denominado DeDe (Decentralized Delivery).
 Estará centrada en la venta de productos informáticos de diferentes ámbitos (como ratones, teclados&#8230;&#8203;).
 Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
-El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.</p>
+El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
+Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además de acceder a la tienda, crear, modificar y eliminar los productos de la base de datos.</p>
 </div>
 <div class="sect2">
 <h3 id="_información_general_de_los_requisitos">1.1. Información general de los requisitos</h3>
@@ -656,17 +658,12 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Robustez</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Privacidad</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Portabilidad</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación ha de poder ejecutarse en diferentes plataformas o entornos integrados</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Baja</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Comodidad</p></td>
@@ -704,7 +701,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Administrador</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tener el control de una aplicación robusta y eficiente con la que poder satisfacer las necesidades de los usuarios</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tener el control de una aplicación robusta y eficiente que incluya la posiblidad de crear, modificar, eliminar productos, ver los usuarios y pedidos</p></td>
 </tr>
 </tbody>
 </table>
@@ -799,7 +796,8 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <h2 id="section-system-scope-and-context">3. Alcance y contexto del sistema</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros clientes, por lo que para cumplir esto dos atributos de calidad, se seguirán los principios de SOLID utilizando PODS. Un POD es un lugar seguro donde el usario podrá alamacenar la informacion que desee y dar autorización a la aplicación para que se utilice la información que sea necesaria. Cada usuario tendrá un POD propio donde colocará principalmente sus datos personales y la dirección de envío.</p>
+<p>En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros clientes, por lo que para cumplir esto dos atributos de calidad, se seguirán los principios de SOLID utilizando PODS. Un POD es un lugar seguro donde el usario podrá alamacenar la informacion que desee y dar autorización a la aplicación para que se utilice la información que sea necesaria. Cada usuario tendrá un POD propio donde colocará principalmente sus datos personales y la dirección de envío. También hay mas seguridad ya que la contraseña del usuario del
+será cifrada para despues ser almacenada en la Base de Datos</p>
 </div>
 <div class="sect2">
 <h3 id="_contexto_de_negocio">3.1. Contexto de negocio</h3>
@@ -839,6 +837,11 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Base de datos</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Peticiones por parte de la aplicación DeDe</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Respuesta de la información almacenada en esta base de datos</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dirección de envío</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Precio de envío desde el almacén</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +907,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <p>Pod Solid: almacenamiento de la inforamción personal de cada usuario.</p>
 </li>
 <li>
-<p>TypeScript, lenguaje de programación con el que está desarrollada la aplicación.</p>
+<p>TypeScript: lenguaje de programación con el que está desarrollada la aplicación.</p>
 </li>
 </ul>
 </div>
@@ -917,7 +920,10 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <p>Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.</p>
 </li>
 <li>
-<p>MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de  código abierto</p>
+<p>MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de código abierto por lo que se permite una mayor libertad de creación de documentos</p>
+</li>
+<li>
+<p>MUI: Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación. La mayoria de componentes que se utilizan en nuestra aplicación son de esta librería y son personalizados según se necesita el formato de este.</p>
 </li>
 </ul>
 </div>
@@ -962,7 +968,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <div class="ulist">
 <ul>
 <li>
-<p>Revisiones y reuniones acordadas con antelación se realizarán a travésd de la aplicación Microsoft Teams.</p>
+<p>Revisiones y reuniones acordadas con antelación se realizarán a través de la aplicación Microsoft Teams.</p>
 </li>
 <li>
 <p>Mensajería instantanea para acordar aquellas reuniones que se realicen de forma online, también para avisar de cambios pequeños.</p>
@@ -975,10 +981,13 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <p>Rama individual para cada uno, donde deberá realizar su trabajo.</p>
 </li>
 <li>
-<p>Uso de wikis para recoger todo lo acordado en las reuniones.</p>
+<p>Uso de wikis para recoger todo lo acordado en las reuniones y  del registro arquitéctonico.</p>
 </li>
 <li>
 <p>Uso de issues para indicar las cosas que tiene que realizar cada miembro del equipo.</p>
+</li>
+<li>
+<p>Uso de Actions para commprobar el correcto funcionamiento de la aplicación</p>
 </li>
 </ul>
 </div>
@@ -993,24 +1002,53 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 <h2 id="section-building-block-view">5. Building Block View</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_descripción_del_sistema_en_caja_blanca">5.1. Descripción del sistema en caja blanca</h3>
+<h3 id="_5_1_whitebox_overall_system">5.1. 5.1. Whitebox Overall System</h3>
 <div class="paragraph">
 <p>El siguiente diagrama permite mostrar las distitnas capas de la aplicación y la manera en la que el usuario interactúa con ella:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/05_building_block_whitebox_level_1.jpg" alt="Building block view - Whitebox Overall System"></span></p>
+<p><span class="image"><img src="./images/05_Whitebox_Overall_System.png" alt="Building block view - Whitebox Overall System"></span></p>
 </div>
 <div class="paragraph">
-<p>En el diagrama se muestra la forma de interactuar tanto del administrador, como del usuario, con el sistema. Estos dos tipos de usuarios
-tendrán dos vistas distintas, teniendo así distintas operaciones disponible a realizar, esta distinción en la aplicación se explicará en el
-nivel 2.</p>
+<p><strong>Motivación</strong></p>
 </div>
 <div class="paragraph">
-<p>Se representa la aplicación DeDe en un diagrama de caja blanca con un modelo del tipo MVC, en el que cada parte de dicho modelo se representa con una
-caja negra.</p>
+<p>El usuario tendrá un POD con el que la aplicación recogerá su información de contacto para calcular el coste de los gastos de envío
+de los productos. A parte de esto, el usuario podrá interactuar con la aplicación para registrarse y poder realizar pedidos con los
+productos que desee.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cajas negras</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Descripción</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usuario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactúa con la aplicación y es propietario de un POD con su información de contacto.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeDe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sistema que permite a los usuarios realizar los pedidos con los productos que desee.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POD del usuario que contiene su informaciñon personal.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_5_2_nivel_1">5.2. 5.2. Nivel 1</h3>
+<div class="paragraph">
+<p><strong>Motivación</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Descripciones de las cajas negras del diagrama</strong></p>
+<p>El usuario de la aplicación interactuará con la WebApp de la misma, es decir, el frontend de la aplicación y éste a su vez intercambia las entradas que recibe de parte del usuario con la API Rest que persiste dichos datos en la BBDD.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1023,16 +1061,69 @@ caja negra.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Responsabilidad</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modelo</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gestiona la persistencia de datos, almacenándolos en la base de datos y recuperándolos cuando se necesitan. Se define el modelo de datos.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebApp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend de la aplicación con la que el usuario interactúa.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vista</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capa con la que interacciona usuario y administrador, además representa los datos del modelo.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API Rest de la apliación que conforma el backend de la aplicación, al que se le harán peticiones y se relaciona con la BBDD.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Controlador</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Intermediario entre la capa de modelo y la de vista, gestiona las interacciones entre ambos.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BBDD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base de datos donde se persiste la información que maneja la aplicación.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_5_3_nivel_2">5.3. 5.3. Nivel 2</h3>
+<div class="paragraph">
+<p><strong>Motivación</strong></p>
+</div>
+<div class="paragraph">
+<p>Se definen las distintas páginas de la aplicación en la WebApp con las que el usuario interactuará para realizar sus pedidos, cada una de estas páginas intercambiará datos con el API Rest, conformado por los Routes, Controllers y Models descritos en la parte inferior.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log-In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El usuario podrá iniciar sesión en la aplicación con sus datos de registro.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El usuario podrá registrarse introduciendo sus datos, para posteriormente iniciar sesión.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Productos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Listado de productos que el usuario podrá añadir al carrito, y posteriormente realizar un pedido.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Home</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Página principal de la aplicación</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Carrito</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Carrito de la compra donde se guardan los productos que el usuario quiere.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pago</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pantalla de pago de la aplicación para realizar el mismo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Routes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rutas del backend para hacer las peticiones correspondientes, a éstas se le añaden las funcionalidades a través del controlador.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controller</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define las funciones que se van a enrutar e interactúa con los modelos de la BBDD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modelos definidos en la BBDD, se encargan de persistir los datos.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1147,7 +1238,7 @@ caja negra.</p>
 <div class="sect2">
 <h3 id="_modelo_de_dominio">8.1. Modelo de dominio</h3>
 <div class="paragraph">
-<p><span class="image"><img src="./images/Modelo_datos.png" alt="Modelo de datos"></span></p>
+<p><span class="image"><img src="./images/08_Modelo_datos.png" alt="Modelo de datos"></span></p>
 </div>
 </div>
 <div class="sect2">
@@ -1159,7 +1250,7 @@ caja negra.</p>
 <div class="sect2">
 <h3 id="_seguridad">8.3. Seguridad</h3>
 <div class="paragraph">
-<p>La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente.</p>
+<p>La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente. Para poder garantizar la seguridad al usuario con sus contraseñas estas serán cifradas.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1187,31 +1278,25 @@ caja negra.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_seguridad_2">8.8. Seguridad</h3>
-<div class="paragraph">
-<p>Ningún aspecto de la aplicación será dañino para la vida del usuario.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_manejo_de_sesión">8.9. Manejo de sesión</h3>
+<h3 id="_manejo_de_sesión">8.8. Manejo de sesión</h3>
 <div class="paragraph">
 <p>Se manejarán las sesiones a través del uso de las APIs necesarias.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_estándares_de_código">8.10. Estándares de código</h3>
+<h3 id="_estándares_de_código">8.9. Estándares de código</h3>
 <div class="paragraph">
 <p>El crear código limpio que siga unas estructuras y patrones definidos es base fundamental para crear código que se pueda actualizar en un futuro. Queremos garantizar crear una aplicación al nivel que se puede esperar de un equipo de formado por Ingenieros Informáticos del Software.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_persistencia">8.11. Persistencia</h3>
+<h3 id="_persistencia">8.10. Persistencia</h3>
 <div class="paragraph">
 <p>Uso de una base de datos MongoDB para gestionar la parte de almacenamiento y modificación de los productos informáticos en la tienda.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_prototipado_de_la_aplicación">8.12. Prototipado de la aplicación</h3>
+<h3 id="_prototipado_de_la_aplicación">8.11. Prototipado de la aplicación</h3>
 <div class="paragraph">
 <p>El formato que se ha escogido para realizar los prototipos de la aplicacion es que esta sea fácil de usar y a la vez siga la forma del resto de aplicaciones del mismo tipo de esta.</p>
 </div>
@@ -1219,33 +1304,102 @@ caja negra.</p>
 <p>Para comenzar tenemos la página inicial, esta estara compuesta por aquellos productos que tengan un descuento o sean top ventas de la aplicación.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/08_protHome.jpg" alt="Página inicio"></span></p>
+<p><span class="image"><img src="./images/08_HomePage.png" alt="Página inicio"></span></p>
+</div>
+<div class="paragraph">
+<p>También se podrá tener acceso a la vista de los productos, la cual ofrece una serie de categorías por si se está buscando algo en especifico.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_CatalogoProductos.png" alt="Catalogo de Productos"></span></p>
 </div>
 <div class="paragraph">
 <p>Una vez se este en la aplicacion se podran realizar varias cosas:</p>
+</div>
+<div class="paragraph">
+<p>Desde el punto de vista de un cliente:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Realizar LogIn en la aplicacion: Para poder acceder a la aplicación es necesario indicar el nombre de email de este como la contraseña que haya indicado anteriormente.</p>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_IniciarSesion.png" alt="Página login"></span></p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Realizar un registro en nuestra aplicación, para ello se deberán indicar unos cuantos campos acerca de la informacion peronal de este.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/08_protLogIn+SignUp.jpg" alt="Página login y registro aplicación"></span></p>
+<p><span class="image"><img src="./images/08_Registro.png" alt="Registro aplicación"></span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Visualización de todos los productos: Se podrá ver inforamcion acerca de cada producto con su diferente precio. Además se podran realizar diferentes filtros para que el cliente pueda conseguir de una forma mas comoda los productos que desee. Los posibles filtros que se podran realizar son por precio, por categoria.</p>
+<p>Realizar el pago del carrito del usuario</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/08_protListaProd.jpg" alt="Página de productos"></span></p>
+<p><span class="image"><img src="./images/08_VentanaPago.png" alt="Ventana Pego"></span></p>
+</div>
+<div class="paragraph">
+<p>Desde el punto de vista de Administrador:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver todos los pedidos que se han realizado desde la aplicación</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_ProdAdmin.png" alt="Pedidos como Admin"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver todos los usuarios registrados en la aplicación, asi como tener un botón para asignar a otro administrador</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_AdminUsuarios.png" alt="Productos como Admin"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Crear un nuevo producto</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_AdminAnadirProducto.png" alt="Añadir productos"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver todos los productos que exiten en la app:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_ProdAdmin.png" alt="Productos como Admin"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Actualizar los valores de productos ya existentes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/08_ModalActualizacionProd.png" alt="Actualizar Productos como Admin"></span></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1265,7 +1419,7 @@ caja negra.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Decisiones</th>
+<th class="tableblock halign-left valign-top">Restricciones</th>
 <th class="tableblock halign-left valign-top">Ventajas</th>
 <th class="tableblock halign-left valign-top">Desventajas</th>
 </tr>
@@ -1286,6 +1440,11 @@ caja negra.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad para el usaurio</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Poco conocimiento del funcionamiento</em></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Jest</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Compatible con TypeScript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nunca se ha trabajado con ello, puede llegar a tardar mucho en devolver el resultado de los tests</em></p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -1293,27 +1452,100 @@ caja negra.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Decisiones</th>
 <th class="tableblock halign-left valign-top">Ventajas</th>
 <th class="tableblock halign-left valign-top">Desventajas</th>
+<th class="tableblock halign-left valign-top">Link</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Forma sencilla de almacenar la información que necesita la aplicación</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Base de datos con la que no se ha trbajado</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Transacciones no soportadas</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #01</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Documentación en español</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mejor conocimiento técnico</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Complicado de entender para personas que no sepan español</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Axios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Forma sencilla de conseguir datos de la Base de Datos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Al procesar mucha información este puede llegar a subir el tiempo de respuesta para el cliente</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #02</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MUI</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Se puede personalizar según el cliente quiera conveniente</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Pruebas de aceptación son dificiles de realizar</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #03</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>PostIamges</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Fácil colocación de las imagenes en la aplicación</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para el administrador de la aplicación puede llegar a costarle asociar una imagen a la página web</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #05</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SweetAlert2</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Modales con mejor diseño que los que nos pueden ofrecer MUI</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Se necesita instalar una nueva dependecia al sistema</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #06</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>UUID</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El código que llega a generar es improbable que se vuelva a repetir</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El código para el adminsitrador en el caso de los productos, podria llegar a ser muy largo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #07</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mongoose</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Facilita la conexion con la base de datos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nunca ha sido utilizado</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #08</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Express</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Facilita el diseño la aplicación de forma sencilla y rápida</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Primera vez que se ha trabajado</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #09</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>NodeJS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Failita el trbajo a la hora de pedir datos a la base de datos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es necesario aprender como funciona este sistema</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #10</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Decisiones que todavia no se han llegado a decidir</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Decisiones</th>
+<th class="tableblock halign-left valign-top">Ventajas</th>
+<th class="tableblock halign-left valign-top">Desventajas</th>
+<th class="tableblock halign-left valign-top">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Heroku</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Gratuito y además existen varias formas de desplegar</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Difil despliegue ya que contiene un número máximo de estos y además la documentación de errores no es concisa</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas">DA #04</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1395,14 +1627,29 @@ caja negra.</p>
 <p>El tiempo. Tenemos poco tiempo para llevar a cabo los prototipos, entonces habrá que tenerlo en cuenta a la hora de desarrollar y llevar el proyecto lo más al día posible.</p>
 </li>
 <li>
-<p>Seguridad en nuestro proyecto. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar.</p>
+<p>Posibles vulnerabilidades en el proyecto web. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
+<div class="ulist">
 <div class="title">Deudas Técnicas</div>
-<p>Por el momento no existen deudas técnicas ya que el proyecto todavía no está en desarrollo y no se han tomado decisiones que
-las generen.</p>
+<ul>
+<li>
+<p>Código poco claro y sin refactorizar en la parte del backend sobre la gestión de usuarios.</p>
+</li>
+<li>
+<p>Acoplamiento en el frontend a la hora de decodificar el token de sesión, se usa un módulo específico para ello.</p>
+</li>
+<li>
+<p>Almacenamiento de token de sesión en el localStorage, se podría guardar en un nuevo campo de la base de datos, ya que el localStorage es modificable desde el navegador</p>
+</li>
+<li>
+<p>Faltaría refactorizar parte del código del frontend para hacerlo más claro y modificable.</p>
+</li>
+<li>
+<p>Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.</p>
+</li>
+</ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1470,6 +1717,42 @@ las generen.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MUI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plataforma para alojar proyectos utilizando un sistema de veriones Git</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pencil</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aplicación de escritorio en la que se puede realizar prototipos de pantallas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Librería que genera cógidos aleatorios donde la probabilidad de que uno sea repetido es mínimo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SweetAlert2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Librería de libre acceso para construir los diferentes componentes modales que se utilizan en la aplicación</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NodeJs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Express</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Framework de aplicaciones web gratuito y de código abierto para Node. js. Se utiliza para diseñar y construir aplicaciones web de forma rápida y sencilla</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sistema de base de datos NoSQL, orientado a documentos y de código abierto</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sistema gestionador de base de datos que se encarga de toda la complejidad de la implementación, la gestión y la recuperación de sus implementaciones en el proveedor de servicios en la nube de su elección</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mongoose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Biblioteca de JavaScript que le permite definir esquemas con datos fuertemente tipados</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -1497,7 +1780,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-04-03 23:09:04 +0200
+Last updated 2022-04-03 23:13:05 +0200
 </div>
 </div>
 </body>
