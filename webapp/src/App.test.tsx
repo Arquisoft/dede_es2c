@@ -10,6 +10,7 @@ import UserAdmin from './pages/admin/UsersAdmin';
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageOrders from './pages/admin/ManageOrders';
 import OrderAdmin from './pages/admin/OrderAdmin';
+import Pago from './pages/Pago';
 
 /* test('renders learn react link', () => {
   render(<App />);
@@ -68,6 +69,14 @@ test('Admin -> Administrar Usuarios', async () => {
 test('Admin -> Administrar Pedidos', async () => {
   render(<ManageOrders />)
   expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
+}); 
+
+test('Ventana Pago', async () => {
+  render(<Pago />)
+  expect(screen.getByText(/Titular de la tarjeta/i)).toBeInTheDocument();
+  expect(screen.getByText(/Numero de tarjeta/i)).toBeInTheDocument();
+  expect(screen.getByText(/Fecha de caducidad (yyyy-mm-dd)/i)).toBeInTheDocument();
+  expect(screen.getByText(/CVV/i)).toBeInTheDocument();
 }); 
 
 test('Admin -> Administrar Pedidos Inside', async () => {
