@@ -12,7 +12,7 @@ import ManageOrders from './pages/admin/ManageOrders';
 import OrderAdmin from './pages/admin/OrderAdmin';
 import Profile from './pages/user/Profile';
 import OrderHistory from './pages/user/OrderHistory'
-
+import Pago from './pages/Pago';
 /* test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/Source code/i);
@@ -70,6 +70,12 @@ test('Admin -> Administrar Usuarios', async () => {
 test('Admin -> Administrar Pedidos', async () => {
   render(<ManageOrders />)
   expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
+}); 
+
+test('Ventana Pago', async () => {
+  render(<Pago />)
+  expect(screen.getByText(/Comprueba tu direccion/i)).toBeInTheDocument();
+  expect(screen.getByText(/Dirección de envío, por favor ingrese el nombre de su POD/i)).toBeInTheDocument();
 }); 
 
 test('Admin -> Administrar Pedidos Inside', async () => {
