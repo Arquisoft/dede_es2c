@@ -73,10 +73,8 @@ test('Admin -> Administrar Pedidos', async () => {
 
 test('Ventana Pago', async () => {
   render(<Pago />)
-  expect(screen.getByText(/Titular de la tarjeta/i)).toBeInTheDocument();
-  expect(screen.getByText(/Numero de tarjeta/i)).toBeInTheDocument();
-  expect(screen.getByText(/Fecha de caducidad (yyyy-mm-dd)/i)).toBeInTheDocument();
-  expect(screen.getByText(/CVV/i)).toBeInTheDocument();
+  expect(screen.getByText(/Comprueba tu direccion/i)).toBeInTheDocument();
+  expect(screen.getByText(/Dirección de envío, por favor ingrese el nombre de su POD/i)).toBeInTheDocument();
 }); 
 
 test('Admin -> Administrar Pedidos Inside', async () => {
