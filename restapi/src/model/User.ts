@@ -19,5 +19,4 @@ const UserSchema = new mongoose.Schema({
     },
     {collection:'User'});
 
-export const User = mongoose.model('User',UserSchema,'User')
-
+export const User = mongoose.model('User',UserSchema,'User');
