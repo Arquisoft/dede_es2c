@@ -4,25 +4,53 @@
 == Building Block View
 
 
-=== Descripción del sistema en caja blanca
+=== 5.1. Whitebox Overall System
 El siguiente diagrama permite mostrar las distitnas capas de la aplicación y la manera en la que el usuario interactúa con ella:
 
-image:05_building_block_whitebox_level_1.jpg["Building block view - Whitebox Overall System"]
+image:05_Whitebox_Overall_System.png["Building block view - Whitebox Overall System"]
 
-En el diagrama se muestra la forma de interactuar tanto del administrador, como del usuario, con el sistema. Estos dos tipos de usuarios
-tendrán dos vistas distintas, teniendo así distintas operaciones disponible a realizar, esta distinción en la aplicación se explicará en el 
-nivel 2.
+*Motivación*
 
-Se representa la aplicación DeDe en un diagrama de caja blanca con un modelo del tipo MVC, en el que cada parte de dicho modelo se representa con una
-caja negra.
+El usuario tendrá un POD con el que la aplicación recogerá su información de contacto para calcular el coste de los gastos de envío
+de los productos. A parte de esto, el usuario podrá interactuar con la aplicación para registrarse y poder realizar pedidos con los
+productos que desee.
 
-*Descripciones de las cajas negras del diagrama*
+|===
+|Cajas negras|Descripción
+|Usuario|Interactúa con la aplicación y es propietario de un POD con su información de contacto.
+|DeDe|Sistema que permite a los usuarios realizar los pedidos con los productos que desee.
+|POD|POD del usuario que contiene su informaciñon personal.
+|===
+
+=== 5.2. Nivel 1
+
+*Motivación*
+
+El usuario de la aplicación interactuará con la WebApp de la misma, es decir, el frontend de la aplicación y éste a su vez intercambia las entradas que recibe de parte del usuario con la API Rest que persiste dichos datos en la BBDD.
 
 |===
 |Nombre|Responsabilidad
-|Modelo|Gestiona la persistencia de datos, almacenándolos en la base de datos y recuperándolos cuando se necesitan. Se define el modelo de datos.
-|Vista|Capa con la que interacciona usuario y administrador, además representa los datos del modelo.
-|Controlador|Intermediario entre la capa de modelo y la de vista, gestiona las interacciones entre ambos.
+|WebApp|Frontend de la aplicación con la que el usuario interactúa.
+|API|API Rest de la apliación que conforma el backend de la aplicación, al que se le harán peticiones y se relaciona con la BBDD.
+|BBDD|Base de datos donde se persiste la información que maneja la aplicación.
+|===
+
+=== 5.3. Nivel 2
+
+*Motivación*
+
+Se definen las distintas páginas de la aplicación en la WebApp con las que el usuario interactuará para realizar sus pedidos, cada una de estas páginas intercambiará datos con el API Rest, conformado por los Routes, Controllers y Models descritos en la parte inferior.
+
+|===
+|Log-In|El usuario podrá iniciar sesión en la aplicación con sus datos de registro.
+|Registro|El usuario podrá registrarse introduciendo sus datos, para posteriormente iniciar sesión.
+|Productos|Listado de productos que el usuario podrá añadir al carrito, y posteriormente realizar un pedido.
+|Home|Página principal de la aplicación
+|Carrito|Carrito de la compra donde se guardan los productos que el usuario quiere.
+|Pago|Pantalla de pago de la aplicación para realizar el mismo.
+|Routes|Rutas del backend para hacer las peticiones correspondientes, a éstas se le añaden las funcionalidades a través del controlador.
+|Controller|Define las funciones que se van a enrutar e interactúa con los modelos de la BBDD.
+|Model|Modelos definidos en la BBDD, se encargan de persistir los datos.
 |===
 
 
