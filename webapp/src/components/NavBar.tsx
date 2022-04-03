@@ -5,17 +5,17 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Badge, { BadgeProps } from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
 import { Product } from '../shared/shareddtypes';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { Container } from '@mui/material';
 
 type ProductsProps = {
     cartItems:Product[]
 }
+
+
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -45,6 +45,7 @@ const NavBar=(cart:ProductsProps) =>{
         removeItem(prod);
         handleClose();
     }
+
     return(
         <AppBar position="fixed" >
             <Toolbar>
@@ -124,7 +125,8 @@ const NavBar=(cart:ProductsProps) =>{
             </Toolbar>     
         </AppBar>
             );
-    }
+
+}
 const  showProducts = () =>{
     return(
         <div>hola</div>
