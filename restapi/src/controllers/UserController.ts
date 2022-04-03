@@ -3,7 +3,7 @@ import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
-const User = require('../model/user')
+import User from "../model/User";
 import {
   getSolidDataset,
   getThing,
@@ -120,7 +120,7 @@ export const update: RequestHandler = async (req, res) => {
     if(password){
       params.password = await bcrypt.hash(password, 10);
     }
-    await User.findByIdAndUpdate(id,params);
+    await User.updateOne({_id: id},params);
     return res.send("User updated")
   } catch (error) {
     console.log(error)
