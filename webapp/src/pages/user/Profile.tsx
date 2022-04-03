@@ -69,12 +69,14 @@ const Profile = (correo:Email) => {
                 position: "relative",
                 top: 150
             }}>
-                <Card className={"main"} elevation={10} style={{display: "grid"}}>
+                <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
 
-                    <Typography className="miPerfil" style={{position:'relative', right:-240, top:10}}> Mi Perfil </Typography>
+                    <Typography className="miPerfil" style={{position:'relative', right:-240, top:20}}> Mi Perfil </Typography>
                     
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
-                        <Stack direction= "column" spacing={2}>
+                        <Stack direction= "column" spacing={-0.5}>
+                            
+                        <Typography className="email" style={{position:'relative', right:188, top:10}}> Correo electrónico: </Typography>
 
                             <TextField
                                 id = "email" 
@@ -83,7 +85,10 @@ const Profile = (correo:Email) => {
                                 variant = "outlined"
                                 size = "small"
                                 onChange = {(e: any) => setEmail(e.target.value)}
+                                style={{position:'relative', top:-20}}
                             />
+
+                            <Typography className="name" style={{position:'relative', right:150, top:10}}> Nombre: </Typography>
 
                             <TextField
                                 id = "name"
@@ -92,7 +97,10 @@ const Profile = (correo:Email) => {
                                 variant = "outlined"
                                 size = "small"
                                 onChange = {(e: any) => setName(e.target.value)}
+                                style={{position:'relative', top:-20}}
                             />
+
+                            <Typography className="surname" style={{position:'relative', right:153, top:10}}> Apellidos: </Typography>
 
                             <TextField
                                 id = "surname"
@@ -102,8 +110,10 @@ const Profile = (correo:Email) => {
                                 variant = "outlined"
                                 size = "small"
                                 onChange = {(e: any) => setSurname(e.target.value)}
+                                style={{position:'relative', top:-20}}
                             />
 
+                            <Typography className="surname" style={{position:'relative', right:163, top:10}}> Contraseña: </Typography>
 
                             <TextField
                                 id = "pass" 
@@ -112,10 +122,11 @@ const Profile = (correo:Email) => {
                                 value= {user.password}
                                 size="small"
                                 variant="outlined"
+                                style={{position:'relative', top:-20}}
                             />
-
-                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit">Aplicar cambios</Button>
-                            <Link href = "">Quiero cambiar mi contraseña.</Link>
+                            
+                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit"> Aplicar cambios</Button>
+                            <Link href = "" style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>
                 </Card>
