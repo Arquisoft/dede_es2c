@@ -58,7 +58,7 @@ Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además
 | Equipo de desarrollo | Aprender a trabajar en equipo con gente que no conocen y familiarizarse con las tecnologías solicitadas en el curso
 | Empresa de venta de productos (cliente) | Una aplicación funcional que satisfaga los requisitos solicitados, especialmente aquellos relacionados con la seguridad
 | Cliente | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
-| Administrador | Tener el control de una aplicación robusta y eficiente que incluya la posiblidad de crear, modificar y eliminar productos
+| Administrador | Tener el control de una aplicación robusta y eficiente que incluya la posiblidad de crear, modificar, eliminar productos, ver los usuarios y pedidos
 |===
 
 

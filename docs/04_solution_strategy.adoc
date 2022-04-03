@@ -28,7 +28,7 @@ Todavía no se ha decidido como va a estar.
  * Mensajería instantanea para acordar aquellas reuniones que se realicen de forma online, también para avisar de cambios pequeños.
  * GitHub para reflejar el trabajo que se esta realizando de varias formas: 
  ** Rama individual para cada uno, donde deberá realizar su trabajo.
- ** Uso de wikis para recoger todo lo acordado en las reuniones.
+ ** Uso de wikis para recoger todo lo acordado en las reuniones y  del registro arquitéctonico.
  ** Uso de issues para indicar las cosas que tiene que realizar cada miembro del equipo. 
  ** Uso de Actions para commprobar el correcto funcionamiento de la aplicación
 
