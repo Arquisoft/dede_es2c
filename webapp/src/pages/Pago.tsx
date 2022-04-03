@@ -4,9 +4,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import Swal from 'sweetalert2'
+import { getDireccionPod } from '../api/api';
 // import Check from '../checks/Arguments'
 
 
@@ -22,8 +24,47 @@ const Pago: FC = () => {
     const [CVV, setCVV] = useState('')
     const [pulse, setPulse] = useState(false)
 
+    // Constantes para el pod
+    const [webId, setWebId] = useState('')
+    const [pais, setPais] = useState('')
+    const [localidad, setLocalidad] = useState('')
+    const [codigo, setCodigo] = useState('')
+    const [region, setRegion] = useState('')
+    const [calle, setCalle] = useState('')
+
     function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
         setPulse(true);
+    }
+
+
+    async function getDireccion(){
+        const direccion = await getDireccionPod(webId);
+
+        if(direccion !== ""){
+            console.log(direccion);
+            setPais(direccion['country']);
+            setLocalidad(direccion['locality']);
+            setCodigo(direccion['postalCode']);
+            setRegion(direccion['region']);
+            setCalle(direccion['street_address']);
+
+            Swal.fire({
+                title: "Creedenciales correctas",
+                text:   "Direccion: " + direccion['street_address'] + "\n" +
+                        "Código Postal: " + direccion['postalCode'] + "\n" + 
+                        "Localidad: " + direccion['locality'] + "\n" +     
+                        "Region: "  + direccion['region'] + "\n" + 
+                        "País: " + direccion['country'] + "\n"
+                      ,
+                icon: "success",
+            });
+        } else {
+            Swal.fire({
+                title: "Creedenciales incorrectos",
+                text: "No se ha encontrado el POD con ese nombre",
+                icon: "error",
+            });
+        }
     }
 
     return ( 
@@ -101,6 +142,23 @@ const Pago: FC = () => {
                                // helperText = "Valor incorrecto"
                             />
                              </Stack>       
+                            <Typography>
+                                Dirección de envío, por favor ingrese el nombre de su POD
+                            </Typography>
+                            <TextField 
+                                id = "pod"
+                                required
+                                name = "Dirección de Envío"
+                                label = "Dirección de Envío"
+                                defaultValue= "Dirección de Envío"
+                                value = {webId}
+                                error = {checkParams(webId) && pulse}
+                                helperText={checkParams(webId) && pulse ? 'La direccion no puede estar vacía' : ''}
+                                onChange = {(e: any) => setWebId(e.target.value)}
+                            />
+
+                            <Button onClick={() => getDireccion()}>Comprueba tu direccion</Button>
+
                             <Button onClick={() => allFunc(titular, tarjeta,fechaCad,CVV)} variant="contained" type="submit">Completar el pago</Button>
                         
                     </Stack>

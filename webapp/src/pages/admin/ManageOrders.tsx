@@ -1,5 +1,4 @@
 import React, { FC, useEffect  } from 'react';
-import StackAdmin from '../../components/admin/StackAdmin';
 import Table from '@mui/material/Table';
 import { TableContainer, TableHead} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -8,8 +7,8 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
-import {  getOrders } from '../../api/api';
 import OrderAdmin from '../admin/OrderAdmin';
+import { getOrders } from '../../api/api';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -24,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ManageOrders: FC = () => {
 
     const [orders, setOrders]  = React.useState<Order[]>([]);
-
+    
     async function cargarPedidos() {
         setOrders(await getOrders());
     }
@@ -41,13 +40,13 @@ const ManageOrders: FC = () => {
                                 <StyledTableCell>Código</StyledTableCell>
                                 <StyledTableCell>Fecha</StyledTableCell>
                                 <StyledTableCell>Correo del comprador</StyledTableCell>
-                                <StyledTableCell>Precio Compra</StyledTableCell>
-                                 <StyledTableCell>Productos Comprados</StyledTableCell> 
+                                <StyledTableCell>Precio Compra (€)</StyledTableCell>
+                                <StyledTableCell>Productos Comprado (Unidades)</StyledTableCell> 
                             </TableRow>
                         </TableHead>
 
                         <TableBody>
-                            <OrderAdmin order = {orders} />
+                            <OrderAdmin orders = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>

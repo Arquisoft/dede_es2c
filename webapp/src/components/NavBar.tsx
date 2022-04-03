@@ -19,6 +19,7 @@ type ProductsProps = {
   cartItems:Product[]
 }
 
+
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -51,6 +52,7 @@ const NavBar=(cart:ProductsProps) =>{
         removeItem(prod);
         handleClose();
     }
+
     return(
         <AppBar position="fixed" >
             <Toolbar>
@@ -162,7 +164,8 @@ const NavBar=(cart:ProductsProps) =>{
             </Toolbar>     
         </AppBar>
             );
-    }
+
+}
 const  showProducts = () =>{
     return(
         <div>hola</div>

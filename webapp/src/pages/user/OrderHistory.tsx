@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
-import {  getOrders, getOrdersByEmail } from '../../api/api';
+import {  getOrders } from '../../api/api';
 import OrderUser from '../user/OrderUser';
 
 type Id = {
@@ -24,18 +24,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
+async function ordersByEmail(order:Order[], orderEmail:Order[], email:String){
+    order.forEach(e => {if(e.correo == email){ orderEmail.push(e) }});
+}
+
 const OrderHistory = (id: Id) => {
     const [orders, setOrders]  = React.useState<Order[]>([]);
     const[ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
+    
     async function cargarPedidos() {
         setOrders(await getOrders());
     }
 
     useEffect(() => {cargarPedidos();}, []);
-
-    async function ordersByEmail(order:Order[], orderEmail:Order[], email:String){
-        order.forEach(e => {if(e.correo == email){ orderEmail.push(e) }});
-    }
 
     ordersByEmail(orders,ordersEmail,id.email);
 

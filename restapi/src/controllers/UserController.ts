@@ -2,14 +2,13 @@ import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
-
-import User from "../model/User";
 import {
   getSolidDataset,
   getThing,
   getStringNoLocale,
 } from "@inrupt/solid-client";
 import { VCARD } from "@inrupt/vocab-common-rdf";
+import { User } from "../model/User";
 
 export const findUsers: RequestHandler = async (req, res) => {
     try {
@@ -32,11 +31,11 @@ export const findUsersById: RequestHandler = async (req, res) => {
 
 export const findUsersByEmail: RequestHandler = async (req, res) => {
   const email = req.params.email;
-  try {
-    const userFound = await User.findOne({email: email});
+  const userFound = await User.findOne({email: email});
+  if (userFound){
     return res.json(userFound)
-  } catch (error) {
-    return res.status(404).json({message: 'User not found'});
+  } else {
+    return res.status(204).json();
   }
 };
 
@@ -100,6 +99,17 @@ export const deleteUser: RequestHandler = async (req, res) => {
     return res.status(404).json({message: 'There was a problem deleting a user'});
   }
 };
+
+export const deleteUserByEmail: RequestHandler = async (req, res) => {
+  try {
+    const { email } = req.params;
+    await User.deleteOne({email: email});
+    return res.send("User deleted")
+  } catch (error) {
+    return res.status(404).json({message: 'There was a problem deleting a user'});
+  }
+};
+
 
 export const update: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');
@@ -170,7 +180,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

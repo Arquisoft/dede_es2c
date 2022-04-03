@@ -19,19 +19,11 @@ export type Product = {
 }
 
 export type Order = {
-  id: string |undefined;
   codigo: string;
   fecha: Date,
   precioTotal: number,
   products: Object[],
   correo: string
-  id_usuario: string;
-}
-
-export type ProductPedido = {
-  id_producto: string;
-  cantidad: number;
-  id_carrito: string;
 }
 
 export type Object = {
@@ -42,5 +34,5 @@ export type Object = {
   stock: string;
   url: string;
   descripcion: string;
-  cantidad: string;
+  cantidad: number;
 }
