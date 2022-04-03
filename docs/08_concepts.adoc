@@ -60,6 +60,15 @@ image:08_Registro.png["Registro aplicación"]
 
 image:08_VentanaPago.png["Ventana Pego"]
 
+* Ver mis pedidos realizados
+
+image:08_ProdUser.png["Mis pedidos"]
+
+* Actualización del perfil
+
+image:08_protProfile.png["Ventana Pego"]
+
+
 Desde el punto de vista de Administrador:
 
 * Ver todos los pedidos que se han realizado desde la aplicación
