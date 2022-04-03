@@ -92,7 +92,9 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                         'Actualizado!',
                         'Este prodcuto ha sido actualizado.',
                         'success'
-                    )
+                    ).then( () =>{
+                        window.location.assign("/admin/manageProducts");
+                    })
                 }else {
                     Swal.fire(
                         'Ha ocurrido un problema',

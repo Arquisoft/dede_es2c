@@ -2,8 +2,8 @@
 == Alcance y contexto del sistema
 
 
-En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros clientes, por lo que para cumplir esto dos atributos de calidad, se seguirán los principios de SOLID utilizando PODS. Un POD es un lugar seguro donde el usario podrá alamacenar la informacion que desee y dar autorización a la aplicación para que se utilice la información que sea necesaria. Cada usuario tendrá un POD propio donde colocará principalmente sus datos personales y la dirección de envío. 
-
+En Dede se le ha dado mas importancia a la seguridad y privacidad de nuestros clientes, por lo que para cumplir esto dos atributos de calidad, se seguirán los principios de SOLID utilizando PODS. Un POD es un lugar seguro donde el usario podrá alamacenar la informacion que desee y dar autorización a la aplicación para que se utilice la información que sea necesaria. Cada usuario tendrá un POD propio donde colocará principalmente sus datos personales y la dirección de envío. También hay mas seguridad ya que la contraseña del usuario del 
+será cifrada para despues ser almacenada en la Base de Datos
 
 === Contexto de negocio
 
@@ -17,6 +17,7 @@ image:03_Negocio.png["Diagrama Contexto Negocio"]
 | _POD del Usuario_ | _La inforamción relativa a cada usuario para respetar su privacidad_ | _Información que necesite la aplicación siempre cuando el usuario lo permita_
 | _DeDe_ | _Venta de productos_ | _Precio según dirección del cliente_
 | _Base de datos_ | _Peticiones por parte de la aplicación DeDe_ | _Respuesta de la información almacenada en esta base de datos_
+| _API_ | _Dirección de envío_ | _Precio de envío desde el almacén_
 |===
 
 === Contexto técnico

@@ -56,6 +56,10 @@ image:08_IniciarSesion.png["Página login"]
 
 image:08_Registro.png["Registro aplicación"]
 
+* Realizar el pago del carrito del usuario
+
+image:08_VentanaPago.png["Ventana Pego"]
+
 Desde el punto de vista de Administrador:
 
 * Ver todos los pedidos que se han realizado desde la aplicación
