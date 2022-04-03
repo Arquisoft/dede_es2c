@@ -49,7 +49,7 @@ test('Admin -> Administrar Productos Base Datos', async () => {
   expect(screen.getByText(/Administrar/i)).toBeInTheDocument();
 });
 
-test('Admin -> Administrar Usuarios dentro', async () => {
+ test('Admin -> Administrar Usuarios dentro', async () => {
   const userList:User[] = [{name:"Ana", email: "a@uniovi.es"}]
   render(<IUserAdmin user={userList} />)
   expect(screen.getByText(/Ver pedidos/i)).toBeInTheDocument();
@@ -60,7 +60,7 @@ test('Admin -> Administrar Usuarios', async () => {
   expect(screen.getByText(/Ver pedidos de usuarios/i)).toBeInTheDocument();
 });
 
-test('Admin -> Añadir Productos', async () => {
+ test('Admin -> Añadir Productos', async () => {
   render(<AddProdutcAdmin />)
   expect(screen.getByText(/Añadir un nuevo producto/i)).toBeInTheDocument();
 });
@@ -68,7 +68,7 @@ test('Admin -> Añadir Productos', async () => {
 test('Admin -> Administrar Pedidos', async () => {
   render(<ManageOrders />)
   expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
-});
+}); 
 
 test('Admin -> Administrar Pedidos Inside', async () => {
   const productList:Object[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
