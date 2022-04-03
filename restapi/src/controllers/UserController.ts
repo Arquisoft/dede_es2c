@@ -3,14 +3,13 @@ import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
-import { User } from "../model/User";
-
 import {
   getSolidDataset,
   getThing,
   getStringNoLocale,
 } from "@inrupt/solid-client";
 import { VCARD } from "@inrupt/vocab-common-rdf";
+import { User } from "../model/User";
 
 export const findUsers: RequestHandler = async (req, res) => {
     try {
