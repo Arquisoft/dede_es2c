@@ -7,18 +7,10 @@ import { Product, productModel } from "../model/Product";
 
 /************* CREAR UN PEDIDO *************/
 
-export const createOrder: RequestHandler = async (req, res) => {
-    
-    // PASO 1: verificar el usuario conectado
+export const addOrder: RequestHandler = async (req, res) => {
 
-    /** 
-    const isVerified = verifyToken(
-      req.headers.token + "",
-      req.headers.email + ""
-    );
-    **/
    
-    // PASO 2: actualizar el stock
+    // Hay que actualizar el stock
 
     const updateStock = async (products: any) => {
       for (var i = 0; i < products.length; i++) {
@@ -27,23 +19,15 @@ export const createOrder: RequestHandler = async (req, res) => {
         product.save();
       }
     };
-  
-    // PASO 3: crear el pedido
-
-
-    //if (isVerified) {
-      try {
+    
+    try {
         const order = new orderModel(req.body);
         updateStock(order.products);
         const orderToSave = await order.save();
         res.json(orderToSave);
-      } catch (error) {
-        console.log(error);
+    } catch (error) {
         res.status(412).json();
-      }
-    //} else {
-    //  res.status(203).json();
-    //}
+    }
 };
 
 /************* GENERAR UN EJEMPLO *************/
@@ -87,7 +71,6 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.save();
         return res.json(order);
     } catch (error){
-        console.log(error)
         return res.send("Ha surgido un error")
     }
 
@@ -110,6 +93,7 @@ export const getOrderByCode: RequestHandler = async (req, res) => {
 };
 
 
+
 export const getOrderByEmail: RequestHandler = async (req, res) => {
     const email = req.params.email;
     try {
@@ -120,9 +104,20 @@ export const getOrderByEmail: RequestHandler = async (req, res) => {
             return res.status(204).json();
           }
     }catch(error){
+        return res.status(404).json({message: 'Ese usuario no tiene pedidos'});
+    }
+};
+
+export const getTotalUserOrderByEmail: RequestHandler = async (req, res) => {
+    const email = req.params.email;
+    try {
+        const encontrado = await orderModel.find({correo: email});
+        return res.json(encontrado)
+    }catch(error){
         return res.status(404).json({message: 'No hay un usuario asociado a ese pedido'});
     }
 };
+
 
 export const getOrders: RequestHandler = async (req, res) => {
     try {

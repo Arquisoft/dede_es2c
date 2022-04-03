@@ -3,7 +3,7 @@ import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
 
-const User = require('../model/user')
+import User from "../model/User";
 import {
   getSolidDataset,
   getThing,
@@ -101,6 +101,17 @@ export const deleteUser: RequestHandler = async (req, res) => {
   }
 };
 
+export const deleteUserByEmail: RequestHandler = async (req, res) => {
+  try {
+    const { email } = req.params;
+    await User.deleteOne({email: email});
+    return res.send("User deleted")
+  } catch (error) {
+    return res.status(404).json({message: 'There was a problem deleting a user'});
+  }
+};
+
+
 export const update: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');
   try {
@@ -109,7 +120,7 @@ export const update: RequestHandler = async (req, res) => {
     if(password){
       params.password = await bcrypt.hash(password, 10);
     }
-    await User.findByIdAndUpdate(id,params);
+    await User.updateOne({_id: id},params);
     return res.send("User updated")
   } catch (error) {
     console.log(error)
@@ -170,7 +181,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

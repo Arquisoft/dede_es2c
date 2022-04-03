@@ -5,8 +5,6 @@ const router = express.Router();
 
 // Generar un ejemplo
 router.get('/product/generateExample', ProductController.generateExample);
-// Añadir un producto por URL
-router.get('/product/add/:codigo/:categoria/:nombre/:precio/:descripcion/:stock/:url', ProductController.addProduct);
 // Eliminar por URL
 router.get('/product/delete/:codigo', ProductController.deleteProduct);
 // Actualizar por URL
