@@ -217,24 +217,15 @@ describe("products ", () => {
 
 
   /**
-   * Busco un producto por una categoría inexistente
+   * Busco un producto por una categoría 
    */
-   it("No conseguir un producto buscando por categoria inexistente", async () => {
+   it("Consigo un producto buscando por categoria", async () => {
     const response: Response = await request(app).get(
-    "/product/getByCategoria/noExiste"
+    "/product/getByCategoria/teclado"
     );
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(200);
   });
 
-  /**
-   * Busco un producto por una categoría inexistente
-   */
-  it("No conseguir un producto buscando por categoria inexistente", async () => {
-    const response: Response = await request(app).get(
-    "/product/getByCategoria/noExiste"
-    );
-    expect(response.statusCode).toBe(204);
-  });
 
   /**
    * Busco un producto por un precio inexistente
