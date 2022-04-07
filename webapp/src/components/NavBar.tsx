@@ -22,7 +22,9 @@ type ProductsProps = {
 
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorElb, setAnchorElb] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const openB = Boolean(anchorElb);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       setAnchorEl(event.currentTarget);
     };
@@ -30,7 +32,7 @@ const NavBar=(cart:ProductsProps) =>{
       setAnchorEl(null);
     };
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElb(event.currentTarget);
     };
     var totalPrice = 0;
     var numOfProducts = 0
@@ -133,14 +135,14 @@ const NavBar=(cart:ProductsProps) =>{
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    onClick={handleClick}
+                    onClick={handleMenu}
                     color = "inherit"
                 >
                     <AccountCircle />
                 </IconButton>
                 <Menu
                     id="menu-appbar"
-                    anchorEl={anchorEl}
+                    anchorEl={anchorElb}
                     anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
@@ -150,7 +152,7 @@ const NavBar=(cart:ProductsProps) =>{
                     vertical: 'top',
                     horizontal: 'right',
                     }}
-                    open={open}
+                    open={openB}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>

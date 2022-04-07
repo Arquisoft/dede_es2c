@@ -63,10 +63,10 @@ const SignUp: FC = () => {
     }
 
     return (
-        <div>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Container component= "main" maxWidth="sm"
                 sx={{
-                position: "relative",
+                position: "center",
                 top: 150
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>

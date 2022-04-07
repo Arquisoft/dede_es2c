@@ -54,10 +54,10 @@ const LogIn: FC = () => {
     }
 
     return ( 
-        <div>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Container component= "main" maxWidth="sm" fixed={true} 
             sx={{
-                position: "relative",
+                position: "center",
                 top: 150
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>

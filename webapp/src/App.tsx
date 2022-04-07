@@ -17,6 +17,7 @@ import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
+import Footer from './components/Footer/Footer';
 
 
 const App: FC = () => {
@@ -87,7 +88,9 @@ const App: FC = () => {
             <UserAdmin />
           </PrivateRoute>} />
         </Routes>
+        <Footer />
       </Router>
+      
   );
 }
 export default App;

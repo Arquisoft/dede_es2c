@@ -120,11 +120,12 @@ const AddProdutcAdmin: FC = () => {
                                 <TextField 
                                     aria-label="empty textarea"
                                     placeholder="Descripcion del producto"
-                                    rows= {5}
+                                    minRows = {5}
                                     maxRows = {10}
                                     multiline
                                     required
-                                    defaultValue={descrip}
+                                    type = "text"
+                                    defaultValue= ""
                                     value = {descrip}
                                     onChange = {(e: any) => setDescripcion(e.target.value)}
                                 />
