@@ -236,7 +236,6 @@ function checkParams(body: any): boolean{
     return codigo != null && codigo != '' && correo != null && correo != '' && 
     direccion != null && direccion != '' && fecha != null && precioTotal > 0
 }
-
 **/
 
 
