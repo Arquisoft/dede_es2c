@@ -35,7 +35,7 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
   if (userFound){
     return res.json(userFound)
   } else {
-    return res.status(204).json();
+    return res.status(412).json();
   }
 };
 
@@ -43,14 +43,20 @@ export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
     if(checkBody(req.body)){
-      const { password, ...body } = req.body
-      const user = new User(body)
-      const passwordHashed = await bcrypt.hash(password, 10);
-      user.password = passwordHashed;
-      await user.save();
-      res.status(201).json({
-          user
-      })
+      // Hay que mirar que el correo no exista
+      const userFound = await User.findOne({email: req.body.email});
+      if (userFound){
+        return res.status(409).json({message: 'The email is already taken'});
+      } else {
+        const { password, ...body } = req.body
+        const user = new User(body)
+        const passwordHashed = await bcrypt.hash(password, 10);
+        user.password = passwordHashed;
+        await user.save();
+        res.status(201).json({
+            user
+        })
+    }
   }
 } catch(err) {
   console.log(err)
@@ -72,7 +78,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
         const token = generateToken(userFound.id,userFound.role)
-        res.status(201).json({
+        return res.status(201).json({
           token,
           userFound
         });
@@ -180,6 +186,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
+    return res.status(412).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

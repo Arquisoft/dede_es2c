@@ -103,6 +103,18 @@ describe("products ", () => {
       expect(response.statusCode).toBe(200);
     });
   
+    
+    /**
+     * Busco un producto por un precio que exista
+     */
+     it("Busco un producto por un precio que exista", async () => {
+      const response: Response = await request(app).get(
+      "/product/getByPrecio/15.99"
+      );
+      expect(response.statusCode).toBe(200);
+    });  
+  
+
   
     /**
      * Busco un producto por un precio inexistente
@@ -129,7 +141,7 @@ describe("products ", () => {
         url: "url de prueba",
       });
       expect(response.statusCode).toBe(201);
-      expect(response.body.nombre).toBe("productoPrueba");
+      expect(response.body.prod.nombre).toBe("productoPrueba");
     });
   
   
@@ -188,7 +200,7 @@ describe("products ", () => {
       */
      it("Intento borrar un producto inexistente", async () => {
         const response: Response = await request(app).get(
-        "/product/delete/codigoNoExistente"
+        "/product/delete/fallo"
         );
         expect(response.statusCode).toBe(412);
       });
@@ -212,6 +224,4 @@ describe("products ", () => {
       );
     expect(response.statusCode).toBe(200);
     });  
-  
-  
   });

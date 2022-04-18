@@ -72,7 +72,7 @@ describe("user ", () => {
     const response: Response = await request(app).get(
       "/user/list/something"
     );
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(412);
   });
 
   /**
@@ -102,6 +102,45 @@ describe("user ", () => {
   });
 
   /**
+   * Actualizo el usuario que acabo de crear
+   */
+   it("Actualizo el usuario que acabo de crear", async () => {
+     // Esto funciona porque miré la ID en Mongo
+    const response: Response = await request(app).put("/user/update/62446b22fce44aae56859b86").send({
+      name: "nombreCambiado",
+    });
+    expect(response.statusCode).toBe(200);
+  });
+
+  /**
+   * Vuelvo a actualizar al usuario dejándolo como estaba
+   */
+   it("Vuelvo a actualizar al usuario dejándolo como estaba", async () => {
+    const response: Response = await request(app).put("/user/update/62446b22fce44aae56859b86").send({
+      name: "Usuario 3",
+    });
+    expect(response.statusCode).toBe(200);
+  });
+
+
+
+  /**
+    * Intento crear un usuario con un correo ya existente
+    */
+   it("Intento crear un usuario con un correo ya existente ", async () => {
+    const response: Response = await request(app).post("/user/signup").send({
+      name: "prueba",
+      surname: "prueba",
+      email: "usuarioPrueba@gmail.com",
+      password: "prueba",
+      repPassword: "prueba",
+      role: "user",
+    });
+    expect(response.statusCode).toBe(409);
+  });
+
+
+  /**
    * Borro el usuario que acabo de crear por el email
    */
    it("Borro el usuario que acabo de crear por el email", async () => {
@@ -120,19 +159,17 @@ describe("user ", () => {
     });
     expect(response.statusCode).toBe(404);
   });
-  
-  // LOGIN
 
-  /**
-    * Hago login de forma correcta
+    /**
+    * Hago login de forma incorrecta
     */
-   it("Hago login de forma correcta", async () => {
-    const response: Response = await request(app).post("/user/login").send({
-      email: "user@uniovi.es",
-      password: "user123",
+     it("Hago login de forma incorrecta", async () => {
+      const response: Response = await request(app).post("/user/login").send({
+        email: "correoInexistente",
+        password: "usuarioInexistente",
+      });
+      expect(response.statusCode).toBe(200);
     });
-    expect(response.statusCode).toBe(200);
-  });
 
 
   /**
@@ -144,6 +181,7 @@ describe("user ", () => {
     );
 
     expect(response.statusCode).toBe(200);
+    expect(response.body.street_address).toBe("El Fondaque 67");
   }); 
 
   /**
@@ -153,16 +191,17 @@ describe("user ", () => {
     const response: Response = await request(app).get(
       "/user/pod/noExiste"
     );
-    expect(response.statusCode).toBe(404);
+    expect(response.statusCode).toBe(412);
   }); 
 
   /**
-   * Intento actualizar un usuario no existente
+   * Intento borrar un usuario no existente
    */
-  it("Intento actualizar un usuario no existente", async () => {
+  it("Intento borrar un usuario no existente", async () => {
   const response: Response = await request(app).post("/user/delete").send({
     id: "IDFALSO"
   });
-  expect(response.statusCode).toBe(404);
+  expect(response.statusCode).toBe(404); // También podría ser 412
   });
+
 });

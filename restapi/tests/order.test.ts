@@ -57,6 +57,7 @@ describe("orders ", () => {
       const response: Response = await request(app).get(
         "/order/getByCode/orderTwoExample"
       );
+      console.log(response)
       expect(response.statusCode).toBe(200);
     });
   
