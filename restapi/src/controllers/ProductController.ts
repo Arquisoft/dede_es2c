@@ -38,7 +38,7 @@ export const deleteProduct: RequestHandler = async (req, res) => {
         if (productDeleted){
             return res.send("Product deleted");
         } else {
-            return res.status(301).json({ message: "The operation didn't succed "});
+            return res.status(412).json({ message: "The operation didn't succed "});
         }
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});
@@ -103,7 +103,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         if (encontrado){
             return res.json(encontrado)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         return res.status(404).json();

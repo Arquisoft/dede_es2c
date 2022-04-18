@@ -78,7 +78,7 @@ describe("products ", () => {
       const response: Response = await request(app).get(
         "/product/getByCode/productDoesNotExists"
       );
-      expect(response.statusCode).toBe(204);
+      expect(response.statusCode).toBe(412);
     });
   
     /**
@@ -111,7 +111,7 @@ describe("products ", () => {
       const response: Response = await request(app).get(
       "/product/getByPrecio/0.00"
       );
-      expect(response.statusCode).toBe(404);
+      expect(response.statusCode).toBe(412);
     });  
   
   
@@ -129,6 +129,7 @@ describe("products ", () => {
         url: "url de prueba",
       });
       expect(response.statusCode).toBe(201);
+      expect(response.body.nombre).toBe("productoPrueba");
     });
   
   
@@ -155,8 +156,8 @@ describe("products ", () => {
       const response: Response = await request(app).post("/product/addPost").send({
         precio: 10,
         stock: 10,
-        descripcion: "producto de prueba",
-        url: "url de prueba",
+        descripcion: "productoIncompleto",
+        url: "urlIncompleta",
       });
       expect(response.statusCode).toBe(412);
     });
@@ -180,6 +181,17 @@ describe("products ", () => {
       );
       expect(response.statusCode).toBe(200);
     });
+
+
+    /**
+      * Intento borrar un producto inexistente
+      */
+     it("Intento borrar un producto inexistente", async () => {
+        const response: Response = await request(app).get(
+        "/product/delete/codigoNoExistente"
+        );
+        expect(response.statusCode).toBe(412);
+      });
   
     /**
      * Creo el producto de ejemplo
