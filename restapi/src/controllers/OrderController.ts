@@ -21,21 +21,50 @@ export const addOrder: RequestHandler = async (req, res) => {
     };
     
     try {
-        const order = new orderModel(req.body);
-        updateStock(order.products);
-        const orderToSave = await order.save();
-        res.json(orderToSave);
+        if (checkParams(req.body)){
+            const order = new orderModel(req.body);
+            updateStock(order.products);
+            const orderToSave = await order.save();
+            res.json(orderToSave);
+        } else {
+            return res.status(412).json({message: "Incomplete order"});
+        }
     } catch (error) {
         res.status(412).json();
     }
 };
 
-/************* GENERAR UN EJEMPLO *************/
+function checkParams(body: any): boolean{
+    const {codigo, correo, direccion, fecha, precioTotal, products} = body;
+    return codigo != null && codigo != '' && correo != null && correo != '' && 
+    direccion != null && direccion != '' && fecha != null  && 
+    precioTotal >= 0  && products != null
+}
+
+
+
+/************* BORRAR UN PEDIDO *************/
+
+export const deleteOrder: RequestHandler = async (req, res) => {
+    try{
+        const {codigo} = req.params;
+        const orderDeleted = await orderModel.deleteOne({codigo: codigo});
+        if (orderDeleted.deletedCount == 1){
+            return res.send("Order deleted");
+        } else {
+            return res.status(412).json({ message: "The operation didn't succed "});
+        }
+    }catch (err){
+        return res.status(404).json({message: "There was a problem deleting an order"});
+    }
+}
+
+
 
 export const generateExample: RequestHandler = async(req, res, next) => {
     try {
         let order = new orderModel();
-        order.codigo = "orderTwoExample";
+        order.codigo = "orderXExample";
         order.correo = "admin@uniovi.es";
         order.direccion = "dirExample";
         order.fecha = new Date();

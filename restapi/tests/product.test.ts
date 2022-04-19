@@ -64,7 +64,6 @@ describe("products ", () => {
           categoria: "monitor",
           nombre: "Samsung LF27T352FHRXEN",
           precio: 139.99,
-          stock: 20,
           descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
           url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg",
         })
