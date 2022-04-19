@@ -8,8 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Menu } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import Badge, { BadgeProps } from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
 import { Product } from '../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -103,12 +102,8 @@ const NavBar=(cart:ProductsProps) =>{
                             <div className= "cartItem">
                                 <Container>
                                     
-                                    <img style={{
-                                        marginRight:20,
-                                        width:50,
-                                        height: 40,
-                                        bottom:20
-                                    }} src = {prod.url}>                                
+                                    <img style={{ marginRight:20, width:50, height: 40,bottom:20}} 
+                                        src = {prod.url} alt = {prod.nombre} >                               
                                     </img>
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
                                         <IconButton style={{
@@ -217,12 +212,8 @@ const NavBar=(cart:ProductsProps) =>{
                             <div className= "cartItem">
                                 <Container>
                                     
-                                    <img style={{
-                                        marginRight:20,
-                                        width:50,
-                                        height: 40,
-                                        bottom:20
-                                    }} src = {prod.url}>                                
+                                <img style={{ marginRight:20, width:50, height: 40,bottom:20}} 
+                                        src = {prod.url} alt = {prod.nombre} >                               
                                     </img>
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
                                         <IconButton style={{
@@ -331,13 +322,10 @@ const NavBar=(cart:ProductsProps) =>{
                             <div className= "cartItem">
                                 <Container>
                                     
-                                    <img style={{
-                                        marginRight:20,
-                                        width:50,
-                                        height: 40,
-                                        bottom:20
-                                    }} src = {prod.url}>                                
-                                    </img>
+                                    <img style={{ marginRight:20, width:50, height: 40,bottom:20}} 
+                                        src = {prod.url} alt = {prod.nombre} >                               
+                                    </img>                               
+                                    
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
                                         <IconButton style={{
                                         left:10,
@@ -407,10 +395,4 @@ const NavBar=(cart:ProductsProps) =>{
             );
 
 }
-const  showProducts = () =>{
-    return(
-        <div>hola</div>
-    );
-}
-
 export default NavBar;

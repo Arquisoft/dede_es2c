@@ -9,7 +9,6 @@ import {  getProducts } from '../../api/api';
 import { Product } from '../../shared/shareddtypes';
 import ProdAdmin from '../admin/ProdAdmin';
 import { styled } from '@mui/material/styles';
-import StackAdmin from '../../components/admin/StackAdmin';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -20,9 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
-  }));
-
-
+}));
 
 const ManageProducts: FC = ()  => {
     const [prod, setProd] = React.useState<Product[]>([]);
