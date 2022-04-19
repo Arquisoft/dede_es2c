@@ -11,10 +11,13 @@ import Pago from './pages/Pago';
 import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
+import Profile from './pages/user/Profile';
+import OrderHistory from './pages/user/OrderHistory';
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
+import Footer from './components/Footer/Footer';
 
 
 const App: FC = () => {
@@ -60,6 +63,11 @@ const App: FC = () => {
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
+          <Route path = 'admin/addProduct' element = {<AddProdutcAdmin />} />
+          <Route path = 'admin/manageProducts' element = {<ManageProducts />} />
+          <Route path = 'admin/manageOrders' element = {<ManageOrders />} />
+          <Route path = 'user/profile' element = {<Profile email={"user2@uniovi.com"}/>} />
+          <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
@@ -80,7 +88,9 @@ const App: FC = () => {
             <UserAdmin />
           </PrivateRoute>} />
         </Routes>
+        <Footer />
       </Router>
+      
   );
 }
 export default App;

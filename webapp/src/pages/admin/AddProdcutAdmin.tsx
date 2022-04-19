@@ -9,9 +9,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import {v4 as uuidv4} from 'uuid';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import {addProduct} from "../../api/ApiProducts";
 
 
 const AddProdutcAdmin: FC = () => {
@@ -27,29 +26,10 @@ const AddProdutcAdmin: FC = () => {
         }
     }
 
-    async function addProduct(url: string, nombre: string, descripcion: string, precio: string, categoria: string, stock: string){
+    async function add(url: string, nombre: string, descripcion: string, precio: string, categoria: string, stock: string){
         checkCampos(nombre, url, descripcion, precio, stock);
-        let codigo = uuidv4();
-        axios.post("http://localhost:5000/product/addPost", {"codigo": codigo, 
-                "nombre": nombre, "categoria": categoria, "stock": Number.parseInt(stock), 
-                "precio": Number.parseFloat(precio), "url": url, "descripcion": descripcion}).then(
-            res => {
-                console.log("Llego hasta aqui")
-                if(res.status === 201){
-                    Swal.fire({
-                        title: "UProducto añadido",
-                        text: "Se ha añadido el prodcuto sin problemas",
-                        icon: "success"
-                    });
-                } else {
-                    Swal.fire({
-                        title: "ERROR",
-                        text: "Se ha producido un error con los productos",
-                        icon: "error"
-                    });
-                }
-            }
-        )
+        await addProduct(url, nombre, descripcion, precio, categoria, stock);
+        
     }
 
     const [urlBase, setUrl] = useState('https://i.postimg.cc/25fVD0hz/TE01.jpg')
@@ -62,7 +42,6 @@ const AddProdutcAdmin: FC = () => {
     const handleChange = (event: SelectChangeEvent) => {
         setCategoria(event.target.value as string)
     }
-
 
     return (
         <div>
@@ -121,11 +100,12 @@ const AddProdutcAdmin: FC = () => {
                                 <TextField 
                                     aria-label="empty textarea"
                                     placeholder="Descripcion del producto"
-                                    rows= {5}
+                                    minRows = {5}
                                     maxRows = {10}
                                     multiline
                                     required
-                                    defaultValue={descrip}
+                                    type = "text"
+                                    defaultValue= ""
                                     value = {descrip}
                                     onChange = {(e: any) => setDescripcion(e.target.value)}
                                 />
@@ -148,7 +128,7 @@ const AddProdutcAdmin: FC = () => {
                                     </Select>
                                 </FormControl>
 
-                                <Button variant = "contained" type = "submit" onClick={() => addProduct(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
+                                <Button variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
                             </Stack>
                         </Box> 
                         </div>

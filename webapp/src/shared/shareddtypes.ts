@@ -1,6 +1,9 @@
 export type User = {
-    name:string;
+    _id:string
     email:string;
+    name:string;
+    surname:string;
+    password:string;
 }
 
 export type Product = {
@@ -14,6 +17,7 @@ export type Product = {
   cantidad: number;
 
 }
+
 export type Order = {
   codigo: string;
   fecha: Date,
