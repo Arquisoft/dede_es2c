@@ -14,6 +14,7 @@ import Link from '@mui/material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
 import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 type ProductsProps = {
   cartItems:Product[]
@@ -54,8 +55,27 @@ const NavBar=(cart:ProductsProps) =>{
         handleClose();
     }
 
-    const cerrarSesion =() => {
-        localStorage.clear();
+    const cerrarSesion = () => {
+        Swal.fire({
+            title: '¿Quieres cerrar sesión?',
+            text: "Se perderan los productos que teine en el carrito",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.clear();
+                Swal.fire(
+                'Sesión cerrada',
+                'Los productos que tenia en el carrito, han sido eliminados',
+                'success'
+              )
+              window.location.assign("/");
+            }
+          })
+        
     }
 
     if(localStorage.getItem('token') != null){
@@ -73,7 +93,6 @@ const NavBar=(cart:ProductsProps) =>{
               <Button color="inherit" href = "/admin/addProduct">Añadir Productos</Button>
               <Button color="inherit" href = "/admin/manageProducts">Administrar Productos</Button>
               <Button color="inherit" href = "/admin/manageOrders">Administrar Pedidos</Button>
-              <Button color="inherit" href = "/products">Productos</Button>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 
@@ -357,7 +376,7 @@ const NavBar=(cart:ProductsProps) =>{
                         </Container>
                         </div>)}
                 </Menu>
-                <IconButton
+                {/* <IconButton
                     id="basic-button"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
@@ -366,8 +385,8 @@ const NavBar=(cart:ProductsProps) =>{
                     color = "inherit"
                 >
                     <AccountCircle />
-                </IconButton>
-                <Menu
+                </IconButton> */}
+                {/* <Menu
                     id="menu-appbar"
                     anchorEl={anchorElb}
                     anchorOrigin={{
@@ -387,7 +406,7 @@ const NavBar=(cart:ProductsProps) =>{
                     <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
                     </Link>
-                </Menu>
+                </Menu> */}
 
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
             </Toolbar>     
