@@ -46,7 +46,7 @@ jobs:
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     env:
-      API_URI: http://${{ secrets.DEPLOY_HOST }}:5000
+      REACT_APP_API_URI: http://${{ secrets.DEPLOY_HOST }}:5000
     runs-on: ubuntu-latest
 #    needs: [e2e-tests]
     steps:
@@ -59,13 +59,14 @@ jobs:
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: webapp
+          buildargs: REACT_APP_API_URI
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     env:
-      USER: ${{ secrets.DB_USER }}
-      PASSWORD: ${{ secrets.DB_PASSWORD }}
-      NAME: ${{ secrets.DB_NAME }}
-      TOKEN: ${{ secrets.TOKEN }}
+      DATABASE_USER: ${{ secrets.DB_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DATABASE_NAME: ${{ secrets.DB_NAME }}
+      JWT_TOKEN: ${{ secrets.TOKEN }}
     runs-on: ubuntu-latest
 #    needs: [e2e-tests]
     steps:
@@ -78,6 +79,7 @@ jobs:
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: restapi
+          buildargs: DATABASE_USER,DATABASE_PASSWORD,DATABASE_NAME,JWT_TOKEN
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest
