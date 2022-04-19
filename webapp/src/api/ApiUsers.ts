@@ -19,8 +19,9 @@ export async function getDireccionPod(webId: string) {
     return response.json();
 }
 
-export const handleLogin = (idUser: String, pass: String) => {
-    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
+export const handleLogin = async (idUser: String, pass: String) => {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    axios.post(apiEndPoint + "/user/login",{"email":idUser,"password":pass})
     .then(res => {
         if(res.status === 201){
          Swal.fire({
@@ -43,7 +44,8 @@ export const handleLogin = (idUser: String, pass: String) => {
 }
 
 export const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    axios.post(apiEndPoint +"/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
     .then(res => {
         console.log(res);
         console.log(res.data);
@@ -60,7 +62,8 @@ export const handleSignup = (name:String,surname:String,email: String,pass: Stri
 }
 
 export const getEmail = async (email: String) => {
-    const data = await axios.get("http://localhost:5000/user/list/"+ email)
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    const data = await axios.get(apiEndPoint +"/user/list/"+ email)
     .then(res => {
         return res.data
     })
