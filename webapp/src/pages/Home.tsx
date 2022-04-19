@@ -25,7 +25,8 @@ const Home = (func: ProductsProps) => {
     const [prods, setProds] = React.useState<Product[]>([]);
 
     const getProducts = async () => {
-        const data = axios.get("http://localhost:5000/product/list").then(
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = axios.get(apiEndPoint + "/product/list").then(
             res => {
                 setProds(res.data)
                 return res.data
