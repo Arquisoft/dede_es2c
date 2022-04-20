@@ -45,7 +45,7 @@ test('Ventana Productos', async () => {
   expect(screen.getByText(/Código/i)).toBeInTheDocument();
 }); */
 
-test('Admin -> Administrar Productos Base Datos', async () => {
+/* test('Admin -> Administrar Productos Base Datos', async () => {
   const productList:Product[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
   render(
     <Table>
@@ -55,7 +55,7 @@ test('Admin -> Administrar Productos Base Datos', async () => {
     </Table>);
   expect(screen.getByText(/PruebaTecado/i)).toBeInTheDocument();
   expect(screen.getByText(/Administrar/i)).toBeInTheDocument();
-});
+}); */
 /*
  test('Admin -> Administrar Usuarios dentro', async () => {
   const userList:User[] = [{name:"Ana", email: "a@uniovi.es"}]
@@ -63,28 +63,28 @@ test('Admin -> Administrar Productos Base Datos', async () => {
   expect(screen.getByText(/Ver pedidos/i)).toBeInTheDocument();
 });*/
 
-test('Admin -> Administrar Usuarios', async () => {
+/* test('Admin -> Administrar Usuarios', async () => {
   render(<UserAdmin />)
   expect(screen.getByText(/Ver pedidos de usuarios/i)).toBeInTheDocument();
-}); 
+});  */
 
-test('Admin -> Añadir Productos', async () => {
+/* test('Admin -> Añadir Productos', async () => {
     render(<AddProdutcAdmin />)
     expect(screen.getByText(/Añadir un nuevo producto/i)).toBeInTheDocument();
 });
-
-test('Admin -> Administrar Pedidos', async () => {
+ */
+/* test('Admin -> Administrar Pedidos', async () => {
   render(<ManageOrders />)
   expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
-});  
+});  */ 
 
-test('Ventana Pago', async () => {
+/* test('Ventana Pago', async () => {
   render(<Pago />)
   expect(screen.getByText(/Comprueba tu direccion/i)).toBeInTheDocument();
   expect(screen.getByText(/Dirección de envío, por favor ingrese el nombre de su POD/i)).toBeInTheDocument();
-}); 
+});  */
 
-test('Admin -> Administrar Pedidos Inside', async () => {
+/* test('Admin -> Administrar Pedidos Inside', async () => {
   const productList:Object[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
   const pedido: Order[] = [{codigo: "A", correo: "a@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}, 
                             {codigo: "B", correo: "b@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}]
@@ -97,9 +97,9 @@ test('Admin -> Administrar Pedidos Inside', async () => {
       </TableBody>
   </Table>)
   expect(screen.getByText(/a@uniovi/i)).toBeInTheDocument();
-}); 
+});  */
 
-test('User -> Sobre La Página', async () => {
+/* test('User -> Sobre La Página', async () => {
   render(<Profile email={"user2@uniovi.com"}/>)
   expect(screen.getByText(/Correo electrónico:/i)).toBeInTheDocument();
   expect(screen.getByText(/Nombre:/i)).toBeInTheDocument();
@@ -114,3 +114,4 @@ test('User -> Página historial de datos', async () => {
   expect(screen.getByText(/Precio del pedido/i)).toBeInTheDocument();
   expect(screen.getByText(/Productos/i)).toBeInTheDocument();
 }); 
+ */

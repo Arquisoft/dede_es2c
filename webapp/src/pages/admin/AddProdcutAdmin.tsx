@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import {addProduct} from "../../api/ApiProducts";
-
+import jwt_decode from 'jwt-decode';
 
 const AddProdutcAdmin: FC = () => {
 
@@ -43,101 +43,121 @@ const AddProdutcAdmin: FC = () => {
         setCategoria(event.target.value as string)
     }
 
-    return (
-        <div>
-            <Container component= "main" maxWidth="sm" fixed={true} 
-            sx={{ position: "relative",top: 150}}>
-                <Card sx = {{minWidth: 700, height: 1100}}>
-                    <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
-                    <CardHeader title = 'Añadir un nuevo producto' />
+    if(localStorage.getItem('token') != null){
+        var user:any = jwt_decode(localStorage.getItem('token') || '{}');
 
-                      <CardMedia component= "img" height= "400" width= "300" image={urlBase} />
-                        <div style={{borderLeft: '125px'}}> 
-                        <Box sx = {{width: 600, height: 300, alignContent: 'center' }}>
-                            <Stack direction = "column" spacing = {2}>
-
-                                <TextField 
-                                    id = "url"
-                                    name = "Url Iamgen"
-                                    label = "Url Imagen"
-                                    size='small'
-                                    value={urlBase}
-                                    onChange = {(e: any) => setUrl(e.target.value)}
-                                />
-
-                                <TextField 
-                                    id = "nombre"
-                                    required
-                                    name= 'Nombre Producto'
-                                    label = 'Nombre Producto'
-                                    defaultValue= "Nombre Producto"
-                                    variant='outlined'
-                                    size = 'small'
-                                    value={nombreP}
-                                    onChange = {(e: any) => setNombre(e.target.value)}
-                                />
-
-                                <TextField 
-                                    id = "stock"
-                                    required
-                                    label = 'Stock Producto'
-                                    variant='outlined'
-                                    size = 'small'
-                                    value={stock}
-                                    onChange = {(e: any) => setStock(e.target.value)}
-                                />
-
-                                <TextField 
-                                    id = "precio"
-                                    required
-                                    label = 'Precio Base Producto'
-                                    variant='outlined'
-                                    size = 'small'
-                                    value={precio}
-                                    onChange = {(e: any) => setPrecio(e.target.value)}
-                                />
-
-                                <TextField 
-                                    aria-label="empty textarea"
-                                    placeholder="Descripcion del producto"
-                                    minRows = {5}
-                                    maxRows = {10}
-                                    multiline
-                                    required
-                                    type = "text"
-                                    defaultValue= ""
-                                    value = {descrip}
-                                    onChange = {(e: any) => setDescripcion(e.target.value)}
-                                />
-
-                                <FormControl >
-                                    <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={categoria}
-                                        label="Categoría"
-                                        onChange={handleChange}
-                                        required
-                                    >
-                                        <MenuItem value = 'teclado'>teclado</MenuItem>
-                                        <MenuItem value = 'monitor'>monitor</MenuItem>
-                                        <MenuItem value = 'raton'>raton</MenuItem>
-                                        <MenuItem value = 'almacenamiento'>almacenamiento</MenuItem>
-                                        <MenuItem value = 'sonido'>sonido</MenuItem>
-                                    </Select>
-                                </FormControl>
-
-                                <Button variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
+        if(user.role === "ROLE_ADMIN"){
+            return (
+                <div>
+                    <Container component= "main" maxWidth="sm" fixed={true} 
+                    sx={{ position: "relative",top: 150}}>
+                        <Card sx = {{minWidth: 700, height: 1100}}>
+                            <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
+                            <CardHeader title = 'Añadir un nuevo producto' />
+        
+                              <CardMedia component= "img" height= "400" width= "300" image={urlBase} />
+                                <div style={{borderLeft: '125px'}}> 
+                                <Box sx = {{width: 600, height: 300, alignContent: 'center' }}>
+                                    <Stack direction = "column" spacing = {2}>
+        
+                                        <TextField 
+                                            id = "url"
+                                            name = "Url Iamgen"
+                                            label = "Url Imagen"
+                                            size='small'
+                                            value={urlBase}
+                                            onChange = {(e: any) => setUrl(e.target.value)}
+                                        />
+        
+                                        <TextField 
+                                            id = "nombre"
+                                            required
+                                            name= 'Nombre Producto'
+                                            label = 'Nombre Producto'
+                                            defaultValue= "Nombre Producto"
+                                            variant='outlined'
+                                            size = 'small'
+                                            value={nombreP}
+                                            onChange = {(e: any) => setNombre(e.target.value)}
+                                        />
+        
+                                        <TextField 
+                                            id = "stock"
+                                            required
+                                            label = 'Stock Producto'
+                                            variant='outlined'
+                                            size = 'small'
+                                            value={stock}
+                                            onChange = {(e: any) => setStock(e.target.value)}
+                                        />
+        
+                                        <TextField 
+                                            id = "precio"
+                                            required
+                                            label = 'Precio Base Producto'
+                                            variant='outlined'
+                                            size = 'small'
+                                            value={precio}
+                                            onChange = {(e: any) => setPrecio(e.target.value)}
+                                        />
+        
+                                        <TextField 
+                                            aria-label="empty textarea"
+                                            placeholder="Descripcion del producto"
+                                            minRows = {5}
+                                            maxRows = {10}
+                                            multiline
+                                            required
+                                            type = "text"
+                                            defaultValue= ""
+                                            value = {descrip}
+                                            onChange = {(e: any) => setDescripcion(e.target.value)}
+                                        />
+        
+                                        <FormControl >
+                                            <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={categoria}
+                                                label="Categoría"
+                                                onChange={handleChange}
+                                                required
+                                            >
+                                                <MenuItem value = 'teclado'>teclado</MenuItem>
+                                                <MenuItem value = 'monitor'>monitor</MenuItem>
+                                                <MenuItem value = 'raton'>raton</MenuItem>
+                                                <MenuItem value = 'almacenamiento'>almacenamiento</MenuItem>
+                                                <MenuItem value = 'sonido'>sonido</MenuItem>
+                                            </Select>
+                                        </FormControl>
+        
+                                        <Button variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
+                                    </Stack>
+                                </Box> 
+                                </div>
                             </Stack>
-                        </Box> 
-                        </div>
-                    </Stack>
-                </Card>
+                        </Card>
+        
+                    </Container>
+                </div>
+            );
+        }else {
+            return (
+                <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <h1>No tiene permisos para acceder a esta página</h1>
+                </div>
+            );
+        }
+    }else{
+        return (
+            <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <h1>No ha iniciado sesión, por favor inicie sesión</h1>
+            </div>
+        );
+    }
 
-            </Container>
-        </div>
-    );
+    
 } 
 
 
