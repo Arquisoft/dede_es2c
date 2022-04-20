@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
+import {check} from 'express-validator';
 import {
   getSolidDataset,
   getThing,
@@ -43,14 +44,15 @@ export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
     if(checkBody(req.body)){
-      const { password, ...body } = req.body
-      const user = new User(body)
-      const passwordHashed = await bcrypt.hash(password, 10);
-      user.password = passwordHashed;
-      await user.save();
-      res.status(201).json({
-          user
-      })
+        const { password, ...body } = req.body
+        const user = new User(body)
+        const passwordHashed = await bcrypt.hash(password.toString(), 10);
+        user.password = passwordHashed;
+        await user.save();
+        res.status(201).json({
+           user
+        })
+      
   }
 } catch(err) {
   console.log(err)
