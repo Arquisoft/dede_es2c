@@ -6,6 +6,17 @@ import promBundle from "express-prom-bundle";
 import apiUser from "../src/routes/UserRoutes";
 
 
+function makeid(length: any) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+
 var server: Server;
 
 const app: Application = express();
@@ -90,7 +101,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: (Math.random() + 1).toString(36).substring(7),
+      password: makeid(5),
       repPassword: "prueba",
       role: "user",
     });
@@ -128,7 +139,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: (Math.random() + 1).toString(36).substring(7),
+      password: makeid(5),
       repPassword: "prueba",
       role: "user",
     });
@@ -162,7 +173,7 @@ describe("user ", () => {
      it("Hago login de forma incorrecta", async () => {
       const response: Response = await request(app).post("/user/login").send({
         email: "correoInexistente",
-        password:  (Math.random() + 1).toString(36).substring(7),
+        password:  makeid(5),
       });
       expect(response.statusCode).toBe(200);
     });
