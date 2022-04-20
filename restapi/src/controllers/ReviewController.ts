@@ -25,7 +25,7 @@ export const getReviewsByProduct: RequestHandler = async (req, res) => {
         return res.json(reviews);
     } catch (err){
         return res.status(404).json({message: "There was a problem getting a review"});
-  };
+  }
 }
 
 
@@ -42,7 +42,7 @@ export const getReviewByUserAndProduct: RequestHandler = async (req, res) => {
         }
     } catch (err){
         return res.status(404).json({message: "There was a problem getting a review"});
-    };
+    }
 };
 
 
@@ -62,6 +62,6 @@ export const deleteReviewByUserAndProduct: RequestHandler = async (req, res) => 
         }
     } catch (err){
         return res.status(404).json({message: "There was a problem deleting a review"});
-    };
+    }
   };
   

@@ -192,14 +192,4 @@ describe("user ", () => {
     expect(response.statusCode).toBe(412);
   }); 
 
-  /**
-   * Intento borrar un usuario no existente
-   */
-  it("Intento borrar un usuario no existente", async () => {
-  const response: Response = await request(app).post("/user/delete").send({
-    id: "IDFALSO"
-  });
-  expect(response.statusCode).toBe(404); // También podría ser 412
-  });
-
 });

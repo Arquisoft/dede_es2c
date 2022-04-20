@@ -90,13 +90,6 @@ export const generateExample: RequestHandler = async(req, res, next) => {
             }
 
         ]
-
-        for (var i = 0; i < order.products.length; i++) {
-            let product = await productModel.findOne({ codigo: order.products[i].codigo });
-            product.stock = product.stock - order.products[i].stock;
-            product.save();
-        }
-
         order.save();
         return res.json(order);
     } catch (error){

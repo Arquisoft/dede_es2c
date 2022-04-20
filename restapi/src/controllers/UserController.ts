@@ -41,10 +41,11 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
 
 export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
+  const email = req.body.email;
   try{
     if(checkBody(req.body)){
       // Hay que mirar que el correo no exista
-      const userFound = await User.findOne({email: req.body.email});
+      const userFound = await User.findOne({email: email});
       if (userFound){
         return res.status(409).json({message: 'The email is already taken'});
       } else {
