@@ -3,7 +3,7 @@ import { orderModel } from "../model/Order";
 import { Product, productModel } from "../model/Product";
 
 
-
+const ShipmentCosts = require('../util/apiShippo')
 
 /************* CREAR UN PEDIDO *************/
 
@@ -149,6 +149,22 @@ export const getOrders: RequestHandler = async (req, res) => {
         console.log(error);
     }
 };
+
+
+/************* CÁLCULO DE ENVÍOS CON SHIPPO *************/
+
+export const getShippmentCost: RequestHandler = async (req, res) => {
+    const addressTo = req.body;
+    try{
+      var costs = await ShipmentCosts(addressTo);
+      console.log(costs)
+      return res.status(200).send({shippmentCost: costs});
+    } catch (error){
+      return res.status(404).json({message: 'Hubo un fallo procesando los costes'});
+    }
+}
+
+
 
 
 // MÉTODOS QUE COMO DE MOMENTO NO USO Y ME PIDEN COBERTURA DE CÓDIGO DEJO COMENTADOS
