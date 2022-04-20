@@ -4,8 +4,6 @@ import cors from "cors";
 import bp from "body-parser";
 import { Server } from "http";
 import promBundle from "express-prom-bundle";
-import apiUser from "../src/routes/UserRoutes";
-import apiProduct from "../src/routes/ProductRoutes";
 import apiOrders from "../src/routes/OrderRoutes";
 
 var server: Server;
@@ -25,8 +23,6 @@ beforeAll(async () => {
   app.use(bp.json());
   app.use(bp.urlencoded({ extended: false }));
 
-  app.use(apiUser);
-  app.use(apiProduct);
   app.use(apiOrders);
 
   await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',

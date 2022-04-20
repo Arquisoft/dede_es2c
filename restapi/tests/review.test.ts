@@ -4,9 +4,7 @@ import cors from "cors";
 import bp from "body-parser";
 import { Server } from "http";
 import promBundle from "express-prom-bundle";
-import apiUser from "../src/routes/UserRoutes";
-import apiProduct from "../src/routes/ProductRoutes";
-import apiOrders from "../src/routes/OrderRoutes";
+import apiReviews from "../src/routes/ReviewRoutes"
 
 var server: Server;
 
@@ -25,9 +23,7 @@ beforeAll(async () => {
   app.use(bp.json());
   app.use(bp.urlencoded({ extended: false }));
 
-  app.use(apiUser);
-  app.use(apiProduct);
-  app.use(apiOrders);
+  app.use(apiReviews)
 
   await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
     {
@@ -66,7 +62,7 @@ describe("reviews", () => {
      */
     it("Obtengo la review que acabo de añadir", async () => {
       const response: Response = await request(app).get(
-        "/reviews/getByEmailAndCode/email@prueba.es/RA01"
+        "/review/getByEmailAndCode/email@prueba.es/RA01"
       );
       expect(response.statusCode).toBe(200);
       expect(response.type).toEqual("application/json");
@@ -79,7 +75,7 @@ describe("reviews", () => {
      */
     it("Consigo todas las reviews de un producto", async () => {
       const response: Response = await request(app).get(
-        "/reviews/getByCode/RA011"
+        "/review/getByCode/RA011"
       );
       expect(response.statusCode).toBe(200);
       expect(response.type).toEqual("application/json");
@@ -90,7 +86,7 @@ describe("reviews", () => {
      */
     it("Busco las reviews de un producto asociado a un usuario que NO existe", async () => {
       const response: Response = await request(app).get(
-        "/reviews/getByEmailAndCode/fallo/fallo"
+        "/review/getByEmailAndCode/fallo/fallo"
       );
       expect(response.statusCode).toBe(412);
     });
@@ -114,7 +110,7 @@ describe("reviews", () => {
      */
     it("Borro la review que he creado antes", async () => {
       const response: Response = await request(app).get(
-        "/reviews/deleteByEmailAndCode/email@prueba.es/RA01"
+        "/review/deleteByEmailAndCode/email@prueba.es/RA01"
       );
       expect(response.statusCode).toBe(200);
     });
@@ -125,7 +121,7 @@ describe("reviews", () => {
      */
     it("Intento borrar una review no existente", async () => {
       const response: Response = await request(app).get(
-        "/reviews/deleteByEmailAndCode/fallo/fallo"
+        "/review/deleteByEmailAndCode/fallo/fallo"
       );
       expect(response.statusCode).toBe(412);
     });    
