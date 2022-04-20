@@ -1,6 +1,5 @@
 import request, { Response } from "supertest";
 import express, { Application, RequestHandler } from "express";
-import cors from "cors";
 import bp from "body-parser";
 import { Server } from "http";
 import promBundle from "express-prom-bundle";
@@ -17,7 +16,6 @@ beforeAll(async () => {
 
   server = app.listen(5000);
 
-  app.use(cors());
   const metricsMiddleware: RequestHandler = promBundle({ includeMethod: true });
   app.use(metricsMiddleware);
   app.use(bp.json());

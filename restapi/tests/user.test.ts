@@ -1,6 +1,5 @@
 import request, { Response } from "supertest";
 import express, { Application, RequestHandler } from "express";
-import cors from "cors";
 import bp from "body-parser";
 import { Server } from "http";
 import promBundle from "express-prom-bundle";
@@ -17,8 +16,6 @@ const mongoose = require("mongoose");
 beforeAll(async () => {
 
   server = app.listen(5000);
-
-  app.use(cors());
   const metricsMiddleware: RequestHandler = promBundle({ includeMethod: true });
   app.use(metricsMiddleware);
   app.use(bp.json());
@@ -41,6 +38,7 @@ afterAll(async () => {
     await mongoose.connection.close();
     // Cuidado con lo que se ponga aquí, que puede afectar a la BD
 });
+
 
 
 /******* USUARIOS *******/ 
@@ -92,7 +90,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: "prueba",
+      password: (Math.random() + 1).toString(36).substring(7),
       repPassword: "prueba",
       role: "user",
     });
@@ -130,7 +128,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: "prueba",
+      password: (Math.random() + 1).toString(36).substring(7),
       repPassword: "prueba",
       role: "user",
     });
@@ -164,7 +162,7 @@ describe("user ", () => {
      it("Hago login de forma incorrecta", async () => {
       const response: Response = await request(app).post("/user/login").send({
         email: "correoInexistente",
-        password: "usuarioInexistente",
+        password:  (Math.random() + 1).toString(36).substring(7),
       });
       expect(response.statusCode).toBe(200);
     });
