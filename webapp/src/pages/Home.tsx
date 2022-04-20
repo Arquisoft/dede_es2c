@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Stack, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
 import Products from '../components/Products';
 import Typography from '@mui/material/Typography';
+import Footer from '../components/Footer/Footer';
 
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
@@ -59,17 +60,19 @@ const Home = (func: ProductsProps) => {
 
     return (
 
-        <div className='Home' style={{ marginTop: '300px', marginLeft: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
-          <Stack direction= 'column'>
+       <>
+       <div className='Home' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '180vh' }}>
+            <Stack direction='column'>
                 {cargarBanner()}
                 <Typography variant="h4" gutterBottom component="div">
                     Últimas Unidades
                 </Typography>
-                <Products homePage = {true} product = {prods} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
+                <Products homePage={true} product={prods} onAddCart={func.onAddCart} cartItems={func.cartItems} />
 
             </Stack>
-
+            
         </div>
+        </> 
     )
 }
 
