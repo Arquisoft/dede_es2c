@@ -68,7 +68,7 @@ describe("orders ", () => {
             nombre: "Samsung LF27T352FHRXEN",
             precio: 139.99,
             descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
-            stock:20,
+            stock:2,
             url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
           },
 
@@ -78,7 +78,7 @@ describe("orders ", () => {
             nombre: "Hama Sonic LS-206 6W",
             precio: 9.87,
             descripcion: "Negro, Plata Altavoz - Altavoces (2.0 Canales, 6 W, 50-20000 Hz, 4 Ω, Negro, Plata) ",
-            stock: 100,
+            stock: 1,
             url: "https://i.postimg.cc/SNJX72mp/AL01.jpg"
           }
         ]
@@ -100,7 +100,7 @@ describe("orders ", () => {
             nombre: "Samsung LF27T352FHRXEN",
             precio: 139.99,
             descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
-            stock:20,
+            stock:2,
             url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
           }
         ]

@@ -12,25 +12,25 @@ export const addOrder: RequestHandler = async (req, res) => {
    
     // Hay que actualizar el stock
 
-    const updateStock = async (products: any) => {
+    const updateNewStock = async (products: any) => {
       for (var i = 0; i < products.length; i++) {
         let product = await productModel.findOne({ codigo: products[i].codigo });
         product.stock = product.stock - products[i].stock;
-        product.save();
+        product.save(); // Se actualiza el stock de los productos
       }
     };
     
     try {
         if (checkParams(req.body)){
             const order = new orderModel(req.body);
-            updateStock(order.products);
+            updateNewStock(order.products);
             const orderToSave = await order.save();
             res.json(orderToSave);
         } else {
             return res.status(412).json({message: "Incomplete order"});
         }
     } catch (error) {
-        res.status(412).json();
+        res.status(404).json();
     }
 };
 
@@ -69,34 +69,34 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         order.direccion = "dirExample";
         order.fecha = new Date();
         order.precioTotal = 139.99;
-
-        var productA = new productModel (
+        order.products = [
             {
                 codigo: "TE01", 
                 categoria: "teclado", 
                 nombre: "Logitech K120 Teclado con Cable",
                 precio: 9.57, 
                 descripcion: "Para Windows, Tamaño Normal, Resistante a Líquido, Barra Espaciadora Curvada, PC/Portátil, Disposición QWERTY Español, color Negro ",
-                stock: 100,
+                stock: 1,
                 url: "https://i.postimg.cc/25fVD0hz/TE01.jpg"
-            }
-        );
-
-        var productB = new productModel (
+            }, 
             {
                 codigo: "RA01", 
                 categoria: "raton", 
                 nombre: "Logitech Ratón Inalámbrico M190",
                 precio: 15.99, 
                 descripcion: "Diseño Curvo Ambidiestro, Batería 18 Meses con Modo Ahorro, Receptor USB, Cursor y Desplazamiento Preciso, Rueda de Desplazamiento Amplio, Negro",
-                stock: 50,
+                stock: 5,
                 url: "https://i.postimg.cc/RVyWPS0J/RA01.jpg"
             }
-        )
 
-        var productos = [productA, productB];
+        ]
 
-        order.products = productos;
+        for (var i = 0; i < order.products.length; i++) {
+            let product = await productModel.findOne({ codigo: order.products[i].codigo });
+            product.stock = product.stock - order.products[i].stock;
+            product.save();
+        }
+
         order.save();
         return res.json(order);
     } catch (error){
