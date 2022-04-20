@@ -41,34 +41,20 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
 
 export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
-  const email = req.body.email;
   try{
-    if(checkBody(req.body)){
-      // Hay que mirar que el correo no exista
-      const userFound = await User.findOne({email: email});
-      if (userFound){
-        return res.status(409).json({message: 'The email is already taken'});
-      } else {
-        const { password, ...body } = req.body
-        const user = new User(body)
-        const passwordHashed = await bcrypt.hash(password, 10);
-        user.password = passwordHashed;
-        await user.save();
-        res.status(201).json({
-            user
-        })
-    }
-  }
+    const { password, ...body } = req.body
+    const user = new User(body)
+    const passwordHashed = await bcrypt.hash(password, 10);
+    user.password = passwordHashed;
+    await user.save();
+    res.status(201).json({
+        user
+    })
 } catch(err) {
-  console.log(err)
     res.status(400).json({msg: err})
 }
 };
 
-function checkBody(body:any):boolean{
-  const { name,surname,email,password,repPassword, } =body;
-  return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
-}
 
 export const loginUser: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');

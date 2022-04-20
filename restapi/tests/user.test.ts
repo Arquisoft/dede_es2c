@@ -134,7 +134,7 @@ describe("user ", () => {
       repPassword: "prueba",
       role: "user",
     });
-    expect(response.statusCode).toBe(409);
+    expect(response.statusCode).toBe(400);
   });
 
 
