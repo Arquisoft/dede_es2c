@@ -36,7 +36,7 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
   if (userFound){
     return res.json(userFound)
   } else {
-    return res.status(204).json();
+    return res.status(412).json();
   }
 };
 
@@ -55,7 +55,6 @@ export const createUser = async (req = request, res = response) => {
       
   }
 } catch(err) {
-  console.log(err)
     res.status(400).json({msg: err})
 }
 };
@@ -74,7 +73,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
         const token = generateToken(userFound.id,userFound.role)
-        res.status(201).json({
+        return res.status(201).json({
           token,
           userFound
         });
@@ -182,6 +181,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
+    return res.status(412).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

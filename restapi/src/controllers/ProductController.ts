@@ -35,10 +35,10 @@ export const deleteProduct: RequestHandler = async (req, res) => {
     try{
         const {codigo} = req.params;
         const productDeleted = await productModel.deleteOne({codigo: codigo});
-        if (productDeleted){
+        if (productDeleted.deletedCount == 1){
             return res.send("Product deleted");
         } else {
-            return res.status(301).json({ message: "The operation didn't succed "});
+            return res.status(412).json({ message: "The operation didn't succed "});
         }
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});
@@ -103,7 +103,7 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         if (encontrado){
             return res.json(encontrado)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         return res.status(404).json();
@@ -136,11 +136,11 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
 export const getProductByPrice: RequestHandler = async (req, res) => {
     const precio = req.params.precio;
     try{
-        const todos = await Product.findOne({precio: precio});
-        if (todos){
-            return res.json(todos)
+        const productos = await productModel.find({precio: {$eq: precio}} );
+        if (productos.length != 0){
+            return res.json(productos)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         res.status(404).json({message: 'No hay productos con ese precio'})
