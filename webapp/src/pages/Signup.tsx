@@ -93,8 +93,9 @@ const SignUp: FC = () => {
                                 variant = "outlined"
                                 size = "small"
                                 value = {email}
-                                error = {checkEmail(email) && pulse}
-                                helperText={checkEmail(email) && pulse ? 'Formato de e-mail inválido' : ''}
+                                error = {checkParams(email) && pulse || checkEmail(email) && pulse}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''
+                                            ||checkEmail(email) && pulse ? 'Formato de e-mail inválido' : ''}
                                 onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
