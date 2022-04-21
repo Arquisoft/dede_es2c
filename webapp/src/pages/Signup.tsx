@@ -5,10 +5,15 @@ import Button from '@mui/material/Button';
 import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
-import { getEmail, handleSignup } from '../api/ApiUsers';
+import { foundEmail, handleSignup } from '../api/ApiUsers';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
+}
+
+const checkEmail = (email: String) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return !re.test(email.toString());
 }
 
 const checkPaswwords = (repPass: String, pass: String) => {
@@ -30,7 +35,7 @@ const SignUp: FC = () => {
 
     async function allFunc(name:String,surname:String,email: String,pass: String,repPass:String){
         setPulse(true);
-        if(await getEmail(email) != null){
+        if(await foundEmail(email)){
             Swal.fire({
                 title: "El e-mail ya existe",
                 text: "El e-mail ya existe en el sistema, pruebe con otro",
@@ -88,8 +93,8 @@ const SignUp: FC = () => {
                                 variant = "outlined"
                                 size = "small"
                                 value = {email}
-                                error = {checkParams(email) && pulse}
-                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                error = {checkEmail(email) && pulse}
+                                helperText={checkEmail(email) && pulse ? 'Formato de e-mail inválido' : ''}
                                 onChange = {(e: any) => setEmail(e.target.value)}
                             />
 

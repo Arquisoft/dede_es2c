@@ -61,11 +61,11 @@ export const handleSignup = (name:String,surname:String,email: String,pass: Stri
     })
 }
 
-export const getEmail = async (email: String) => {
+export const foundEmail = async (email: String) => {
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-    const data = await axios.get(apiEndPoint +"/user/list/"+ email)
+    const status = await axios.get(apiEndPoint +"/user/list/"+ email)
     .then(res => {
-        return res.data
+        return res.status
     })
-    return data != null; 
+    return status != 204; 
 } 
