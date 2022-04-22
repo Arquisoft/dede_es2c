@@ -18,6 +18,7 @@ import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
+import ProductDetails from './pages/ProductDetails';
 
 
 const App: FC = () => {
@@ -71,6 +72,7 @@ const App: FC = () => {
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
+          <Route path = 'products/details/:id' element = {<ProductDetails id='RA01'/>} />
           <Route path = 'admin/addProduct' element = {
           <PrivateRoute redirectTo="/login" >
             <AddProdutcAdmin />

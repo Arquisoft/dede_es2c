@@ -1,7 +1,7 @@
 # asw2122_0
 
-[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_0&metric=alert_status)](https://sonarcloud.io/summary/overall?id=Arquisoft_dede_es2c)
+[![Actions Status](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml/badge.svg)](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_es2c&metric=alert_status)](https://sonarcloud.io/summary/overall?id=Arquisoft_dede_es2c)
 [![codecov](https://codecov.io/gh/arquisoft/dede_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://app.codecov.io/gh/Arquisoft/dede_es2c)
 
 <p float="left">
