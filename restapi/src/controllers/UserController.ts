@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
+import {check} from 'express-validator';
 import {
   getSolidDataset,
   getThing,
@@ -42,19 +43,26 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
 export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
-    const { password, ...body } = req.body
-    const user = new User(body)
-    const passwordHashed = await bcrypt.hash(password, 10);
-    user.password = passwordHashed;
-    await user.save();
-    res.status(201).json({
-        user
-    })
+    if(checkBody(req.body)){
+        const { password, ...body } = req.body
+        const user = new User(body)
+        const passwordHashed = await bcrypt.hash(password.toString(), 10);
+        user.password = passwordHashed;
+        await user.save();
+        res.status(201).json({
+           user
+        })
+      
+  }
 } catch(err) {
     res.status(400).json({msg: err})
 }
 };
 
+function checkBody(body:any):boolean{
+  const { name,surname,email,password,repPassword, } =body;
+  return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
+}
 
 export const loginUser: RequestHandler = async (req, res) => {
   var bcrypt = require('bcrypt');

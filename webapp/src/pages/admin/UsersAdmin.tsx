@@ -25,7 +25,8 @@ const UserAdmin: FC = () => {
     const [users, setUsers] = React.useState<User[]>([]);
 
     const getUsers = async () => {
-        const data = axios.get("http://localhost:5000/user/list").then (
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = axios.get(apiEndPoint + "/user/list").then (
             res => {
                 setUsers(res.data)
                 return res.data
