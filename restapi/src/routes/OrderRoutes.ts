@@ -15,6 +15,10 @@ router.get('/order/getByCode/:codigo', OrderController.getOrderByCode);
 router.get('/order/getByEmail/:email', OrderController.getOrderByEmail);
 // Buscar todos los pedidos por correo
 router.get('/order/getAllByEmail/:email', OrderController.getTotalUserOrderByEmail);
+// Eliminar por URL
+router.get('/order/delete/:codigo', OrderController.deleteOrder);
+// Calcular costes de envío con shippo
+router.post("/order/calculateShipment", OrderController.getShippmentCost);
 
 
 module.exports = router;

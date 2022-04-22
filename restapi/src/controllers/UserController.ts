@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
+import {check} from 'express-validator';
 import {
   getSolidDataset,
   getThing,
@@ -35,7 +36,7 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
   if (userFound){
     return res.json(userFound)
   } else {
-    return res.status(204).json();
+    return res.status(412).json();
   }
 };
 
@@ -43,17 +44,17 @@ export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
     if(checkBody(req.body)){
-      const { password, ...body } = req.body
-      const user = new User(body)
-      const passwordHashed = await bcrypt.hash(password, 10);
-      user.password = passwordHashed;
-      await user.save();
-      res.status(201).json({
-          user
-      })
+        const { password, ...body } = req.body
+        const user = new User(body)
+        const passwordHashed = await bcrypt.hash(password.toString(), 10);
+        user.password = passwordHashed;
+        await user.save();
+        res.status(201).json({
+           user
+        })
+      
   }
 } catch(err) {
-  console.log(err)
     res.status(400).json({msg: err})
 }
 };
@@ -72,7 +73,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
         const token = generateToken(userFound.id,userFound.role)
-        res.status(201).json({
+        return res.status(201).json({
           token,
           userFound
         });
@@ -180,6 +181,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
+    return res.status(412).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

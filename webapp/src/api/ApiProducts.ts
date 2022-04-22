@@ -17,7 +17,8 @@ export async function getProductosByCategoria(categoria: string): Promise<Produc
 
 export async function addProduct(url: string, nombre: string, descripcion: string, precio: string, categoria: string, stock: string): Promise<any>{
     let codigo = uuidv4();
-    axios.post("http://localhost:5000/product/addPost", {"codigo": codigo, 
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    axios.post(apiEndPoint + "/product/addPost", {"codigo": codigo, 
             "nombre": nombre, "categoria": categoria, "stock": Number.parseInt(stock), 
             "precio": Number.parseFloat(precio), "url": url, "descripcion": descripcion}).then(
         res => {

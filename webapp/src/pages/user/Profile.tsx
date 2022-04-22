@@ -22,7 +22,8 @@ const Profile = (correo:Email) => {
     const [pulse, setPulse] = useState(false)
 
     const getUserByEmail = async (email:String) => {
-        const data = await axios.get("http://localhost:5000/user/list/" + email).
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = await axios.get(apiEndPoint + "/user/list/" + email).
         then(res => {
             setUser(res.data);
             return res.data;
