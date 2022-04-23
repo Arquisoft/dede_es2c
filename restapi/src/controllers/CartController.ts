@@ -3,20 +3,28 @@ import { ObjectId } from "mongodb";
 const { response, request } = require('express')
 import { Cart } from "../model/Cart";
 import { User } from "../model/User";
+import { Product } from "../model/Product";
 
 export const createCart = async (req = request, res = response) => {
     try{
-        const { client_id, ...body } = req.body
+        const { client_id} = req.body
         if(await checkClient(client_id)){
-            const cart = new Cart(client_id,new Object())
-            await cart.save();
-            res.status(201).json({
-                cart
-             })
+            if(await checkCart(client_id)){
+                const cart = new Cart();
+                cart.client_id = client_id;
+                cart.products = [];
+                await cart.save();
+                res.status(201).json({
+                    cart
+                })
+            }else{
+                return res.status(400).json({message: 'The cart already exists'});
+            }
         }else{
             return res.status(404).json({message: 'User not found'});
         }
     }catch(error){
+        console.log(error)
         res.status(400).json({msg: error})
     }
 };
@@ -31,3 +39,12 @@ async function checkClient(client_id: ObjectId):Promise<boolean>{
     }
     return false;
 }
+async function checkCart(client_id: ObjectId):Promise<boolean> {
+    const cartFound =  await Cart.findOne({client_id: client_id});
+    if(cartFound){
+        return false;
+    }else{
+        return true;
+    }
+}
+
