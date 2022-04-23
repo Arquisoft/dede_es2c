@@ -40,11 +40,14 @@ async function checkClient(client_id: ObjectId):Promise<boolean>{
     return false;
 }
 async function checkCart(client_id: ObjectId):Promise<boolean> {
-    const cartFound =  await Cart.findOne({client_id: client_id});
-    if(cartFound){
-        return false;
-    }else{
-        return true;
+    if(client_id){
+        const cartFound =  await Cart.findOne({client_id: client_id});
+        if(cartFound){
+            return false;
+        }else{
+            return true;
+        }
     }
+    return false;
 }
 
