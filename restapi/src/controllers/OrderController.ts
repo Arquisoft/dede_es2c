@@ -3,7 +3,7 @@ import { orderModel } from "../model/Order";
 import { Product, productModel } from "../model/Product";
 
 
-const ShipmentCosts = require('../util/apiShippo')
+const ShipmentCosts = require('../util/apiEasyPost')
 
 /************* CREAR UN PEDIDO *************/
 
@@ -157,7 +157,6 @@ export const getShippmentCost: RequestHandler = async (req, res) => {
     const addressTo = req.body;
     try{
       var costs = await ShipmentCosts(addressTo);
-      console.log(costs)
       return res.status(200).send({shippmentCost: costs});
     } catch (error){
       return res.status(404).json({message: 'Hubo un fallo procesando los costes'});
