@@ -8,6 +8,7 @@ require('dotenv').config();
 import productRoutes from "./src/routes/ProductRoutes";
 import orderRoutes from "./src/routes/OrderRoutes";
 import reviewRoutes from "./src/routes/ReviewRoutes";
+import cartRoutes from "./src/routes/CartRoutes";
 
 
 
@@ -31,6 +32,7 @@ app.use(userRoutes);
 app.use(productRoutes);
 app.use(orderRoutes);
 app.use(reviewRoutes);
+app.use(cartRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
