@@ -8,11 +8,20 @@ const CartSchema = new mongoose.Schema({
         type: ObjectId,
         required: true,
     },
-    products: {
-        type: [Product],
-        required: true
-    }, 
+    products: [
+        {
+          product: {
+            type: Product
+          },
+          quantity: {
+            type: Number,
+            default: 1,
+          },
+        },
+      ],
     },
     { collection: 'Cart' })
     
+
+
 export const Cart = mongoose.model('Cart', CartSchema);
