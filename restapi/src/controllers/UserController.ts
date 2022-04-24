@@ -48,18 +48,19 @@ export const createUser = async (req = request, res = response) => {
         const passwordHashed = await bcrypt.hash(password.toString(), 10);
         user.password = passwordHashed;
         await user.save();
-        res.status(201).json({
+        return res.status(201).json({
            user
         })
       
   }
 } catch(err) {
-    res.status(400).json({msg: err})
+    return res.status(400).json({msg: err})
 }
 };
 
 function checkBody(body:any):boolean{
-  const { name,surname,email,password,repPassword, } =body;
+  const { name,surname,email,password,repPassword } = body;
+
   return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
 }
 

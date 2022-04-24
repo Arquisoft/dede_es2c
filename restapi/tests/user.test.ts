@@ -100,7 +100,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: makeid(5),
+      password: "prueba",
       repPassword: "prueba",
       role: "user",
     });
@@ -138,7 +138,7 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: makeid(5),
+      password: "prueba",
       repPassword: "prueba",
       role: "user",
     });
