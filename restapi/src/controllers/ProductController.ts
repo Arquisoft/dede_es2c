@@ -3,8 +3,6 @@ import { Product, productModel } from "../model/Product";
 
 const ProductPost = require('../model/Product')
 
-// FALTA LA VERIFICACIÓN DE LOS TOKENS
-
 /************* POST CON LOS PRODUCTOS *************/
 
 export const addProductPost : RequestHandler= async (req = request, res = response) => {
