@@ -8,6 +8,7 @@ require('dotenv').config();
 import productRoutes from "./src/routes/ProductRoutes";
 import orderRoutes from "./src/routes/OrderRoutes";
 import reviewRoutes from "./src/routes/ReviewRoutes";
+import cartRoutes from "./src/routes/CartRoutes";
 
 
 
@@ -22,7 +23,7 @@ const options: cors.CorsOptions = {
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
-app.use(cors(options));
+app.use(cors());
 app.use(bp.json());
 
 app.use("/api", api)
@@ -31,6 +32,7 @@ app.use(userRoutes);
 app.use(productRoutes);
 app.use(orderRoutes);
 app.use(reviewRoutes);
+app.use(cartRoutes);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);

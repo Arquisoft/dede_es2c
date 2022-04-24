@@ -19,8 +19,9 @@ export async function getDireccionPod(webId: string) {
     return response.json();
 }
 
-export const handleLogin = (idUser: String, pass: String) => {
-    axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
+export const handleLogin = async (idUser: String, pass: String) => {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    axios.post(apiEndPoint + "/user/login",{"email":idUser,"password":pass})
     .then(res => {
         if(res.status === 201){
          Swal.fire({
@@ -43,26 +44,38 @@ export const handleLogin = (idUser: String, pass: String) => {
 }
 
 export const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
+    console.log("EntrA")
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    axios.post(apiEndPoint +"/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
     .then(res => {
-        console.log(res);
-        console.log(res.data);
         if(res.status === 201){
-            Swal.fire({
-                title: "Usuario registrado",
-                text: "Te has registrado correctamente en la aplicación",
-                icon: "success"
-            }).then(() => {
-                window.location.assign("/login");
-            });
+            axios.post(apiEndPoint + "/cart/add",{"client_id":res.data.user._id}).then(res =>{
+                if(res.status === 201){
+                    Swal.fire({
+                        title: "Usuario registrado",
+                        text: "Te has registrado correctamente en la aplicación",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.assign("/login");
+                    });
+                }
+            })
         }
     })
 }
 
-export const getEmail = async (email: String) => {
-    const data = await axios.get("http://localhost:5000/user/list/"+ email)
-    .then(res => {
-        return res.data
-    })
-    return data != null; 
+export const foundEmail = async (email: String):Promise<boolean> => {
+    var status = false;
+    if(email.trim().length > 0){
+        try{
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        status = await axios.get(apiEndPoint +"/user/list/"+ email)
+        .then(res => {
+            return res.status == 200
+        })
+        }catch(error){
+            return false
+        }
+    } 
+    return status;
 } 
