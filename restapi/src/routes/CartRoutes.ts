@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.post('/cart/add', CartController.createCart);
 router.put('/cart/addProduct', CartController.addProduct);
+router.put('/cart/deleteProduct', CartController.deleteProduct);
 
 export default router;
