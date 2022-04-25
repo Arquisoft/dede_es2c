@@ -3,12 +3,9 @@ import { Product, productModel } from "../model/Product";
 
 const ProductPost = require('../model/Product')
 
-// FALTA LA VERIFICACIÓN DE LOS TOKENS
-
 /************* POST CON LOS PRODUCTOS *************/
 
 export const addProductPost : RequestHandler= async (req = request, res = response) => {
-    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
     try {
         // Hay que buscar que no exista
         const productoPrevio = await productModel.findOne({codigo: req.body.codigo})
