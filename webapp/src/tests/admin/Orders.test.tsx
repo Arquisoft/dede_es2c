@@ -8,7 +8,7 @@ test('Admin -> Administrar Pedidos Inside', async () => {
     const productList:Object[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
     const pedido: Order[] = [{codigo: "A", correo: "a@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}, 
                               {codigo: "B", correo: "b@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}]
-  
+   
                           
     render(
       <Table>

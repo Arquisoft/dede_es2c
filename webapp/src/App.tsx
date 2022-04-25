@@ -19,6 +19,8 @@ import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
 import ProductDetails from './pages/ProductDetails';
+import HelpPage from './pages/utils/HelpPage';
+import { HelpButton } from './components/utils/HelpButton';
 
 
 const App: FC = () => {
@@ -59,6 +61,7 @@ const App: FC = () => {
 
       <Router>
         <NavBar cartItems = {cartItems}></NavBar>
+        <HelpButton />
         {/* <NavBar/>  */}
         <Routes>
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
@@ -71,6 +74,7 @@ const App: FC = () => {
           <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
+          <Route path= 'help' element = {<HelpPage/>} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'products/details/:id' element = {<ProductDetails id='RA01'/>} />
           <Route path = 'admin/addProduct' element = {

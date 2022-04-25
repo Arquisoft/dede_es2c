@@ -19,4 +19,4 @@ test('Admin -> Administrar Productos Base Datos', async () => {
 test('Admin -> Administrar Productos Base', async () => {
   render(<ManageProducts />);
   expect(screen.getByText(/Código/i)).toBeInTheDocument();
-});
+}); 

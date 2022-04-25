@@ -47,11 +47,11 @@ const SignUp: FC = () => {
     }
 
     return (
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '140vh' }}>
             <Container component= "main" maxWidth="sm"
                 sx={{
                 position: "center",
-                top: 150
+                top: 200
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
@@ -63,7 +63,6 @@ const SignUp: FC = () => {
                                 id = "name" required
                                 name = "Nombre"
                                 label = "Nombre"
-                                defaultValue = "Nombre"
                                 variant = "outlined"
                                 size = "small"
                                 value = {name}
@@ -76,7 +75,6 @@ const SignUp: FC = () => {
                                 id = "surname" required
                                 name = "Apellido"
                                 label = "Apellido"
-                                defaultValue = "Apellido"
                                 variant = "outlined"
                                 size = "small"
                                 value = {surname}
@@ -89,7 +87,6 @@ const SignUp: FC = () => {
                                 id = "email" required
                                 name = "Correo electronico"
                                 label = "Correo electronico"
-                                defaultValue = "Correo electronico"
                                 variant = "outlined"
                                 size = "small"
                                 value = {email}
@@ -104,7 +101,6 @@ const SignUp: FC = () => {
                                 name = "Contraseña"
                                 label = "Contraseña"
                                 type= "password"
-                                defaultValue= "Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {pass}
@@ -118,7 +114,6 @@ const SignUp: FC = () => {
                                 name = "Repetir Contraseña"
                                 label = "Repetir Contraseña"
                                 type= "password"
-                                defaultValue= "Repetir Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {repPass}

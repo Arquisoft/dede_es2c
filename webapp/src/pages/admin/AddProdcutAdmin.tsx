@@ -48,9 +48,9 @@ const AddProdutcAdmin: FC = () => {
 
         if(user.role === "ROLE_ADMIN"){
             return (
-                <div>
+                <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '125vh' }}>
                     <Container component= "main" maxWidth="sm" fixed={true} 
-                    sx={{ position: "relative",top: 150}}>
+                    sx={{ position: "center",top: 150}}>
                         <Card sx = {{minWidth: 700, height: 1100}}>
                             <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
                             <CardHeader title = 'Añadir un nuevo producto' />
