@@ -16,7 +16,7 @@ const app: Application = express();
 
 const mongoose = require("mongoose");
 
-var passwordTest : String;
+const passwordTest = makeid();
 
 beforeAll(async () => {
 
@@ -27,9 +27,6 @@ beforeAll(async () => {
   app.use(bp.urlencoded({ extended: false }));
 
   app.use(apiUser);
-
-  passwordTest = makeid();
-  console.log(passwordTest)
 
 
 
