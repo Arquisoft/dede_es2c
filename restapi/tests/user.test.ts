@@ -6,14 +6,8 @@ import promBundle from "express-prom-bundle";
 import apiUser from "../src/routes/UserRoutes";
 
 
-function makeid(length: any) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(charactersLength));
- }
- return result;
+function makeid() {
+ return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 }
 
 var server: Server;
@@ -22,8 +16,7 @@ const app: Application = express();
 
 const mongoose = require("mongoose");
 
-const passwordTest = "password";
-
+var passwordTest : String;
 
 beforeAll(async () => {
 
@@ -34,6 +27,10 @@ beforeAll(async () => {
   app.use(bp.urlencoded({ extended: false }));
 
   app.use(apiUser);
+
+  passwordTest = makeid();
+  console.log(passwordTest)
+
 
 
   await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
