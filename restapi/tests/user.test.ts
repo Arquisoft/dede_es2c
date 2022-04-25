@@ -22,6 +22,8 @@ const app: Application = express();
 
 const mongoose = require("mongoose");
 
+const passwordTest = "password";
+
 
 beforeAll(async () => {
 
@@ -96,14 +98,16 @@ describe("user ", () => {
     * Creo un usuario de forma correcta
     */
   it("Creo un usuario de forma correcta", async () => {
+
     const response: Response = await request(app).post("/user/signup").send({
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: "prueba",
-      repPassword: "prueba",
+      password: passwordTest,
+      repPassword: passwordTest,
       role: "user",
     });
+
     expect(response.statusCode).toBe(201);
   });
 
@@ -138,8 +142,8 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: "prueba",
-      repPassword: "prueba",
+      password: passwordTest,
+      repPassword: passwordTest,
       role: "user",
     });
     expect(response.statusCode).toBe(400);
@@ -172,7 +176,7 @@ describe("user ", () => {
      it("Hago login de forma incorrecta", async () => {
       const response: Response = await request(app).post("/user/login").send({
         email: "correoInexistente",
-        password:  makeid(5),
+        password: passwordTest,
       });
       expect(response.statusCode).toBe(200);
     });
