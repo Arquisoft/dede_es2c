@@ -44,30 +44,38 @@ export const handleLogin = async (idUser: String, pass: String) => {
 }
 
 export const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
+    console.log("EntrA")
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
     axios.post(apiEndPoint +"/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
     .then(res => {
-        console.log(res);
-        console.log(res.data);
         if(res.status === 201){
-            Swal.fire({
-                title: "Usuario registrado",
-                text: "Te has registrado correctamente en la aplicación",
-                icon: "success"
-            }).then(() => {
-                window.location.assign("/login");
-            });
+            axios.post(apiEndPoint + "/cart/add",{"client_id":res.data.user._id}).then(res =>{
+                if(res.status === 201){
+                    Swal.fire({
+                        title: "Usuario registrado",
+                        text: "Te has registrado correctamente en la aplicación",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.assign("/login");
+                    });
+                }
+            })
         }
     })
 }
 
-export const foundEmail = async (email: String) => {
+export const foundEmail = async (email: String):Promise<boolean> => {
+    var status = false;
     if(email.trim().length > 0){
+        try{
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-        const status = await axios.get(apiEndPoint +"/user/list/"+ email)
+        status = await axios.get(apiEndPoint +"/user/list/"+ email)
         .then(res => {
-            return res.status
+            return res.status == 200
         })
-        return status != 204;
+        }catch(error){
+            return false
+        }
     } 
+    return status;
 } 

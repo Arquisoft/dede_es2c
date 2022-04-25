@@ -2,7 +2,6 @@ import { RequestHandler } from "express";
 import{generateToken} from "../util/service";
 import{verifyToken} from "../util/service";
 const { response, request } = require('express')
-import {check} from 'express-validator';
 import {
   getSolidDataset,
   getThing,
