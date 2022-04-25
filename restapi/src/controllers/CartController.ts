@@ -90,6 +90,20 @@ export const deleteProduct = async (req = request, res = response) => {
     }
 };
 
+export const findByClientId = async (req = request, res = response) => {
+    try{
+        const client_id = req.params.client_id
+        var cart = await Cart.findOne({client_id:client_id})
+        if(cart){
+            return res.status(200).json(cart)
+        }
+        return res.status(404).json({msg: "Cart not found"})
+    }catch(error){
+        console.log(error)
+        return res.status(404).json({msg: "Cart not found"})
+    }
+};
+
 async function checkClient(client_id: ObjectId):Promise<boolean>{
     if(client_id){
         const userFound =  await User.findOne({_id: client_id});
