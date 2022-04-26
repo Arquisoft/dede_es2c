@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import ClearIcon from '@mui/icons-material/Clear';
 import Card from '@mui/material/Card';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {v4 as uuidv4} from 'uuid';
 
 type ProductsProps = {
     product: Product[]
@@ -112,7 +113,7 @@ const Productos = ( product: ProductsProps) => {
     }
 
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} key = {uuidv4()}>
          {product.product.map(
             (p) => {
                 
@@ -162,7 +163,7 @@ const Productos = ( product: ProductsProps) => {
                     );
                     } else {
                         return (
-                            <Grid item xs={3} md={3}>
+                            <Grid item xs={3} md={3} key= {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />

@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import {addProduct} from "../../api/ApiProducts";
 import jwt_decode from 'jwt-decode';
+import NoPermissions from '../utils/NoPermissions';
 
 const AddProdutcAdmin: FC = () => {
 
@@ -144,16 +145,12 @@ const AddProdutcAdmin: FC = () => {
             );
         }else {
             return (
-                <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                    <h1>No tiene permisos para acceder a esta página</h1>
-                </div>
+                <NoPermissions />
             );
         }
     }else{
         return (
-            <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <h1>No ha iniciado sesión, por favor inicie sesión</h1>
-            </div>
+            <NoPermissions />
         );
     }
 

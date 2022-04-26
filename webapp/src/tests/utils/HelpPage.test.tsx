@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import HelpPage from '../../pages/utils/HelpPage';
 
 
-test('Carga correcta de la ventana SingUp',async () => {
+test('Carga correcta de la ventana Help Page',async () => {
     const {getAllByText} =  render(
           <HelpPage /> 
      );

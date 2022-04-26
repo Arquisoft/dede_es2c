@@ -20,6 +20,8 @@ import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
 import ProductDetails from './pages/ProductDetails';
 import HelpPage from './pages/utils/HelpPage';
+import NoPermissions from './pages/utils/NoPermissions';
+
 import { HelpButton } from './components/utils/HelpButton';
 
 
@@ -62,7 +64,6 @@ const App: FC = () => {
       <Router>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
-        {/* <NavBar/>  */}
         <Routes>
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
@@ -74,22 +75,27 @@ const App: FC = () => {
           <Route path= 'help' element = {<HelpPage/>} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'products/details/:id' element = {<ProductDetails id='RA01'/>} />
+          <Route path = 'nopermissions' element = {< NoPermissions/>} />
           <Route path = 'admin/addProduct' element = {
-          <PrivateRoute redirectTo="/login" >
-            <AddProdutcAdmin />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions" >
+              <AddProdutcAdmin />
+              </PrivateRoute>} 
+          />
           <Route path = 'admin/manageProducts' element = {
-          <PrivateRoute redirectTo="/login" >
-            <ManageProducts />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions" >
+              <ManageProducts />
+            </PrivateRoute>} 
+          />
           <Route path = 'admin/manageOrders' element = {
-          <PrivateRoute redirectTo="/login">
-            <ManageOrders />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions">
+              <ManageOrders />
+            </PrivateRoute>} 
+          />
           <Route path = 'admin/manageUsers' element = {
-          <PrivateRoute redirectTo="/login">
-            <UserAdmin />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions">
+              <UserAdmin />
+            </PrivateRoute>} 
+          />
         </Routes>
         <Footer />
       </Router>

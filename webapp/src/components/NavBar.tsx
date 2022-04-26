@@ -200,9 +200,7 @@ const NavBar=(cart:ProductsProps) =>{
               </Typography>
               <Button color="inherit" href = "/">Inicio</Button>
               <Button color="inherit" href = "/products">Productos</Button>
-              <Button color="inherit" href = "/admin/addProduct">Añadir Productos</Button>
-              <Button color="inherit" href = "/admin/manageProducts">Administrar Productos</Button>
-              <Button color="inherit" href = "/admin/manageOrders">Administrar Pedidos</Button>
+              <Button color="inherit" href = "/admin/addProduct">Mis pedidos</Button>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 
