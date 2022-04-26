@@ -3,6 +3,6 @@ import AddProdutcAdmin from '../../pages/admin/AddProdcutAdmin';
 
 test('Admin -> Añadir Productos', async () => {
     render(<AddProdutcAdmin />)
-    expect(screen.getByText(/No ha iniciado sesión, por favor inicie sesión/i)).toBeInTheDocument();
+    expect(screen.getByText(/No dispone de los permisos necesarios para acceder a la ruta introducida/i)).toBeInTheDocument();
 });
  
