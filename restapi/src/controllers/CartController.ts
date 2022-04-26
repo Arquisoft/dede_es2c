@@ -24,7 +24,6 @@ export const createCart = async (req = request, res = response) => {
             return res.status(404).json({message: 'User not found'});
         }
     }catch(error){
-        console.log(error)
         return res.status(400).json({msg: error})
     }
 };
@@ -59,7 +58,6 @@ export const addProduct = async (req = request, res = response) => {
               return res.status(200).json({products})
         }
     }catch(error){
-        console.log(error)
         return res.status(400).json({msg: error})
     }
 };
@@ -85,7 +83,6 @@ export const deleteProduct = async (req = request, res = response) => {
         }
         return res.status(200).json({msg: "The cart was empty"})
     }catch(error){
-        console.log(error)
         return res.status(400).json({msg: error})
     }
 };
@@ -99,7 +96,6 @@ export const findByClientId = async (req = request, res = response) => {
         }
         return res.status(404).json({msg: "Cart not found"})
     }catch(error){
-        console.log(error)
         return res.status(404).json({msg: "Cart not found"})
     }
 };

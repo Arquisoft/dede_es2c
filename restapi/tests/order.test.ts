@@ -54,7 +54,6 @@ describe("orders ", () => {
         correo:  "correoPrueba",
         direccion: "dirPrueba",
         fecha: new Date(),
-        precioTotal: 149.86,
         products: [
           {
             codigo: "MO01",
@@ -77,6 +76,7 @@ describe("orders ", () => {
           }
         ]
       });
+      
       expect(response.statusCode).toBe(200);
     });
 
