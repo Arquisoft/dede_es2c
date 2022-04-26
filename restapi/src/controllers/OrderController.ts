@@ -19,10 +19,26 @@ export const addOrder: RequestHandler = async (req, res) => {
         product.save(); // Se actualiza el stock de los productos
       }
     };
+
+    // Calculas el precio total
+
+    var totalPrice = 0;
+    const updateTotalPrice = async (products: any) => {
+        for (var i = 0; i < products.length; i++) {
+          totalPrice = totalPrice + products[i].precio;
+        }
+        totalPrice = totalPrice * 1.21; // El IVA
+      };
+    
+
     
     try {
         if (checkParams(req.body)){
             const order = new orderModel(req.body);
+
+            updateTotalPrice(order.products)
+            order.precioTotal = totalPrice
+
             updateNewStock(order.products);
             const orderToSave = await order.save();
             res.json(orderToSave);
@@ -37,8 +53,7 @@ export const addOrder: RequestHandler = async (req, res) => {
 function checkParams(body: any): boolean{
     const {codigo, correo, direccion, fecha, precioTotal, products} = body;
     return codigo != null && codigo != '' && correo != null && correo != '' && 
-    direccion != null && direccion != '' && fecha != null  && 
-    precioTotal >= 0  && products != null
+    direccion != null && direccion != '' && fecha != null   && products != null
 }
 
 
