@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -7,20 +7,20 @@ import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
 import { foundEmail, handleSignup } from '../api/ApiUsers';
 
-const checkParams = (text: String) => {
+const checkParams = (text: string) => {
     return text === "" || text == null;
 }
 
-const checkEmail = (email: String) => {
+const checkEmail = (email: string) => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return !re.test(email.toString());
 }
 
-const checkPaswwords = (repPass: String, pass: String) => {
+const checkPaswwords = (repPass: string, pass: string) => {
     return repPass !== pass;
 }
 
-const signUp = (name:String,surname:String,email: String,pass: String,repPass:String) => {
+const signUp = (name:string,surname:string,email: string,pass: String,repPass:string) => {
     handleSignup(name, surname, email, pass, repPass);
 }
 
@@ -33,7 +33,7 @@ const SignUp: FC = () => {
     const [repPass, setRepPass] = useState('')
     const [pulse, setPulse] = useState(false)
 
-    async function allFunc(name:String,surname:String,email: String,pass: String,repPass:String){
+    async function allFunc(name:string,surname:string,email: string,pass: string,repPass:string){
         setPulse(true);
         if(await foundEmail(email)){
             Swal.fire({

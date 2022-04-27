@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import { CardHeader, CardMedia, Container, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import React, { FC, useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Swal from 'sweetalert2';
 import {addProduct} from "../../api/ApiProducts";
 import Select, { SelectChangeEvent } from '@mui/material/Select';

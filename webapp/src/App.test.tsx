@@ -1,33 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-import Home from '../src/pages/Home';
-import { Order, Product, User, Object } from '../src/shared/shareddtypes';
+import {  Product } from '../src/shared/shareddtypes';
 import ListProducts from './pages/ListProducts';
-import ManageProducts from './pages/admin/ManageProducts';
-import ProdAdmin from './pages/admin/ProdAdmin';
-import IUserAdmin from './pages/admin/IUserAdmin';
-import UserAdmin from './pages/admin/UsersAdmin';
-import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
-import ManageOrders from './pages/admin/ManageOrders';
-import OrderAdmin from './pages/admin/OrderAdmin';
-import Profile from './pages/user/Profile';
-import OrderHistory from './pages/user/OrderHistory'
-import Pago from './pages/Pago';
-import { Table, TableBody } from '@mui/material';
-/* test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Source code/i);
-  expect(linkElement).toBeInTheDocument();
-}); */ 
 
-/* test('Home Page de la aplicacion', async () => {
-    const productList:Product[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
-    const productOnCart:any = {};
-    render(<Home onAddCart={productOnCart} cartItems = {productList}/>);
-    const linkElement = screen.getByAltText(/Banner/i); 
-    expect(linkElement).toBeInTheDocument();
-    expect(screen.getByText(/Últimas unidades/i)).toBeInTheDocument(); 
-}); */
 
 
 test('Ventana Productos', async () => {
@@ -38,80 +12,3 @@ test('Ventana Productos', async () => {
   expect(screen.getByText(/Menor a mayor/i)).toBeInTheDocument();  
   expect(screen.getByLabelText(/Precio/i)).toBeInTheDocument(); 
 });
-
-
-/* test('Admin -> Administrar Productos Base', async () => {
-  render(<ManageProducts />);
-  expect(screen.getByText(/Código/i)).toBeInTheDocument();
-}); */
-
-/* test('Admin -> Administrar Productos Base Datos', async () => {
-  const productList:Product[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
-  render(
-    <Table>
-        <TableBody>
-          <ProdAdmin produc={productList} />
-        </TableBody>
-    </Table>);
-  expect(screen.getByText(/PruebaTecado/i)).toBeInTheDocument();
-  expect(screen.getByText(/Administrar/i)).toBeInTheDocument();
-}); */
-/*
- test('Admin -> Administrar Usuarios dentro', async () => {
-  const userList:User[] = [{name:"Ana", email: "a@uniovi.es"}]
-  render(<IUserAdmin user={userList} />)
-  expect(screen.getByText(/Ver pedidos/i)).toBeInTheDocument();
-});*/
-
-/* test('Admin -> Administrar Usuarios', async () => {
-  render(<UserAdmin />)
-  expect(screen.getByText(/Ver pedidos de usuarios/i)).toBeInTheDocument();
-});  */
-
-/* test('Admin -> Añadir Productos', async () => {
-    render(<AddProdutcAdmin />)
-    expect(screen.getByText(/Añadir un nuevo producto/i)).toBeInTheDocument();
-});
- */
-/* test('Admin -> Administrar Pedidos', async () => {
-  render(<ManageOrders />)
-  expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
-});  */ 
-
-/* test('Ventana Pago', async () => {
-  render(<Pago />)
-  expect(screen.getByText(/Comprueba tu direccion/i)).toBeInTheDocument();
-  expect(screen.getByText(/Dirección de envío, por favor ingrese el nombre de su POD/i)).toBeInTheDocument();
-});  */
-
-/* test('Admin -> Administrar Pedidos Inside', async () => {
-  const productList:Object[] = [{codigo: "TE01", categoria: "teclado", nombre: "PruebaTecado", precio: 20, stock: '4', url: "aa", descripcion: "", cantidad: 0}];
-  const pedido: Order[] = [{codigo: "A", correo: "a@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}, 
-                            {codigo: "B", correo: "b@uniovi", fecha: new Date(), precioTotal: 140.23, products: productList}]
-
-                        
-  render(
-    <Table>
-      <TableBody>
-       <OrderAdmin orders={pedido}  />
-      </TableBody>
-  </Table>)
-  expect(screen.getByText(/a@uniovi/i)).toBeInTheDocument();
-});  */
-
-/* test('User -> Sobre La Página', async () => {
-  render(<Profile email={"user2@uniovi.com"}/>)
-  expect(screen.getByText(/Correo electrónico:/i)).toBeInTheDocument();
-  expect(screen.getByText(/Nombre:/i)).toBeInTheDocument();
-  expect(screen.getByText(/Apellidos:/i)).toBeInTheDocument();
-  expect(screen.getByText(/Contraseña:/i)).toBeInTheDocument();
-}); 
-
-test('User -> Página historial de datos', async () => {
-  render(<OrderHistory email={"admin@uniovi.es"}/>)
-  expect(screen.getByText(/Código del pedido/i)).toBeInTheDocument();
-  expect(screen.getByText(/Fecha de orden/i)).toBeInTheDocument();
-  expect(screen.getByText(/Precio del pedido/i)).toBeInTheDocument();
-  expect(screen.getByText(/Productos/i)).toBeInTheDocument();
-}); 
- */
