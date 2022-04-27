@@ -32,7 +32,6 @@ const UserAdmin: FC = () => {
                 return res.data
             }
         )
-
         return data != null;
     }
 

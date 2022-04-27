@@ -69,10 +69,10 @@ const App: FC = () => {
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'user/profile' element = {<Profile email={"user2@uniovi.com"}/>} />
-          <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
+          <Route path = 'user/orderHistory' element = {<OrderHistory/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
-          <Route path= 'help' element = {<HelpPage/>} />
+          <Route path = 'help' element = {<HelpPage/>} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'products/details/:id' element = {<ProductDetails />} />
           <Route path = 'nopermissions' element = {< NoPermissions/>} />

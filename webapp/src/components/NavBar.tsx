@@ -58,7 +58,7 @@ const NavBar=(cart:ProductsProps) =>{
     const cerrarSesion = () => {
         Swal.fire({
             title: '¿Quieres cerrar sesión?',
-            text: "Se perderan los productos que teine en el carrito",
+            text: "Se perderan los productos que tiene en el carrito",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

@@ -9,6 +9,9 @@ import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import {  getOrders } from '../../api/api';
 import OrderUser from '../user/OrderUser';
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import { User } from '../../shared/shareddtypes';
 
 type Id = {
     email:String
@@ -23,10 +26,38 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       fontSize: 14,
     },
 }));
-
-const OrderHistory = (id: Id) => {
+/*
+function getUserId() {
+    var id;
+    if(localStorage.getItem('token') != null)
+    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+    id = user.id
+    return id
+}
+*/
+const OrderHistory = () => {
     const [orders, setOrders]  = React.useState<Order[]>([]);
-    
+    const [email, setEmail] = useState('')
+    const [id, setId] = useState('')/*
+    const [user, setUser] = React.useState<User>();
+
+    setId(getUserId())
+
+    const getUser = async () => {
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = axios.get(apiEndPoint + "/user/list/" + id).then (
+            res => {
+                setUser(res.data)
+                return res.data
+            }
+        )
+        return data != null;
+    }
+
+    useEffect (() => {getUser();}, [])*/
+
+    setEmail("admin@uniovi.es")
+
     async function cargarPedidos() {
         setOrders(await getOrders());
     }
@@ -46,7 +77,7 @@ const OrderHistory = (id: Id) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <OrderUser orders = {orders} email = {id.email} />
+                            <OrderUser orders = {orders} />
                         </TableBody>
                     </Table>
                 </TableContainer>
