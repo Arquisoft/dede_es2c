@@ -37,7 +37,7 @@ const ProductDetails = () => {
 
                         <Grid container item xs={12} md={6} direction={"column"}>
                             <Typography component="h1" variant='h5'>{p0?.nombre}</Typography>
-                            <Typography component="h1" >Categoías: {p0?.categoria}</Typography>
+                            <Typography component="h1" >Categorías: {p0?.categoria}</Typography>
                             <Typography component="h1" >Descripcion: {p0?.descripcion}</Typography>
                             <Typography component="h1" >Precio: {p0?.precio}€</Typography>
                             <Button onClick={() => añadirCarrito()} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
