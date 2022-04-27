@@ -1,10 +1,11 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useEffect } from 'react';
 import { Product } from '../shared/shareddtypes';
 import axios from 'axios';
 import { Stack, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
 import Products from '../components/Products';
 import Typography from '@mui/material/Typography';
-import Footer from '../components/Footer/Footer';
+
+
 
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
@@ -40,7 +41,8 @@ const Home = (func: ProductsProps) => {
 
     const cargarProductos = () => {
         prods.map((p) => {
-            if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) >= 0){
+            if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0){
+                console.log(p.cantidad);
                 return(
                     <Grid item xs={3} md={3}>
                             <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
@@ -60,9 +62,9 @@ const Home = (func: ProductsProps) => {
     getProducts()
 
     return (
-
        <>
        <div className='Home' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '180vh' }}>
+            
             <Stack direction='column'>
                 {cargarBanner()}
                 <Typography variant="h4" gutterBottom component="div">

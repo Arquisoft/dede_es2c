@@ -38,3 +38,9 @@ export async function addProduct(url: string, nombre: string, descripcion: strin
         }
     )
 }
+
+export async function getProductByCode (code: string): Promise<Product> {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    let response = await fetch(apiEndPoint + "/product/getByCodigo/" + code, {method: "GET"});
+    return response.json();
+}

@@ -78,6 +78,10 @@ const NavBar=(cart:ProductsProps) =>{
         
     }
 
+    function goTo(){
+        window.location.assign("/products");
+    }
+
     if(localStorage.getItem('token') != null){
         var user:any = jwt_decode(localStorage.getItem('token') || '{}');
 
@@ -89,7 +93,7 @@ const NavBar=(cart:ProductsProps) =>{
                DeDe
               </Typography>
               <Button color="inherit" href = "/">Inicio</Button>
-              <Button color="inherit" href = "/products">Productos</Button>
+              <Button color="inherit" onClick={() => goTo()}>Productos</Button>
               <Button color="inherit" href = "/admin/addProduct">Añadir Productos</Button>
               <Button color="inherit" href = "/admin/manageProducts">Administrar Productos</Button>
               <Button color="inherit" href = "/admin/manageOrders">Administrar Pedidos</Button>
@@ -200,9 +204,7 @@ const NavBar=(cart:ProductsProps) =>{
               </Typography>
               <Button color="inherit" href = "/">Inicio</Button>
               <Button color="inherit" href = "/products">Productos</Button>
-              <Button color="inherit" href = "/admin/addProduct">Añadir Productos</Button>
-              <Button color="inherit" href = "/admin/manageProducts">Administrar Productos</Button>
-              <Button color="inherit" href = "/admin/manageOrders">Administrar Pedidos</Button>
+              <Button color="inherit" href = "/admin/addProduct">Mis pedidos</Button>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 

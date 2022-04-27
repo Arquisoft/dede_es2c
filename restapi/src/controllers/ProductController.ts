@@ -97,12 +97,24 @@ export const generateExample: RequestHandler = async(req, res, next) => {
     const cod = req.params.codigo;
     try {
         const encontrado = await productModel.findOne({codigo: cod});
+        console.log(res.json(encontrado))
         if (encontrado){
+            console.log(res.json(encontrado))
             return res.json(encontrado)
           } else {
             return res.status(412).json();
           }
     }catch(error){
+        return res.status(404).json();
+    }
+}
+
+export const getProductoByCodigo: RequestHandler = async (req, res) => {
+    const cod = req.params.codigo;
+     const encontrado = await productModel.findOne({codigo: cod});
+    if (encontrado){
+        return res.json(encontrado)
+    } else {
         return res.status(404).json();
     }
 }

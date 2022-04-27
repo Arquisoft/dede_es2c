@@ -43,11 +43,11 @@ const LogIn: FC = () => {
                     <Stack direction= "column" spacing={2}>
                         
                             <TextField 
+                                type= "text"
                                 id = "email"
                                 required
-                                name = "Correo Electronico"
-                                label = "Correo Electronico"
-                                defaultValue= "Correo Electronico"
+                                name = "Introduzca Correo Electronico"
+                                label = "Correo"
                                 variant="outlined"
                                 size="small"
                                 value = {email}
@@ -60,10 +60,9 @@ const LogIn: FC = () => {
                             <TextField 
                                 id = "pass"
                                 required
-                                name = "Contraseña"
-                                label = "Contraseña"
+                                name = "cont"
+                                label = "Introduza su contraseña"
                                 type= "password"
-                                defaultValue= "Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {pass}

@@ -18,6 +18,11 @@ import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
+import ProductDetails from './pages/ProductDetails';
+import HelpPage from './pages/utils/HelpPage';
+import NoPermissions from './pages/utils/NoPermissions';
+
+import { HelpButton } from './components/utils/HelpButton';
 
 
 const App: FC = () => {
@@ -58,7 +63,7 @@ const App: FC = () => {
 
       <Router>
         <NavBar cartItems = {cartItems}></NavBar>
-        {/* <NavBar/>  */}
+        <HelpButton />
         <Routes>
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
@@ -67,23 +72,30 @@ const App: FC = () => {
           <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
+          <Route path= 'help' element = {<HelpPage/>} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
+          <Route path = 'products/details/:id' element = {<ProductDetails />} />
+          <Route path = 'nopermissions' element = {< NoPermissions/>} />
           <Route path = 'admin/addProduct' element = {
-          <PrivateRoute redirectTo="/login" >
-            <AddProdutcAdmin />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions" >
+              <AddProdutcAdmin />
+              </PrivateRoute>} 
+          />
           <Route path = 'admin/manageProducts' element = {
-          <PrivateRoute redirectTo="/login" >
-            <ManageProducts />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions" >
+              <ManageProducts />
+            </PrivateRoute>} 
+          />
           <Route path = 'admin/manageOrders' element = {
-          <PrivateRoute redirectTo="/login">
-            <ManageOrders />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions">
+              <ManageOrders />
+            </PrivateRoute>} 
+          />
           <Route path = 'admin/manageUsers' element = {
-          <PrivateRoute redirectTo="/login">
-            <UserAdmin />
-          </PrivateRoute>} />
+            <PrivateRoute redirectTo="/nopermissions">
+              <UserAdmin />
+            </PrivateRoute>} 
+          />
         </Routes>
         <Footer />
       </Router>
