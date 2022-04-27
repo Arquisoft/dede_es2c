@@ -7,15 +7,11 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
-import {  getOrders } from '../../api/api';
+import {  getOrdersByEmail } from '../../api/api';
 import OrderUser from '../user/OrderUser';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { User } from '../../shared/shareddtypes';
-
-type Id = {
-    email:String
-}
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -26,6 +22,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       fontSize: 14,
     },
 }));
+
 /*
 function getUserId() {
     var id;
@@ -36,8 +33,8 @@ function getUserId() {
 }
 */
 const OrderHistory = () => {
-    const [orders, setOrders]  = React.useState<Order[]>([]);
-    const [email, setEmail] = useState('')
+    const [ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
+    let [email, setEmail] = useState('')
     const [id, setId] = useState('')/*
     const [user, setUser] = React.useState<User>();
 
@@ -56,12 +53,12 @@ const OrderHistory = () => {
 
     useEffect (() => {getUser();}, [])*/
 
-    setEmail("admin@uniovi.es")
+    email = "admin@uniovi.es"
 
-    async function cargarPedidos() {
-        setOrders(await getOrders());
+    async function cargarPedidosEmail() {
+        setOrdersEmail(await getOrdersByEmail(email))
     }
-    useEffect(() => {cargarPedidos();}, []);
+    useEffect(() => {cargarPedidosEmail();}, []);
 
     return (
         <div>
@@ -77,7 +74,7 @@ const OrderHistory = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <OrderUser orders = {orders} />
+                            <OrderUser orders = {ordersEmail} />
                         </TableBody>
                     </Table>
                 </TableContainer>
