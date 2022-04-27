@@ -5,11 +5,8 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
 import { Card, CardContent, Typography } from '@mui/material';
-import Link from '@mui/material/Link';
-import axios from 'axios';
 import Swal from 'sweetalert2'
 import { getDireccionPod } from '../api/api';
-// import Check from '../checks/Arguments'
 
 
 const checkParams = (text: String) => {
@@ -22,6 +19,7 @@ const Pago: FC = () => {
     const [tarjeta, setTarjeta] = useState('')
     const [fechaCad, setFechaCad] = useState('')
     const [CVV, setCVV] = useState('')
+    const [tel, setTel] = useState('')
     const [pulse, setPulse] = useState(false)
 
     // Constantes para el pod
@@ -87,14 +85,12 @@ const Pago: FC = () => {
                                 required
                                 name = "Titular de la tarjeta"
                                 label = "Titular de la tarjeta"
-                                defaultValue= "Titular de la tarjeta"
                                 variant="outlined"
                                 size="small"
                                 value = {titular}
                                 error = {checkParams(titular) && pulse}
                                 helperText={checkParams(titular) && pulse ? 'El titular no puede ser vacío' : ''}
                                 onChange = {(e: any) => setTitular(e.target.value)}
-                               // helperText = "Valor incorrecto"
                             />
                                                     
                             <TextField 
@@ -102,14 +98,12 @@ const Pago: FC = () => {
                                 required
                                 name = "Numero de tarjeta"
                                 label = "Numero de tarjeta"
-                                defaultValue= "Numero de tarjeta"
                                 variant="outlined"
                                 size="small"
                                 value = {tarjeta}
                                 error = {checkParams(tarjeta) && pulse}
                                 helperText={checkParams(tarjeta) && pulse ? 'El numero de la tarjeta no puede ser vacío' : ''}
                                 onChange = {(e: any) => setTarjeta(e.target.value)}
-                               // helperText = "Valor incorrecto"
                             />
                              <Stack direction= "row" spacing={2}>
 
@@ -118,30 +112,39 @@ const Pago: FC = () => {
                                 required
                                 name = "Fecha de caducidad"
                                 label = "Fecha de caducidad (yyyy-mm-dd)"
-                                defaultValue= "Fecha de caducidad (yyyy-mm-dd)"
                                 variant="outlined"
                                 size="small"
                                 value = {fechaCad}
                                 error = {checkParams(fechaCad) && pulse}
                                 helperText={checkParams(fechaCad) && pulse ? 'Fecha de caducidad incorrecta' : ''}
                                 onChange = {(e: any) => setFechaCad(e.target.value)}
-                               // helperText = "Valor incorrecto"
                             />
                             <TextField 
                                 id = "cvv"
                                 required
                                 name = "CVV"
                                 label = "CVV"
-                                defaultValue= "CVV"
                                 variant="outlined"
                                 size="small"
                                 value = {CVV}
                                 error = {checkParams(CVV) && pulse}
                                 helperText={checkParams(CVV) && pulse ? 'El código CVV no puede ser vacío' : ''}
                                 onChange = {(e: any) => setCVV(e.target.value)}
-                               // helperText = "Valor incorrecto"
                             />
-                             </Stack>       
+                            </Stack>       
+                            <TextField 
+                                id = "telefono"
+                                required
+                                name="contacto cliente"
+                                label = "Telefono de contacto"
+                                variant="outlined"
+                                size="small"
+                                value = {tel}
+                                error = {checkParams(tel) && pulse}
+                                helperText={checkParams(tel) && pulse ? 'El telefono no puede ser vacío' : ''}
+                                onChange = {(e: any) => setTel(e.target.value)}
+                            />
+                        
                             <Typography>
                                 Dirección de envío, por favor ingrese el nombre de su POD
                             </Typography>
@@ -150,7 +153,6 @@ const Pago: FC = () => {
                                 required
                                 name = "Dirección de Envío"
                                 label = "Dirección de Envío"
-                                defaultValue= "Dirección de Envío"
                                 value = {webId}
                                 error = {checkParams(webId) && pulse}
                                 helperText={checkParams(webId) && pulse ? 'La direccion no puede estar vacía' : ''}

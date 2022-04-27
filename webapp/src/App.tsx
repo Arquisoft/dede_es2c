@@ -74,7 +74,7 @@ const App: FC = () => {
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path= 'help' element = {<HelpPage/>} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
-          <Route path = 'products/details/:id' element = {<ProductDetails id='RA01'/>} />
+          <Route path = 'products/details/:id' element = {<ProductDetails />} />
           <Route path = 'nopermissions' element = {< NoPermissions/>} />
           <Route path = 'admin/addProduct' element = {
             <PrivateRoute redirectTo="/nopermissions" >
