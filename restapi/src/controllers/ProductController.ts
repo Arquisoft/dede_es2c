@@ -50,9 +50,10 @@ export const updateProduct: RequestHandler = async (req, res) => {
         const productUpdated = await productModel.findOneAndUpdate({codigo: codigo}, req.query, { new: true }); 
         if (productUpdated){
             return res.send("Product updated");
+        } else {
+            return res.status(412).json({ message: "The operation didn't succed "});
         }
     }catch (err){
-        console.log(err);
         return res.status(404).json({message: "There was a problem updating a product"})
     }
 }
@@ -130,10 +131,10 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
         const encontrado = await productModel.find({categoria: req.params.categoria});
-        if (encontrado){
+        if (encontrado.length != 0){
             return res.json(encontrado)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         res.status(404).json({message: 'No hay productos de esa categoría'})
@@ -154,43 +155,3 @@ export const getProductByPrice: RequestHandler = async (req, res) => {
 
     }
 }
-
-
-
-// MÉTODOS QUE COMO DE MOMENTO NO USO Y ME PIDEN COBERTURA DE CÓDIGO DEJO COMENTADOS
-
-/**
- 
-
-export const getProductoByID: RequestHandler = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const encontrado = await Product.findOne({_id: id});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json({message: 'No hay producto con ese ID'});
-    }
-}
-
-export const getProductsByCategoria: RequestHandler = async (req, res) => {
-
-    try {
-        const encontrado = await Product.find({categoria: req.params.categoria});
-        return res.json(encontrado);
-    }catch(error){
-        res.status(404).json({message: 'No hay productos de esa categoría'})
-    }
-}
-
-export const getProductByPrice: RequestHandler = async (req, res) => {
-    const price = req.params.price;
-    try{
-        const todos = await Product.find({precio: price});
-        return res.json(todos);
-    }catch(error){
-        console.log(error);
-        res.json(error);
-    }
-}
-
- **/
