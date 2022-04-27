@@ -24,21 +24,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-async function ordersByEmail(order:Order[], orderEmail:Order[], email:String){
-    order.forEach(e => {if(e.correo == email){ orderEmail.push(e) }});
-}
-
 const OrderHistory = (id: Id) => {
     const [orders, setOrders]  = React.useState<Order[]>([]);
-    const[ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
     
     async function cargarPedidos() {
         setOrders(await getOrders());
     }
-
     useEffect(() => {cargarPedidos();}, []);
-
-    ordersByEmail(orders,ordersEmail,id.email);
 
     return (
         <div>
@@ -54,7 +46,7 @@ const OrderHistory = (id: Id) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <OrderUser orders = {ordersEmail} />
+                            <OrderUser orders = {orders} email = {id.email} />
                         </TableBody>
                     </Table>
                 </TableContainer>
