@@ -19,7 +19,8 @@ router.get('/product/getByCategoria/:categoria', ProductController.getProductsBy
 router.get('/product/getByPrecio/:precio', ProductController.getProductByPrice);
 // Productos añadir con Post
 router.post('/product/addPost', ProductController.addProductPost);
-
+// Añadido para que funcione en front
 router.get('/product/getByCodigo/:codigo', ProductController.getProductoByCodigo);
+
 module.exports = router;
 export default router;
