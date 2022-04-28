@@ -225,7 +225,7 @@ describe("user ", () => {
   it("Intento hacer login desde aquí pero no puedo porque manejan tokens desde el front", async () => {
     const response: Response = await request(app).post("/user/login").send({
       email: "admin@uniovi.es",
-      password: "admin123",
+      password: admin(),
     });
     expect(response.statusCode).toBe(404);
   });
@@ -236,9 +236,10 @@ describe("user ", () => {
     * Intento hacer login y falla por poner mal la contraseña
     */
    it("Intento hacer login y falla por poner mal la contraseña", async () => {
+     console.log(admin())
     const response: Response = await request(app).post("/user/login").send({
       email: "admin@uniovi.es",
-      password: admin(),
+      password: makeid(),
     });
     expect(response.statusCode).toBe(200);
   });
