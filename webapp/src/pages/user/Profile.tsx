@@ -9,29 +9,39 @@ import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
+import jwt_decode from "jwt-decode";
 
-type Email = {
-    email:String
+function getUserId(): string {
+    var id;
+    if(localStorage.getItem('token') != null)
+    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+    id = user.id
+    return id
 }
 
-const Profile = (correo:Email) => {
+const Profile = () => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
+    let [id, setId] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     const [pulse, setPulse] = useState(false)
 
-    const getUserByEmail = async (email:String) => {
+    id = getUserId()
+
+    const getUser = async (id:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-        const data = await axios.get(apiEndPoint + "/user/list/" + email).
-        then(res => {
-            setUser(res.data);
-            return res.data;
-        })
+        const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
+            res => {
+                setUser(res.data);
+                console.log(user.email)
+                return res.data
+            }
+        )
         return data != null;
     }
-
-    getUserByEmail(correo.email);
+    
+    getUser(id)
     const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
         if(name == ''){
             name = user.name
@@ -39,10 +49,7 @@ const Profile = (correo:Email) => {
         if(surname == ''){
             surname = user.surname
         }
-        if(email == ''){
-            email = user.email
-        }
-        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname})
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -81,11 +88,10 @@ const Profile = (correo:Email) => {
 
                             <TextField
                                 id = "email" 
-                                multiline
-                                defaultValue={user.email}
-                                variant = "outlined"
-                                size = "small"
-                                onChange = {(e: any) => setEmail(e.target.value)}
+                                name = "Email"
+                                value= {user.email}
+                                size="small"
+                                variant="outlined"
                                 style={{position:'relative', top:-20}}
                             />
 
