@@ -14,6 +14,8 @@ router.get('/user/deleteByEmail/:email',UserController.deleteUserByEmail);
 router.put('/user/update/:id',UserController.update);
 router.post('/user/giveAdmin',UserController.giveAdminRole);
 router.get('/user/pod/:name',UserController.getUserPOD);
+// Extra
+router.get('/user/findById/:id', UserController.findUsersById);
 module.exports=router;
 
 export default router;
