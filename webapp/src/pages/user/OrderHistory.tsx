@@ -23,42 +23,42 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-/*
-function getUserId() {
+
+function getUserId(): string {
     var id;
     if(localStorage.getItem('token') != null)
     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
     id = user.id
     return id
 }
-*/
+
 const OrderHistory = () => {
     const [ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
     let [email, setEmail] = useState('')
-    const [id, setId] = useState('')/*
-    const [user, setUser] = React.useState<User>();
+    let [id, setId] = useState('')
+    let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
 
-    setId(getUserId())
-
-    const getUser = async () => {
+    id = getUserId()
+    
+    const getUser = async (id:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-        const data = axios.get(apiEndPoint + "/user/list/" + id).then (
+        const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
             res => {
-                setUser(res.data)
+                setUser(res.data);
+                console.log(user.email)
                 return res.data
             }
         )
         return data != null;
     }
-
-    useEffect (() => {getUser();}, [])*/
-
-    email = "admin@uniovi.es"
+    
+    getUser(id)
+    email = user.email
 
     async function cargarPedidosEmail() {
         setOrdersEmail(await getOrdersByEmail(email))
     }
-    useEffect(() => {cargarPedidosEmail();}, []);
+    cargarPedidosEmail()
 
     return (
         <div>
