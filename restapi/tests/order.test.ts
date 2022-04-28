@@ -113,6 +113,16 @@ describe("orders ", () => {
       expect(response.statusCode).toBe(200);
     });  
 
+    /**
+     * Intento borrar un pedido pasando un codigo no existente
+     */
+     it("Intento borrar un pedido pasando un codigo no existente", async () => {
+      const response: Response = await request(app).get(
+      "/order/delete/fallo"
+        );
+      expect(response.statusCode).toBe(412);
+    });  
+
 
 
     /**

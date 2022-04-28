@@ -46,18 +46,20 @@ afterAll(async () => {
 
 describe("carts ", () => {
 
+
+    // Si hago esto me va a fallar porque no hay un método para "deshacer" el carro
   
-    /** 
-     
+
+     /** 
      it("Creo un nuevo carro vacío", async () => {
       const response: Response = await request(app).post("/cart/add").send({
-         client_id:"624364bdb14f7ce93ddae736",
+         client_id:"62436970ce933f737bdebb2a",
       });
       
       expect(response.statusCode).toBe(201);
     });
-
     **/
+
 
     
     /**
@@ -82,12 +84,22 @@ describe("carts ", () => {
         expect(response.statusCode).toBe(404);
     });
 
+    /**
+     * Intento crear un carro sin pasar información
+     */
+      it("Intento crear un carro sin pasar información", async () => {
+       const response: Response = await request(app).post("/cart/add").send({
+      });
+        
+      expect(response.statusCode).toBe(404);
+    });
+  
 
 
     /**
      * Añado un producto al carro
      */
-     it("No puedo crear un pedido al que le falten campos ", async () => {
+     it("Añado un producto al carro ", async () => {
       const response: Response = await request(app).put("/cart/addProduct").send({
         client_id:"624364bdb14f7ce93ddae736",
         product:
@@ -103,6 +115,28 @@ describe("carts ", () => {
       });
       expect(response.statusCode).toBe(200);
     });
+
+
+    /**
+     * Añado el mismo producto al carro
+     */
+     it("Añado el mismo producto al carro ", async () => {
+      const response: Response = await request(app).put("/cart/addProduct").send({
+        client_id:"624364bdb14f7ce93ddae736",
+        product:
+            {
+              codigo: "MO01",
+              categoria: "monitor",
+              nombre: "Samsung LF27T352FHRXEN",
+              precio: 139.99,
+              descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
+              stock:2,
+              url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
+            }
+      });
+      expect(response.statusCode).toBe(200);
+    });
+
 
     /**
      * Intento añadir un producto pasando mal el usuario
@@ -125,11 +159,11 @@ describe("carts ", () => {
       });
 
     /**
-     * Añado otro producto más al carro
+     * Añado otro producto distinto más al carro
      */
-     it("Añado otro producto más al carro ", async () => {
+     it("Añado otro producto distinto más al carro ", async () => {
         const response: Response = await request(app).put("/cart/addProduct").send({
-          client_id:"fallo",
+          client_id:"624364bdb14f7ce93ddae736",
           product:
             {
             codigo: "SO01",
@@ -141,7 +175,7 @@ describe("carts ", () => {
             url: "https://i.postimg.cc/SNJX72mp/AL01.jpg"
             }
         });
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(200);
       });
 
 
@@ -167,23 +201,44 @@ describe("carts ", () => {
 
 
     /**
+     * Borro otra vez el producto repetido del carro
+     */
+     it("Borro otra vez el producto repetido del carro", async () => {
+      const response: Response = await request(app).put("/cart/deleteProduct").send({
+          client_id:"624364bdb14f7ce93ddae736",
+          product:
+              {
+                codigo: "MO01",
+                categoria: "monitor",
+                nombre: "Samsung LF27T352FHRXEN",
+                precio: 139.99,
+                descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
+                stock:2,
+                url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
+              },
+        });
+        expect(response.statusCode).toBe(200);
+  });  
+
+
+    /**
      * Intento borrar pasando mal el usuario
      */
-        it("Borro el producto del carro", async () => {
-            const response: Response = await request(app).put("/cart/deleteProduct").send({
-                client_id:"fallo",
-                product:
-                    {
-                      codigo: "MO01",
-                      categoria: "monitor",
-                      nombre: "Samsung LF27T352FHRXEN",
-                      precio: 139.99,
-                      descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
-                      stock:2,
-                      url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
-                    },
-              });
-              expect(response.statusCode).toBe(400);
+    it("Borro el producto del carro", async () => {
+        const response: Response = await request(app).put("/cart/deleteProduct").send({
+            client_id:"fallo",
+            product:
+                {
+                  codigo: "MO01",
+                  categoria: "monitor",
+                  nombre: "Samsung LF27T352FHRXEN",
+                  precio: 139.99,
+                  descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
+                  stock:2,
+                  url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg"
+                },
+           });
+          expect(response.statusCode).toBe(400);
     }); 
 
 
@@ -205,7 +260,21 @@ describe("carts ", () => {
                     }
               });
               expect(response.statusCode).toBe(200);
-        });  
+    });
+    
+    
+    /**
+     * Intento borrar un producto vacio
+     */
+     it("Intento borrar un carro vacío", async () => {
+      const response: Response = await request(app).put("/cart/deleteProduct").send({
+          client_id:"624364bdb14f7ce93ddae736",
+          product:
+              {
+              }
+        });
+        expect(response.statusCode).toBe(200);
+}); 
 
 
     /**
@@ -219,7 +288,7 @@ describe("carts ", () => {
     });
 
     /**
-     * No encuentro el carro de un cliente noi existente
+     * No encuentro el carro de un cliente no existente
      */
     it("No encuentro el carro de un cliente no existente", async () => {
         const response: Response = await request(app).get(
