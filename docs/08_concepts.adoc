@@ -46,7 +46,6 @@ object Review{
     productCode: String
 }
 
-User *--> Order
 User *--> Cart
 Cart *--> Order
 User *--> Review
