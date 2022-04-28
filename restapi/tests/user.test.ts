@@ -10,6 +10,10 @@ function makeid() {
  return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 }
 
+function admin() {
+  return "admin123";
+ }
+
 var server: Server;
 
 const app: Application = express();
@@ -234,7 +238,7 @@ describe("user ", () => {
    it("Intento hacer login y falla por poner mal la contraseña", async () => {
     const response: Response = await request(app).post("/user/login").send({
       email: "admin@uniovi.es",
-      password: "fallo",
+      password: admin(),
     });
     expect(response.statusCode).toBe(200);
   });
