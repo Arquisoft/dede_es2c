@@ -6,21 +6,21 @@ import promBundle from "express-prom-bundle";
 import apiUser from "../src/routes/UserRoutes";
 
 
-function makeid(length: any) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(charactersLength));
- }
- return result;
+function makeid() {
+ return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 }
+
+function admin() {
+  return "admin123";
+ }
 
 var server: Server;
 
 const app: Application = express();
 
 const mongoose = require("mongoose");
+
+const passwordTest = makeid();
 
 
 beforeAll(async () => {
@@ -32,6 +32,7 @@ beforeAll(async () => {
   app.use(bp.urlencoded({ extended: false }));
 
   app.use(apiUser);
+
 
 
   await mongoose.connect('mongodb+srv://admin:es2c@cluster0.tx3d4.mongodb.net/TestDataBase?retryWrites=true&w=majority',
@@ -81,6 +82,7 @@ describe("user ", () => {
     expect(response.statusCode).toBe(412);
   });
 
+
   /**
    * Puedo listar a todos los usuarios
    */
@@ -93,17 +95,31 @@ describe("user ", () => {
 
 
   /**
+   * Busco a un usuario por su ID
+   */
+     it("Busco a un usuario por su ID", async () => {
+      const response: Response = await request(app).get(
+        "/user/findById/6243643891563b010abbb654"
+      );
+      expect(response.statusCode).toBe(200);
+    });
+  
+
+
+  /**
     * Creo un usuario de forma correcta
     */
   it("Creo un usuario de forma correcta", async () => {
+
     const response: Response = await request(app).post("/user/signup").send({
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: makeid(5),
-      repPassword: "prueba",
+      password: passwordTest,
+      repPassword: passwordTest,
       role: "user",
     });
+
     expect(response.statusCode).toBe(201);
   });
 
@@ -129,6 +145,18 @@ describe("user ", () => {
   });
 
 
+  /**
+   * Intento actualizar un usuario empleando un ID con un formato no válido
+   */
+    it("Intento actualizar un usuario no existente", async () => {
+      // Esto funciona porque miré la ID en Mongo
+     const response: Response = await request(app).put("/user/update/formatoNoValido").send({
+       name: "nombreCambiado",
+     });
+     expect(response.statusCode).toBe(404);
+   });
+
+
 
   /**
     * Intento crear un usuario con un correo ya existente
@@ -138,8 +166,8 @@ describe("user ", () => {
       name: "prueba",
       surname: "prueba",
       email: "usuarioPrueba@gmail.com",
-      password: makeid(5),
-      repPassword: "prueba",
+      password: passwordTest,
+      repPassword: passwordTest,
       role: "user",
     });
     expect(response.statusCode).toBe(400);
@@ -160,22 +188,72 @@ describe("user ", () => {
    * Intento borrar un usuario con un ID que no existe
    */
   it("Intento borrar un usuario con un ID que no existe", async () => {
-    const response: Response = await request(app).post("/user/delete").send({
+    const response: Response = await request(app).post("/user/delete/").send({
       id: "IDFALSO"
     });
     expect(response.statusCode).toBe(404);
   });
+  
 
-    /**
-    * Hago login de forma incorrecta
+  /**
+    * Intento dar privilegios de admin pero no puedo porque los tokens los manejan desde el front
     */
-     it("Hago login de forma incorrecta", async () => {
-      const response: Response = await request(app).post("/user/login").send({
-        email: "correoInexistente",
-        password:  makeid(5),
-      });
-      expect(response.statusCode).toBe(200);
+   it("Intento dar privilegios de admin pero no puedo porque los tokens los manejan desde el front", async () => {
+    const response: Response = await request(app).post("/user/giveAdmin").send({
+      id: "624736af129ec63aae8e376c"
     });
+    expect(response.statusCode).toBe(404);
+  });
+
+
+   /**
+    * Intento dar privilegios de admin a un usuario no existente
+    */
+    it("Intento dar privilegios de admin a un usuario no existente", async () => {
+      const response: Response = await request(app).post("/user/giveAdmin").send({
+        id: "noExisto"
+      });
+      expect(response.statusCode).toBe(404);
+    });
+  
+
+
+
+  /**
+    * Intento hacer login desde aquí pero no puedo porque manejan tokens desde el front
+    */
+  it("Intento hacer login desde aquí pero no puedo porque manejan tokens desde el front", async () => {
+    const response: Response = await request(app).post("/user/login").send({
+      email: "admin@uniovi.es",
+      password: admin(),
+    });
+    expect(response.statusCode).toBe(404);
+  });
+
+
+  
+  /**
+    * Intento hacer login y falla por poner mal la contraseña
+    */
+   it("Intento hacer login y falla por poner mal la contraseña", async () => {
+     console.log(admin())
+    const response: Response = await request(app).post("/user/login").send({
+      email: "admin@uniovi.es",
+      password: makeid(),
+    });
+    expect(response.statusCode).toBe(200);
+  });
+    
+  /**
+    * Hago login de forma incorrecta
+  */
+  it("Hago login de forma incorrecta", async () => {
+    const response: Response = await request(app).post("/user/login").send({
+      email: "correoInexistente",
+      password: passwordTest,
+    });
+    expect(response.statusCode).toBe(200);
+  });
 
 
   /**

@@ -54,7 +54,6 @@ describe("orders ", () => {
         correo:  "correoPrueba",
         direccion: "dirPrueba",
         fecha: new Date(),
-        precioTotal: 149.86,
         products: [
           {
             codigo: "MO01",
@@ -77,6 +76,7 @@ describe("orders ", () => {
           }
         ]
       });
+      
       expect(response.statusCode).toBe(200);
     });
 
@@ -111,6 +111,16 @@ describe("orders ", () => {
       "/order/delete/orderPrueba"
         );
       expect(response.statusCode).toBe(200);
+    });  
+
+    /**
+     * Intento borrar un pedido pasando un codigo no existente
+     */
+     it("Intento borrar un pedido pasando un codigo no existente", async () => {
+      const response: Response = await request(app).get(
+      "/order/delete/fallo"
+        );
+      expect(response.statusCode).toBe(412);
     });  
 
 
@@ -204,17 +214,13 @@ describe("orders ", () => {
      */
      it("Hallo los costes de envío de una dirección determinada ", async () => {
       const response: Response = await request(app).post("/order/calculateShipment").send({
-        name: "Mr Hippo",
-        company: "",
-        street1: "Broadway 1",
-        street2: "",
-        city: "New York",
-        state: "NY",
-        zip: "10007",
-        country: "US",
-        phone: "+1 555 341 9393",
-        email: "mrhippo@goshippo.com",
-        metadata: "Hippos dont lie"
+        name: 'Dr. Steve Brule',
+        street1: '179 N Harbor Dr',
+        city: 'Redondo Beach',
+        state: 'CA',
+        zip: '90277',
+        country: 'US',
+        phone: '4155559999'
       });
       expect(response.statusCode).toBe(200);
     });
