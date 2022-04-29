@@ -13,7 +13,6 @@ import { Product } from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
-import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
 
 type ProductsProps = {
@@ -38,6 +37,25 @@ const NavBarAdmin = (cart:ProductsProps) => {
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
+
+    var cart2: Product[] = [];
+    const carrt = localStorage.getItem("cart");
+    if(carrt !== null){
+        for(let i =0;  i < JSON.parse(carrt).length; i++){
+            cart.cartItems[i] = {
+                nombre: JSON.parse(carrt)[i]['nombre'],
+                codigo: JSON.parse(carrt)[i]['codigo'],
+                descripcion: JSON.parse(carrt)[i]['descripcion'],
+                precio: JSON.parse(carrt)[i]['precio'],
+                cantidad: JSON.parse(carrt)[i]['cantidad'],
+                url: JSON.parse(carrt)[i]['url'],
+                stock: JSON.parse(carrt)[i]['stock'],
+                categoria: JSON.parse(carrt)[i]['categoria'],
+            }
+        }
+    }
+    console.log(cart.cartItems);
+    localStorage.setItem("cart", JSON.stringify(cart.cartItems));
 
     const removeItem = (prod:Product) =>{
         const index = cart.cartItems.indexOf(prod,0);
@@ -81,6 +99,13 @@ const NavBarAdmin = (cart:ProductsProps) => {
         window.location.assign("/products");
     }
 
+    function goTo2(){
+        console.log("Antes de cambiar");
+        console.log(cart.cartItems);
+        localStorage.setItem("carrito", JSON.stringify(cart.cartItems));
+        window.location.assign("/carrito");
+    }
+
     return (
         <AppBar position="fixed" >
                     <Toolbar>
@@ -92,58 +117,9 @@ const NavBarAdmin = (cart:ProductsProps) => {
                         <Button color="inherit" href = "/admin/manageOrders">Administrar Pedidos</Button>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
 
-                        <IconButton id="basic-button" aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
-                            <Badge badgeContent={numOfProducts} color="secondary">    
-                                <ShoppingCartIcon color="inherit" />
-                            </Badge>
-                        </IconButton>
-                        <Menu  id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                 'aria-labelledby': 'basic-button',
-                }}>
-                    {cart.cartItems.length > 0 ? (
-                        <>
-                        {cart.cartItems.map( prod => (
-                            <div className= "cartItem">
-                                <Container>
-                                    
-                                    <img style={{ marginRight:20, width:50, height: 40,bottom:20}} 
-                                        src = {prod.url} alt = {prod.nombre} >                               
-                                    </img>
-                                        {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
-                                        <IconButton style={{
-                                        left:10,
-                                    }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
-                                    
-                          
-                                </Container>                         
-                            </div>                                            
-                         ))}
-                        <div></div>
-                        <Container style = {{
-                            right:200
-                        }}>
-                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
-                            Precio total: {totalPrice}€
-                        </Typography>
-                        </Container>
-                        <Button variant = "contained" size = "small" style={{
-                            left:24,
-                            bottom:-2
-                        }} href = "/pago"> Completar el pago </Button>
-                        
-                        </>
-                    ) :(<div>
-                        <Container>
-                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
-                            El carro se encuentra vacío
-                        </Typography>
-                        </Container>
-                        </div>)}
-                </Menu>
+                        <Button color="inherit" onClick={() => goTo2()} startIcon = {<ShoppingCartIcon color="inherit"/>}>
+                                Mi carrito
+                        </Button>
                 <IconButton
                     id="basic-button"
                     aria-label="account of current user"

@@ -24,7 +24,7 @@ const Productos = ( product: ProductsProps) => {
                 if(product.homePage){
                     if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0 ){
                         return(
-                            <Grid item xs={3} md={3}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
@@ -44,7 +44,7 @@ const Productos = ( product: ProductsProps) => {
 
                     if(p.stock !== '0') {
                         return (
-                            <Grid item xs={3} md={3}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <Link to ={"/products/details/" + p.codigo} className = "nav-link">
@@ -65,7 +65,7 @@ const Productos = ( product: ProductsProps) => {
                     );
                     } else {
                         return (
-                            <Grid item xs={3} md={3} key= {p.codigo}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <Link to ={"/products/details/" + p.codigo} className = "nav-link">

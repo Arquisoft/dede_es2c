@@ -40,6 +40,27 @@ const NavBar=(cart:ProductsProps) =>{
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
 
+    /* var cart2: Product[] = [];
+    const carrt = localStorage.getItem("cart");
+    if(carrt !== null ){
+        if(JSON.parse(carrt).length !== 0){
+        for(let i =0;  i < JSON.parse(carrt).length; i++){
+            cart2[i] = {
+                nombre: JSON.parse(carrt)[i]['nombre'],
+                codigo: JSON.parse(carrt)[i]['codigo'],
+                descripcion: JSON.parse(carrt)[i]['descripcion'],
+                precio: JSON.parse(carrt)[i]['precio'],
+                cantidad: JSON.parse(carrt)[i]['cantidad'],
+                url: JSON.parse(carrt)[i]['url'],
+                stock: JSON.parse(carrt)[i]['stock'],
+                categoria: JSON.parse(carrt)[i]['categoria'],
+            }
+        }}
+    }
+
+    console.log(cart.cartItems)
+    localStorage.setItem("cart", JSON.stringify(cart.cartItems)); */
+
     const removeItem = (prod:Product) =>{
         const index = cart.cartItems.indexOf(prod,0);
         if(index > -1){
@@ -83,7 +104,7 @@ const NavBar=(cart:ProductsProps) =>{
 
         if(user.role === "ROLE_ADMIN"){
             return(
-                <NavBarAdmin cartItems={[]} />
+                <NavBarAdmin cartItems={cart.cartItems} />
             );
         } else if(user.role === "ROLE_USER") {
             return(
