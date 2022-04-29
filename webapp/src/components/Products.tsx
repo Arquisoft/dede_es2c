@@ -16,6 +16,7 @@ type ProductsProps = {
 const Productos = ( product: ProductsProps) => {
 
     return (
+        <>
         <Grid container spacing={3} key = {uuidv4()}>
          {product.product.map(
             (p) => {
@@ -86,6 +87,7 @@ const Productos = ( product: ProductsProps) => {
             }
         )}
         </Grid>
+        </>
     );
 }
 

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import LogIn from './pages/LogIn';
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/NavBar';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import ListProducts from './pages/ListProducts';
@@ -14,7 +14,6 @@ import ManageOrders from './pages/admin/ManageOrders';
 import Profile from './pages/user/Profile';
 import OrderHistory from './pages/user/OrderHistory';
 import PrivateRoute from './components/routes/PrivateRoute';
-import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
@@ -89,11 +88,6 @@ const App: FC = () => {
           <Route path = 'admin/manageOrders' element = {
             <PrivateRoute redirectTo="/nopermissions">
               <ManageOrders />
-            </PrivateRoute>} 
-          />
-          <Route path = 'admin/manageUsers' element = {
-            <PrivateRoute redirectTo="/nopermissions">
-              <UserAdmin />
             </PrivateRoute>} 
           />
         </Routes>
