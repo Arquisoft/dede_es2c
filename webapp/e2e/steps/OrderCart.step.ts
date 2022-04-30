@@ -1,10 +1,11 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 
-const feature = loadFeature('./features/AddProduct.feature');
+const feature = loadFeature('./features/OrderCart.feature');
 
 let page: puppeteer.Page;
 let page2: puppeteer.Page;
+let page3: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
@@ -28,10 +29,18 @@ defineFeature(feature, test => {
       .goto("http://localhost:3000/products", {
        waitUntil: "networkidle0",
       })
-      .catch(() => {});  
+      .catch(() => {});
+
+    page3 = await browser.newPage();
+
+    await page3
+      .goto("http://localhost:3000/pago", {
+      waitUntil: "networkidle0",
+      })
+      .catch(() => {});    
   });
 
-  test('The user adds new products to the car', ({given,when,then}) => {
+  test('The user makes an incorrect order', ({given,when,then}) => {
 
     let email:string;
     let password:string;
@@ -41,8 +50,7 @@ defineFeature(feature, test => {
         password = "efren"
     });
 
-    when('I log in and press the button to add my products', async () => {
-
+    when('I choose a product and dont fill the order form', async () => {
         // Primero hacemos login
         await expect(page).toMatch('Iniciar Sesión')
         await expect(page).toFill('#email', email);
@@ -55,10 +63,15 @@ defineFeature(feature, test => {
         await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
         await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
         await expect(page2).toClick('#basic-button') 
+        // (El href me lo salto, accedo directamente a la URL)
+
+        // "Completamos" el pago
+        await expect(page3).toMatch('Completar el pago')
+        await expect(page3).toClick('button', { text: 'Completar el pago' }) 
     });
 
-    then('They should be in the cart', async () => {
-        await expect(page2).toMatch('Completar el pago')
+    then('An error should appear', async () => {
+        await expect(page3).toMatch('El titular no puede ser vacío')
     });
   })
 

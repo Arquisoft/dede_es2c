@@ -4,6 +4,7 @@ import puppeteer from "puppeteer";
 const feature = loadFeature('./features/Login.feature');
 
 let page: puppeteer.Page;
+let page2: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
@@ -19,6 +20,14 @@ defineFeature(feature, test => {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
+
+      page2 = await browser.newPage();
+
+      await page2
+        .goto("http://localhost:3000/products", {
+         waitUntil: "networkidle0",
+        })
+        .catch(() => {}); 
   });
 
   test('The user is registered in the website', ({given,when,then}) => {
@@ -69,9 +78,4 @@ defineFeature(feature, test => {
       await expect(page).toMatch('El usuario o contraseña son incorrectos, vuelva a introducirlos')
     });
   })
-
-  afterEach(async ()=>{
-    browser.close()
-  })
-
 });
