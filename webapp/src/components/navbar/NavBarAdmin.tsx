@@ -54,8 +54,10 @@ const NavBarAdmin = (cart:ProductsProps) => {
             }
         }
     }
-    console.log(cart.cartItems);
+   // localStorage.setItem("carrito", JSON.stringify(cart.cartItems));
     localStorage.setItem("cart", JSON.stringify(cart.cartItems));
+    console.log("Antes de cambiar");
+        console.log(cart.cartItems);
 
     const removeItem = (prod:Product) =>{
         const index = cart.cartItems.indexOf(prod,0);

@@ -1,9 +1,9 @@
-import React from "react";
-import { Product } from "../shared/shareddtypes";
-import { Table, Paper, TableContainer, TableHead, TableRow, TableBody} from "@mui/material";
+import React, { useEffect, Fragment } from "react";
+import { Product, Object } from "../shared/shareddtypes";
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import CarritoItem from '../components/utils/CarritoItem'
+import {Container, Grid, Typography, Card, CardMedia, Button, ListSubheader , ListItem, List, ListItemText} from "@mui/material";
+import { keys } from "@mui/system";
 
 const Carrito = () => {
 
@@ -17,14 +17,13 @@ const Carrito = () => {
         },
     }));
 
-
     const carrt2 = localStorage.getItem("carrito");
-    console.log(carrt2)
-    var cart: Product[] = [];
+    const cart: Product[] = [];
     var precioProductosFinal: number = 0;
-
+    var size: number = 0;
     if(carrt2 !== null){
-        for(let i =0;  i < JSON.parse(carrt2).length; i++){
+        size = JSON.parse(carrt2).length;
+        for(let i =0;  i < size; i++){
             cart[i] = {
                 nombre: JSON.parse(carrt2)[i]['nombre'],
                 codigo: JSON.parse(carrt2)[i]['codigo'],
@@ -35,13 +34,17 @@ const Carrito = () => {
                 stock: JSON.parse(carrt2)[i]['stock'],
                 categoria: JSON.parse(carrt2)[i]['categoria'],
             }
+            console.log(cart[i]);
             precioProductosFinal += cart[i].precio;
         }
+        console.log(precioProductosFinal + "");
     }
 
-     localStorage.setItem("carrito", JSON.stringify(localStorage.getItem("carrito")));
+    console.log(cart)
+    console.log(cart.length)
+    const carrito = JSON.parse(sessionStorage.getItem('carrito') as string);
+    // localStorage.setItem("carrito", JSON.stringify(localStorage.getItem("carrito")));
 
-     console.log(cart)
         if(cart.length === 0){
             return(
                 
@@ -49,28 +52,41 @@ const Carrito = () => {
                  <p>El carrito esta vacio</p>
                 </div>
             );
-        }
-        return(
-            <div style={{ margin: '170px' }}>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Articulo</StyledTableCell>
-                                <StyledTableCell>Precio</StyledTableCell>
-                                <StyledTableCell>Cantidad</StyledTableCell>
-                                <StyledTableCell>Total</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                            <CarritoItem items={cart} />
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        );
-    
+        } else {
+            return(
+                <Fragment>
+                    <List
+                    style={{ display: "grid", margin: "auto", textAlign: "center" }}
+                    sx={{
+                      width: '100%',
+                      maxWidth: 700,
+                      bgcolor: 'background.paper',
+                      position: 'relative',
+                      overflow: 'auto',
+                      maxHeight: 700,
+                      '& ul': { padding: 0 },
+                    }}
+                    >
+                      <li key={'Productos'}>
+                        <ul>
+                          <ListSubheader>Me cago en to</ListSubheader>
+                          {cart.map((item: Product) => (
+                              
+                            <ListItem key={item.nombre} alignItems="center">
+                            <ListItemText primary={"x" + item.precio + "\t"+item.categoria + ":"} />
+                            </ListItem>
+                            ))}
+                        </ul>
+                        <ul>
+                        <ListItem>
+                        <ListItemText primary={precioProductosFinal.toFixed(2) + "$"}/>
+                        </ListItem>
+                        </ul>
+                      </li>
+                    </List>
+                    </Fragment>
+            );
+                    }
 
 }
 
