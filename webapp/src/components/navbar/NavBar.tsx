@@ -148,7 +148,7 @@ const NavBar=(cart:ProductsProps) =>{
                                         src = {prod.url} alt = {prod.nombre} >                               
                                     </img>
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
-                                        <IconButton style={{
+                                        <IconButton id="delete-button" style={{
                                         left:10,
                                     }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
                                     
@@ -259,9 +259,10 @@ const NavBar=(cart:ProductsProps) =>{
                                     </img>                               
                                     
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
-                                        <IconButton style={{
+                                        <IconButton id = "delete-button" style={{
                                         left:10,
                                     }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
+                                    
                                     
                           
                                 </Container>                         
