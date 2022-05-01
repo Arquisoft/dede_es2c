@@ -1,6 +1,9 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 
+const apiEndPoint= process.env.REACT_APP_URI|| 'http://localhost:3000'
+
+
 const feature = loadFeature('./features/DeleteProduct.feature');
 
 let page: puppeteer.Page;
@@ -17,7 +20,7 @@ defineFeature(feature, test => {
     page = await browser.newPage();
 
     await page
-      .goto("http://localhost:3000/login", {
+      .goto(apiEndPoint + "/login", {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
@@ -25,7 +28,7 @@ defineFeature(feature, test => {
     page2 = await browser.newPage();
 
     await page2
-      .goto("http://localhost:3000/products", {
+      .goto(apiEndPoint + "/products", {
        waitUntil: "networkidle0",
       })
       .catch(() => {});  
@@ -54,15 +57,12 @@ defineFeature(feature, test => {
         await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
         await expect(page2).toClick('#basic-button') 
         await expect(page2).toMatch('Completar el pago')
+    });
 
+    then('I should be able to delete the product', async () => {
         // Lo eliminamos
         await expect(page2).toClick('#basic-button') 
         await expect(page2).toClick('#delete-button') 
-    });
-
-    then('It should not be in the cart anymore', async () => {
-        await expect(page2).toClick('#basic-button') 
-        await expect(page2).toMatch('El carro se encuentra vacío') // Debería estar vacio
     });
   })
 

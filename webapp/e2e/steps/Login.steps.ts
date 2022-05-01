@@ -1,6 +1,8 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 
+const apiEndPoint= process.env.REACT_APP_URI|| 'http://localhost:3000'
+
 const feature = loadFeature('./features/Login.feature');
 
 let page: puppeteer.Page;
@@ -16,7 +18,7 @@ defineFeature(feature, test => {
     page = await browser.newPage();
 
     await page
-      .goto("http://localhost:3000/login", {
+      .goto(apiEndPoint + "/login", {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
@@ -24,7 +26,7 @@ defineFeature(feature, test => {
       page2 = await browser.newPage();
 
       await page2
-        .goto("http://localhost:3000/products", {
+        .goto(apiEndPoint + "/products", {
          waitUntil: "networkidle0",
         })
         .catch(() => {}); 
@@ -78,4 +80,9 @@ defineFeature(feature, test => {
       await expect(page).toMatch('El usuario o contraseña son incorrectos, vuelva a introducirlos')
     });
   })
+
+  afterEach(async ()=>{
+    browser.close()
+  })
+  
 });

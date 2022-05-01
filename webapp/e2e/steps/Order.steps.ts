@@ -1,11 +1,16 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 
-const feature = loadFeature('./features/OrderCart.feature');
+const apiEndPoint= process.env.REACT_APP_URI|| 'http://localhost:3000'
+
+const feature = loadFeature('./features/Order.feature');
 
 let page: puppeteer.Page;
 let page2: puppeteer.Page;
 let page3: puppeteer.Page;
+let page4: puppeteer.Page;
+
+
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
@@ -18,7 +23,7 @@ defineFeature(feature, test => {
     page = await browser.newPage();
 
     await page
-      .goto("http://localhost:3000/login", {
+      .goto(apiEndPoint + "/login", {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
@@ -26,15 +31,24 @@ defineFeature(feature, test => {
     page2 = await browser.newPage();
 
     await page2
-      .goto("http://localhost:3000/products", {
+      .goto(apiEndPoint + "/products", {
        waitUntil: "networkidle0",
       })
       .catch(() => {});
 
-    page3 = await browser.newPage();
+      
+    page3 = await browser.newPage();  
 
     await page3
-      .goto("http://localhost:3000/pago", {
+      .goto(apiEndPoint + "/pago", {
+      waitUntil: "networkidle0",
+      })
+      .catch(() => {});    
+
+    page4 = await browser.newPage();  
+
+    await page4
+      .goto(apiEndPoint + "/user/orderHistory", {
       waitUntil: "networkidle0",
       })
       .catch(() => {});    
@@ -61,9 +75,8 @@ defineFeature(feature, test => {
         // Añadimos el producto
         await expect(page2).toMatch('Categorías')
         await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
-        await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
         await expect(page2).toClick('#basic-button') 
-        // (El href me lo salto, accedo directamente a la URL)
+        await expect(page2).toMatch('Completar el pago')
 
         // "Completamos" el pago
         await expect(page3).toMatch('Completar el pago')
@@ -72,6 +85,35 @@ defineFeature(feature, test => {
 
     then('An error should appear', async () => {
         await expect(page3).toMatch('El titular no puede ser vacío')
+    });
+  })
+
+
+  
+  test('The user can see the history of orders', ({given,when,then}) => {
+
+    let email:string;
+    let password:string;
+    
+    given('An existing user', () => {   
+        email = "efrengv15@gmail.com"
+        password = "efren"
+    });
+
+    when('I log in and want to check the orders', async () => {
+        
+        // Primero hacemos login
+        await expect(page).toMatch('Iniciar Sesión')
+        await expect(page).toFill('#email', email);
+        await expect(page).toFill('#pass', password);
+
+        // Hacemos click en el icono de usuarios y vamos al historial de pedidos
+        await expect(page2).toClick('#basic-button')
+
+    });
+
+    then('I can see the orders made in the website', async () => {
+        await expect(page4).toMatch('orderOneExample')
     });
   })
 
