@@ -47,11 +47,14 @@ var shipment =  api.Shipment.create({
 
 
 return shipment.save().then((s:any, err: any) =>  {
+    try {
         s.buy(shipment.lowestRate());
         if (err != null)
             console.log("Ha ocurrido un error al calcular los gastos de envio: " + err);
-        
         // Si se busca sólo la cantidad añadir .rate
         return shipment.lowestRate();
-    });
+    } catch(error){
+        return "Ha surgido un error: " + error;
+    }
+});
 }
