@@ -31,8 +31,11 @@ const NavBar=(cart:ProductsProps) =>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElb(event.currentTarget);
+    };
+    const handleCloseMenu = () => {
+        setAnchorElb(null);
     };
     var totalPrice = 0;
     var numOfProducts = 0
@@ -105,13 +108,13 @@ const NavBar=(cart:ProductsProps) =>{
                 aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}       
+                onClick={handleClick}
               >
-                <Badge badgeContent={numOfProducts} color="secondary">    
+                <Badge badgeContent={numOfProducts} color="secondary">
                     <ShoppingCartIcon color="inherit" />
                 </Badge>
                 </IconButton>
-                <Menu     
+                <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
                     open={open}
@@ -162,8 +165,9 @@ const NavBar=(cart:ProductsProps) =>{
                 <IconButton
                     id="basic-button"
                     aria-label="account of current user"
-                    aria-controls="menu-appbar"
+                    aria-controls={openB ? 'basic-menu' : undefined}
                     aria-haspopup="true"
+                    aria-expanded={openB ? 'true' : undefined}
                     onClick={handleMenu}
                     color = "inherit"
                 >
@@ -173,15 +177,16 @@ const NavBar=(cart:ProductsProps) =>{
                     id="menu-appbar"
                     anchorEl={anchorElb}
                     anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                        vertical: 'top',
+                        horizontal: 'right',
                     }}
-                    keepMounted
-                    transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                        keepMounted
+                        transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
                     }}
                     open={openB}
+                    onClose={handleCloseMenu}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
