@@ -1,13 +1,11 @@
-import React, { useState, FC } from 'react';
+import React, { useState} from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
-import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
 import jwt_decode from "jwt-decode";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -51,7 +49,8 @@ const Profile = (correo:Email) => {
         if(email == ''){
             email = user.email
         }
-        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        axios.put(apiEndPoint + "/user/update/" + id,{"name":name,"surname":surname,"email":email})
         .then(res => {
             console.log(res);
             console.log(res.data);
