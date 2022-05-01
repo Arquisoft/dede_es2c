@@ -9,10 +9,12 @@ const ShipmentCosts = require('../util/apiEasyPost')
 
 export const addOrder: RequestHandler = async (req, res) => {
 
-   
+   console.log("Base de datos")
+
     // Hay que actualizar el stock
 
     const updateNewStock = async (products: any) => {
+        console.log(products)
       for (var i = 0; i < products.length; i++) {
         let product = await productModel.findOne({ codigo: products[i].codigo });
         product.stock = product.stock - products[i].stock;
@@ -46,7 +48,7 @@ export const addOrder: RequestHandler = async (req, res) => {
             return res.status(412).json({message: "Incomplete order"});
         }
     } catch (error) {
-        res.status(404).json();
+        return res.status(404).json();
     }
 };
 
@@ -171,6 +173,7 @@ export const getOrders: RequestHandler = async (req, res) => {
 export const getShippmentCost: RequestHandler = async (req, res) => {
     const addressTo = req.body;
     try{
+      console.log("En OrderController OK")
       var costs = await ShipmentCosts(addressTo);
       return res.status(200).send({shippmentCost: costs});
     } catch (error){
