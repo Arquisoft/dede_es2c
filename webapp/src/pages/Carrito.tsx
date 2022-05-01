@@ -36,6 +36,8 @@ const Carrito = () => {
             precioProductosFinal += cart[i].precio * cart[i].cantidad;
         }
         console.log(precioProductosFinal + "");
+        localStorage.setItem("precioCarrito", JSON.stringify(precioProductosFinal.toFixed(2)));
+        console.log(localStorage.getItem("precioCarrito"))
     }
 
     console.log(cart)
@@ -92,6 +94,7 @@ const Carrito = () => {
 
       function mover(){
         localStorage.setItem("carrito", JSON.stringify(cart));
+        //localStorage.setItem("precioCarrito", JSON.stringify(precioProductosFinal.toFixed(2)));
         window.location.assign('/pago')
       }
 

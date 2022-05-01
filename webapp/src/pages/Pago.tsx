@@ -9,9 +9,9 @@ import Swal from 'sweetalert2'
 import { getDireccionPod } from '../api/api';
 import jwt_decode from "jwt-decode";
 import { getUserById } from '../api/ApiUsers';
-import {User} from '../shared/shareddtypes';
+import {Product, User} from '../shared/shareddtypes';
 import axios from 'axios';
-
+import {v4 as uuidv4} from 'uuid';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
@@ -34,8 +34,64 @@ const Pago: FC = () => {
     const [region, setRegion] = useState('')
     const [calle, setCalle] = useState('')
 
-    function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
+    var envio: number = 0;
+
+    async function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
         setPulse(true);
+        var precio = localStorage.getItem("precioCarrito");
+        if(precio !== null){
+            var parseado = JSON.parse(precio);
+            console.log(parseado);
+            var precioFinal: number = Number.parseFloat(parseado) + envio*0.95;
+            console.log(precioFinal)
+            console.log(localStorage.getItem("carrito"));
+            Swal.fire({
+                title: "Precio Final",
+                text: "El precio de los articulos es de " + parseado + " tras la suma" + 
+                        " con el precio de envío de " + envio + ". El precio Final que se " + 
+                        " deberá abonar es de: " + precioFinal.toFixed(2), 
+                icon: "warning",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirmar pedido!'
+            }).then(async (res) => {
+                if(res.isConfirmed){
+                    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000';
+                    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+                    var UserName:User = await getUserById(user.id);
+                    let codigo = uuidv4();
+
+                    const carrt2 = localStorage.getItem("carrito");
+                    const cart: Product[] = [];
+                    var size: number = 0;
+                    if(carrt2 !== null){
+                        size = JSON.parse(carrt2).length;
+                        for(let i =0;  i < size; i++){
+                            cart[i] = {
+                            nombre: JSON.parse(carrt2)[i]['nombre'],
+                            codigo: JSON.parse(carrt2)[i]['codigo'],
+                            descripcion: JSON.parse(carrt2)[i]['descripcion'],
+                            precio: JSON.parse(carrt2)[i]['precio'],
+                            cantidad: JSON.parse(carrt2)[i]['cantidad'],
+                            url: JSON.parse(carrt2)[i]['url'],
+                            stock: JSON.parse(carrt2)[i]['cantidad'],
+                            categoria: JSON.parse(carrt2)[i]['categoria'],
+                            }
+            
+                        }   
+                    }
+                    axios.post(apiEndPoint + "/order/addOrder", 
+                        {"codigo": codigo, "correo": UserName.email, "direccion": 
+                        calle + " " + localidad + " " + pais, "fecha": new Date(), 
+                        "products": cart}).then(
+                            resp => {
+                                console.log(resp.data);
+                            }
+                        );
+                }
+            })
+
+        }
     }
 
 
@@ -70,18 +126,19 @@ const Pago: FC = () => {
             const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
             axios.post(apiEndPoint + "/order/calculateShipment", {
                 name: UserName.name, 
-                street1: calle,
-                city: localidad,
-                state: region,
-                zip: codigo,
-                country: pais,
+                street1: direccion['street_address'] + "",
+                city: direccion['locality']  + "",
+                state: direccion['region'] + "",
+                zip: direccion['postalCode']  + "",
+                country: direccion['country'] + "",
                 phone: tel
             }).then(res => {
                 if(res.status !== 404){
                     console.log(res.status);
                     console.log(res.data);
                     var dataJson: any = res.data['shippmentCost']
-                    var precioEnvio: string = dataJson['retail_rate']
+                    var precioEnvio: string = dataJson['retail_rate'];
+                    envio = Number.parseFloat(dataJson['retail_rate']);
                     console.log(precioEnvio)
                     
                 } else {
