@@ -1,5 +1,4 @@
 import { Container } from '@mui/material';
-import React, {FC } from 'react';
 import { Product } from '../shared/shareddtypes';
 import Button from '@mui/material/Button';
 

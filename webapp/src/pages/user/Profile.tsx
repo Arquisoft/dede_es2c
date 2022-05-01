@@ -9,12 +9,21 @@ import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
+import jwt_decode from "jwt-decode";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 type Email = {
     email:String
 }
 
 const Profile = (correo:Email) => {
+
+    function metodo() {
+        localStorage.clear();
+        window.location.assign("/login");
+    }
+
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
@@ -63,77 +72,54 @@ const Profile = (correo:Email) => {
         updateUser(id, name, surname, email);
     }
 
-    return ( 
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Container component= "main" maxWidth="sm"
-                sx={{
-                position: "relative",
-                top: 150
-            }}>
-                <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
-
-                    <Typography className="miPerfil" style={{position:'relative', right:-240, top:20}}> Mi Perfil </Typography>
-                    
-                    <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
-                        <Stack direction= "column" spacing={-0.5}>
-                            
-                        <Typography className="email" style={{position:'relative', right:188, top:10}}> Correo electrónico: </Typography>
-
-                            <TextField
-                                id = "email" 
-                                multiline
-                                defaultValue={user.email}
-                                variant = "outlined"
-                                size = "small"
-                                onChange = {(e: any) => setEmail(e.target.value)}
-                                style={{position:'relative', top:-20}}
-                            />
-
-                            <Typography className="name" style={{position:'relative', right:150, top:10}}> Nombre: </Typography>
-
-                            <TextField
-                                id = "name"
-                                multiline
-                                defaultValue = {user.name}
-                                variant = "outlined"
-                                size = "small"
-                                onChange = {(e: any) => setName(e.target.value)}
-                                style={{position:'relative', top:-20}}
-                            />
-
-                            <Typography className="surname" style={{position:'relative', right:153, top:10}}> Apellidos: </Typography>
-
-                            <TextField
-                                id = "surname"
-                                name = "Apellido"
-                                multiline
-                                defaultValue = {user.surname}
-                                variant = "outlined"
-                                size = "small"
-                                onChange = {(e: any) => setSurname(e.target.value)}
-                                style={{position:'relative', top:-20}}
-                            />
-
-                            <Typography className="surname" style={{position:'relative', right:163, top:10}}> Contraseña: </Typography>
-
-                            <TextField
-                                id = "pass" 
-                                name = "Contraseña"
-                                type= "password"
-                                value= {user.password}
-                                size="small"
-                                variant="outlined"
-                                style={{position:'relative', top:-20}}
-                            />
-                            
-                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit"> Aplicar cambios</Button>
-                            <Link href = "" style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
-                        </Stack>
-                    </CardContent>
-                </Card>
-            </Container>
-        </div>
-    );
+        if(localStorage.getItem('token') != null){
+            var user2:any = jwt_decode(localStorage.getItem('token') || '{}');
+            console.log(user2.id);
+            return (
+                <div className='PerfilUsuario' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
+                    <Container component= "main" maxWidth="sm" fixed={true} sx={{position: "center",top: 150}}> 
+                        <Card className={"main"} elevation={10} style={{display: "grid"}}> 
+                            <CardContent style={{display: "flex", textAlign: "center", margin: "auto", justifyContent: 'center', alignItems: 'center'}}> 
+                                <Stack direction= "column" spacing={2} textAlign = "center">
+                                    <div>
+                                        <AccountCircleIcon sx={{ fontSize: 60, textAlign: "center", justifyContent: 'center', alignItems: 'center'}}/>
+                                    </div>
+                                    <h1>MI PERFIL</h1>
+                                    <TextField 
+                                        disabled
+                                        required
+                                        size = "small"
+                                        name = "correoToken"
+                                        label = "Correo Asociado"
+                                        variant = 'outlined'
+                                        value={user2.correo}
+                                    />
+                                    <h2>{user2.correo}</h2>
+                                </Stack>
+                        </CardContent>            
+                        </Card>
+                    </Container>
+                </div>);
+        } else {
+            return(
+                <div className='PerfilUsuarioError' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
+                    <Container component= "main" maxWidth="sm" fixed={true} sx={{position: "center",top: 150}}> 
+                        <Card className={"main"} elevation={10} style={{display: "grid"}}> 
+                            <CardContent style={{display: "flex", textAlign: "center", margin: "auto", justifyContent: 'center', alignItems: 'center'}}> 
+                                <Stack direction= "column" spacing={2} textAlign = "center">
+                                    <div>
+                                        <WarningAmberIcon sx={{ fontSize: 60, textAlign: "center", justifyContent: 'center', alignItems: 'center'}}/>
+                                    </div>
+                                    <h1>Error</h1>
+                                    <h2>No hay sesión inciada, por favor inicie sesión</h2>
+                                    <Button onClick={() => metodo()}>Iniciar Sesión</Button>
+                                </Stack>
+                            </CardContent>            
+                        </Card>
+                    </Container>
+                </div>
+            );
+        }
 }
 
 export default Profile; 
