@@ -81,7 +81,6 @@ const Profile = () => {
                 'Podrá cambiar su contraseña en el correo que le acabamos de enviar',
                 'success'
               )
-              //window.location.assign("/");
             }
           })
         
@@ -97,7 +96,7 @@ const Profile = () => {
             <Container component= "main" maxWidth="sm"
                 sx={{
                 position: "relative",
-                top: 150
+                top: 10
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
 
