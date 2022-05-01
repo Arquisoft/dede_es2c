@@ -31,9 +31,9 @@ const App: FC = () => {
     try{
     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
     if(user){
-      const exist = cartItems.find(x=> x.codigo == prod.codigo);
+      const exist = cartItems.find(x=> x.codigo === prod.codigo);
       if(exist){
-        setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
+        setCartItems(cartItems.map(x=> x.codigo === prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
       } else {
         setCartItems([...cartItems,{...prod,cantidad:1}])
       }
