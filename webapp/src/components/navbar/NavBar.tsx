@@ -39,27 +39,12 @@ const NavBar=(cart:ProductsProps) =>{
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
+    console.log( cart.cartItems)
 
-    /* var cart2: Product[] = [];
-    const carrt = localStorage.getItem("cart");
-    if(carrt !== null ){
-        if(JSON.parse(carrt).length !== 0){
-        for(let i =0;  i < JSON.parse(carrt).length; i++){
-            cart2[i] = {
-                nombre: JSON.parse(carrt)[i]['nombre'],
-                codigo: JSON.parse(carrt)[i]['codigo'],
-                descripcion: JSON.parse(carrt)[i]['descripcion'],
-                precio: JSON.parse(carrt)[i]['precio'],
-                cantidad: JSON.parse(carrt)[i]['cantidad'],
-                url: JSON.parse(carrt)[i]['url'],
-                stock: JSON.parse(carrt)[i]['stock'],
-                categoria: JSON.parse(carrt)[i]['categoria'],
-            }
-        }}
+    function mover(){
+        localStorage.setItem("carrito", JSON.stringify(cart.cartItems));
+        window.location.assign("/carrito");
     }
-
-    console.log(cart.cartItems)
-    localStorage.setItem("cart", JSON.stringify(cart.cartItems)); */
 
     const removeItem = (prod:Product) =>{
         const index = cart.cartItems.indexOf(prod,0);
@@ -161,13 +146,13 @@ const NavBar=(cart:ProductsProps) =>{
                             right:200
                         }}>
                         <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
-                            Precio total: {totalPrice}€
+                            Precio total: {totalPrice.toFixed(2)}€
                         </Typography>
                         </Container>
                         <Button variant = "contained" size = "small" style={{
                             left:24,
                             bottom:-2
-                        }} href = "/pago"> Completar el pago </Button>
+                        }} onClick ={() => mover()}> Completar el pago </Button>
                         
                         </>
                     ) :(<div>
@@ -289,37 +274,6 @@ const NavBar=(cart:ProductsProps) =>{
                         </Container>
                         </div>)}
                 </Menu>
-                {/* <IconButton
-                    id="basic-button"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color = "inherit"
-                >
-                    <AccountCircle />
-                </IconButton> */}
-                {/* <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElb}
-                    anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    open={openB}
-                >
-                    <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                    </Link>
-                    <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
-                    </Link>
-                </Menu> */}
 
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
             </Toolbar>     

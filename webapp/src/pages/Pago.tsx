@@ -7,6 +7,10 @@ import logo from '../img/logo-dede.svg';
 import { Card, CardContent, Typography } from '@mui/material';
 import Swal from 'sweetalert2'
 import { getDireccionPod } from '../api/api';
+import jwt_decode from "jwt-decode";
+import { getUserById } from '../api/ApiUsers';
+import {User} from '../shared/shareddtypes';
+import axios from 'axios';
 
 
 const checkParams = (text: String) => {
@@ -56,6 +60,38 @@ const Pago: FC = () => {
                       ,
                 icon: "success",
             });
+
+            var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+            console.log(localStorage.getItem('token'));
+            console.log(user);
+            var UserName:User = await getUserById(user.id);
+            console.log(UserName);
+
+            const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+            axios.post(apiEndPoint + "/order/calculateShipment", {
+                name: UserName.name, 
+                street1: calle,
+                city: localidad,
+                state: region,
+                zip: codigo,
+                country: pais,
+                phone: tel
+            }).then(res => {
+                if(res.status !== 404){
+                    console.log(res.status);
+                    console.log(res.data);
+                    var dataJson: any = res.data['shippmentCost']
+                    var precioEnvio: string = dataJson['retail_rate']
+                    console.log(precioEnvio)
+                    
+                } else {
+                    console.log('fallo')
+                }
+            }).catch(
+                
+            );
+
+
         } else {
             Swal.fire({
                 title: "Creedenciales incorrectos",
@@ -65,8 +101,10 @@ const Pago: FC = () => {
         }
     }
 
+    console.log(localStorage.getItem("carrito"));
+
     return ( 
-        <div>
+        <div className='Home' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '130vh' }}>
             <Container component= "main" maxWidth="sm" fixed={true} 
             sx={{
                 position: "relative",

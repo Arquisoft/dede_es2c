@@ -1,9 +1,7 @@
-import React, { useEffect, Fragment } from "react";
-import { Product, Object } from "../shared/shareddtypes";
+import { Product } from "../shared/shareddtypes";
 import { styled } from '@mui/material/styles';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import {Container, Grid, Typography, Card, CardMedia, Button, ListSubheader , ListItem, List, ListItemText} from "@mui/material";
-import { keys } from "@mui/system";
+import  { tableCellClasses } from '@mui/material/TableCell';
+import {TableBody, Paper, Table,TableContainer, TableHead, Button, TableCell, TableRow} from "@mui/material";
 
 const Carrito = () => {
 
@@ -35,14 +33,14 @@ const Carrito = () => {
                 categoria: JSON.parse(carrt2)[i]['categoria'],
             }
             console.log(cart[i]);
-            precioProductosFinal += cart[i].precio;
+            precioProductosFinal += cart[i].precio * cart[i].cantidad;
         }
         console.log(precioProductosFinal + "");
     }
 
     console.log(cart)
     console.log(cart.length)
-    const carrito = JSON.parse(sessionStorage.getItem('carrito') as string);
+    // const carrito = JSON.parse(sessionStorage.getItem('carrito') as string);
     // localStorage.setItem("carrito", JSON.stringify(localStorage.getItem("carrito")));
 
         if(cart.length === 0){
@@ -54,39 +52,48 @@ const Carrito = () => {
             );
         } else {
             return(
-                <Fragment>
-                    <List
-                    style={{ display: "grid", margin: "auto", textAlign: "center" }}
-                    sx={{
-                      width: '100%',
-                      maxWidth: 700,
-                      bgcolor: 'background.paper',
-                      position: 'relative',
-                      overflow: 'auto',
-                      maxHeight: 700,
-                      '& ul': { padding: 0 },
-                    }}
-                    >
-                      <li key={'Productos'}>
-                        <ul>
-                          <ListSubheader>Me cago en to</ListSubheader>
-                          {cart.map((item: Product) => (
-                              
-                            <ListItem key={item.nombre} alignItems="center">
-                            <ListItemText primary={"x" + item.precio + "\t"+item.categoria + ":"} />
-                            </ListItem>
-                            ))}
-                        </ul>
-                        <ul>
-                        <ListItem>
-                        <ListItemText primary={precioProductosFinal.toFixed(2) + "$"}/>
-                        </ListItem>
-                        </ul>
-                      </li>
-                    </List>
-                    </Fragment>
+              <div style={{ margin: '170px' }}>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>Artículo</StyledTableCell>
+                        <StyledTableCell>Cantidad</StyledTableCell>
+                        <StyledTableCell>Precio Articulo</StyledTableCell>
+                        <StyledTableCell>Precio Total Articulo</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+
+                    <TableBody>
+                      {cart.map((item: Product) => (
+                          <>
+                          <TableRow key={item.nombre} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                          <StyledTableCell>{item.nombre}</StyledTableCell>
+                          <StyledTableCell>{item.cantidad}</StyledTableCell>
+                          <StyledTableCell>{item.precio}</StyledTableCell>
+                          <StyledTableCell>{item.precio * item.cantidad}</StyledTableCell>
+                          </TableRow>
+                          </>
+                      ))}
+                      <TableRow key = {"Precio Final"}>
+                          <StyledTableCell>{""}</StyledTableCell>
+                          <StyledTableCell>{""}</StyledTableCell>
+                          <StyledTableCell>{"Precio Final"}</StyledTableCell>
+                          <StyledTableCell>{precioProductosFinal.toFixed(2)}</StyledTableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <p></p>
+                <Button sx = {{minWidth: 650}} variant="contained" onClick={() => mover()}>CONFIRMAR PAGO</Button>
+              </div>
             );
-                    }
+        }
+
+      function mover(){
+        localStorage.setItem("carrito", JSON.stringify(cart));
+        window.location.assign('/pago')
+      }
 
 }
 
