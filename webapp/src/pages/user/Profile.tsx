@@ -65,6 +65,28 @@ const Profile = () => {
         })
     }
 
+    const enviarContraseña = () => {
+        Swal.fire({
+            title: '¿Desea cambiar su contraseña?',
+            text: "Se le enviará un correo a su dirección correo electrónico para cambiar su contraseña.",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Correo envaido',
+                'Podrá cambiar su contraseña en el correo que le acabamos de enviar',
+                'success'
+              )
+              //window.location.assign("/");
+            }
+          })
+        
+    }
+
     async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
         updateUser(id, name, surname, email);
@@ -133,7 +155,7 @@ const Profile = () => {
                             />
                             
                             <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit"> Aplicar cambios</Button>
-                            <Link href = "" style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
+                            <Link onClick={() => enviarContraseña()} style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>
                 </Card>
