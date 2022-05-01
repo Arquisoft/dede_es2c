@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Product } from '../shared/shareddtypes';
 import {getProductByCode} from '../api/ApiProducts';
-import { Typography, Paper, Grid, Button } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Swal from 'sweetalert2';
-
+import { Typography, Paper, Grid } from '@mui/material';
 const ProductDetails = () => {
 
     const pName = ((window.location.href.split('/'))[5]).replaceAll('%20', "");
@@ -13,9 +10,7 @@ const ProductDetails = () => {
          setProdo(await getProductByCode(nombre));
         
     }
-
-
-    function añadirCarrito(){
+/*     function añadirCarrito(){
         if(p0 === undefined || Number.parseInt(p0.stock) <= 0){
             Swal.fire({
                 title: "Error", 
@@ -23,7 +18,7 @@ const ProductDetails = () => {
                 icon: "error"
             })
         }
-    }
+    } */
 
     useEffect(() => {getProduct(pName)});
     return (
@@ -40,9 +35,9 @@ const ProductDetails = () => {
                             <Typography component="h1" >Categoías: {p0?.categoria}</Typography>
                             <Typography component="h1" >Descripcion: {p0?.descripcion}</Typography>
                             <Typography component="h1" >Precio: {p0?.precio}€</Typography>
-                            <Button onClick={() => añadirCarrito()} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                            {/* <Button onClick={() => añadirCarrito()} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
                                 Añadir al carrito
-                            </Button>
+                            </Button> */}
                         </Grid>
                     </Grid>
                 </Paper>
