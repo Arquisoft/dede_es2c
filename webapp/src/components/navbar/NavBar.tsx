@@ -133,7 +133,7 @@ const NavBar=(cart:ProductsProps) =>{
                                         src = {prod.url} alt = {prod.nombre} >                               
                                     </img>
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
-                                        <IconButton style={{
+                                        <IconButton id="delete-button" style={{
                                         left:10,
                                     }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
                                     
@@ -190,7 +190,7 @@ const NavBar=(cart:ProductsProps) =>{
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
                     </Link>
-                    <Link href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
+                    <Link id= "historialVentas" href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
                     </Link>
                 </Menu>
@@ -244,9 +244,10 @@ const NavBar=(cart:ProductsProps) =>{
                                     </img>                               
                                     
                                         {prod.nombre} x{prod.cantidad} precio: {prod.cantidad * prod.precio}€         
-                                        <IconButton style={{
+                                        <IconButton id = "delete-button" style={{
                                         left:10,
                                     }} onClick = {() => allFunc(prod)} size = "small">  <DeleteIcon  color="inherit" /> </IconButton>                         
+                                    
                                     
                           
                                 </Container>                         

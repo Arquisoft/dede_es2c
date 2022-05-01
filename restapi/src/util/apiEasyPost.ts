@@ -47,38 +47,16 @@ var shipment =  api.Shipment.create({
     status: "200"
 });
 
-
-try {
-
-    return await shipment.save().then(async (s:any, err: any) =>  {
-        try{
-            console.log("En API 1 OK")
-            s.buy(shipment.lowestRate());   
-            if (err != null)
-                console.log("Ha ocurrido un error al calcular los gastos de envio: " + err);
-            
-            // Si se busca sólo la cantidad añadir .rate
-            console.log("En API 2 OK")
-            try {
-                var result = shipment.lowestRate()
-                
-                console.log(shipment.status);
-                /* shipment.status = 200;
-                console.log(shipment.status); */
-                return  result;
-            } catch (error){
-                console.log(error)
-            }
-            return shipment.lowestRate(); 
-        } catch(error){
-            return "Ha surgido un error" + error;
-        }
-        }).catch((error: any) => {
-            console.log(error);
-        })
-} catch (error) {
-    console.log(error);
+return shipment.save().then((s:any, err: any) =>  {
+    try {
+        s.buy(shipment.lowestRate());
+        if (err != null)
+            console.log("Ha ocurrido un error al calcular los gastos de envio: " + err);
+        // Si se busca sólo la cantidad añadir .rate
+        return shipment.lowestRate();
+    } catch(error){
+        return "Ha surgido un error: " + error;
+    }
+});
 }
 
-    
-}; 
