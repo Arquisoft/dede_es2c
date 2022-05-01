@@ -133,18 +133,21 @@ const Pago: FC = () => {
                 country: direccion['country'] + "",
                 phone: tel
             }).then(res => {
-                if(res.status !== 404){
+                if(res.status == 200){
                     console.log(res.status);
                     console.log(res.data);
                     var dataJson: any = res.data['shippmentCost']
-                    var precioEnvio: string = dataJson['retail_rate'];
-                    envio = Number.parseFloat(dataJson['retail_rate']);
+                    var precioEnvio: string = dataJson['rate'];
+                    envio = Number.parseFloat(dataJson['rate']);
                     console.log(precioEnvio)
                     
                 } else {
                     console.log('fallo')
                 }
-            }).catch(
+            }).catch( (error) => {
+                console.log("En el catch");
+                console.log(error);
+            }
                 
             );
 

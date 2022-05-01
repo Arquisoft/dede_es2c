@@ -173,6 +173,7 @@ export const getOrders: RequestHandler = async (req, res) => {
 export const getShippmentCost: RequestHandler = async (req, res) => {
     const addressTo = req.body;
     try{
+      console.log("En OrderController OK")
       var costs = await ShipmentCosts(addressTo);
       return res.status(200).send({shippmentCost: costs});
     } catch (error){
