@@ -47,9 +47,9 @@ var shipment =  api.Shipment.create({
     status: "200"
 });
 
-return shipment.save().then((s:any, err: any) =>  {
+return shipment.save().then( (s:any, err: any) =>  {
     try {
-        s.buy(shipment.lowestRate());
+        //s.buy(shipment.lowestRate());
         if (err != null)
             console.log("Ha ocurrido un error al calcular los gastos de envio: " + err);
         // Si se busca sólo la cantidad añadir .rate

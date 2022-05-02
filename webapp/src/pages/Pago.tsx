@@ -36,15 +36,44 @@ const Pago: FC = () => {
 
     var envio: number = 0;
 
+    async function getPrecioEnvio(direccion:any){
+        var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+        var UserName:User = await getUserById(user.id);
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const precioEnvio = await axios.post(apiEndPoint + "/order/calculateShipment", {
+                name: UserName.name, 
+                street1: direccion['street_address'] + "",
+                city: direccion['locality']  + "",
+                state: direccion['region'] + "",
+                zip: direccion['postalCode']  + "",
+                country: direccion['country'] + "",
+                phone: tel
+            }).then(res => {
+                if(res.status == 200){
+                    var dataJson: any = res.data['shippmentCost']
+                    envio = Number.parseFloat(dataJson['rate']);
+                    console.log(envio)
+                    return envio;
+                    
+                } else {
+                    console.log('fallo')
+                }
+            }).catch( (error) => {
+                console.log("En el catch");
+                console.log(error);
+            });
+        return precioEnvio;
+    }
+
     async function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
         setPulse(true);
         var precio = localStorage.getItem("precioCarrito");
         if(precio !== null){
+            const direccion = await getDireccionPod(webId);
+            await getPrecioEnvio(direccion);
             var parseado = JSON.parse(precio);
-            console.log(parseado);
+            console.log("Envio: " + envio)
             var precioFinal: number = Number.parseFloat(parseado) + envio*0.95;
-            console.log(precioFinal)
-            console.log(localStorage.getItem("carrito"));
             Swal.fire({
                 title: "Precio Final",
                 text: "El precio de los articulos es de " + parseado + " tras la suma" + 
@@ -116,42 +145,6 @@ const Pago: FC = () => {
                       ,
                 icon: "success",
             });
-
-            var user:any = jwt_decode(localStorage.getItem('token') || '{}');
-            console.log(localStorage.getItem('token'));
-            console.log(user);
-            var UserName:User = await getUserById(user.id);
-            console.log(UserName);
-
-            const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-            axios.post(apiEndPoint + "/order/calculateShipment", {
-                name: UserName.name, 
-                street1: direccion['street_address'] + "",
-                city: direccion['locality']  + "",
-                state: direccion['region'] + "",
-                zip: direccion['postalCode']  + "",
-                country: direccion['country'] + "",
-                phone: tel
-            }).then(res => {
-                if(res.status == 200){
-                    console.log(res.status);
-                    console.log(res.data);
-                    var dataJson: any = res.data['shippmentCost']
-                    var precioEnvio: string = dataJson['rate'];
-                    envio = Number.parseFloat(dataJson['rate']);
-                    console.log(precioEnvio)
-                    
-                } else {
-                    console.log('fallo')
-                }
-            }).catch( (error) => {
-                console.log("En el catch");
-                console.log(error);
-            }
-                
-            );
-
-
         } else {
             Swal.fire({
                 title: "Creedenciales incorrectos",
@@ -160,8 +153,6 @@ const Pago: FC = () => {
             });
         }
     }
-
-    console.log(localStorage.getItem("carrito"));
 
     return ( 
         <div className='Home' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '130vh' }}>
