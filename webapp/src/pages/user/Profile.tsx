@@ -77,7 +77,7 @@ const Profile = () => {
           }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
-                'Correo envaido',
+                'Correo enviado',
                 'Podrá cambiar su contraseña en el correo que le acabamos de enviar',
                 'success'
               )

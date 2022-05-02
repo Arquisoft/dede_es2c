@@ -7,7 +7,7 @@ const Footer = () => {
                         "Darío Martínez Bajo \n Efrén García Valencia \n " + 
                         "Rubén Rubio del Castillo";
     
-    const correo = "prguntar dario";
+    const correo = "Preguntar Dario";
 
     return (
 
@@ -38,7 +38,7 @@ const Footer = () => {
                             <Box borderBottom={1}>Información adicional</Box>
                             <Box><Typography>Grupo Es_2C</Typography></Box>
                             <Box><Typography>Arquitectura del Software</Typography></Box>
-                            <Box><Typography>Ingeneria Informarica del Software</Typography></Box>
+                            <Box><Typography>Ingenieria Informática del Software</Typography></Box>
                             <Box><Typography>Universidad de Oviedo, Asturias</Typography></Box>
                         </Grid>
                     </Grid>
