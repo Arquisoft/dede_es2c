@@ -124,7 +124,7 @@ const SignUp: FC = () => {
                             />
 
                             <Button onClick={() => allFunc(name,surname,email,pass,repPass)} variant="contained" type="submit">Crear cuenta</Button>
-                            <Link href = "/login">¿Ya tienes una cuenta? Inicia sesión aqui!</Link>
+                            <Link href = "/login">¿Ya tienes una cuenta? ¡Inicia sesión aqui!</Link>
                         </Stack>
                     </CardContent>
                 </Card>
