@@ -68,9 +68,6 @@ Queremos garantizar el tener una interfaz de usuario que resulte cómoda al usua
 === Manejo de excepciones
 Se incluirá el código necesario para manejar y capturar los errores procedentes de las diferentes partes de la aplicación. De ser necesario, se le informará al cliente con el mensaje que corresponda.
 
-=== Accesibilidad
-Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
-
 === Manejo de sesión
 Se manejarán las sesiones a través del uso de tokens asignados a cada usuario registrado.
 
