@@ -25,34 +25,6 @@ const theme = createTheme({
       }
     }
   });
-  
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
-declare module '@mui/material/styles' {
-    interface Theme {
-      status: {
-        danger: string;
-      };
-    }
-    // allow configuration using `createTheme`
-    interface ThemeOptions {
-      status?: {
-        danger?: string;
-      };
-    }
-  }
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
     cartItems:Product[]
@@ -139,21 +111,25 @@ const ListProducts = (func:ProductsProps) => {
             </NativeSelect>
                 </FormControl>
                 <TextCategorias/>
-            <Filtros backgroundColor="#6D9886" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
-            <Filtros backgroundColor="#6D9886" label="Monitores" onClick={() => filtrar("monitor")}/>
-            <Filtros backgroundColor="#6D9886" label="Ratones" onClick={() => filtrar("raton")}/>
-            <Filtros backgroundColor="#6D9886" label="Sonido" onClick={() => filtrar("sonido")}/>
-            <Filtros backgroundColor="#6D9886" label="Teclados" onClick={() => filtrar("teclado")}/>
-            <Filtros backgroundColor="#6D9886" label="Todos los productos" onClick={() => filtrar("")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Monitores" onClick={() => filtrar("monitor")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Ratones" onClick={() => filtrar("raton")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Sonido" onClick={() => filtrar("sonido")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Teclados" onClick={() => filtrar("teclado")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Todos los productos" onClick={() => filtrar("")}/>
             <Box sx = {{ width: 250 }}>
                 <TextSlider></TextSlider>
             <Grid container spacing={2} alignItems = "center">
-            <Grid item><EuroIcon /></Grid>
+            <Grid item>
+                <ThemeProvider theme = {theme}>
+                <EuroIcon color="secondary" />
+                </ThemeProvider>  
+                </Grid>
+                
             <Grid item xs>
                 <ThemeProvider theme = {theme}>
                     <Slider color = "secondary"aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
-                    </ThemeProvider>
-            
+                    </ThemeProvider>            
         </Grid>
         </Grid>
         </Box>
