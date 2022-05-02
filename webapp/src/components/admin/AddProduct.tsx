@@ -22,7 +22,7 @@ const AddProduct = () => {
 
     function checkCampos(url: string, nombre: string, descipcion: string, precio: string, stock: string){
         if(url === '' || url === null || nombre === '' || nombre === null ||
-        descipcion === '' || descipcion === null || Number.parseFloat(precio) < 0 || Number.parseInt(stock) < 0 ){
+        descipcion === '' || descipcion === null || Number.parseFloat(precio) < 0 || Number.parseInt(stock) <= 0 ){
             Swal.fire({
                 title: "ERROR",
                 text: "Alguno de los campos introducidos no es correcto",

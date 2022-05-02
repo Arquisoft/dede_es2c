@@ -42,7 +42,7 @@ const Productos = ( product: ProductsProps) => {
                     }
                 } else {
 
-                    if(p.stock !== '0') {
+                    if(Number.parseInt(p.stock) > 0) {
                         return (
                             <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
@@ -62,7 +62,7 @@ const Productos = ( product: ProductsProps) => {
                                     </CardActions>
                                 </Card>
                             </Grid>
-                    );
+                        );
                     } else {
                         return (
                             <Grid item xs={3} md={3} key = {p.codigo}>

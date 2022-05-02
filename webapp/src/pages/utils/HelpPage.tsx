@@ -13,6 +13,9 @@ const HelpPage = () => {
                     dos videos de como funciona cada una de ellas
                 </p>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/EMk6nom1aS4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
+                <p>El vídeo que se muestra a continuación sería de como funciona la aplicación desde una vista de administrador</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZRobGjPoAA8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
             </Stack>
         </div>
     );

@@ -114,6 +114,7 @@ const Pago: FC = () => {
                         calle + " " + localidad + " " + pais, "fecha": new Date(), 
                         "products": cart}).then(
                             resp => {
+                                window.location.assign("/products");
                                 console.log(resp.data);
                             }
                         );
