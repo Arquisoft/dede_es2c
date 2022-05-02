@@ -5,8 +5,9 @@ const Footer = () => {
     const correo = "dede.es2c@gmail.com";
 
     return (
-
-        <footer>
+        <footer style = {{
+            position:'relative'
+        }}>
             <Box px = {{xs:3, sm:10}} py = {{xs: 5, sm:10}} bgcolor ="text.secondary" color = "white">
                 <Container maxWidth = "lg">
                     <Grid container spacing={5}>

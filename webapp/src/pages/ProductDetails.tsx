@@ -22,7 +22,7 @@ const ProductDetails = () => {
 
     useEffect(() => {getProduct(pName)});
     return (
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }} >
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' ,backgroundColor:'#F6F6F6'}} >
             <Grid> 
                 <Paper elevation={8} style={{ margin: "3vh 5vw", padding: "1em" }}>
                     <Grid container direction="row" alignItems="center" justifyContent="center" spacing={2} sx={{ p: 2 }}> 
