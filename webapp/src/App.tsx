@@ -21,7 +21,6 @@ import Footer from './components/Footer/Footer';
 import ProductDetails from './pages/ProductDetails';
 import HelpPage from './pages/utils/HelpPage';
 import NoPermissions from './pages/utils/NoPermissions';
-
 import { HelpButton } from './components/utils/HelpButton';
 
 
@@ -60,7 +59,6 @@ const App: FC = () => {
   }
 
   return (
-
       <Router>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
@@ -97,9 +95,12 @@ const App: FC = () => {
             </PrivateRoute>} 
           />
         </Routes>
-        <Footer />
+        <div style = {{
+          position:'relative'
+        }}>
+          <Footer/>
+        </div>
       </Router>
-      
   );
 }
 export default App;
