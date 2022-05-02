@@ -10,9 +10,16 @@ import Swal from 'sweetalert2';
 import {addProduct} from "../../api/ApiProducts";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const AddProduct = () => {
-
+    const theme = createTheme({
+        palette: {
+          secondary: {
+            main: '#6D9886'
+          }
+        }
+      });
     const [urlBase, setUrl] = useState('https://i.postimg.cc/25fVD0hz/TE01.jpg')
     const [nombreP , setNombre] = useState('')
     const [descrip, setDescripcion] = useState('')
@@ -124,9 +131,10 @@ const AddProduct = () => {
                                                 <MenuItem value = 'sonido'>sonido</MenuItem>
                                             </Select>
                                         </FormControl>
-        
-                                        <Button variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
-                                    </Stack>
+                                        <ThemeProvider theme = {theme}>
+                                        <Button color="secondary" variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
+                                        </ThemeProvider>
+                                    </Stack>                                   
                                 </Box> 
                                 </div>
                             </Stack>
