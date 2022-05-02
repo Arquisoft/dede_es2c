@@ -44,6 +44,8 @@ afterAll(async () => {
 
 describe("products ", () => {
 
+    // Con el primer getByCode
+
     /**
      * Consigo un producto buscando por código
      */
@@ -73,6 +75,39 @@ describe("products ", () => {
       );
       expect(response.statusCode).toBe(412);
     });
+
+
+    // Con el segundo getByCode que por alguna razón funciona en front y el anterior no
+
+    /**
+     * Consigo un producto buscando por código
+     */
+     it("Puedo conseguir un producto buscando por código", async () => {
+      const response: Response = await request(app).get(
+        "/product/getByCodigo/MO01"
+      );
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toEqual(
+        expect.objectContaining({
+          codigo: "MO01",
+          categoria: "monitor",
+          nombre: "Samsung LF27T352FHRXEN",
+          precio: 139.99,
+          descripcion: "Monitor Plano de 27'', Full HD (1080p, Panel IPS), Freesync, HDMI, Gaming, Negro",
+          url: "https://i.postimg.cc/sgWvqkB6/MO01.jpg",
+        })
+      );
+    });
+  
+    /**
+     * No puedo conseguir un producto no existente buscando por código
+     */
+    it("No puedo conseguir un producto no existente buscando por código", async () => {
+      const response: Response = await request(app).get(
+        "/product/getByCodigo/productDoesNotExists"
+      );
+      expect(response.statusCode).toBe(404);
+    });
   
     /**
      * Puedo listar a todos los productos
@@ -95,6 +130,17 @@ describe("products ", () => {
       );
       expect(response.statusCode).toBe(200);
     });
+
+
+    /**
+     * Intento buscar un producto por una categoría no existente 
+     */
+       it("Intento buscar un producto por una categoría no existente", async () => {
+        const response: Response = await request(app).get(
+        "/product/getByCategoria/ERROR"
+        );
+        expect(response.statusCode).toBe(412);
+      });
   
     
     /**
@@ -153,6 +199,7 @@ describe("products ", () => {
       });
       expect(response.statusCode).toBe(409);
     });
+
   
     /**
      * Intento crear el producto sin que tenga todos los campos
@@ -175,6 +222,17 @@ describe("products ", () => {
       "/product/update/codigoPrueba/?nombre=nombreCambiado"
       );
       expect(response.statusCode).toBe(200);
+    });
+
+
+    /**
+    * Intento actualizar un producto inexistente
+    */
+    it(" Intento actualizar un producto inexistente", async () => {
+      const response: Response = await request(app).get(
+      "/product/update/noExisto/?nombre=nombreCambiado"
+       );
+      expect(response.statusCode).toBe(412);
     });
   
     /**

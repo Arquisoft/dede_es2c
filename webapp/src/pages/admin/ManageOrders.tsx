@@ -37,14 +37,14 @@ const ManageOrders: FC = () => {
     }
 
     useEffect(() => {cargarPedidos();}, []);
-
+    console.log(orders);
     return (
         <div style={{backgroundColor:'#F6F6F6'}}>
             <div style={{ margin: '170px',backgroundColor:'#F6F6F6'}}>
             <ThemeProvider theme = {theme}>
                 <TableContainer component={Paper} color = "secondary">              
-                    <Table sx={{ minWidth: 650 }} aria-label="customized table" >                 
-                        <TableHead >
+                    <Table sx={{ minWidth: 650 }} aria-label="customized table" >                  
+                        <TableHead>
                             <TableRow>
                                 <StyledTableCell>Código</StyledTableCell>
                                 <StyledTableCell>Fecha</StyledTableCell>
@@ -63,7 +63,6 @@ const ManageOrders: FC = () => {
                 </ThemeProvider>
             </div>
         </div>
-
     );
 
 }

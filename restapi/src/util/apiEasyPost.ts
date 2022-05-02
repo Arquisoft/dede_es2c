@@ -10,7 +10,8 @@ const addressFrom  = {
     "zip": '94104',
     "country": 'US',
     "company": 'EasyPost',
-    "phone": '415-123-4567'
+    "phone": '415-123-4567',
+    async: true
 };
 
 const parcel = {
@@ -21,7 +22,7 @@ const parcel = {
     async: true
 };
 
-module.exports = function (addressPod:object){
+module.exports = async function (addressPod:object){
 
 // Dirección de destido DEL POD
 // Tiene que tener ESTE FORMATO
@@ -42,16 +43,20 @@ var shipment =  api.Shipment.create({
     "from_address": addressFrom,
     "to_address": addressPod,
     "parcel": parcel,
-    async : true
+    async : true,
+    status: "200"
 });
 
-
-return shipment.save().then((s:any, err: any) =>  {
-        s.buy(shipment.lowestRate());
+return shipment.save().then( (s:any, err: any) =>  {
+    try {
+        //s.buy(shipment.lowestRate());
         if (err != null)
             console.log("Ha ocurrido un error al calcular los gastos de envio: " + err);
-        
         // Si se busca sólo la cantidad añadir .rate
         return shipment.lowestRate();
-    });
+    } catch(error){
+        return "Ha surgido un error: " + error;
+    }
+});
 }
+

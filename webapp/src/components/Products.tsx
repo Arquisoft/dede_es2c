@@ -31,9 +31,9 @@ const Productos = ( product: ProductsProps) => {
                                     <CardContent>Descripción del producto:</CardContent>
                                     <CardContent>{p.descripcion}</CardContent>
                                     <CardActions>
-                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                       {/*  <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
                                             Añadir al carrito
-                                        </Button>
+                                        </Button> */}
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -41,7 +41,7 @@ const Productos = ( product: ProductsProps) => {
                     }
                 } else {
 
-                    if(p.stock !== '0') {
+                    if(Number.parseInt(p.stock) > 0) {
                         return (
                             <Grid item xs={3} md={3} style={{position:'relative'}}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
@@ -61,7 +61,7 @@ const Productos = ( product: ProductsProps) => {
                                     </CardActions>
                                 </Card>
                             </Grid>
-                    );
+                        );
                     } else {
                         return (
                             <Grid item xs={3} md={3} key= {p.codigo} style={{position:'relative',backgroundColor:'#F6F6F6'}}>
@@ -83,7 +83,9 @@ const Productos = ( product: ProductsProps) => {
                     );
                 } 
             }
+            return ("");
             }
+            
         )}
         </Grid>
     );

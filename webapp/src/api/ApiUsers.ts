@@ -71,7 +71,7 @@ export const foundEmail = async (email: String):Promise<boolean> => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
         status = await axios.get(apiEndPoint +"/user/list/"+ email)
         .then(res => {
-            return res.status == 200
+            return res.status === 200
         })
         }catch(error){
             return false
@@ -79,3 +79,10 @@ export const foundEmail = async (email: String):Promise<boolean> => {
     } 
     return status;
 } 
+
+export async function getUserById(id: string) {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    let response = await fetch(apiEndPoint+'user/findById/' + id);
+    //The objects returned by the api are directly convertible to User objects
+    return response.json()
+}

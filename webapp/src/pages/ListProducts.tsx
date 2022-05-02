@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import {Filtros} from '../stories/Button.stories';
