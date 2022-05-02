@@ -43,11 +43,11 @@ Los usuarios eligirán los productos que formarán parte de su carro de compra. 
 [options="header",cols="1,2,2"]
 |===
 |Objetivos de calidad|Motivación|Importancia
-| Eficiencia | La aplicación utilizará la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
+| Eficiencia | Buscamos en la medida de lo posible mejorar los tiempos de respuesta | Media
 | Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
 | Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Alta
 | Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
-| Transparencia | Todo lo que se haga en el proyecto permanecerá en un repositorio público para que otra gente lo pueda tener como referencia | Media
+| Transparencia | Todo lo que se haga en el proyecto permanecerá en un repositorio público para que otra gente lo pueda tener como referencia | Alta
 | Comodidad | La aplicación ha de ser fácil de manejar para gente no experimentada | Alta
 |===
 
