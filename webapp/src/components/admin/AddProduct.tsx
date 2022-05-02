@@ -10,9 +10,16 @@ import Swal from 'sweetalert2';
 import {addProduct} from "../../api/ApiProducts";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const AddProduct = () => {
-
+    const theme = createTheme({
+        palette: {
+          secondary: {
+            main: '#6D9886'
+          }
+        }
+      });
     const [urlBase, setUrl] = useState('https://i.postimg.cc/25fVD0hz/TE01.jpg')
     const [nombreP , setNombre] = useState('')
     const [descrip, setDescripcion] = useState('')
@@ -43,9 +50,9 @@ const AddProduct = () => {
 
 
     return (
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '125vh' }}>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '125vh',backgroundColor:'#F6F6F6'}}>
                     <Container component= "main" maxWidth="sm" fixed={true} 
-                    sx={{ position: "center",top: 150}}>
+                    sx={{ position: "center",top: 150,backgroundColor:'#F6F6F6'}}>
                         <Card sx = {{minWidth: 700, height: 1100}}>
                             <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
                             <CardHeader title = 'Añadir un nuevo producto' />
@@ -124,9 +131,10 @@ const AddProduct = () => {
                                                 <MenuItem value = 'sonido'>sonido</MenuItem>
                                             </Select>
                                         </FormControl>
-        
-                                        <Button variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
-                                    </Stack>
+                                        <ThemeProvider theme = {theme}>
+                                        <Button color="secondary" variant = "contained" type = "submit" onClick={() => add(urlBase, nombreP, descrip, precio, categoria, stock)}>Añadir Producto Nuevo</Button>
+                                        </ThemeProvider>
+                                    </Stack>                                   
                                 </Box> 
                                 </div>
                             </Stack>

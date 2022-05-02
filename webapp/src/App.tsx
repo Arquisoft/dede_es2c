@@ -58,8 +58,10 @@ const App: FC = () => {
   }
 
   return (
-
       <Router>
+        <div style={{
+          backgroundColor:'#F6F6F6'
+        }}>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
         <Routes>
@@ -91,9 +93,14 @@ const App: FC = () => {
             </PrivateRoute>} 
           />
         </Routes>
-        <Footer />
+        <div style = {{
+          position:'relative'
+        }}>
+          <Footer/>
+        </div>
+        </div>
+       
       </Router>
-      
   );
 }
 export default App;
