@@ -19,3 +19,5 @@ Para solucionarlo hemos buscado información del campo que nos ha sido asignado 
 * Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.
 * Mal uso de los tipos de TypeScript en algunas ocasiones por falta de experiencia, por ejemplo, usar el tipo "any" en casos innecesarios
 * Mostrar de una forma poco clara que se está accediendo a un servicio de terceros en el caso de los PODs de SOLID.
+* El carrito del cliente se pierde, no se mantiene por las diferentes ventanas.
+* Falta de mas pruebas sobre el código de front. 

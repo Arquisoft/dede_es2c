@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import { TableContainer, TableHead} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -25,12 +25,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 async function ordersByEmail(order:Order[], orderEmail:Order[], email:String){
-    order.forEach(e => {if(e.correo == email){ orderEmail.push(e) }});
+    order.forEach(e => {if(e.correo === email){ orderEmail.push(e) }});
 }
 
 const OrderHistory = (id: Id) => {
     const [orders, setOrders]  = React.useState<Order[]>([]);
-    const[ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
+    const[ordersEmail] = React.useState<Order[]>([]);
     
     async function cargarPedidos() {
         setOrders(await getOrders());

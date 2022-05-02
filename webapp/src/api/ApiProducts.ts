@@ -24,14 +24,15 @@ export async function addProduct(url: string, nombre: string, descripcion: strin
         res => {
             if(res.status === 201){
                 Swal.fire({
-                    title: "UProducto añadido",
+                    title: "Producto añadido",
                     text: "Se ha añadido el prodcuto sin problemas",
                     icon: "success"
                 });
+                window.location.assign("/admin/manageProducts")
             } else {
                 Swal.fire({
                     title: "ERROR",
-                    text: "Se ha producido un error con los productos",
+                    text: "Se ha producido un error al añadir el producto",
                     icon: "error"
                 });
             }
