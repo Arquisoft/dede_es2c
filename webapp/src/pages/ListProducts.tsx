@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import {Filtros} from '../stories/Button.stories';
-import {TextCategorias} from '../stories/Text.stories';
+import {TextCategorias,TextSlider} from '../stories/Text.stories';
 import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
@@ -98,6 +98,15 @@ const ListProducts = (func:ProductsProps) => {
             <Filtros backgroundColor="#06ee99" label="Sonido" onClick={() => filtrar("sonido")}/>
             <Filtros backgroundColor="#06ee99" label="Teclados" onClick={() => filtrar("teclado")}/>
             <Filtros backgroundColor="#06ee99" label="Todos los productos" onClick={() => filtrar("")}/>
+            <Box sx = {{ width: 250 }}>
+                <TextSlider></TextSlider>
+            <Grid container spacing={2} alignItems = "center">
+            <Grid item><EuroIcon /></Grid>
+            <Grid item xs>
+            <Slider aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
+        </Grid>
+        </Grid>
+        </Box>
             </Stack> 
             </Container>
             <Container style = {{
@@ -107,16 +116,8 @@ const ListProducts = (func:ProductsProps) => {
             }}>
             
             <div className='Filtros' style ={ {height: '15vh'} }>
-            <Stack direction="row" divider = {<Divider orientation='horizontal' flexItem/>} spacing = {0.5}>                  
-        <Box sx = {{ width: 250 }}>
-            <Typography id = "input-slider" gutterBottom>Precio</Typography>
-            <Grid container spacing={2} alignItems = "center">
-        <Grid item><EuroIcon /></Grid>
-        <Grid item xs>
-            <Slider aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
-        </Grid>
-    </Grid>
-        </Box>
+            <Stack direction="column" divider = {<Divider orientation='horizontal' flexItem/>} spacing = {0.5}>                  
+
         <FormControl >
     <InputLabel variant='standard' htmlFor = 'uncontrolled'>Precio: </InputLabel>
         <NativeSelect>

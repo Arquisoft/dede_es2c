@@ -60,6 +60,9 @@ const App: FC = () => {
 
   return (
       <Router>
+        <div style={{
+          backgroundColor:'#F6F6F6'
+        }}>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
         <Routes>
@@ -100,6 +103,8 @@ const App: FC = () => {
         }}>
           <Footer/>
         </div>
+        </div>
+       
       </Router>
   );
 }

@@ -9,3 +9,9 @@ export const TextCategorias = () => (
         color :'#06ee99'
     }}>Categoria de productos: </h3>
 );
+
+export const TextSlider = () => (
+    <h3 style={{
+        color :'#06ee99'
+    }}>Precio: </h3>
+);
