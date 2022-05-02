@@ -1,12 +1,12 @@
-import React, { useState} from 'react';
+/* import React, { useState} from 'react'; */
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Card, CardContent } from '@mui/material';
-import axios from 'axios';
-import {User} from '../../shared/shareddtypes';
-import Swal from 'sweetalert2';
+/* import axios from 'axios'; */
+/* import {User} from '../../shared/shareddtypes';
+import Swal from 'sweetalert2'; */
 import jwt_decode from "jwt-decode";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
@@ -22,13 +22,10 @@ const Profile = (correo:Email) => {
         window.location.assign("/login");
     }
 
-    let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [pulse, setPulse] = useState(false)
+    /* let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
+    const [pulse, setPulse] = useState(false) */
 
-    const getUserByEmail = async (email:String) => {
+    /* const getUserByEmail = async (email:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
         const data = await axios.get(apiEndPoint + "/user/list/" + email).
         then(res => {
@@ -38,15 +35,15 @@ const Profile = (correo:Email) => {
         return data != null;
     }
 
-    getUserByEmail(correo.email);
-    const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
-        if(name == ''){
+    getUserByEmail(correo.email); */
+   /*  const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
+        if(name === ''){
             name = user.name
         }
-        if(surname == ''){
+        if(surname === ''){
             surname = user.surname
         }
-        if(email == ''){
+        if(email === ''){
             email = user.email
         }
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
@@ -54,7 +51,7 @@ const Profile = (correo:Email) => {
         .then(res => {
             console.log(res);
             console.log(res.data);
-            if(res.status == 404){
+            if(res.status === 404){
                 Swal.fire({
                     title: "Perfil modificado",
                     text: "El perfil ha sido modificado con exito",
@@ -64,12 +61,12 @@ const Profile = (correo:Email) => {
                 });
             }
         })
-    }
+    } */
 
-    async function allFunc(id:String,name:String,surname:String,email: String){
+    /* async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
         updateUser(id, name, surname, email);
-    }
+    } */
 
         if(localStorage.getItem('token') != null){
             var user2:any = jwt_decode(localStorage.getItem('token') || '{}');

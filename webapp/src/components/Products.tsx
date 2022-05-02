@@ -32,9 +32,9 @@ const Productos = ( product: ProductsProps) => {
                                     <CardContent>Descripción del producto:</CardContent>
                                     <CardContent>{p.descripcion}</CardContent>
                                     <CardActions>
-                                        <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
+                                       {/*  <Button onClick={() => product.onAddCart(p)} variant="outlined" startIcon = {<AddShoppingCartIcon />}>
                                             Añadir al carrito
-                                        </Button>
+                                        </Button> */}
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -84,7 +84,9 @@ const Productos = ( product: ProductsProps) => {
                     );
                 } 
             }
+            return ("");
             }
+            
         )}
         </Grid>
         </>

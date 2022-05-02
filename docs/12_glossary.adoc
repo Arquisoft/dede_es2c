@@ -25,4 +25,9 @@
 | MongoDB | Sistema de base de datos NoSQL, orientado a documentos y de código abierto
 | MongoDB Atlas | Sistema gestionador de base de datos que se encarga de toda la complejidad de la implementación, la gestión y la recuperación de sus implementaciones en el proveedor de servicios en la nube de su elección
 | Mongoose | Biblioteca de JavaScript que le permite definir esquemas con datos fuertemente tipados
+| AWS | Amazon Web Services es una colección de servicios de computación en la nube pública que en conjunto forman una plataforma de computación en la nube, ofrecidas a través de Internet por Amazon.com
+| EasyPost | API de envío para poder calcular los costes dentro de nuestra aplicación
+| JSON Web Token | Estándar abierto basado en JSON propuesto por IETF para la creación de tokens de acceso que permiten la propagación de identidad y privilegios o claims en inglés
+| Jest | Librería abierta para pruebas en JavaScript desarrollada por Facebook
+| Scala | Lenguaje de programación multi-paradigma diseñado para expresar patrones comunes de programación en forma concisa, elegante y con tipos seguros. Integra sutilmente características de lenguajes funcionales y orientados a objetos
 |===

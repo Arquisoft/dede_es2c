@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -31,7 +31,7 @@ const Pago: FC = () => {
     const [pais, setPais] = useState('')
     const [localidad, setLocalidad] = useState('')
     const [codigo, setCodigo] = useState('')
-    const [region, setRegion] = useState('')
+    const [regio, setRegion] = useState('')
     const [calle, setCalle] = useState('')
 
     var envio: number = 0;
@@ -49,7 +49,7 @@ const Pago: FC = () => {
                 country: direccion['country'] + "",
                 phone: tel
             }).then(res => {
-                if(res.status == 200){
+                if(res.status === 200){
                     var dataJson: any = res.data['shippmentCost']
                     envio = Number.parseFloat(dataJson['rate']);
                     console.log(envio)
@@ -88,7 +88,7 @@ const Pago: FC = () => {
                     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000';
                     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
                     var UserName:User = await getUserById(user.id);
-                    let codigo = uuidv4();
+                    let codigo2 = uuidv4();
 
                     const carrt2 = localStorage.getItem("carrito");
                     const cart: Product[] = [];
@@ -110,8 +110,8 @@ const Pago: FC = () => {
                         }   
                     }
                     axios.post(apiEndPoint + "/order/addOrder", 
-                        {"codigo": codigo, "correo": UserName.email, "direccion": 
-                        calle + " " + localidad + " " + pais, "fecha": new Date(), 
+                        {"codigo": codigo2, "correo": UserName.email, "direccion": 
+                        calle + " " + localidad + " " + pais + " " + codigo + " " + regio, "fecha": new Date(), 
                         "products": cart}).then(
                             resp => {
                                 window.location.assign("/products");

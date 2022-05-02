@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -12,7 +12,7 @@ const checkParams = (text: string) => {
 }
 
 const checkEmail = (email: string) => {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return !re.test(email.toString());
 }
 
@@ -90,9 +90,9 @@ const SignUp: FC = () => {
                                 variant = "outlined"
                                 size = "small"
                                 value = {email}
-                                error = {checkParams(email) && pulse || checkEmail(email) && pulse}
+                                error = {(checkParams(email) && pulse) || (checkEmail(email) && pulse)}
                                 helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''
-                                            ||checkEmail(email) && pulse ? 'Formato de e-mail inválido' : ''}
+                                            ||(checkEmail(email) && pulse ? 'Formato de e-mail inválido' : '')}
                                 onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
@@ -117,9 +117,9 @@ const SignUp: FC = () => {
                                 size="small"
                                 variant="outlined"
                                 value = {repPass}
-                                error = {checkParams(repPass) && pulse || checkPaswwords(repPass, pass)}
+                                error = {(checkParams(repPass) && pulse) || (checkPaswwords(repPass, pass))}
                                 helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ''
-                                                || checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : ''}
+                                                || (checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : '')}
                                 onChange = {(e: any) => setRepPass(e.target.value)}
                             />
 

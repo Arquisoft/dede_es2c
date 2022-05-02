@@ -16,3 +16,5 @@
 * Almacenamiento de token de sesión en el localStorage, se podría guardar en un nuevo campo de la base de datos, ya que el localStorage es modificable desde el navegador
 * Faltaría refactorizar parte del código del frontend para hacerlo más claro y modificable.
 * Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.
+* El carrito del cliente se pierde, no se mantiene por las diferentes ventanas.
+* Falta de mas pruebas sobre el código de front. 
