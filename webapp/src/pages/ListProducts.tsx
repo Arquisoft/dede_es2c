@@ -16,7 +16,43 @@ import Grid from '@mui/material/Grid';
 import EuroIcon from '@mui/icons-material/Euro';
 import Container from '@mui/material/Container';
 import { relative } from 'path';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#6D9886'
+      }
+    }
+  });
+  
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
+declare module '@mui/material/styles' {
+    interface Theme {
+      status: {
+        danger: string;
+      };
+    }
+    // allow configuration using `createTheme`
+    interface ThemeOptions {
+      status?: {
+        danger?: string;
+      };
+    }
+  }
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
     cartItems:Product[]
@@ -81,55 +117,56 @@ const ListProducts = (func:ProductsProps) => {
             top:10,
             height:1800,
             width:700,
+            backgroundColor:'6D9886'
         }}>
+
             <Container style = {{
                 position:'relative',
                 top: 150,
-                right:600
+                right:600,
+                backgroundColor:'6D9886'
             }}>
-                <TextCategorias/>
                 <Stack direction="column" spacing={2} style={{
                 width:150,
                 height:50
                 }}>
-            <Filtros backgroundColor="#06ee99" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
-            <Filtros backgroundColor="#06ee99" label="Monitores" onClick={() => filtrar("monitor")}/>
-            <Filtros backgroundColor="#06ee99" label="Ratones" onClick={() => filtrar("raton")}/>
-            <Filtros backgroundColor="#06ee99" label="Sonido" onClick={() => filtrar("sonido")}/>
-            <Filtros backgroundColor="#06ee99" label="Teclados" onClick={() => filtrar("teclado")}/>
-            <Filtros backgroundColor="#06ee99" label="Todos los productos" onClick={() => filtrar("")}/>
+                            <FormControl >
+            <InputLabel variant='standard' htmlFor = 'uncontrolled'>Precio: </InputLabel>
+                <NativeSelect>
+            <option onClick={() => cargarProductos()}>Por defecto</option>
+            <option onClick={() => filtroPrecio('mayor')}>Menor a mayor</option>
+            <option onClick={() => filtroPrecio('menor')}>Mayor a menor</option>
+            </NativeSelect>
+                </FormControl>
+                <TextCategorias/>
+            <Filtros backgroundColor="#6D9886" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
+            <Filtros backgroundColor="#6D9886" label="Monitores" onClick={() => filtrar("monitor")}/>
+            <Filtros backgroundColor="#6D9886" label="Ratones" onClick={() => filtrar("raton")}/>
+            <Filtros backgroundColor="#6D9886" label="Sonido" onClick={() => filtrar("sonido")}/>
+            <Filtros backgroundColor="#6D9886" label="Teclados" onClick={() => filtrar("teclado")}/>
+            <Filtros backgroundColor="#6D9886" label="Todos los productos" onClick={() => filtrar("")}/>
             <Box sx = {{ width: 250 }}>
                 <TextSlider></TextSlider>
             <Grid container spacing={2} alignItems = "center">
             <Grid item><EuroIcon /></Grid>
             <Grid item xs>
-            <Slider aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
+                <ThemeProvider theme = {theme}>
+                    <Slider color = "secondary"aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
+                    </ThemeProvider>
+            
         </Grid>
         </Grid>
         </Box>
+
             </Stack> 
             </Container>
             <Container style = {{
                 position:'relative',
+                top:150,
                 right:250,
                 width:1500
             }}>
-            
-            <div className='Filtros' style ={ {height: '15vh'} }>
-            <Stack direction="column" divider = {<Divider orientation='horizontal' flexItem/>} spacing = {0.5}>                  
-
-        <FormControl >
-    <InputLabel variant='standard' htmlFor = 'uncontrolled'>Precio: </InputLabel>
-        <NativeSelect>
-            <option onClick={() => cargarProductos()}>Por defecto</option>
-            <option onClick={() => filtroPrecio('mayor')}>Menor a mayor</option>
-            <option onClick={() => filtroPrecio('menor')}>Mayor a menor</option>
-        </NativeSelect>
-</FormControl>
-
-</Stack>  
-</div>
-<Products homePage = {false} product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
+    <Products homePage = {false} product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
             </Container>
         </Container>    
     );

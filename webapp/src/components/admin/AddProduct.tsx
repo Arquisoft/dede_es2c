@@ -43,9 +43,9 @@ const AddProduct = () => {
 
 
     return (
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '125vh' }}>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '125vh',backgroundColor:'#F6F6F6'}}>
                     <Container component= "main" maxWidth="sm" fixed={true} 
-                    sx={{ position: "center",top: 150}}>
+                    sx={{ position: "center",top: 150,backgroundColor:'#F6F6F6'}}>
                         <Card sx = {{minWidth: 700, height: 1100}}>
                             <Stack direction = "column" spacing={3} style = {{marginLeft: '50px'}}>
                             <CardHeader title = 'Añadir un nuevo producto' />
