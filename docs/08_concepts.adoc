@@ -47,7 +47,7 @@ object Review{
 }
 
 User *--> Cart
-Cart *--> Order
+Cart o--> Order
 User *--> Review
 Order o--> Product
 Product *--> Review
