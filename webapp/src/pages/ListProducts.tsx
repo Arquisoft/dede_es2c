@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import {Button} from '../stories/Button';
+import {Filtros} from '../stories/Button.stories';
 import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
@@ -77,7 +77,12 @@ const ListProducts = (func:ProductsProps) => {
             <p>Categorías: </p>
             <div className='Filtros' style ={ {height: '15vh'} }>
                 <Stack direction="row" divider = {<Divider orientation='horizontal' flexItem/>} spacing = {0.5}>                  
-                <Button   backgroundColor="#57dbd0" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
+                <Filtros backgroundColor="#06ee99" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
+                <Filtros backgroundColor="#06ee99" label="Monitores" onClick={() => filtrar("monitor")}/>
+                <Filtros backgroundColor="#06ee99" label="Ratones" onClick={() => filtrar("raton")}/>
+                <Filtros backgroundColor="#06ee99" label="Sonido" onClick={() => filtrar("sonido")}/>
+                <Filtros backgroundColor="#06ee99" label="Teclados" onClick={() => filtrar("teclado")}/>
+                <Filtros backgroundColor="#06ee99" label="Todos los productos" onClick={() => filtrar("")}/>
                     <Box sx = {{ width: 250 }}>
                         <Typography id = "input-slider" gutterBottom>Precio</Typography>
                         <Grid container spacing={2} alignItems = "center">

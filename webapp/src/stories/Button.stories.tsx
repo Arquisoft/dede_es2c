@@ -16,10 +16,15 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const FiltroAlmacenamiento = Template.bind({});
+export const Filtros = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-FiltroAlmacenamiento.args = {
-  label: 'Almacenamiento',
-  size:"medium",
+Filtros.args = {
+  size:"medium"
 };
 
+export const AñadirCarro = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+AñadirCarro.args = {
+  label: 'Añadir al carrito',
+  size:"medium",
+};
