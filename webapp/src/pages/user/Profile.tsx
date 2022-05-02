@@ -10,7 +10,6 @@ import {User} from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
 import jwt_decode from "jwt-decode";
-
 function getUserId(): string {
     var id;
     if(localStorage.getItem('token') != null)
@@ -18,7 +17,6 @@ function getUserId(): string {
     id = user.id
     return id
 }
-
 const Profile = () => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
     let [id, setId] = useState('')
@@ -26,9 +24,7 @@ const Profile = () => {
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     const [pulse, setPulse] = useState(false)
-
     id = getUserId()
-
     const getUser = async (id:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
         const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
@@ -64,7 +60,6 @@ const Profile = () => {
             }
         })
     }
-
     const enviarContraseña = () => {
         Swal.fire({
             title: '¿Desea cambiar su contraseña?',
@@ -85,12 +80,10 @@ const Profile = () => {
           })
         
     }
-
     async function allFunc(id:String,name:String,surname:String,email: String){
         setPulse(true);
         updateUser(id, name, surname, email);
     }
-
     return ( 
         <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Container component= "main" maxWidth="sm"
@@ -99,14 +92,12 @@ const Profile = () => {
                 top: 10
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
-
                     <Typography className="miPerfil" style={{position:'relative', right:-240, top:20}}> Mi Perfil </Typography>
                     
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
                         <Stack direction= "column" spacing={-0.5}>
                             
                         <Typography className="email" style={{position:'relative', right:188, top:10}}> Correo electrónico: </Typography>
-
                             <TextField
                                 id = "email" 
                                 name = "Email"
@@ -115,9 +106,7 @@ const Profile = () => {
                                 variant="outlined"
                                 style={{position:'relative', top:-20}}
                             />
-
                             <Typography className="name" style={{position:'relative', right:150, top:10}}> Nombre: </Typography>
-
                             <TextField
                                 id = "name"
                                 multiline
@@ -127,9 +116,7 @@ const Profile = () => {
                                 onChange = {(e: any) => setName(e.target.value)}
                                 style={{position:'relative', top:-20}}
                             />
-
                             <Typography className="surname" style={{position:'relative', right:153, top:10}}> Apellidos: </Typography>
-
                             <TextField
                                 id = "surname"
                                 name = "Apellido"
@@ -140,9 +127,7 @@ const Profile = () => {
                                 onChange = {(e: any) => setSurname(e.target.value)}
                                 style={{position:'relative', top:-20}}
                             />
-
                             <Typography className="surname" style={{position:'relative', right:163, top:10}}> Contraseña: </Typography>
-
                             <TextField
                                 id = "pass" 
                                 name = "Contraseña"
@@ -162,5 +147,4 @@ const Profile = () => {
         </div>
     );
 }
-
 export default Profile; 

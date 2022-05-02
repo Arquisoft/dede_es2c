@@ -236,7 +236,6 @@ describe("user ", () => {
     * Intento hacer login y falla por poner mal la contraseña
     */
    it("Intento hacer login y falla por poner mal la contraseña", async () => {
-     console.log(admin())
     const response: Response = await request(app).post("/user/login").send({
       email: "admin@uniovi.es",
       password: makeid(),

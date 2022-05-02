@@ -11,6 +11,7 @@ Los usuarios eligirán los productos que formarán parte de su carro de compra. 
 
 === Información general de los requisitos
 
+A continuación se muestran los requisitos que se puedes encontrar en nuestra aplicación. Se dividen en obligatorios y opcionales
 
 .Requisitos obligatorios
 
@@ -23,18 +24,9 @@ Los usuarios eligirán los productos que formarán parte de su carro de compra. 
 
 .Requisitos opcionales
 
-* Los usuarios pueden tener más de una dirección de envío en sus pods (por ejemplo, en sus casas, universidad, …)
-* Poner una estimación del tiempo en que la persona estará en un sitio y limitar algunas direcciones de ser usadas en la entrega fuera de esos horarios.
-* Crear estaciones de recogida que algunos portadores emplearán. La estación de recogida se puede calcular de forma dinámica basándose en la dirección de la persona o en una posición que pille de camino al receptor.
-* Se pueden usar APIs externas de diferentes portadores, para que los usuarios puedan establecer con cuál de los portadores desean realizar el pedido.
-* Hacer que algunos usuarios con privilegios de administrador puedan ver estadísticas de productos solicitados y monitorizar el estado de los pedidos.
-* Realizar el producto tanto en una aplicación web como una aplicación de móvil.
-* Crear un emulador del sistema de envío que pueda notificar a los usuarios cuando los productos hayan llegado a su destino y poder seguir el proceso de envío.
-* Tener diferentes roles como clientes o gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
-* Incluir la posibilidad de que haya varios centros de distribución o almacenes en los que se encuentren almacenados los productos.
-* Que los usuarios puedan añadir o actualizar la información de sus direcciones en sus pods a través de la aplicación.
-* Permitir a los usuarios dar realimentación sobre su experiencia como puntuaciones y revisiones a los productos o los centros de distribución.
-* Se deja abierta la opción de emplear más de una tecnología de despliegue.
+* Rol de gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
+* Se añade tambien una vista en el que el administrador pueda ver todos los pedidos que se han realizado. 
+* Un usuario puedde actuzalziar el nombre de este dentro de la aplicación
 
 
 === Objetivos de calidad
@@ -43,11 +35,11 @@ Los usuarios eligirán los productos que formarán parte de su carro de compra. 
 [options="header",cols="1,2,2"]
 |===
 |Objetivos de calidad|Motivación|Importancia
-| Eficiencia | La aplicación utilizará la menor cantidad de recursos posibles para  generar las respuestas a las peticiones, mejorando así los tiempos de respuesta | Media
+| Eficiencia | Buscamos en la medida de lo posible mejorar los tiempos de respuesta | Media
 | Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
 | Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Alta
 | Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
-| Transparencia | Todo lo que se haga en el proyecto permanecerá en un repositorio público para que otra gente lo pueda tener como referencia | Media
+| Transparencia | Todo lo que se haga en el proyecto permanecerá en un repositorio público para que otra gente lo pueda tener como referencia | Alta
 | Comodidad | La aplicación ha de ser fácil de manejar para gente no experimentada | Alta
 |===
 

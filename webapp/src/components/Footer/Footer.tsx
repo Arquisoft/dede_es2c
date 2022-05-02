@@ -3,15 +3,12 @@ import {Container, Grid, Box, Link, Typography} from '@mui/material/';
 
 const Footer = () => {
 
-    const nosotros = "Ana Fernandez Ostio \n  Adrián Santamarina Romero\n" +  
-                        "Darío Martínez Bajo \n Efrén García Valencia \n " + 
-                        "Rubén Rubio del Castillo";
-    
-    const correo = "Preguntar Dario";
+    const correo = "dede.es2c@gmail.com";
 
     return (
-
-        <footer>
+        <footer style = {{
+            position:'relative'
+        }}>
             <Box px = {{xs:3, sm:10}} py = {{xs: 5, sm:10}} bgcolor ="text.secondary" color = "white">
                 <Container maxWidth = "lg">
                     <Grid container spacing={5}>

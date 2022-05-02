@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
+import {Filtros} from '../stories/Button.stories';
+import {TextCategorias,TextSlider} from '../stories/Text.stories';
 import { Product } from '../shared/shareddtypes';
 import { getProductosByCategoria, getProducts } from '../api/api';
 import Products from '../components/Products';
@@ -13,7 +14,17 @@ import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import EuroIcon from '@mui/icons-material/Euro';
+import Container from '@mui/material/Container';
+import { relative } from 'path';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#6D9886'
+      }
+    }
+  });
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
     cartItems:Product[]
@@ -73,39 +84,70 @@ const ListProducts = (func:ProductsProps) => {
     useEffect(() => {cargarProductos();}, []);
 
     return(
-        <div style={{margin: '75px', color: '#1976d2'}}>
-            <p>Categorías: </p>
-            <div className='Filtros' style ={ {height: '15vh'} }>
-                <Stack direction="row" divider = {<Divider orientation='horizontal' flexItem/>} spacing = {0.5}>
-                    <Button onClick={() => filtrar("almacenamiento")} variant="contained">Almacenamiento</Button>
-                    <Button onClick={() => filtrar("monitor")} variant="contained">Monitores</Button>
-                    <Button onClick={() => filtrar("raton")} variant="contained">Ratones</Button>
-                    <Button onClick={() => filtrar("sonido")} variant="contained">Sonido</Button>
-                    <Button onClick={() => filtrar("teclado")} variant="contained">Teclados</Button>
-                    <Button onClick={() => cargarProductos()} variant="contained">Todos los productos</Button>
-                    <Box sx = {{ width: 250 }}>
-                        <Typography id = "input-slider" gutterBottom>Precio</Typography>
-                        <Grid container spacing={2} alignItems = "center">
-                            <Grid item><EuroIcon /></Grid>
-                            <Grid item xs>
-                                <Slider aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <FormControl >
-                        <InputLabel variant='standard' htmlFor = 'uncontrolled'>Precio: </InputLabel>
-                            <NativeSelect>
-                                <option onClick={() => cargarProductos()}>Por defecto</option>
-                                <option onClick={() => filtroPrecio('mayor')}>Menor a mayor</option>
-                                <option onClick={() => filtroPrecio('menor')}>Mayor a menor</option>
-                            </NativeSelect>
-                    </FormControl>
-                    
-                </Stack>  
-            </div>
-            <Products homePage = {false} product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
-        </div>
+    <Container style= {{
+            position:'relative',
+            top:10,
+            height:1800,
+            width:700,
+            backgroundColor:'6D9886'
+        }}>
+
+            <Container style = {{
+                position:'relative',
+                top: 150,
+                right:600,
+                backgroundColor:'6D9886'
+            }}>
+                <Stack direction="column" spacing={2} style={{
+                width:150,
+                height:50
+                }}>
+                            <FormControl >
+            <InputLabel variant='standard' htmlFor = 'uncontrolled'>Precio: </InputLabel>
+                <NativeSelect>
+            <option onClick={() => cargarProductos()}>Por defecto</option>
+            <option onClick={() => filtroPrecio('mayor')}>Menor a mayor</option>
+            <option onClick={() => filtroPrecio('menor')}>Mayor a menor</option>
+            </NativeSelect>
+                </FormControl>
+                <TextCategorias/>
+            <Filtros primary backgroundColor="#6D9886" label="Almacenamiento" onClick={() => filtrar("almacenamiento")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Monitores" onClick={() => filtrar("monitor")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Ratones" onClick={() => filtrar("raton")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Sonido" onClick={() => filtrar("sonido")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Teclados" onClick={() => filtrar("teclado")}/>
+            <Filtros primary backgroundColor="#6D9886" label="Todos los productos" onClick={() => filtrar("")}/>
+            <Box sx = {{ width: 250 }}>
+                <TextSlider></TextSlider>
+            <Grid container spacing={2} alignItems = "center">
+            <Grid item>
+                <ThemeProvider theme = {theme}>
+                <EuroIcon color="secondary" />
+                </ThemeProvider>  
+                </Grid>
+                
+            <Grid item xs>
+                <ThemeProvider theme = {theme}>
+                    <Slider color = "secondary"aria-label='Precio'  value = {value} onChange={handleChange} valueLabelDisplay = "on" max = {max} />
+                    </ThemeProvider>            
+        </Grid>
+        </Grid>
+        </Box>
+
+            </Stack> 
+            </Container>
+            <Container style = {{
+                position:'relative',
+                top:150,
+                right:250,
+                width:1500
+            }}>
+    <Products homePage = {false} product = {prod} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
+            </Container>
+        </Container>    
     );
 }
 
 export default ListProducts;
+
+       

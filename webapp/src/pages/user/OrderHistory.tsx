@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import { TableContainer, TableHead} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -12,6 +12,7 @@ import OrderUser from '../user/OrderUser';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { User } from '../../shared/shareddtypes';
+import { useState } from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -22,7 +23,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       fontSize: 14,
     },
 }));
-
 
 function getUserId(): string {
     var id;

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import LogIn from './pages/LogIn';
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/NavBar';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import ListProducts from './pages/ListProducts';
@@ -14,14 +14,13 @@ import ManageOrders from './pages/admin/ManageOrders';
 import Profile from './pages/user/Profile';
 import OrderHistory from './pages/user/OrderHistory';
 import PrivateRoute from './components/routes/PrivateRoute';
-import UserAdmin from './pages/admin/UsersAdmin';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import Footer from './components/Footer/Footer';
 import ProductDetails from './pages/ProductDetails';
 import HelpPage from './pages/utils/HelpPage';
 import NoPermissions from './pages/utils/NoPermissions';
-
+import Carrito from './pages/Carrito';
 import { HelpButton } from './components/utils/HelpButton';
 
 
@@ -32,10 +31,9 @@ const App: FC = () => {
     try{
     var user:any = jwt_decode(localStorage.getItem('token') || '{}');
     if(user){
-      const exist = cartItems.find(x=> x.codigo == prod.codigo);
+      const exist = cartItems.find(x=> x.codigo === prod.codigo);
       if(exist){
-        setCartItems(cartItems.map(x=> x.codigo == prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
-
+        setCartItems(cartItems.map(x=> x.codigo === prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
       } else {
         setCartItems([...cartItems,{...prod,cantidad:1}])
       }
@@ -60,8 +58,10 @@ const App: FC = () => {
   }
 
   return (
-
       <Router>
+        <div style={{
+          backgroundColor:'#F6F6F6'
+        }}>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
         <Routes>
@@ -72,7 +72,8 @@ const App: FC = () => {
           <Route path = 'user/orderHistory' element = {<OrderHistory/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
-          <Route path = 'help' element = {<HelpPage/>} />
+          <Route path= 'help' element = {<HelpPage/>} />
+          <Route path = 'carrito' element = {<Carrito />} />
           <Route path = 'summary' element = {<ProductsSummary cartItems = {cartItems}/>}/>
           <Route path = 'products/details/:id' element = {<ProductDetails />} />
           <Route path = 'nopermissions' element = {< NoPermissions/>} />
@@ -91,15 +92,15 @@ const App: FC = () => {
               <ManageOrders />
             </PrivateRoute>} 
           />
-          <Route path = 'admin/manageUsers' element = {
-            <PrivateRoute redirectTo="/nopermissions">
-              <UserAdmin />
-            </PrivateRoute>} 
-          />
         </Routes>
-        <Footer />
+        <div style = {{
+          position:'relative'
+        }}>
+          <Footer/>
+        </div>
+        </div>
+       
       </Router>
-      
   );
 }
 export default App;
