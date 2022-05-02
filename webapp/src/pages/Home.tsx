@@ -37,7 +37,7 @@ const Home = (func: ProductsProps) => {
         return data != null
     }
 
-    useEffect(() => {cargarProductos();}, [])
+    useEffect(() => {cargarProductos();})
 
     const cargarProductos = () => {
         prods.map((p) => {
