@@ -68,8 +68,8 @@ const Pago: FC = () => {
     async function allFunc(titular: string, tarjeta: string,fecha:String,cvv:string){
         console.log(Number(cvv))
         console.log(new Date().getFullYear());
-        
-
+        console.log("fecha")
+        console.log( isNaN(Number(fecha[4])));
         if(fecha[2] !== '-' || fecha.length < 7 || fecha.length > 7 || isNaN(Number(fecha[0])) || isNaN(Number(fecha[1])) || isNaN(Number(fecha[3]))
             || isNaN(Number(fecha[4])) || isNaN(Number(fecha[5])) || isNaN(Number(fecha[6]))){
                 Swal.fire({

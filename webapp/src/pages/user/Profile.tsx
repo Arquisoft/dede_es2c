@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState} from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -22,15 +22,12 @@ const Profile = () => {
     let [id, setId] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [pulse, setPulse] = useState(false)
-    id = getUserId()
+    setId(getUserId())
     const getUser = async (id:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
         const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
             res => {
                 setUser(res.data);
-                console.log(user.email)
                 return res.data
             }
         )
@@ -39,17 +36,17 @@ const Profile = () => {
     
     getUser(id)
     const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
-        if(name == ''){
+        if(name === ''){
             name = user.name
         }
-        if(surname == ''){
+        if(surname === ''){
             surname = user.surname
         }
         axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname})
         .then(res => {
             console.log(res);
             console.log(res.data);
-            if(res.status == 404){
+            if(res.status === 404){
                 Swal.fire({
                     title: "Perfil modificado",
                     text: "El perfil ha sido modificado con exito",
@@ -81,7 +78,6 @@ const Profile = () => {
         
     }
     async function allFunc(id:String,name:String,surname:String,email: String){
-        setPulse(true);
         updateUser(id, name, surname, email);
     }
     return ( 
@@ -138,7 +134,7 @@ const Profile = () => {
                                 style={{position:'relative', top:-20}}
                             />
                             
-                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit"> Aplicar cambios</Button>
+                            <Button onClick={() => allFunc(user._id,name,surname,user.email)} variant="contained" type="submit"> Aplicar cambios</Button>
                             <Link onClick={() => enviarContraseña()} style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>

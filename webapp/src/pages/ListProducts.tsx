@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import {Filtros} from '../stories/Button.stories';
 import {TextCategorias,TextSlider} from '../stories/Text.stories';
 import { Product } from '../shared/shareddtypes';
@@ -11,11 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import EuroIcon from '@mui/icons-material/Euro';
 import Container from '@mui/material/Container';
-import { relative } from 'path';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({

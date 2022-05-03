@@ -37,13 +37,12 @@ const Home = (func: ProductsProps) => {
         return data != null
     }
 
-    useEffect(() => {cargarProductos();}, [])
+    useEffect(() => {cargarProductos();})
 
     const cargarProductos = () => {
         getProducts();
         prods.map((p) => {
             if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0){
-                console.log(p.cantidad);
                 return(
                     <Grid item xs={3} md={3}>
                             <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>

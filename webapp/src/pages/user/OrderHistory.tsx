@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import { TableContainer, TableHead} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -38,14 +38,13 @@ const OrderHistory = () => {
     let [id, setId] = useState('')
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
 
-    id = getUserId()
+    setId(getUserId())
     
     const getUser = async (id:String) => {
         const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
         const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
             res => {
                 setUser(res.data);
-                console.log(user.email)
                 return res.data
             }
         )
@@ -53,7 +52,7 @@ const OrderHistory = () => {
     }
     
     getUser(id)
-    email = user.email
+    setEmail(user.email)
 
     async function cargarPedidosEmail() {
         setOrdersEmail(await getOrdersByEmail(email))

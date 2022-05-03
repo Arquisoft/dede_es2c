@@ -9,7 +9,6 @@ import {  getProducts } from '../../api/api';
 import { Product } from '../../shared/shareddtypes';
 import ProdAdmin from '../admin/ProdAdmin';
 import { styled } from '@mui/material/styles';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
