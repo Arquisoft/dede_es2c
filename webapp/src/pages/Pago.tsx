@@ -66,10 +66,38 @@ const Pago: FC = () => {
     }
 
     async function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
+        console.log(Number(cvv))
+        console.log(new Date().getFullYear());
+        console.log("fecha")
+        console.log( isNaN(Number(fecha[4])));
+        if(fecha[2] !== '-' || fecha.length < 7 || fecha.length > 7 || isNaN(Number(fecha[0])) || isNaN(Number(fecha[1])) || isNaN(Number(fecha[3]))
+            || isNaN(Number(fecha[4])) || isNaN(Number(fecha[5])) || isNaN(Number(fecha[6]))){
+                Swal.fire({
+                    title: "Formato fecha incorrecto",
+                    text: "el formato de la fecha debe ser mm-yyyy, siendo mm mes e yyyy el año",
+                    icon: "error",
+                });
+        } else {
+            var mes = fecha[0] + fecha[1]; 
+            var año = fecha[3] + fecha[4] + fecha[5] + fecha[6];
+            console.log(año)
+            console.log(mes)
+
+            if(isNaN(Number(cvv)) || isNaN(Number(tarjeta)) || titular === null || titular === '' || (Number.parseInt(mes) < new Date().getMonth() && 
+            Number.parseInt(año) === new Date().getFullYear())  || Number.parseInt(año) < new Date().getFullYear() || Number.parseInt(mes) > 12 || Number.parseInt(mes) <= 0
+            || tarjeta.length < 16 || tarjeta.length > 16 || cvv.length > 3 || cvv.length < 3){
+             Swal.fire({
+                  title: "Creedenciales incorrectos",
+                 text: "Los campos introducidos son incorrectos",
+                    icon: "error",
+             });
+        } else {
+
         setPulse(true);
         var precio = localStorage.getItem("precioCarrito");
         if(precio !== null){
             const direccion = await getDireccionPod(webId);
+            if(direccion['street_address'] !== undefined){
             await getPrecioEnvio(direccion);
             var parseado = JSON.parse(precio);
             console.log("Envio: " + envio)
@@ -78,7 +106,7 @@ const Pago: FC = () => {
                 title: "Precio Final",
                 text: "El precio de los articulos es de " + parseado + " tras la suma" + 
                         " con el precio de envío de " + envio + ". El precio Final que se " + 
-                        " deberá abonar es de: " + precioFinal.toFixed(2), 
+                        " deberá abonar es de: " + (precioFinal*1.21).toFixed(2), 
                 icon: "warning",
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -100,7 +128,7 @@ const Pago: FC = () => {
                             nombre: JSON.parse(carrt2)[i]['nombre'],
                             codigo: JSON.parse(carrt2)[i]['codigo'],
                             descripcion: JSON.parse(carrt2)[i]['descripcion'],
-                            precio: JSON.parse(carrt2)[i]['precio'],
+                            precio: JSON.parse(carrt2)[i]['precio'] + envio,
                             cantidad: JSON.parse(carrt2)[i]['cantidad'],
                             url: JSON.parse(carrt2)[i]['url'],
                             stock: JSON.parse(carrt2)[i]['cantidad'],
@@ -120,8 +148,16 @@ const Pago: FC = () => {
                         );
                 }
             })
-
+        } else{
+            Swal.fire({
+                title: "Creedenciales incorrectos",
+                text: "No se ha encontrado el POD con ese nombre",
+                icon: "error",
+            });
         }
+        }
+    }
+}
     }
 
 
@@ -201,7 +237,7 @@ const Pago: FC = () => {
                                 id = "caducidad"
                                 required
                                 name = "Fecha de caducidad"
-                                label = "Fecha de caducidad (yyyy-mm-dd)"
+                                label = "Fecha de caducidad (mm-yyyy)"
                                 variant="outlined"
                                 size="small"
                                 value = {fechaCad}

@@ -229,7 +229,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                     <TableCell align='center'>{p.categoria}</TableCell>
                     <TableCell align='center'>{p.descripcion}</TableCell>
                     <TableCell align='center'>{p.precio}</TableCell>
-                    <TableCell align='center'>18</TableCell>
+                    <TableCell align='center'>21</TableCell>
                     <TableCell align='center'>{p.stock}</TableCell>
                     <TableCell align='center'><Button onClick={ () => saveP(p)}>Administrar</Button></TableCell>
                     <TableCell align='center'>

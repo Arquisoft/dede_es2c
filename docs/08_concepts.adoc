@@ -62,6 +62,10 @@ image:08_IniciarSesion.png["Página login"]
 
 image:08_Registro.png["Registro aplicación"]
 
+* Comprobar los articulos que se desean comprar por parte del cliente
+
+image:08_Carrito.png["Registro aplicación"]
+
 * Realizar el pago del carrito del usuario
 
 image:08_VentanaPago.png["Ventana Pego"]
