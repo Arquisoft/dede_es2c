@@ -51,6 +51,10 @@ Encontrarás más información sobre el repositorio en los otros archivos README
 - Webapp: https://github.com/Arquisoft/dede_es2c/tree/master/webapp
 - Restapi: https://github.com/Arquisoft/dede_es2c/tree/master/restapi
 
+Se han realizado dos videos explicando el funcionamiento de la aplicación, los links a estos son:
+ - [Visión Administrador](https://youtu.be/ZRobGjPoAA8)
+ - [Visión Cliente](https://www.youtube.com/watch?v=-E7908j38X0) 
+
 ## Integrantes del grupo:
    - Ruben Rubio Del Castillo - UO276255
    - Darío Martínez Bajo - UO278290

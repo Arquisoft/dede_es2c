@@ -84,7 +84,7 @@ defineFeature(feature, test => {
     });
 
     then('An error should appear', async () => {
-        await expect(page3).toMatch('El titular no puede ser vacío')
+        await expect(page3).toMatch('Formato fecha incorrecto')
     });
   })
 
