@@ -75,7 +75,7 @@ const Profile = () => {
             <Container component= "main" maxWidth="sm"
                 sx={{
                 position: "relative",
-                top: 150
+                top: 10
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
                     <Typography className="miPerfil" style={{position:'relative', right:-240, top:20}}> Mi Perfil </Typography>

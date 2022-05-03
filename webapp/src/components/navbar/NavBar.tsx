@@ -195,7 +195,7 @@ const NavBar=(cart:ProductsProps) =>{
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
                     </Link>
                     <Link id= "historialVentas" href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Historial de Ventas</MenuItem>
+                        <MenuItem onClick={handleClose}>Historial de Pedidos</MenuItem>
                     </Link>
                 </Menu>
 

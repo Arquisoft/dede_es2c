@@ -29,6 +29,14 @@ image:06_Compra_Productos.png["Compra productos"]
 El usuario debe introducir sus credenciales en la aplicación y estas serán validadas con la vase de datos, si son correctas accederá a la aplicacion con su cuentas y sino se le mostrará un mensaje  de error
 image:06_Login.png["Login"]
 
-=== Mostrar historial de ventas
+=== Mostrar historial de ventas administador
 El administrador pedirá el historial de ventas a la base de datos.
-image:06_sales_history.png["Mostrar historial de ventas"]
+image:06_sales_history.png["Mostrar historial de ventas administrador"]
+
+=== Mostrar historial de pedidos del usuario
+El usuario pedirá el historial de sus compras a la base de datos.
+image:06_pedidosUsuario.PNG["Mostrar historial de pedidos del usuario"]
+
+=== Modificar perfil
+El usuario podrá modificar su perfil ya sea cambiando su nombre o apellidos directamente o solicitando un cambio de contraseña. El correo no podrá ser modificado.
+image:06_modifPerfil.PNG["Modificar perfil"]
