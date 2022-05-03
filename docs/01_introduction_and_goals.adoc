@@ -8,7 +8,7 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además de acceder a la tienda, crear, modificar y eliminar los productos de la base de datos.
 Los usuarios eligirán los productos que formarán parte de su carro de compra. Cada usuario tiene su propio carro individual.
 
-== Integrantes
+=== Integrantes
 
 * Ana Fernández Ostio
 * Darío Martínez Bajo
@@ -16,7 +16,7 @@ Los usuarios eligirán los productos que formarán parte de su carro de compra. 
 * Adrián Santamarina Romero
 * Rubén Rubio el Castillo
 
-== Profesores a cargo de la asignatura
+=== Profesores a cargo de la asignatura
 
 * Hugo Lebredo Buján
 * Jose Emilio Labra Gayo
