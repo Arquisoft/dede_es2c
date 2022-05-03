@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 
 import Profile from '../../pages/user/Profile';
 
-test('Carga correcta de la ventana SingUp',async () => {
+test('Carga correcta de la ventana SignUp',async () => {
      render(
-         <Profile email={"khdkadhka"} /> 
+         <Profile /> 
     );
 
     expect(screen.getByText(/No hay sesión inciada, por favor inicie sesión/i)).toBeInTheDocument();

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Container, Grid, Box, Link, Typography} from '@mui/material/';
 
-const Footer = () => {    
+const Footer = () => {
+
     const correo = "dede.es2c@gmail.com";
 
     return (
@@ -34,7 +35,7 @@ const Footer = () => {
                             <Box borderBottom={1}>Información adicional</Box>
                             <Box><Typography>Grupo Es_2C</Typography></Box>
                             <Box><Typography>Arquitectura del Software</Typography></Box>
-                            <Box><Typography>Ingeneria Informarica del Software</Typography></Box>
+                            <Box><Typography>Ingenieria Informática del Software</Typography></Box>
                             <Box><Typography>Universidad de Oviedo, Asturias</Typography></Box>
                         </Grid>
                     </Grid>

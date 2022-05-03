@@ -4,10 +4,11 @@
 .Riesgos Técnicos
 
 * Falta de experiencia con las tecnologías, ya sea React, TypeScript o SOLID. Nunca hemos trabajado con estas tecnologías, por lo tanto, empezaremos desde cero y deberíamos realizar búsquedas de información constantes para conseguir manejarlas correctamente.
+Para solucionarlo hemos buscado información del campo que nos ha sido asignado cada uno y hemos hecho pruebas de funcionalidad para paliar los máximos errores posibles.
 * Posibles problemas al trabajar con GitHub. Pueden surgir problemas a la hora de subir nuestros cambios a GitHub e incluso modificar cambios ya realizados por otros compañeros, para reducir esto lo máximo posible, cada compañero trabajará en su rama y cuando se quiera realizar cambios al proyecto principal se hará un pull request para que otro miembro del equipo lo verifique.
 * Primer proyecto web con un tamaño tan grande. Si bien hemos tenido algo de experiencia con proyectos web, nunca con estas dimensiones ni tecnologías. Para paliar este riesgo, deberíamos buscar bastante información sobre cómo llevarlo a cabo e intentar familiarizarnos con esta forma de trabajo lo antes posible.
 * El tiempo. Tenemos poco tiempo para llevar a cabo los prototipos, entonces habrá que tenerlo en cuenta a la hora de desarrollar y llevar el proyecto lo más al día posible.
-* Posibles vulnerabilidades en el proyecto web. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar.
+* Posibles vulnerabilidades en el proyecto web. Nunca nos han hablado de este tema en ninguna otra asignatura, por tanto, habrá que tenerlo en cuenta a la hora de desarrollar. Para mitigar este riesgo hemos tenido en cuenta algunos aspectos de seguridad, como el cifrado de contraseñas o un fichero con los datos más sensibles que utilizamos en el proyecto.
 
 .Deudas Técnicas
 
@@ -16,6 +17,8 @@
 * Almacenamiento de token de sesión en el localStorage, se podría guardar en un nuevo campo de la base de datos, ya que el localStorage es modificable desde el navegador
 * Faltaría refactorizar parte del código del frontend para hacerlo más claro y modificable.
 * Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.
+* Mal uso de los tipos de TypeScript en algunas ocasiones por falta de experiencia, por ejemplo, usar el tipo "any" en casos innecesarios
+* Mostrar de una forma poco clara que se está accediendo a un servicio de terceros en el caso de los PODs de SOLID.
 * El carrito del cliente se pierde, no se mantiene por las diferentes ventanas.
 * Falta de mas pruebas sobre el código de front. 
 * Si se eliminael primer producto del carrito, el carrito se elimina por completo.

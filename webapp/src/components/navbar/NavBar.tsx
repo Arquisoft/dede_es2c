@@ -39,8 +39,11 @@ const NavBar=(cart:ProductsProps) =>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElb(event.currentTarget);
+    };
+    const handleClosePerfil = () => {
+        setAnchorElb(null);
     };
     var totalPrice = 0;
     var numOfProducts = 0
@@ -72,7 +75,7 @@ const NavBar=(cart:ProductsProps) =>{
     const cerrarSesion = () => {
         Swal.fire({
             title: '¿Quieres cerrar sesión?',
-            text: "Se perderan los productos que teine en el carrito",
+            text: "Se perderan los productos que tiene en el carrito",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -95,7 +98,7 @@ const NavBar=(cart:ProductsProps) =>{
         var user:any = jwt_decode(localStorage.getItem('token') || '{}');
         if(user.role === "ROLE_ADMIN"){
             return(             
-            <NavBarAdmin cartItems={cart.cartItems} />
+                <NavBarAdmin cartItems={cart.cartItems} />
             );
         } else if(user.role === "ROLE_USER") {
             return(
@@ -193,6 +196,7 @@ const NavBar=(cart:ProductsProps) =>{
                     horizontal: 'right',
                     }}
                     open={openB}
+                    onClose={handleClosePerfil}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
