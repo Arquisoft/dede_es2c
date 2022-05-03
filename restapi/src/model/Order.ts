@@ -22,7 +22,6 @@ const OrderShema = new mongoose.Schema({
     },
     precioTotal: {
         type: Number,
-        required: true,
         min: 0
     },
     products: {
