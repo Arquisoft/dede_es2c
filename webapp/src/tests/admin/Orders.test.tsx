@@ -23,4 +23,3 @@ test('Admin -> Administrar Pedidos', async () => {
     render(<ManageOrders />)
     expect(screen.getByText(/Correo del comprador/i)).toBeInTheDocument();
 });  
-  

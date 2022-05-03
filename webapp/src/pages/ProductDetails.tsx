@@ -22,7 +22,7 @@ const ProductDetails = () => {
 
     useEffect(() => {getProduct(pName)});
     return (
-        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }} >
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' ,backgroundColor:'#F6F6F6'}} >
             <Grid> 
                 <Paper elevation={8} style={{ margin: "3vh 5vw", padding: "1em" }}>
                     <Grid container direction="row" alignItems="center" justifyContent="center" spacing={2} sx={{ p: 2 }}> 
@@ -32,7 +32,7 @@ const ProductDetails = () => {
 
                         <Grid container item xs={12} md={6} direction={"column"}>
                             <Typography component="h1" variant='h5'>{p0?.nombre}</Typography>
-                            <Typography component="h1" >Categoías: {p0?.categoria}</Typography>
+                            <Typography component="h1" >Categorías: {p0?.categoria}</Typography>
                             <Typography component="h1" >Descripcion: {p0?.descripcion}</Typography>
                             <Typography component="h1" >Precio: {p0?.precio}€</Typography>
                             {/* <Button onClick={() => añadirCarrito()} variant="outlined" startIcon = {<AddShoppingCartIcon />}>

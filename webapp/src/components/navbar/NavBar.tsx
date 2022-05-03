@@ -15,12 +15,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavBarAdmin from '../navbar/NavBarAdmin'
 
 type ProductsProps = {
   cartItems:Product[]
 }
-
+const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#6D9886'
+      }
+    }
+  });
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [anchorElb, setAnchorElb] = React.useState<null | HTMLElement>(null);
@@ -32,8 +39,11 @@ const NavBar=(cart:ProductsProps) =>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElb(event.currentTarget);
+    };
+    const handleClosePerfil = () => {
+        setAnchorElb(null);
     };
     var totalPrice = 0;
     var numOfProducts = 0
@@ -65,7 +75,7 @@ const NavBar=(cart:ProductsProps) =>{
     const cerrarSesion = () => {
         Swal.fire({
             title: '¿Quieres cerrar sesión?',
-            text: "Se perderan los productos que teine en el carrito",
+            text: "Se perderan los productos que tiene en el carrito",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -86,14 +96,14 @@ const NavBar=(cart:ProductsProps) =>{
 
     if(localStorage.getItem('token') != null){
         var user:any = jwt_decode(localStorage.getItem('token') || '{}');
-
         if(user.role === "ROLE_ADMIN"){
-            return(
+            return(             
                 <NavBarAdmin cartItems={cart.cartItems} />
             );
         } else if(user.role === "ROLE_USER") {
             return(
-                <AppBar position="fixed" >
+                <ThemeProvider theme={theme}>
+                <AppBar position="fixed" color = "secondary" >
             <Toolbar>
             <Typography variant="h6" component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
                DeDe
@@ -186,6 +196,7 @@ const NavBar=(cart:ProductsProps) =>{
                     horizontal: 'right',
                     }}
                     open={openB}
+                    onClose={handleClosePerfil}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
@@ -198,12 +209,14 @@ const NavBar=(cart:ProductsProps) =>{
                 <Button onClick={() => cerrarSesion()} color="inherit">Cerrar Sesión</Button> 
             </Toolbar>     
         </AppBar>
+        </ThemeProvider>
             );
         }
     }
 
     return(
-        <AppBar position="fixed" >
+        <ThemeProvider theme={theme}>
+        <AppBar position="fixed" color = "secondary" >
             <Toolbar>
             <Typography variant="h6" component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
                DeDe
@@ -279,6 +292,7 @@ const NavBar=(cart:ProductsProps) =>{
                 <Button color="inherit" href = "/login">Iniciar Sesión / Registro</Button> 
             </Toolbar>     
         </AppBar>
+        </ThemeProvider>
             );
 
 }

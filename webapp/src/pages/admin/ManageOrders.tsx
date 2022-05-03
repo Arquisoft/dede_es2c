@@ -9,6 +9,7 @@ import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
 import OrderAdmin from '../admin/OrderAdmin';
 import { getOrders } from '../../api/api';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -20,6 +21,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
+const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#6D9886'
+      }
+    }
+  });
 const ManageOrders: FC = () => {
 
     const [orders, setOrders]  = React.useState<Order[]>([]);
@@ -31,11 +39,11 @@ const ManageOrders: FC = () => {
     useEffect(() => {cargarPedidos();}, []);
     console.log(orders);
     return (
-        
-        <div>
-            <div style={{ margin: '170px' }}>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="customized table">
+        <div style={{backgroundColor:'#F6F6F6'}}>
+            <div style={{ margin: '170px',backgroundColor:'#F6F6F6'}}>
+            <ThemeProvider theme = {theme}>
+                <TableContainer component={Paper} color = "secondary">              
+                    <Table sx={{ minWidth: 650 }} aria-label="customized table" >                  
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Código</StyledTableCell>
@@ -50,10 +58,11 @@ const ManageOrders: FC = () => {
                             <OrderAdmin orders = {orders} />
                         </TableBody>
                     </Table>
+                    
                 </TableContainer>
+                </ThemeProvider>
             </div>
         </div>
-
     );
 
 }

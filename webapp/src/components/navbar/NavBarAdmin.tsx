@@ -14,11 +14,17 @@ import Link from '@mui/material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
 import Swal from 'sweetalert2';
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 type ProductsProps = {
     cartItems:Product[]
 }
-  
+const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#6D9886'
+      }
+    }
+  });
 const NavBarAdmin = (cart:ProductsProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [anchorElb, setAnchorElb] = React.useState<null | HTMLElement>(null);
@@ -33,6 +39,9 @@ const NavBarAdmin = (cart:ProductsProps) => {
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElb(event.currentTarget);
     };
+    const handleClosePerfil = () => {
+        setAnchorElb(null);
+      };
     var totalPrice = 0;
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
@@ -73,7 +82,7 @@ const NavBarAdmin = (cart:ProductsProps) => {
     const cerrarSesion = () => {
         Swal.fire({
             title: '¿Quieres cerrar sesión?',
-            text: "Se perderan los productos que teine en el carrito",
+            text: "Se perderan los productos que tiene en el carrito",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -104,7 +113,8 @@ const NavBarAdmin = (cart:ProductsProps) => {
     }
 
     return (
-        <AppBar position="fixed" >
+        <ThemeProvider theme={theme}>
+        <AppBar position="fixed" color="secondary">
                     <Toolbar>
                         <Typography variant="h6" component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>DeDe</Typography>
                         <Button aria-label ='Inicio' color="inherit" href = "/">Inicio</Button>
@@ -196,6 +206,7 @@ const NavBarAdmin = (cart:ProductsProps) => {
                     horizontal: 'right',
                     }}
                     open={openB}
+                    onClose={handleClosePerfil}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
@@ -208,6 +219,7 @@ const NavBarAdmin = (cart:ProductsProps) => {
                 <Button onClick={() => cerrarSesion()} color="inherit">Cerrar Sesión</Button> 
             </Toolbar>     
         </AppBar>
+        </ThemeProvider>
     );
 
 }

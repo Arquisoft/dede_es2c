@@ -58,16 +58,18 @@ const App: FC = () => {
   }
 
   return (
-
       <Router>
+        <div style={{
+          backgroundColor:'#F6F6F6'
+        }}>
         <NavBar cartItems = {cartItems}></NavBar>
         <HelpButton />
         <Routes>
           <Route index element = {<Home onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
-          <Route path = 'user/profile' element = {<Profile email={"user2@uniovi.com"}/>} />
-          <Route path = 'user/orderHistory' element = {<OrderHistory email={"admin@uniovi.es"}/>} />
+          <Route path = 'user/profile' element = {<Profile />} />
+          <Route path = 'user/orderHistory' element = {<OrderHistory/>} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path= 'help' element = {<HelpPage/>} />
@@ -91,9 +93,14 @@ const App: FC = () => {
             </PrivateRoute>} 
           />
         </Routes>
-        <Footer />
+        <div style = {{
+          position:'relative'
+        }}>
+          <Footer/>
+        </div>
+        </div>
+       
       </Router>
-      
   );
 }
 export default App;
