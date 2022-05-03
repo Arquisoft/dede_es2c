@@ -102,7 +102,7 @@ export const findByClientId = async (req = request, res = response) => {
 
 async function checkClient(client_id: ObjectId):Promise<boolean>{
     if(client_id){
-        const userFound =  await User.findOne({_id: client_id});
+        const userFound =  await User.findOne({_id: client_id.toString()});
         if(userFound){
             return true;
         }
