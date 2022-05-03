@@ -1,14 +1,12 @@
 import * as React from 'react';
 import {Container, Grid, Box, Link, Typography} from '@mui/material/';
 
-const Footer = () => {
-
+const Footer = () => {    
     const correo = "dede.es2c@gmail.com";
 
     return (
-        <footer style = {{
-            position:'relative'
-        }}>
+
+        <footer>
             <Box px = {{xs:3, sm:10}} py = {{xs: 5, sm:10}} bgcolor ="text.secondary" color = "white">
                 <Container maxWidth = "lg">
                     <Grid container spacing={5}>
@@ -35,7 +33,7 @@ const Footer = () => {
                             <Box borderBottom={1}>Información adicional</Box>
                             <Box><Typography>Grupo Es_2C</Typography></Box>
                             <Box><Typography>Arquitectura del Software</Typography></Box>
-                            <Box><Typography>Ingenieria Informática del Software</Typography></Box>
+                            <Box><Typography>Ingeneria Informarica del Software</Typography></Box>
                             <Box><Typography>Universidad de Oviedo, Asturias</Typography></Box>
                         </Grid>
                     </Grid>

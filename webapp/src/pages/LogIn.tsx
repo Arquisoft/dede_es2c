@@ -73,7 +73,7 @@ const LogIn: FC = () => {
                             />
         
                             <Button onClick={() => allFunc(email, pass)} variant="contained" type="submit">Iniciar Sesión</Button>
-                            <Link href = "/signup">¿No tienes cuenta? ¡Registrate ahora!</Link>
+                            <Link href = "/signup">¿No tienes cuenta? Registrate ahora!</Link>
                         
                     </Stack>
                     

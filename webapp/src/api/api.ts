@@ -38,12 +38,6 @@ export async function getOrders(): Promise<Order[]>{
   return response.json();
 }
 
-export async function getOrdersByEmail(email: string): Promise<Order[]>{
-  const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
-  let response = await fetch(apiEndPoint + "/order/getAllByEmail/" + email);
-  return response.json();
-}
-
 export async function getDireccionPod(webId: string) {
   const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
   let response = await fetch(apiEndPoint + "/user/pod/" + webId);

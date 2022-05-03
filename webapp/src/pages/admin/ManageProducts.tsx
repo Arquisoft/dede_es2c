@@ -9,7 +9,6 @@ import {  getProducts } from '../../api/api';
 import { Product } from '../../shared/shareddtypes';
 import ProdAdmin from '../admin/ProdAdmin';
 import { styled } from '@mui/material/styles';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -36,9 +35,9 @@ const ManageProducts: FC = ()  => {
         <div>
             {/* <StackAdmin /> */}
             <div style={{ margin: '170px' }}>
-                <TableContainer component={Paper}>                    
-                    <Table  sx={{ minWidth: 650}} aria-label="customized table">                                      
-                        <TableHead >
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="customized table">
+                        <TableHead>
                             <TableRow>
                                 <StyledTableCell>Código</StyledTableCell>
                                 <StyledTableCell align='center'>Nombre</StyledTableCell>
@@ -51,7 +50,6 @@ const ManageProducts: FC = ()  => {
                                 <StyledTableCell align='center'>Eliminar</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        
 
                         {/*  Cuerpo de la tabla */}
 

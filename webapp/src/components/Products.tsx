@@ -16,14 +16,15 @@ type ProductsProps = {
 const Productos = ( product: ProductsProps) => {
 
     return (
-        <Grid container spacing={3} key = {uuidv4()} style={{position:'relative'}}>
+        <>
+        <Grid container spacing={3} key = {uuidv4()}>
          {product.product.map(
             (p) => {
                 
                 if(product.homePage){
                     if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0 ){
                         return(
-                            <Grid item xs={3} md={3} sx={{color:'#F6F6F6'}}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <CardMedia component="img" height="300" width = "300" image={p.url} alt={p.nombre} />
@@ -43,7 +44,7 @@ const Productos = ( product: ProductsProps) => {
 
                     if(Number.parseInt(p.stock) > 0) {
                         return (
-                            <Grid item xs={3} md={3} style={{position:'relative'}}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
                                 <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <Link to ={"/products/details/" + p.codigo} className = "nav-link">
@@ -64,8 +65,8 @@ const Productos = ( product: ProductsProps) => {
                         );
                     } else {
                         return (
-                            <Grid item xs={3} md={3} key= {p.codigo} style={{position:'relative',backgroundColor:'#F6F6F6'}}>
-                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700,backgroundColor:'#F6F6F6'}}>
+                            <Grid item xs={3} md={3} key = {p.codigo}>
+                                <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
                                     <CardHeader title = {p.nombre}/>
                                     <Link to ={"/products/details/" + p.codigo} className = "nav-link">
                                         <CardMedia component="img" height="300" width = "300" src={p.url} alt={p.nombre} />
@@ -88,6 +89,7 @@ const Productos = ( product: ProductsProps) => {
             
         )}
         </Grid>
+        </>
     );
 }
 
