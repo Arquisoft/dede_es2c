@@ -18,3 +18,4 @@
 * Mejoras en la implementación del filtrado de productos en el apartado del listado de los mismos.
 * El carrito del cliente se pierde, no se mantiene por las diferentes ventanas.
 * Falta de mas pruebas sobre el código de front. 
+* Si se eliminael primer producto del carrito, el carrito se elimina por completo.

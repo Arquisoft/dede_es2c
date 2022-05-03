@@ -26,7 +26,7 @@ A continuación se muestran los requisitos que se puedes encontrar en nuestra ap
 
 * Rol de gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
 * Se añade tambien una vista en el que el administrador pueda ver todos los pedidos que se han realizado. 
-* Un usuario puedde actuzalziar el nombre de este dentro de la aplicación
+* Un usuario puede actuzalziar el nombre de este dentro de la aplicación
 
 
 === Objetivos de calidad

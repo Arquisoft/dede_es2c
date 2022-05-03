@@ -70,6 +70,7 @@ const Pago: FC = () => {
         var precio = localStorage.getItem("precioCarrito");
         if(precio !== null){
             const direccion = await getDireccionPod(webId);
+            if(direccion['street_address'] !== undefined){
             await getPrecioEnvio(direccion);
             var parseado = JSON.parse(precio);
             console.log("Envio: " + envio)
@@ -120,7 +121,13 @@ const Pago: FC = () => {
                         );
                 }
             })
-
+        } else{
+            Swal.fire({
+                title: "Creedenciales incorrectos",
+                text: "No se ha encontrado el POD con ese nombre",
+                icon: "error",
+            });
+        }
         }
     }
 
@@ -128,7 +135,7 @@ const Pago: FC = () => {
     async function getDireccion(){
         const direccion = await getDireccionPod(webId);
 
-        if(direccion !== ""){
+        if(direccion['street_address'] !== undefined){
             console.log(direccion);
             setPais(direccion['country']);
             setLocalidad(direccion['locality']);
