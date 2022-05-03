@@ -9,11 +9,23 @@ El administrador rellenará un formulario con los detalles del producto que se m
 
 image:06_add.PNG["Añadir productos"]
 
+=== Administrar productos
+
+El administrador podra administrar todos los productos de la web. Se le mostrará una tabla con todos los productos, su información, stock y con dos opciones, editar el producto o eliminarlo.
+
+image:06_editProducts.PNG["Administrar productos"]
+
 === Eliminar productos
 
-El administrador rellenará un formulario con los detalles del producto a borrar.La aplicación pasará la información necesaria a la base de datos para identificar y borrar el producto correctamente.
+El administrador podra eliminar el producto que desee desde la misma ventana donde se administran los productos.La aplicación borrará el producto seleccionado.
 
 image:06_remove.PNG["Eliminar productos"]
+
+=== Administrar pedidos
+
+El administrador podra administrar todos los pedidos de la web. Se le mostrará una tabla con todos los pedidos y su información.
+
+image:06_adminOrder.PNG["Administrar pedidos"]
 
 === Filtro de productos
 El usuario tras realizar el login en la aplicación y ver los diferentes productos que hay, podrá utilizar los filtros situados en la parte izquierda de la página para realizar una búsqueda más precisa. Tras selccionar los filtros que el usuario vea convenientes. La aplicación pedirá a la base de datos donde se encuentren todos los productos, aquellos que el filtro muestre. Tras ello, la base de datos, retornara los productos que cumplan esos filtros a la aplicación. La aplicación mostrará los productos al usuario.
@@ -29,6 +41,18 @@ image:06_Compra_Productos.png["Compra productos"]
 El usuario debe introducir sus credenciales en la aplicación y estas serán validadas con la vase de datos, si son correctas accederá a la aplicacion con su cuentas y sino se le mostrará un mensaje  de error
 image:06_Login.png["Login"]
 
-=== Mostrar historial de ventas
+=== Cerrar sesión
+Una vez que haya acabado, el usuario podra cerrar sesión para no mantener su cuenta activa
+image:06_cierreSesion.png["Login"]
+
+=== Mostrar historial de ventas administador
 El administrador pedirá el historial de ventas a la base de datos.
-image:06_sales_history.png["Mostrar historial de ventas"]
+image:06_sales_history.png["Mostrar historial de ventas administrador"]
+
+=== Mostrar historial de pedidos del usuario
+El usuario pedirá el historial de sus compras a la base de datos.
+image:06_pedidosUsuario.PNG["Mostrar historial de pedidos del usuario"]
+
+=== Modificar perfil
+El usuario podrá modificar su perfil ya sea cambiando su nombre o apellidos directamente o solicitando un cambio de contraseña. El correo no podrá ser modificado.
+image:06_modifPerfil.PNG["Modificar perfil"]
