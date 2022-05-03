@@ -1,7 +1,7 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 
-const apiEndPoint= process.env.REACT_APP_URI|| 'http://localhost:3000'
+const apiEndPoint= 'http://localhost:3000'
 
 const feature = loadFeature('./features/AddProduct.feature');
 
