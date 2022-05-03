@@ -39,6 +39,15 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 16
+    - name: Create env
+      run: |
+        cd restapi
+        touch .env
+        echo DATABASE_USER=${{ secrets.DATABASE_USER }} >> .env
+        echo DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} >> .env
+        echo DATABASE_NAME=${{ secrets.DATABASE_NAME }} >> .env
+        echo JWT_TOKEN=${{ secrets.JWT_TOKEN }} >> .env
+        cat .env
     - run: npm --prefix webapp install
     - run: npm --prefix restapi install
     - run: npm --prefix webapp run build
@@ -92,7 +101,7 @@ jobs:
         user: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
-          wget https://raw.githubusercontent.com/Arquisoft/dede_es2c/Dario/docker-compose-deploy.yaml -O docker-compose.yml
+          wget https://raw.githubusercontent.com/Arquisoft/dede_es2c/Dario-Nueva/docker-compose-deploy.yaml -O docker-compose.yml
           docker-compose stop
           docker-compose rm -f
           docker-compose pull   
