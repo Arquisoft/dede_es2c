@@ -18,12 +18,12 @@
 | Tiempo | Fecha de entrega limite al final de semestre, 2 horas semanales con el profesor y reuniones del equipo semanales de 1 a 2 horas. 
 |===
 
-.Convecciones
+.Restricciones de documentación
 [options = "header", cols = "1,2"]
 |===
 | Restricción | Descripción
 | Arc42 | Recomendado para realizar la documentación. 
-| Diseño APP | El diseño de la aplicación debera parecerse al resto de las tiendas webs del mismo tipo.
+| PlantUML | Programa que permite diseñar y realizar diagramas, generándolos a través de un texto escrito 
 |===
 
 

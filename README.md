@@ -2,7 +2,7 @@
 
 [![Actions Status](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml/badge.svg)](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_es2c&metric=alert_status)](https://sonarcloud.io/summary/overall?id=Arquisoft_dede_es2c)
-[![codecov](https://codecov.io/gh/arquisoft/dede_es2c/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://app.codecov.io/gh/Arquisoft/dede_es2c)
+[![codecov](https://codecov.io/gh/arquisoft/dede_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://app.codecov.io/gh/Arquisoft/dede_es2c)
 
 <p float="left">
 <img src="https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg" height="100">
@@ -49,10 +49,6 @@ You can get more information about the respository in the other README files:
 - Documentation: https://github.com/Arquisoft/dede_es2c/tree/master/docs
 - Webapp: https://github.com/Arquisoft/dede_es2c/tree/master/webapp
 - Restapi: https://github.com/Arquisoft/dede_es2c/tree/master/restapi
-
-Two videos have been made explaining how the application works, the links to these are:
- - [Administrator's vision](https://youtu.be/ZRobGjPoAA8)
- - [Client's vision]()  
 
 ## Team members
    - Ruben Rubio Del Castillo - UO276255
