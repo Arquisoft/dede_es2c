@@ -82,7 +82,8 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
 
     async function allFunc(codigo: string, nombre: string, descrip: string, stock: number, precio: number, url: string) {
         // http://localhost:5000/product/update/codeExample/?nombre=namePrueba&descripcion=descripcionPrueba
-        axios.get("http://localhost:5000/product/update/" + 
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        axios.get(apiEndPoint + "/product/update/" + 
             codigo + "/?nombre=" + nombre + "&descripcion" + descrip + 
             "&precio=" + precio + "&url=" + url + '&stock=' + stock).then(
             res => {
@@ -117,7 +118,8 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
             confirmButtonText: 'Sí'
           }).then((result) => {
             if (result.isConfirmed) {
-                axios.get("http://localhost:5000/product/delete/" + pro.codigo).then(res => {
+                const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+                axios.get(apiEndPoint + "/product/delete/" + pro.codigo).then(res => {
                     if(res.status !== 404){
                         Swal.fire(
                             'Eliminado!',
@@ -227,7 +229,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                     <TableCell align='center'>{p.categoria}</TableCell>
                     <TableCell align='center'>{p.descripcion}</TableCell>
                     <TableCell align='center'>{p.precio}</TableCell>
-                    <TableCell align='center'>18</TableCell>
+                    <TableCell align='center'>21</TableCell>
                     <TableCell align='center'>{p.stock}</TableCell>
                     <TableCell align='center'><Button onClick={ () => saveP(p)}>Administrar</Button></TableCell>
                     <TableCell align='center'>

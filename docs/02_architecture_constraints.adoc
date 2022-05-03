@@ -7,7 +7,6 @@
 | Restricción | Descripción
 | Typescript | Nuevo lenguaje de programación para todos los integrantes del grupo. 
 | React | Libreria JavaScript requerido para construir interfaces de usuario para la web. Aplicación nueva que nunca usamos. 
-| Mongo | Se trata de una base de datos no relacional, la primera vez que trabajamos con una. 
 | SOLID | Principios y tecnologia que nos ayudará a organizar apps, al igual que react, tenemos que investigar sobre ello ya que es la primera vez que la usamos. 
 |===
 

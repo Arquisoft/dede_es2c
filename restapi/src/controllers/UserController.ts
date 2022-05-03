@@ -35,7 +35,7 @@ export const findUsersByEmail: RequestHandler = async (req, res) => {
   if (userFound){
     return res.json(userFound)
   } else {
-    return res.status(204).json();
+    return res.status(412).json();
   }
 };
 
@@ -43,23 +43,24 @@ export const createUser = async (req = request, res = response) => {
   var bcrypt = require('bcrypt');
   try{
     if(checkBody(req.body)){
-      const { password, ...body } = req.body
-      const user = new User(body)
-      const passwordHashed = await bcrypt.hash(password, 10);
-      user.password = passwordHashed;
-      await user.save();
-      res.status(201).json({
-          user
-      })
+        const { password, ...body } = req.body
+        const user = new User(body)
+        const passwordHashed = await bcrypt.hash(password.toString(), 10);
+        user.password = passwordHashed;
+        await user.save();
+        return res.status(201).json({
+           user
+        })
+      
   }
 } catch(err) {
-  console.log(err)
-    res.status(400).json({msg: err})
+    return res.status(400).json({msg: err})
 }
 };
 
 function checkBody(body:any):boolean{
-  const { name,surname,email,password,repPassword, } =body;
+  const { name,surname,email,password,repPassword } = body;
+
   return name != '' && surname != '' && email != '' && password != '' && password == repPassword;
 }
 
@@ -72,7 +73,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     if(userFound){
       if(await bcrypt.compare(password,userFound.password)){
         const token = generateToken(userFound.id,userFound.role)
-        res.status(201).json({
+        return res.status(201).json({
           token,
           userFound
         });
@@ -84,7 +85,6 @@ export const loginUser: RequestHandler = async (req, res) => {
     }
     
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'There was a problem logging a user'});
   }
   
@@ -122,7 +122,6 @@ export const update: RequestHandler = async (req, res) => {
     await User.updateOne({_id: id},params);
     return res.send("User updated")
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'There was a problem updating a user'});
   }
 };
@@ -143,7 +142,6 @@ export const giveAdminRole: RequestHandler = async (req, res) => {
       return res.status(404).json("El usuario a cambiar el rol no existe")
     }
   } catch (error) {
-    console.log(error)
     return res.status(404).json({message: 'Hubo un problema cambiando el rol al usuario'});
   }
 };
@@ -180,6 +178,6 @@ export const getUserPOD: RequestHandler = async (req, res) => {
         country: result[4],
       }) 
   } catch (error) {
-    return res.status(404).json({message: 'No se ha encontrado el POD con ese nombre'});
+    return res.status(412).json({message: 'No se ha encontrado el POD con ese nombre'});
   }
 };

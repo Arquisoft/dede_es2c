@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import { TableContainer, TableHead} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -7,12 +7,11 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Order } from '../../shared/shareddtypes';
 import Paper from '@mui/material/Paper';
-import {  getOrders } from '../../api/api';
+import {  getOrdersByEmail } from '../../api/api';
 import OrderUser from '../user/OrderUser';
-
-type Id = {
-    email:String
-}
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import { User } from '../../shared/shareddtypes';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -24,21 +23,40 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-async function ordersByEmail(order:Order[], orderEmail:Order[], email:String){
-    order.forEach(e => {if(e.correo == email){ orderEmail.push(e) }});
+function getUserId(): string {
+    var id;
+    if(localStorage.getItem('token') != null)
+    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+    id = user.id
+    return id
 }
 
-const OrderHistory = (id: Id) => {
-    const [orders, setOrders]  = React.useState<Order[]>([]);
-    const[ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
-    
-    async function cargarPedidos() {
-        setOrders(await getOrders());
+const OrderHistory = () => {
+    const [ordersEmail, setOrdersEmail] = React.useState<Order[]>([]);
+    let [email, setEmail] = useState('')
+    let [id, setId] = useState('')
+    let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
+
+    setId(getUserId())
+
+    const getUser = async (id:String) => {
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
+            res => {
+                setUser(res.data);
+                return res.data
+            }
+        )
+        return data != null;
     }
 
-    useEffect(() => {cargarPedidos();}, []);
+    getUser(id)
+    setEmail(user.email)
 
-    ordersByEmail(orders,ordersEmail,id.email);
+    async function cargarPedidosEmail() {
+        setOrdersEmail(await getOrdersByEmail(email))
+    }
+    cargarPedidosEmail()
 
     return (
         <div>
@@ -60,8 +78,6 @@ const OrderHistory = (id: Id) => {
                 </TableContainer>
             </div>
         </div>
-
     );
 }
-
 export default OrderHistory;

@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,43 +9,50 @@ import axios from 'axios';
 import {User} from '../../shared/shareddtypes';
 import Link from '@mui/material/Link';
 import Swal from 'sweetalert2';
+import jwt_decode from "jwt-decode";
 
-type Email = {
-    email:String
+
+function getUserId(): string {
+    var id;
+    if(localStorage.getItem('token') != null)
+    var user:any = jwt_decode(localStorage.getItem('token') || '{}');
+    id = user.id
+    return id
 }
 
-const Profile = (correo:Email) => {
+const Profile = () => {
     let [user, setUser] = React.useState<User>({_id: "", name: "",email: "",surname: "", password: ""});
+    let [id, setId] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [pulse, setPulse] = useState(false)
 
-    const getUserByEmail = async (email:String) => {
-        const data = await axios.get("http://localhost:5000/user/list/" + email).
-        then(res => {
-            setUser(res.data);
-            return res.data;
-        })
+    setId(getUserId())
+
+    const getUser = async (id:String) => {
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+
+        const data = await axios.get(apiEndPoint + "/user/findById/" + id).then (
+            res => {
+                setUser(res.data);
+                return res.data
+            }
+        )
         return data != null;
     }
-
-    getUserByEmail(correo.email);
+    
+    getUser(id)
     const updateUser = (id:String,name?:String,surname?:String,email?:String) => {
-        if(name == ''){
+        if(name === ''){
             name = user.name
         }
-        if(surname == ''){
+        if(surname === ''){
             surname = user.surname
         }
-        if(email == ''){
-            email = user.email
-        }
-        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname,"email":email})
+        axios.put("http://localhost:5000/user/update/" + id,{"name":name,"surname":surname})
         .then(res => {
             console.log(res);
             console.log(res.data);
-            if(res.status == 404){
+            if(res.status === 404){
                 Swal.fire({
                     title: "Perfil modificado",
                     text: "El perfil ha sido modificado con exito",
@@ -56,21 +63,17 @@ const Profile = (correo:Email) => {
             }
         })
     }
-
     async function allFunc(id:String,name:String,surname:String,email: String){
-        setPulse(true);
         updateUser(id, name, surname, email);
     }
-
     return ( 
-        <div>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Container component= "main" maxWidth="sm"
                 sx={{
                 position: "relative",
-                top: 150
+                top: 10
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid", height: 370}}>
-
                     <Typography className="miPerfil" style={{position:'relative', right:-240, top:20}}> Mi Perfil </Typography>
                     
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
@@ -80,16 +83,14 @@ const Profile = (correo:Email) => {
 
                             <TextField
                                 id = "email" 
-                                multiline
-                                defaultValue={user.email}
-                                variant = "outlined"
-                                size = "small"
-                                onChange = {(e: any) => setEmail(e.target.value)}
+                                name = "Email"
+                                value= {user.email}
+                                size="small"
+                                variant="outlined"
                                 style={{position:'relative', top:-20}}
                             />
 
                             <Typography className="name" style={{position:'relative', right:150, top:10}}> Nombre: </Typography>
-
                             <TextField
                                 id = "name"
                                 multiline
@@ -99,9 +100,7 @@ const Profile = (correo:Email) => {
                                 onChange = {(e: any) => setName(e.target.value)}
                                 style={{position:'relative', top:-20}}
                             />
-
                             <Typography className="surname" style={{position:'relative', right:153, top:10}}> Apellidos: </Typography>
-
                             <TextField
                                 id = "surname"
                                 name = "Apellido"
@@ -112,9 +111,7 @@ const Profile = (correo:Email) => {
                                 onChange = {(e: any) => setSurname(e.target.value)}
                                 style={{position:'relative', top:-20}}
                             />
-
                             <Typography className="surname" style={{position:'relative', right:163, top:10}}> Contraseña: </Typography>
-
                             <TextField
                                 id = "pass" 
                                 name = "Contraseña"
@@ -125,7 +122,7 @@ const Profile = (correo:Email) => {
                                 style={{position:'relative', top:-20}}
                             />
                             
-                            <Button onClick={() => allFunc(user._id,name,surname,email)} variant="contained" type="submit"> Aplicar cambios</Button>
+                            <Button onClick={() => allFunc(user._id,name,surname,user.email)} variant="contained" type="submit"> Aplicar cambios</Button>
                             <Link href = "" style={{position:'relative', top:10}}>Quiero cambiar mi contraseña.</Link>
                         </Stack>
                     </CardContent>
@@ -134,5 +131,4 @@ const Profile = (correo:Email) => {
         </div>
     );
 }
-
-export default Profile; 
+export default Profile;

@@ -6,42 +6,16 @@ import Stack from '@mui/material/Stack';
 import logo from '../img/logo-dede.svg';
 import { Card, CardContent } from '@mui/material';
 import Link from '@mui/material/Link';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import SelectInput from '@mui/material/Select/SelectInput';
-// import Check from '../checks/Arguments'
-
+import { handleLogin } from '../api/ApiUsers';
 
 const checkParams = (text: String) => {
     return text === "" || text == null;
 }
 
-const handleLogin = (idUser: String, pass: String) => {
-   axios.post("http://localhost:5000/user/login",{"email":idUser,"password":pass})
-   .then(res => {
-       if(res.status == 201){
-        Swal.fire({
-            title: "Sesión iniciada",
-            icon: "success"
-        }).then(() => {
-            console.log(res.data)
-            localStorage.setItem('token',res.data.token);
-            window.location.assign("/products");
-        });
-       }else{
-            Swal.fire({
-                title: "Creedenciales incorrectos",
-                text: "El usuario o contraseña son incorrectos, vuelva a introducirlos",
-                icon: "error",
-                footer: '<a href ="/signup">¿No tienes cuenta? Registrate ahora!</a>'
-            });
-       }
-   })
+const login = (idUser: String, pass: String) => {
+    handleLogin(idUser, pass);
 }
 
-const changeIcon = () => {
-
-}
 
 const LogIn: FC = () => {
     const [email, setEmail] = useState('')
@@ -49,15 +23,15 @@ const LogIn: FC = () => {
     const [pulse, setPulse] = useState(false)
 
     function allFunc(idUser: String, pass: String){
-        handleLogin(idUser, pass);
+        login(idUser, pass);
         setPulse(true);
     }
 
     return ( 
-        <div>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <Container component= "main" maxWidth="sm" fixed={true} 
             sx={{
-                position: "relative",
+                position: "center",
                 top: 150
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
@@ -69,11 +43,11 @@ const LogIn: FC = () => {
                     <Stack direction= "column" spacing={2}>
                         
                             <TextField 
+                                type= "text"
                                 id = "email"
                                 required
-                                name = "Correo Electronico"
-                                label = "Correo Electronico"
-                                defaultValue= "Correo Electronico"
+                                name = "Introduzca Correo Electronico"
+                                label = "Correo"
                                 variant="outlined"
                                 size="small"
                                 value = {email}
@@ -86,10 +60,9 @@ const LogIn: FC = () => {
                             <TextField 
                                 id = "pass"
                                 required
-                                name = "Contraseña"
-                                label = "Contraseña"
+                                name = "cont"
+                                label = "Introduza su contraseña"
                                 type= "password"
-                                defaultValue= "Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {pass}

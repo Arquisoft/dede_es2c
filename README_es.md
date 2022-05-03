@@ -1,8 +1,8 @@
 # asw2122_0
 
-[![Actions Status](https://github.com/pglez82/asw2122_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/pglez82/asw2122_0/actions)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pglez82_asw2122_0&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pglez82_asw2122_0)
-[![codecov](https://codecov.io/gh/pglez82/asw2122_0/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://codecov.io/gh/pglez82/asw2122_0)
+[![Actions Status](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml/badge.svg)](https://github.com/Arquisoft/dede_es2c/actions/workflows/asw2122.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_es2c&metric=alert_status)](https://sonarcloud.io/summary/overall?id=Arquisoft_dede_es2c)
+[![codecov](https://codecov.io/gh/arquisoft/dede_es2c/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://app.codecov.io/gh/Arquisoft/dede_es2c)
 
 <p float="left">
 <img src="https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg" height="100">
@@ -50,6 +50,10 @@ Encontrarás más información sobre el repositorio en los otros archivos README
 - Documentación: https://github.com/Arquisoft/dede_es2c/tree/master/docs
 - Webapp: https://github.com/Arquisoft/dede_es2c/tree/master/webapp
 - Restapi: https://github.com/Arquisoft/dede_es2c/tree/master/restapi
+
+Se han realizado dos videos explicando el funcionamiento de la aplicación, los links a estos son:
+ - [Visión Administrador](https://youtu.be/ZRobGjPoAA8)
+ - [Visión Cliente](https://www.youtube.com/watch?v=-E7908j38X0) 
 
 ## Integrantes del grupo:
    - Ruben Rubio Del Castillo - UO276255

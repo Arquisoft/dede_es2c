@@ -29,8 +29,9 @@ const ManageOrders: FC = () => {
     }
 
     useEffect(() => {cargarPedidos();}, []);
-
+    console.log(orders);
     return (
+        
         <div>
             <div style={{ margin: '170px' }}>
                 <TableContainer component={Paper}>

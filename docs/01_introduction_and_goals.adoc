@@ -6,12 +6,28 @@ Estará centrada en la venta de productos informáticos de diferentes ámbitos (
 Este sistema busca priorizar la privacidad de los clientes a través de los principios SOLID.
 El sistema obtendrá la información de los clientes de los pods de los usuarios siempre que éstos den los permisos necesarios al sistema de venta.
 Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además de acceder a la tienda, crear, modificar y eliminar los productos de la base de datos.
+Los usuarios eligirán los productos que formarán parte de su carro de compra. Cada usuario tiene su propio carro individual.
 
+== Integrantes
+
+* Ana Fernández Ostio
+* Darío Martínez Bajo
+* Efrén García Valencia
+* Adrián Santamarina Romero
+* Rubén Rubio el Castillo
+
+== Profesores a cargo de la asignatura
+
+* Hugo Lebredo Buján
+* Jose Emilio Labra Gayo
+* Pablo González
+* Irene Cid Roco
 
 === Información general de los requisitos
 
+A continuación se muestran los requisitos que se puedes encontrar en nuestra aplicación. Se dividen en obligatorios y opcionales
 
-.Requisitos obligatorios
+.Requisitos obligatorios implementados
 
 * El sistema recreará un sistema de compra online donde los usuarios podrán elegir y solicitar productos a comprar.
 * Una vez que el usuario escoja los productos a llevar, el sistema calculará los costes de envío mirando la dirección deseada del usuario en su pod y estableciendo los costes de acuerdo a la distancia del centro de distribución a dicha dirección.
@@ -20,20 +36,11 @@ Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además
 * Se construirá la aplicación usando el framework React y Typescript.
 * El producto acabado tiene que ser accesible y estar desplegado utilizando un sistema de integración continua y un servicio de hosting.
 
-.Requisitos opcionales
+.Requisitos opcionales considerados
 
-* Los usuarios pueden tener más de una dirección de envío en sus pods (por ejemplo, en sus casas, universidad, …)
-* Poner una estimación del tiempo en que la persona estará en un sitio y limitar algunas direcciones de ser usadas en la entrega fuera de esos horarios.
-* Crear estaciones de recogida que algunos portadores emplearán. La estación de recogida se puede calcular de forma dinámica basándose en la dirección de la persona o en una posición que pille de camino al receptor.
-* Se pueden usar APIs externas de diferentes portadores, para que los usuarios puedan establecer con cuál de los portadores desean realizar el pedido.
-* Hacer que algunos usuarios con privilegios de administrador puedan ver estadísticas de productos solicitados y monitorizar el estado de los pedidos.
-* Realizar el producto tanto en una aplicación web como una aplicación de móvil.
-* Crear un emulador del sistema de envío que pueda notificar a los usuarios cuando los productos hayan llegado a su destino y poder seguir el proceso de envío.
-* Tener diferentes roles como clientes o gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
-* Incluir la posibilidad de que haya varios centros de distribución o almacenes en los que se encuentren almacenados los productos.
-* Que los usuarios puedan añadir o actualizar la información de sus direcciones en sus pods a través de la aplicación.
-* Permitir a los usuarios dar realimentación sobre su experiencia como puntuaciones y revisiones a los productos o los centros de distribución.
-* Se deja abierta la opción de emplear más de una tecnología de despliegue.
+* Rol de gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
+* Se añade tambien una vista en el que el administrador pueda ver todos los pedidos que se han realizado. 
+* Un usuario puedde actuzalziar el nombre de este dentro de la aplicación
 
 
 === Objetivos de calidad
@@ -46,6 +53,7 @@ Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además
 | Seguridad | El usuario debe tener la certeza de que su información personal esté segura para ganar su confianza | Alta
 | Robustez | Se ha de manejar correctamente las excepciones para evitar que el usuario tenga una experiencia desagradable usando la aplicación | Alta
 | Privacidad | Solamente el usuario debería tener acceso a su información privada, sin que haya terceras partes implicadas | Alta
+| Transparencia | Todo lo que se haga en el proyecto permanecerá en un repositorio público para que otra gente lo pueda tener como referencia | Media
 | Comodidad | La aplicación ha de ser fácil de manejar para gente no experimentada | Alta
 |===
 
@@ -57,8 +65,9 @@ Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además
 |Rol/Nombre|Expectations
 | Equipo de desarrollo | Aprender a trabajar en equipo con gente que no conocen y familiarizarse con las tecnologías solicitadas en el curso
 | Empresa de venta de productos (cliente) | Una aplicación funcional que satisfaga los requisitos solicitados, especialmente aquellos relacionados con la seguridad
-| Cliente | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda
+| Cliente | Poder entrar a la aplicación para realizar las compras que desean de forma segura y cómoda. Introducirán sus productos en un carro de la compra.
 | Administrador | Tener el control de una aplicación robusta y eficiente que incluya la posiblidad de crear, modificar, eliminar productos, ver los usuarios y pedidos
+| Inrupt/Empathy | Entidades colaboradoras del concurso SOLID en el que se puede presentar el proyecto desarrollado durante el curso
 |===
 
 
