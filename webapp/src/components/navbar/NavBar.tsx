@@ -35,6 +35,9 @@ const NavBar=(cart:ProductsProps) =>{
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElb(event.currentTarget);
     };
+    const handleCloseMenu = () => {
+        setAnchorElb(null);
+    };
     var totalPrice = 0;
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
@@ -186,6 +189,7 @@ const NavBar=(cart:ProductsProps) =>{
                     horizontal: 'right',
                     }}
                     open={openB}
+                    onClose={handleCloseMenu}
                 >
                     <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
                         <MenuItem onClick={handleClose}>Perfil</MenuItem>
