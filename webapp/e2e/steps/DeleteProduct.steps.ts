@@ -53,7 +53,7 @@ defineFeature(feature, test => {
         await expect(page).toClick('button', { text: 'OK' })
 
         // Añadimos el producto
-        await expect(page2).toMatch('Categorías')
+        //await expect(page2).toMatch('Categorías')
         await expect(page2).toClick('button', { text: 'Añadir al carrito' }) 
         await expect(page2).toClick('#basic-button') 
         await expect(page2).toMatch('Completar el pago')

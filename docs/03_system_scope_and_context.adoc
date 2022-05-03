@@ -10,29 +10,17 @@ será cifrada para despues ser almacenada en la Base de Datos
 
 image:03_Negocio.png["Diagrama Contexto Negocio"]
 
-[options="header",cols="1,2,2"]
-|===
-|Comunicaciones |Entradas | Salidas
-| _Usuario_ | _Interacciones con la aplicación_ |_Respuestas a esas interacciones_
-| _POD del Usuario_ | _La inforamción relativa a cada usuario para respetar su privacidad_ | _Información que necesite la aplicación siempre cuando el usuario lo permita_
-| _DeDe_ | _Venta de productos_ | _Precio según dirección del cliente_
-| _Base de datos_ | _Peticiones por parte de la aplicación DeDe_ | _Respuesta de la información almacenada en esta base de datos_
-| _API_ | _Dirección de envío_ | _Precio de envío desde el almacén_
-|===
-
 === Contexto técnico
-
-
-image:03_Tecnico.png["Diagrama Contexto Técnico"]
 
 [options="header",cols="1,2"]
 |===
-|Objeto |Descripción
-| _Usuario_ | _Persona que utilice la aplicación_
+| Tecnología | Descripción
+| _SOLID_ | _Principios utilizados para poder obtener un codigo limipio y mantenible_
 | _POD_ | _Lugar donde se almacena la información de cada cliente_ 
-| _DeDe_ | _Aplicación descentralizada_ 
-| _Explorador Web_ | _Aplicación donde el usuario va a acceder a DeDe_ 
-| _HTTPS_ | _Protocolo que se utilizará para enviar y recibir información entre el navegador y la aplicación_ 
-| _Servidor Web_ | _Servidor que tendrá la aplicación DeDe almacenada (sin decidir)_
+| _PostIamges_ | _API para obtener las imagenes de los productos_ 
+| _EasyPost_ | _API para obtener los precios de envío_ 
+| _TypeScript_ | _Lenguaje con el que se esta implmentando_ 
+| _React_ | _Biblioteca para diseñar las interfeces de usuario_
+| _Axios_ | _API utilizada para pedir peticiones al back-en de la aplicación_
 |===
 

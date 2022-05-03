@@ -3,25 +3,18 @@
 
 === Restricciones tecnologicas
 - React: libreria de acceso libre que en este caso se utilizara con TypeScript diseñada para que el diseño de las interfaces web sean más fáciles. 
-- Pod Solid: almacenamiento de la inforamción personal de cada usuario. 
 - TypeScript: lenguaje de programación con el que está desarrollada la aplicación. 
+- GitHub: Repositorio donde se encuentra el codigo fuente. 
 
 === Deciones tecnologicas
 - Node.js: entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
 - MongoDB: sistema de base de datos NoSQL orientado a documentos. Además MongoDB es de código abierto por lo que se permite una mayor libertad de creación de documentos
 - MUI: Libreria de libre acceso para construir los diferentes componentes que utiliza la aplicación. La mayoria de componentes que se utilizan en nuestra aplicación son de esta librería y son personalizados según se necesita el formato de este.
-
-=== Como alcanzar los objetivos de calidad
-[options="header",cols="1,2"]
-|===
-|Objetivos de calidad| Solución
-| Eficiencia | El acceso al pod del usuario se hará las minimas veces posibles. Realización de pruebas para comprobar como de rápido responde la aplicación
-| Privacidad | Utilización de un POD por cada usuario, donde el usuario deberá dar permiso a la web para utilizar sus datos. 
-| Usabilidad | La página tendrá un aspecto parecido al resto de aplicaciones que existen sobre tiendas online.
-|=== 
-
-=== Descomposición de alto nivel del sistema
-Todavía no se ha decidido como va a estar.
+- Docker: Automatizacion del despligue medainte contenedores, se han creado dos contenedores, uno para la parte de 'front-end' y otro para 'back-end'
+- AWS: Depligue de la página. 
+- EasyPost: API que calcula el precio de envío en funcion de una dirección. 
+- PostImages: API utilizada para poder utilizar las imagenes en nuestra aplicación.
+- SuperTest y Jest: Utilizado para poder realziar las diferentes pruebas. 
 
 === Decisiones de organización
  * Revisiones y reuniones acordadas con antelación se realizarán a través de la aplicación Microsoft Teams.

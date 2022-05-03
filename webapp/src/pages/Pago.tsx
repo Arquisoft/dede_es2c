@@ -65,11 +65,38 @@ const Pago: FC = () => {
         return precioEnvio;
     }
 
-    async function allFunc(Titular: String, tarjeta: String,fecha:String,cvv:string){
+    async function allFunc(titular: string, tarjeta: string,fecha:String,cvv:string){
+        console.log(Number(cvv))
+        console.log(new Date().getFullYear());
+        
+
+        if(fecha[2] !== '-' || fecha.length < 7 || fecha.length > 7 || isNaN(Number(fecha[0])) || isNaN(Number(fecha[1])) || isNaN(Number(fecha[3]))
+            || isNaN(Number(fecha[4])) || isNaN(Number(fecha[5])) || isNaN(Number(fecha[6]))){
+                Swal.fire({
+                    title: "Formato fecha incorrecto",
+                    text: "el formato de la fecha debe ser mm-yyyy, siendo mm mes e yyyy el año",
+                    icon: "error",
+                });
+        } else {
+            var mes = fecha[0] + fecha[1]; 
+            var año = fecha[3] + fecha[4] + fecha[5] + fecha[6];
+            console.log(año)
+            console.log(mes)
+
+            if(isNaN(Number(cvv)) || isNaN(Number(tarjeta)) || titular === null || titular === '' || (Number.parseInt(mes) < new Date().getMonth() && 
+            Number.parseInt(año) === new Date().getFullYear())  || Number.parseInt(año) < new Date().getFullYear() || Number.parseInt(mes) > 12 || Number.parseInt(mes) <= 0){
+             Swal.fire({
+                  title: "Creedenciales incorrectos",
+                 text: "Los campos introducidos son incorrectos",
+                    icon: "error",
+             });
+        } else {
+
         setPulse(true);
         var precio = localStorage.getItem("precioCarrito");
         if(precio !== null){
             const direccion = await getDireccionPod(webId);
+            if(direccion['street_address'] !== undefined){
             await getPrecioEnvio(direccion);
             var parseado = JSON.parse(precio);
             console.log("Envio: " + envio)
@@ -120,15 +147,23 @@ const Pago: FC = () => {
                         );
                 }
             })
-
+        } else{
+            Swal.fire({
+                title: "Creedenciales incorrectos",
+                text: "No se ha encontrado el POD con ese nombre",
+                icon: "error",
+            });
         }
+        }
+    }
+}
     }
 
 
     async function getDireccion(){
         const direccion = await getDireccionPod(webId);
 
-        if(direccion !== ""){
+        if(direccion['street_address'] !== undefined){
             console.log(direccion);
             setPais(direccion['country']);
             setLocalidad(direccion['locality']);
@@ -201,7 +236,7 @@ const Pago: FC = () => {
                                 id = "caducidad"
                                 required
                                 name = "Fecha de caducidad"
-                                label = "Fecha de caducidad (yyyy-mm-dd)"
+                                label = "Fecha de caducidad (mm-yyyy)"
                                 variant="outlined"
                                 size="small"
                                 value = {fechaCad}

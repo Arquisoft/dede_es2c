@@ -37,9 +37,10 @@ const Home = (func: ProductsProps) => {
         return data != null
     }
 
-    useEffect(() => {cargarProductos();})
+    useEffect(() => {cargarProductos();}, [])
 
     const cargarProductos = () => {
+        getProducts();
         prods.map((p) => {
             if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0){
                 console.log(p.cantidad);
@@ -59,7 +60,6 @@ const Home = (func: ProductsProps) => {
             }
         });
     }
-    getProducts()
 
     return (
        <>

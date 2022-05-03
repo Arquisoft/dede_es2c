@@ -21,3 +21,4 @@ Para solucionarlo hemos buscado información del campo que nos ha sido asignado 
 * Mostrar de una forma poco clara que se está accediendo a un servicio de terceros en el caso de los PODs de SOLID.
 * El carrito del cliente se pierde, no se mantiene por las diferentes ventanas.
 * Falta de mas pruebas sobre el código de front. 
+* Si se eliminael primer producto del carrito, el carrito se elimina por completo.

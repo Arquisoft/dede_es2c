@@ -30,4 +30,5 @@
 | JSON Web Token | Estándar abierto basado en JSON propuesto por IETF para la creación de tokens de acceso que permiten la propagación de identidad y privilegios o claims en inglés
 | Jest | Librería abierta para pruebas en JavaScript desarrollada por Facebook
 | Scala | Lenguaje de programación multi-paradigma diseñado para expresar patrones comunes de programación en forma concisa, elegante y con tipos seguros. Integra sutilmente características de lenguajes funcionales y orientados a objetos
+| bcrypt | Función de hashing de contraseñas utilizada para poder almacenar las contraseñas de los usuarios de forma segura en la base de datos
 |===

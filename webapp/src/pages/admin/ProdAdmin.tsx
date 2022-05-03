@@ -91,7 +91,7 @@ const ProdAdmin = (produc: ProductsProps):  JSX.Element => {
                 if(res.status !== 404){
                     Swal.fire(
                         'Actualizado!',
-                        'Este prodcuto ha sido actualizado.',
+                        'Este producto ha sido actualizado.',
                         'success'
                     ).then( () =>{
                         window.location.assign("/admin/manageProducts");
