@@ -8,12 +8,26 @@ El sistema obtendrá la información de los clientes de los pods de los usuarios
 Se distinguirá entre usuarios normales y adminstradores. Éstos pueden, además de acceder a la tienda, crear, modificar y eliminar los productos de la base de datos.
 Los usuarios eligirán los productos que formarán parte de su carro de compra. Cada usuario tiene su propio carro individual.
 
+== Integrantes
+
+* Ana Fernández Ostio
+* Darío Martínez Bajo
+* Efrén García Valencia
+* Adrián Santamarina Romero
+* Rubén Rubio el Castillo
+
+== Profesores a cargo de la asignatura
+
+* Hugo Lebredo Buján
+* Jose Emilio Labra Gayo
+* Pablo González
+* Irene Cid Roco
 
 === Información general de los requisitos
 
 A continuación se muestran los requisitos que se puedes encontrar en nuestra aplicación. Se dividen en obligatorios y opcionales
 
-.Requisitos obligatorios
+.Requisitos obligatorios implementados
 
 * El sistema recreará un sistema de compra online donde los usuarios podrán elegir y solicitar productos a comprar.
 * Una vez que el usuario escoja los productos a llevar, el sistema calculará los costes de envío mirando la dirección deseada del usuario en su pod y estableciendo los costes de acuerdo a la distancia del centro de distribución a dicha dirección.
@@ -22,7 +36,7 @@ A continuación se muestran los requisitos que se puedes encontrar en nuestra ap
 * Se construirá la aplicación usando el framework React y Typescript.
 * El producto acabado tiene que ser accesible y estar desplegado utilizando un sistema de integración continua y un servicio de hosting.
 
-.Requisitos opcionales
+.Requisitos opcionales considerados
 
 * Rol de gestores que puedan realizar diferentes acciones como gestión de inventario, cambios de precios, quitar ítems del catálogo, etc.
 * Se añade tambien una vista en el que el administrador pueda ver todos los pedidos que se han realizado. 

@@ -3,58 +3,17 @@
 
 === Modelo de dominio
 
-----
-object Product{
-    codigo: String
-    categoria: String
-    nombre: String
-    precio: Number
-    descripcion: String
-    stock: Number
-    url: String
-}
+image:08_Modelo_datos.png["Modelo de datos"]
 
+=== Comentarios del modelo
 
-object User{
-    name : String
-    surname: String
-    email : String
-    role : String
-    password: String
-}
+Dos matizaciones importantes:
 
-object Order{
-    codigo: String
-    correo: String
-    direccion: String
-    fecha: Date
-    precio Total: Number
-    products: Array
-}
-
-
-object Cart{
-    client_id: ObjectId
-    products: Array
-
-}
-
-object Review{
-    score: Number
-    comment: String
-    authorEmail: String
-    productCode: String
-}
-
-User *--> Cart
-Cart *--> Order
-User *--> Review
-Order o--> Product
-Product *--> Review
-----
+* La primera es que como se puede comprobar en la página web no hay reviews. Eso es que en backend está implementado pero en el front no se incluyó por problemas en el desarrollo. Como sigue siendo una parte de la aplicación de la cual además se hacen tests sobre ello pues se dejan en el diagrama.
+* También con el carro de compra desde el backend tenemos código para guardarlo en la base de datos pero al final no lo usamos tampoco en el front.
 
 === Internacionalización
-La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
+La aplicación está construida sobre el lenguaje castellano.
 
 === Seguridad
 La seguridad es uno de los aspectos fundamentales de la aplicación. Por ello se aplicarán los principios SOLID y el uso de pods para almacenar la información personal del cliente. Para poder garantizar la seguridad al usuario con sus contraseñas estas serán cifradas.
@@ -67,9 +26,6 @@ Queremos garantizar el tener una interfaz de usuario que resulte cómoda al usua
 
 === Manejo de excepciones
 Se incluirá el código necesario para manejar y capturar los errores procedentes de las diferentes partes de la aplicación. De ser necesario, se le informará al cliente con el mensaje que corresponda.
-
-=== Accesibilidad
-Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
 
 === Manejo de sesión
 Se manejarán las sesiones a través del uso de tokens asignados a cada usuario registrado.
