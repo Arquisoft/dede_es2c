@@ -10,7 +10,7 @@ image:08_Modelo_datos.png["Modelo de datos"]
 Dos matizaciones importantes:
 
 * La primera es que como se puede comprobar en la página web no hay reviews. Eso es que en backend está implementado pero en el front no se incluyó por problemas en el desarrollo. Como sigue siendo una parte de la aplicación de la cual además se hacen tests sobre ello pues se dejan en el diagrama.
-* También con el carro de compra desde el backend tenemos código para guardarlo en la base de datos pero al final no lo usamos tampoco en el front.
+* También con el carro de compra desde el backend tenemos código para guardarlo en la base de datos pero al final no se almacena en MongoDB.
 
 === Internacionalización
 La aplicación está construida sobre el lenguaje castellano.
