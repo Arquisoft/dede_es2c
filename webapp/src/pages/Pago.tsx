@@ -106,7 +106,7 @@ const Pago: FC = () => {
                 title: "Precio Final",
                 text: "El precio de los articulos es de " + parseado + " tras la suma" + 
                         " con el precio de envío de " + envio + ". El precio Final que se " + 
-                        " deberá abonar es de: " + precioFinal.toFixed(2), 
+                        " deberá abonar es de: " + (precioFinal*1.21).toFixed(2), 
                 icon: "warning",
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -128,7 +128,7 @@ const Pago: FC = () => {
                             nombre: JSON.parse(carrt2)[i]['nombre'],
                             codigo: JSON.parse(carrt2)[i]['codigo'],
                             descripcion: JSON.parse(carrt2)[i]['descripcion'],
-                            precio: JSON.parse(carrt2)[i]['precio'],
+                            precio: JSON.parse(carrt2)[i]['precio'] + envio,
                             cantidad: JSON.parse(carrt2)[i]['cantidad'],
                             url: JSON.parse(carrt2)[i]['url'],
                             stock: JSON.parse(carrt2)[i]['cantidad'],
