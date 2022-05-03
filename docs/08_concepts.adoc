@@ -3,8 +3,55 @@
 
 === Modelo de dominio
 
-image:08_Modelo_datos.png["Modelo de datos"]
+----
+object Product{
+    codigo: String
+    categoria: String
+    nombre: String
+    precio: Number
+    descripcion: String
+    stock: Number
+    url: String
+}
 
+
+object User{
+    name : String
+    surname: String
+    email : String
+    role : String
+    password: String
+}
+
+object Order{
+    codigo: String
+    correo: String
+    direccion: String
+    fecha: Date
+    precio Total: Number
+    products: Array
+}
+
+
+object Cart{
+    client_id: ObjectId
+    products: Array
+
+}
+
+object Review{
+    score: Number
+    comment: String
+    authorEmail: String
+    productCode: String
+}
+
+User *--> Cart
+Cart *--> Order
+User *--> Review
+Order o--> Product
+Product *--> Review
+----
 
 === Internacionalización
 La aplicación soportará el lenguaje español. En función del éxito que tenga el proyecto, puede que se plantee en un futuro incluir otros idiomas como inglés o francés.
@@ -25,7 +72,7 @@ Se incluirá el código necesario para manejar y capturar los errores procedente
 Se seguirán unas convenciones mínimas de accesibilidad. En concreto, garantizamos que nuestra aplicación no tendrá combinación de colores que resulten dañinas a personas que sean daltónicas. 
 
 === Manejo de sesión
-Se manejarán las sesiones a través del uso de las APIs necesarias.
+Se manejarán las sesiones a través del uso de tokens asignados a cada usuario registrado.
 
 === Estándares de código
 El crear código limpio que siga unas estructuras y patrones definidos es base fundamental para crear código que se pueda actualizar en un futuro. Queremos garantizar crear una aplicación al nivel que se puede esperar de un equipo de formado por Ingenieros Informáticos del Software.
@@ -35,6 +82,9 @@ Uso de una base de datos MongoDB para gestionar la parte de almacenamiento y mod
 
 === Prototipado de la aplicación
 El formato que se ha escogido para realizar los prototipos de la aplicacion es que esta sea fácil de usar y a la vez siga la forma del resto de aplicaciones del mismo tipo de esta. 
+
+=== Generación de pruebas
+Consideramos fundamental el uso de pruebas unitarias para verificar el correcto funcionamiento de la aplicación.
 
 Para comenzar tenemos la página inicial, esta estara compuesta por aquellos productos que tengan un descuento o sean top ventas de la aplicación. 
 

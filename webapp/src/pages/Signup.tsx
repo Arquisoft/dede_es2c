@@ -1,45 +1,29 @@
-import React, { useState, useEffect, FC } from 'react';
+import { useState, FC } from 'react';
 import Container from '@mui/material/Container';
 import { Card, CardContent, Stack, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import logo from '../img/logo-dede.svg';
 import Link from '@mui/material/Link';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import { readdir } from 'fs/promises';
+import { foundEmail, handleSignup } from '../api/ApiUsers';
 
-const checkParams = (text: String) => {
+const checkParams = (text: string) => {
     return text === "" || text == null;
 }
 
-const checkPaswwords = (repPass: String, pass: String) => {
+const checkEmail = (email: string) => {
+    let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return !re.test(email.toString());
+}
+
+const checkPaswwords = (repPass: string, pass: string) => {
     return repPass !== pass;
 }
 
-const handleSignup = (name:String,surname:String,email: String,pass: String,repPass:String) => {
-    axios.post("http://localhost:5000/user/signup",{"name":name,"surname":surname,"email":email,"role":"ROLE_USER","password":pass,"repPassword":repPass})
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(res.status == 201){
-            Swal.fire({
-                title: "Usuario registrado",
-                text: "Te has registrado correctamente en la aplicación",
-                icon: "success"
-            }).then(() => {
-                window.location.assign("/login");
-            });
-        }
-    })
- }
+const signUp = (name:string,surname:string,email: string,pass: String,repPass:string) => {
+    handleSignup(name, surname, email, pass, repPass);
+}
 
- const getEmail = async (email: String) => {
-    const data = await axios.get("http://localhost:5000/user/list/"+ email).
-    then(res => {
-        return res.data
-    })
-    return data != null; 
-} 
 
 const SignUp: FC = () => {
     const [name, setName] = useState('')
@@ -49,25 +33,25 @@ const SignUp: FC = () => {
     const [repPass, setRepPass] = useState('')
     const [pulse, setPulse] = useState(false)
 
-    async function allFunc(name:String,surname:String,email: String,pass: String,repPass:String){
+    async function allFunc(name:string,surname:string,email: string,pass: string,repPass:string){
         setPulse(true);
-        if(await getEmail(email).then(resolve => {return resolve})){
+        if(await foundEmail(email)){
             Swal.fire({
                 title: "El e-mail ya existe",
                 text: "El e-mail ya existe en el sistema, pruebe con otro",
                 icon: "error"
             });
         }else{
-            handleSignup(name,surname,email,pass,repPass);
+            signUp(name,surname,email,pass,repPass);
         }
     }
 
     return (
-        <div>
+        <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '140vh' }}>
             <Container component= "main" maxWidth="sm"
                 sx={{
-                position: "relative",
-                top: 150
+                position: "center",
+                top: 200
             }}>
                 <Card className={"main"} elevation={10} style={{display: "grid"}}>
                     <CardContent style={{display: "grid", textAlign: "center", margin: "auto"}}>
@@ -79,7 +63,6 @@ const SignUp: FC = () => {
                                 id = "name" required
                                 name = "Nombre"
                                 label = "Nombre"
-                                defaultValue = "Nombre"
                                 variant = "outlined"
                                 size = "small"
                                 value = {name}
@@ -92,7 +75,6 @@ const SignUp: FC = () => {
                                 id = "surname" required
                                 name = "Apellido"
                                 label = "Apellido"
-                                defaultValue = "Apellido"
                                 variant = "outlined"
                                 size = "small"
                                 value = {surname}
@@ -105,12 +87,12 @@ const SignUp: FC = () => {
                                 id = "email" required
                                 name = "Correo electronico"
                                 label = "Correo electronico"
-                                defaultValue = "Correo electronico"
                                 variant = "outlined"
                                 size = "small"
                                 value = {email}
-                                error = {checkParams(email) && pulse}
-                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''}
+                                error = {(checkParams(email) && pulse) || (checkEmail(email) && pulse)}
+                                helperText={checkParams(email) && pulse ? 'La casilla no puede estar vacia' : ''
+                                            ||(checkEmail(email) && pulse ? 'Formato de e-mail inválido' : '')}
                                 onChange = {(e: any) => setEmail(e.target.value)}
                             />
 
@@ -119,7 +101,6 @@ const SignUp: FC = () => {
                                 name = "Contraseña"
                                 label = "Contraseña"
                                 type= "password"
-                                defaultValue= "Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {pass}
@@ -133,13 +114,12 @@ const SignUp: FC = () => {
                                 name = "Repetir Contraseña"
                                 label = "Repetir Contraseña"
                                 type= "password"
-                                defaultValue= "Repetir Contraseña"
                                 size="small"
                                 variant="outlined"
                                 value = {repPass}
-                                error = {checkParams(repPass) && pulse || checkPaswwords(repPass, pass)}
+                                error = {(checkParams(repPass) && pulse) || (checkPaswwords(repPass, pass))}
                                 helperText={checkParams(repPass) && pulse ? 'La casilla no puede estar vacia' : ''
-                                                || checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : ''}
+                                                || (checkPaswwords(repPass, pass) && pulse ? 'Las contraseñas no coinciden' : '')}
                                 onChange = {(e: any) => setRepPass(e.target.value)}
                             />
 

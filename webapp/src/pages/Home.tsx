@@ -1,9 +1,11 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useEffect } from 'react';
 import { Product } from '../shared/shareddtypes';
 import axios from 'axios';
 import { Stack, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
 import Products from '../components/Products';
 import Typography from '@mui/material/Typography';
+
+
 
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
@@ -24,7 +26,8 @@ const Home = (func: ProductsProps) => {
     const [prods, setProds] = React.useState<Product[]>([]);
 
     const getProducts = async () => {
-        const data = axios.get("http://localhost:5000/product/list").then(
+        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
+        const data = axios.get(apiEndPoint + "/product/list").then(
             res => {
                 setProds(res.data)
                 return res.data
@@ -34,11 +37,12 @@ const Home = (func: ProductsProps) => {
         return data != null
     }
 
-    useEffect(() => {cargarProductos();}, [])
+    useEffect(() => {cargarProductos();})
 
     const cargarProductos = () => {
         prods.map((p) => {
-            if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) >= 0){
+            if(Number.parseInt(p.stock) <= 5 && Number.parseInt(p.stock) > 0){
+                console.log(p.cantidad);
                 return(
                     <Grid item xs={3} md={3}>
                             <Card  sx={{ maxWidth: 600, maxHeight: 700, minHeight: 700}}>
@@ -58,18 +62,20 @@ const Home = (func: ProductsProps) => {
     getProducts()
 
     return (
-
-        <div className='Home' style={{ marginTop: '300px', marginLeft: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
-          <Stack direction= 'column'>
+       <>
+       <div className='Home' style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '180vh' }}>
+            
+            <Stack direction='column'>
                 {cargarBanner()}
                 <Typography variant="h4" gutterBottom component="div">
                     Últimas Unidades
                 </Typography>
-                <Products homePage = {true} product = {prods} onAddCart = {func.onAddCart} cartItems = {func.cartItems}/> 
+                <Products homePage={true} product={prods} onAddCart={func.onAddCart} cartItems={func.cartItems} />
 
             </Stack>
-
+            
         </div>
+        </> 
     )
 }
 

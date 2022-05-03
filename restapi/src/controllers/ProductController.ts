@@ -3,12 +3,9 @@ import { Product, productModel } from "../model/Product";
 
 const ProductPost = require('../model/Product')
 
-// FALTA LA VERIFICACIÓN DE LOS TOKENS
-
 /************* POST CON LOS PRODUCTOS *************/
 
 export const addProductPost : RequestHandler= async (req = request, res = response) => {
-    // EJEMPLO: localhost:5000/product/add/codeExample/categoryExample/nameExample/10/descriptionExample/3/urlExample
     try {
         // Hay que buscar que no exista
         const productoPrevio = await productModel.findOne({codigo: req.body.codigo})
@@ -35,10 +32,10 @@ export const deleteProduct: RequestHandler = async (req, res) => {
     try{
         const {codigo} = req.params;
         const productDeleted = await productModel.deleteOne({codigo: codigo});
-        if (productDeleted){
+        if (productDeleted.deletedCount == 1){
             return res.send("Product deleted");
         } else {
-            return res.status(301).json({ message: "The operation didn't succed "});
+            return res.status(412).json({ message: "The operation didn't succed "});
         }
     }catch (err){
         return res.status(404).json({message: "There was a problem deleting a prodcut"});
@@ -53,9 +50,10 @@ export const updateProduct: RequestHandler = async (req, res) => {
         const productUpdated = await productModel.findOneAndUpdate({codigo: codigo}, req.query, { new: true }); 
         if (productUpdated){
             return res.send("Product updated");
+        } else {
+            return res.status(412).json({ message: "The operation didn't succed "});
         }
     }catch (err){
-        console.log(err);
         return res.status(404).json({message: "There was a problem updating a product"})
     }
 }
@@ -103,9 +101,19 @@ export const generateExample: RequestHandler = async(req, res, next) => {
         if (encontrado){
             return res.json(encontrado)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
+        return res.status(404).json();
+    }
+}
+
+export const getProductoByCodigo: RequestHandler = async (req, res) => {
+    const cod = req.params.codigo;
+     const encontrado = await productModel.findOne({codigo: cod});
+    if (encontrado){
+        return res.json(encontrado)
+    } else {
         return res.status(404).json();
     }
 }
@@ -123,10 +131,10 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
 
     try {
         const encontrado = await productModel.find({categoria: req.params.categoria});
-        if (encontrado){
+        if (encontrado.length != 0){
             return res.json(encontrado)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         res.status(404).json({message: 'No hay productos de esa categoría'})
@@ -136,54 +144,14 @@ export const getProductsByCategoria: RequestHandler = async (req, res) => {
 export const getProductByPrice: RequestHandler = async (req, res) => {
     const precio = req.params.precio;
     try{
-        const todos = await Product.findOne({precio: precio});
-        if (todos){
-            return res.json(todos)
+        const productos = await productModel.find({precio: {$eq: precio}} );
+        if (productos.length != 0){
+            return res.json(productos)
           } else {
-            return res.status(204).json();
+            return res.status(412).json();
           }
     }catch(error){
         res.status(404).json({message: 'No hay productos con ese precio'})
 
     }
 }
-
-
-
-// MÉTODOS QUE COMO DE MOMENTO NO USO Y ME PIDEN COBERTURA DE CÓDIGO DEJO COMENTADOS
-
-/**
- 
-
-export const getProductoByID: RequestHandler = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const encontrado = await Product.findOne({_id: id});
-        return res.json(encontrado)
-    }catch(error){
-        return res.status(404).json({message: 'No hay producto con ese ID'});
-    }
-}
-
-export const getProductsByCategoria: RequestHandler = async (req, res) => {
-
-    try {
-        const encontrado = await Product.find({categoria: req.params.categoria});
-        return res.json(encontrado);
-    }catch(error){
-        res.status(404).json({message: 'No hay productos de esa categoría'})
-    }
-}
-
-export const getProductByPrice: RequestHandler = async (req, res) => {
-    const price = req.params.price;
-    try{
-        const todos = await Product.find({precio: price});
-        return res.json(todos);
-    }catch(error){
-        console.log(error);
-        res.json(error);
-    }
-}
-
- **/

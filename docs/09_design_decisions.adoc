@@ -24,10 +24,13 @@ Las siguientes decisiones de diseño tomadas por el equipo de desarrollo, van or
 | _Mongoose_ | _Facilita la conexion con la base de datos_ | _Nunca ha sido utilizado_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #08]
 | _Express_ | _Facilita el diseño la aplicación de forma sencilla y rápida_ | _Primera vez que se ha trabajado_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #09]
 | _NodeJS_| _Failita el trbajo a la hora de pedir datos a la base de datos_ | _Es necesario aprender como funciona este sistema_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #10]
+| _AWS_ | _Despliegue de la aplicación web en nube_| _Se necesita de una cuenta especifica y ademas ,poco conocimeiento sobre este_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #11]
+| _EasyPost_ | _Calculo de envio para la aplicación sencillo_ | _Puede producir errores, centro de distribución se situa en EEUU_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #12]
+| _JSON Web Token_ | _Guarda de forma correcta el usuario para controlar sus privilegios_ | _Puede generar fallos de seguridad_ | https://github.com/Arquisoft/dede_es2c/wiki/00:-Decisiones-Arquitect%C3%B3nicas[DA #13]
 |===
 
 
-Decisiones que todavia no se han llegado a decidir 
+Decisiones Denegadas 
 [options="header",cols="1,2,2,2"]
 |===
 | Decisiones | Ventajas | Desventajas | Link 
