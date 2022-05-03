@@ -50,6 +50,11 @@ You can get more information about the respository in the other README files:
 - Webapp: https://github.com/Arquisoft/dede_es2c/tree/master/webapp
 - Restapi: https://github.com/Arquisoft/dede_es2c/tree/master/restapi
 
+
+Two videos have been made explaining how the application works, the links to these are:
+ - [Administrator's vision](https://youtu.be/ZRobGjPoAA8)
+ - [Client's vision](https://www.youtube.com/watch?v=-E7908j38X0) 
+
 ## Team members
    - Ruben Rubio Del Castillo - UO276255
    - Darío Martínez Bajo - UO278290
