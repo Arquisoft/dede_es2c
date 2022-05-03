@@ -31,12 +31,12 @@ export const createCart = async (req = request, res = response) => {
 export const addProduct = async (req = request, res = response) => {
     try{
         const { client_id,product} = req.body
-        var cart = await Cart.findOne({client_id:client_id})
+        var cart = await Cart.findOne({client_id:client_id.toString()})
         if(cart.products.length > 0){
             for (let index = 0; index < cart.products.length; index++) {
                 if(cart.products[index].product.codigo === product.codigo){
                     cart.products[index].quantity += 1;
-                    await Cart.updateOne({client_id: client_id},cart)
+                    await Cart.updateOne({client_id: client_id.toString()},cart)
                     return res.status(200).json({cart})
                 }
             }
@@ -45,7 +45,7 @@ export const addProduct = async (req = request, res = response) => {
                 quantity:1
             }
             cart.products.push(newProduct);
-            await Cart.updateOne({client_id: client_id},cart)
+            await Cart.updateOne({client_id: client_id.toString()},cart)
             return res.status(200).json({cart})
         }else{
             let products = [
@@ -54,7 +54,7 @@ export const addProduct = async (req = request, res = response) => {
                   quantity:1
                 },
               ]
-              await Cart.updateOne({client_id: client_id},{$push: {products: products}});
+              await Cart.updateOne({client_id: client_id.toString()},{$push: {products: products}});
               return res.status(200).json({products})
         }
     }catch(error){
@@ -65,17 +65,17 @@ export const addProduct = async (req = request, res = response) => {
 export const deleteProduct = async (req = request, res = response) => {
     try{
         const { client_id,product} = req.body
-        var cart = await Cart.findOne({client_id:client_id})
+        var cart = await Cart.findOne({client_id:client_id.toString()})
         if(cart.products.length > 0){
             for (let index = 0; index < cart.products.length; index++) {
                 if(cart.products[index].product.codigo === product.codigo){
                     cart.products[index].quantity -= 1;
                     if(cart.products[index].quantity > 0){
-                        await Cart.updateOne({client_id: client_id},cart)
+                        await Cart.updateOne({client_id: client_id.toString()},cart)
                         return res.status(200).json({cart})
                     }else{
                         cart.products.splice(index,1)
-                        await Cart.updateOne({client_id: client_id},cart)
+                        await Cart.updateOne({client_id: client_id.toString()},cart)
                         return res.status(200).json({cart})
                     }
                 }
@@ -90,7 +90,7 @@ export const deleteProduct = async (req = request, res = response) => {
 export const findByClientId = async (req = request, res = response) => {
     try{
         const client_id = req.params.client_id
-        var cart = await Cart.findOne({client_id:client_id})
+        var cart = await Cart.findOne({client_id:client_id.toString()})
         if(cart){
             return res.status(200).json(cart)
         }
@@ -112,7 +112,7 @@ async function checkClient(client_id: ObjectId):Promise<boolean>{
 }
 async function checkCart(client_id: ObjectId):Promise<boolean> {
     if(client_id){
-        const cartFound =  await Cart.findOne({client_id: client_id});
+        const cartFound =  await Cart.findOne({client_id: client_id.toString()});
         if(cartFound){
             return false;
         }else{
