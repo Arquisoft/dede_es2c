@@ -14,5 +14,5 @@
 === Diagrama de Despliegue
 
 ****
-image:diagrama_despliegue.png[]
+image:07-Diagrama-Despliegue.jpeg[]
 ****
