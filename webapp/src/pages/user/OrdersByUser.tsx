@@ -6,7 +6,7 @@ type OrderProps = {
     orders: Order[]
 }
 
-const OrderUser = (order: OrderProps) => {
+const OrdersByUser = (order: OrderProps) => {
     
     return (
         
@@ -18,7 +18,7 @@ const OrderUser = (order: OrderProps) => {
                         <TableCell component="th" scope="row">{o.fecha.toLocaleString().substring(0, 10)}</TableCell>
                         <TableCell component="th" scope="row">{o.precioTotal}</TableCell>
                          <TableCell component="th" >
-                            {o.products.map((p) => {return p.nombre + " (" + 0 + " uds) "})}
+                            {o.products.map((p) => {return p.nombre + " (" + p.stock + " uds) "})}
                         </TableCell>  
                     </TableRow>
                 );  
@@ -27,4 +27,4 @@ const OrderUser = (order: OrderProps) => {
     );
 }
 
-export default OrderUser;
+export default OrdersByUser;

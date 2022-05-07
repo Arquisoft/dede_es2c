@@ -6,11 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Menu } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
 import { Product } from '../../shared/shareddtypes';
-import Link from '@mui/material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/material';
 import jwt_decode from 'jwt-decode';
@@ -23,21 +20,14 @@ type ProductsProps = {
 
 const NavBar=(cart:ProductsProps) =>{
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [anchorElb, setAnchorElb] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const openB = Boolean(anchorElb);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
       setAnchorEl(null);
     };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElb(event.currentTarget);
-    };
-    const handleCloseMenu = () => {
-        setAnchorElb(null);
-    };
+
     var totalPrice = 0;
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
@@ -68,7 +58,7 @@ const NavBar=(cart:ProductsProps) =>{
     const cerrarSesion = () => {
         Swal.fire({
             title: '¿Quieres cerrar sesión?',
-            text: "Se perderan los productos que teine en el carrito",
+            text: "Se perderan los productos que tiene en el carrito",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -103,7 +93,7 @@ const NavBar=(cart:ProductsProps) =>{
               </Typography>
               <Button color="inherit" href = "/">Inicio</Button>
               <Button color="inherit" href = "/products">Productos</Button>
-              <Button color="inherit" href = "/admin/addProduct">Mis pedidos</Button>
+              <Button color="inherit" href = "user/orderHistory">Mis pedidos</Button>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               </Typography>
 
@@ -165,38 +155,6 @@ const NavBar=(cart:ProductsProps) =>{
                         </Typography>
                         </Container>
                         </div>)}
-                </Menu>
-                <IconButton
-                    id="basic-button"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color = "inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElb}
-                    anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                    }}
-                    open={openB}
-                    onClose={handleCloseMenu}
-                >
-                    <Link href="/user/profile" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                    </Link>
-                    <Link id= "historialVentas" href="/user/orderHistory" underline="none"style={{color:"#000000"}}>
-                        <MenuItem onClick={handleClose}>Historial de Pedidos</MenuItem>
-                    </Link>
                 </Menu>
 
                 <Button onClick={() => cerrarSesion()} color="inherit">Cerrar Sesión</Button> 
