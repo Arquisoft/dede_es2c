@@ -81,7 +81,7 @@ export const foundEmail = async (email: String):Promise<boolean> => {
 } 
 
 export async function getUserById(id: string) {
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000'
     let response = await fetch(apiEndPoint+'/user/findById/' + id);
     //The objects returned by the api are directly convertible to User objects
     return response.json()

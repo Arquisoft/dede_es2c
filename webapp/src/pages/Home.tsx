@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 type ProductsProps = {
     onAddCart:(prod:Product) => (void);
-    cartItems:Product[]
+    cartItems:Object[]
 }
 
 function cargarBanner(){

@@ -33,10 +33,15 @@ const App: FC = () => {
     if(user){
       const exist = cartItems.find(x=> x.codigo === prod.codigo);
       if(exist){
-        setCartItems(cartItems.map(x=> x.codigo === prod.codigo ? {...exist, cantidad : exist.cantidad +1} : x))
+        exist.cantidad+=1
+        setCartItems(cartItems.map(x=> x.codigo === prod.codigo ?{ ...x, exist } : x))
       } else {
-        setCartItems([...cartItems,{...prod,cantidad:1}])
+        prod.cantidad = 1;
+        cartItems.push(prod)
+        setCartItems([...cartItems])
       }
+      console.log("CARRO ---> " + JSON.stringify(cartItems))
+      localStorage.setItem('carrito',JSON.stringify(cartItems))
     }else{
       Swal.fire({
         title: "Debes iniciar sesión",

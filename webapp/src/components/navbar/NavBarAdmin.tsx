@@ -41,7 +41,7 @@ const NavBarAdmin = (cart:ProductsProps) => {
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
 
-    const carrt = localStorage.getItem("cart");
+    const carrt = localStorage.getItem("carrito");
     if(carrt !== null){
         for(let i =0;  i < JSON.parse(carrt).length; i++){
             cart.cartItems[i] = {
@@ -62,8 +62,10 @@ const NavBarAdmin = (cart:ProductsProps) => {
         if(index > -1){
             if(cart.cartItems[index].cantidad > 1){
                 cart.cartItems[index].cantidad = cart.cartItems[index].cantidad -1 ;
+                localStorage.setItem("carrito",JSON.stringify(cart.cartItems));
             } else{
-                cart.cartItems.splice(index);
+                cart.cartItems.splice(index,1);
+                localStorage.setItem("carrito",JSON.stringify(cart.cartItems));
             }
         } 
     }
