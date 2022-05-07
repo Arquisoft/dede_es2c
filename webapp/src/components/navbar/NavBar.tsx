@@ -42,7 +42,21 @@ const NavBar=(cart:ProductsProps) =>{
     var numOfProducts = 0
     cart.cartItems.map(x => numOfProducts+= x.cantidad);
     cart.cartItems.map(x => totalPrice+= x.cantidad * x.precio);
-    console.log( cart.cartItems)
+    const carrt = localStorage.getItem("carrito");
+    if(carrt !== null){
+        for(let i =0;  i < JSON.parse(carrt).length; i++){
+            cart.cartItems[i] = {
+                nombre: JSON.parse(carrt)[i]['nombre'],
+                codigo: JSON.parse(carrt)[i]['codigo'],
+                descripcion: JSON.parse(carrt)[i]['descripcion'],
+                precio: JSON.parse(carrt)[i]['precio'],
+                cantidad: JSON.parse(carrt)[i]['cantidad'],
+                url: JSON.parse(carrt)[i]['url'],
+                stock: JSON.parse(carrt)[i]['stock'],
+                categoria: JSON.parse(carrt)[i]['categoria'],
+            }
+        }
+    }
 
     function mover(){
         localStorage.setItem("carrito", JSON.stringify(cart.cartItems));
@@ -54,8 +68,10 @@ const NavBar=(cart:ProductsProps) =>{
         if(index > -1){
             if(cart.cartItems[index].cantidad > 1){
                 cart.cartItems[index].cantidad = cart.cartItems[index].cantidad -1 ;
+                localStorage.setItem("carrito",JSON.stringify(cart.cartItems));
             } else{
                 cart.cartItems.splice(index);
+                localStorage.setItem("carrito",JSON.stringify(cart.cartItems));
             }
         } 
     }
