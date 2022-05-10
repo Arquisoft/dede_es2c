@@ -4,6 +4,6 @@ import Pago from '../pages/Pago';
 test('Ventana Pago', async () => {
      render(<Pago />) 
      expect(screen.getByText(/Comprueba tu direccion/i)).toBeInTheDocument();
-    expect(screen.getByText(/Dirección de envío, por favor ingrese el nombre de su POD/i)).toBeInTheDocument(); 
+    expect(screen.getByText(/Introduzca su Inrupt ID para poder seleccionar la direccion de envío/i)).toBeInTheDocument(); 
 }); 
 

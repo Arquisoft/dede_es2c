@@ -12,7 +12,7 @@ import AddProdutcAdmin from './pages/admin/AddProdcutAdmin';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageOrders from './pages/admin/ManageOrders';
 import Profile from './pages/user/Profile';
-import OrderHistory from './pages/user/OrderHistory';
+import OrdersHistoryByUser from './pages/user/OrdersHistoryByUser'
 import PrivateRoute from './components/routes/PrivateRoute';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
@@ -72,7 +72,7 @@ const App: FC = () => {
           <Route path = 'login' element = {<LogIn/>}/>
           <Route path = 'signup' element = {<SignUp/>}/>
           <Route path = 'user/profile' element = {<Profile />} />
-          <Route path = 'user/orderHistory' element = {<OrderHistory />} />
+          <Route path = 'user/orderHistory' element = {<OrdersHistoryByUser />} />
           <Route path = 'products' element = {<ListProducts onAddCart={onAddCart} cartItems = {cartItems}/>}/>
           <Route path = 'pago' element = {<Pago/>}/>
           <Route path= 'help' element = {<HelpPage/>} />
