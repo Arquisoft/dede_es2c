@@ -88,7 +88,7 @@ const Pago: FC = () => {
             || tarjeta.length < 16 || tarjeta.length > 16 || cvv.length > 3 || cvv.length < 3){
              Swal.fire({
                   title: "Creedenciales incorrectos",
-                 text: "Los campos introducidos son incorrectos",
+                 text: "Los campos introducidos son incorrectos. Numero de tarjeta debe ser de 16 números seguidos, CVV de 3 números" ,
                     icon: "error",
              });
         } else {
@@ -105,7 +105,7 @@ const Pago: FC = () => {
             Swal.fire({
                 title: "Precio Final",
                 text: "El precio de los articulos es de " + parseado + " tras la suma" + 
-                        " con el precio de envío de " + envio + ". El precio Final que se " + 
+                        " con el precio de envío de " + envio + ". Tras realizar los calculos con el IVA (21%), el precio Final que se " + 
                         " deberá abonar es de: " + (precioFinal*1.21).toFixed(2), 
                 icon: "warning",
                 confirmButtonColor: '#3085d6',
@@ -272,13 +272,13 @@ const Pago: FC = () => {
                             />
                         
                             <Typography>
-                                Dirección de envío, por favor ingrese el nombre de su POD
+                                Introduzca su Inrupt ID para poder seleccionar la direccion de envío
                             </Typography>
                             <TextField 
                                 id = "pod"
                                 required
                                 name = "Dirección de Envío"
-                                label = "Dirección de Envío"
+                                label = "WebId"
                                 value = {webId}
                                 error = {checkParams(webId) && pulse}
                                 helperText={checkParams(webId) && pulse ? 'La direccion no puede estar vacía' : ''}
