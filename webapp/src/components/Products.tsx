@@ -9,7 +9,7 @@ import {v4 as uuidv4} from 'uuid';
 type ProductsProps = {
     product: Product[]
     onAddCart:(prod:Product) => (void);
-    cartItems:Product[]
+    cartItems:Object[]
     homePage: boolean
 }
         
